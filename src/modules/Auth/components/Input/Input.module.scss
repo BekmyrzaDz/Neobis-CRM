@@ -1,0 +1,37 @@
+@import '../../../../sass/base';
+
+.wrapper {
+  position: relative;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 2px solid $gray-color;
+  padding: 16px 12px;
+}
+
+.inputWrapper {
+  display: flex;
+}
+
+.icon {
+  margin-right: 12px;
+}
+
+.input {
+  border: none;
+  width: 100%;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  &:focus {
+    outline: none;
+  }
+}
+
+.error {
+  color: $error-color;
+  margin-top: 8px;
+  position: absolute;
+  bottom: 0;
+}

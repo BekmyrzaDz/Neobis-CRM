@@ -1,0 +1,40 @@
+@import '../../sass/base';
+
+.login {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginContent {
+  position: relative;
+  width: 1000px;
+  min-height: 611px;
+  background: $white-color;
+  border: 6px solid $violet-color;
+  border-radius: 20px;
+}
+
+.logo {
+  position: absolute;
+  left: 32px;
+  top: 24px;
+}
+
+.wrapper {
+  margin: 0;
+  padding: 113px 60px;
+  display: flex;
+  align-items: center;
+}
+
+.img {
+  margin-right: 54px;
+}
+
+
+
+
+

@@ -1,0 +1,34 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.title {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 48px;
+  color: #252525;
+  margin-bottom: 32px;
+}
+
+.input {
+  margin-bottom: 32px;
+}
+
+.passInput {
+  margin-bottom: 48px;
+}
+
+.button {
+  margin-bottom: 26px;
+}
+
+.forgotPass {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+  color: #252525;
+}
