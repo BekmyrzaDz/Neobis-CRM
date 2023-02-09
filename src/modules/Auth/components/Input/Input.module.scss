@@ -29,6 +29,10 @@
   }
 }
 
+::placeholder {
+  color: $gray-color;
+}
+
 .error {
   color: $error-color;
   margin-top: 8px;

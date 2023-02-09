@@ -1,17 +1,18 @@
 import { Formik, Form } from 'formik'
 
 import styles from './index.module.scss'
-import AuthButton from '../../components/Button'
-import Input from '../../components/Input'
-import { LoginSchema } from '../../Schema/Validation'
-import { initialState } from '../../State/state'
+import { LoginSchema } from '../../schema/validation'
+import { loginState } from '../../state/state'
 import MailSvg from '../../assets/mail.svg'
 import LockSvg from '../../assets/lock.svg'
+import { Link } from 'react-router-dom'
+import AuthButton from '../../components/button'
+import Input from '../../components/input'
 
 const Login = () => {
   return (
     <Formik
-      initialValues={initialState}
+      initialValues={loginState}
       validationSchema={LoginSchema}
       onSubmit={(values) => console.log(JSON.stringify(values, null, 2))}
     >
@@ -36,9 +37,9 @@ const Login = () => {
         <AuthButton type='submit' className={styles.button}>
           Войти
         </AuthButton>
-        <a href='#' className={styles.forgotPass}>
+        <Link to='/forgot-password' className={styles.forgotPass}>
           Забыли пароль?
-        </a>
+        </Link>
       </Form>
     </Formik>
   )

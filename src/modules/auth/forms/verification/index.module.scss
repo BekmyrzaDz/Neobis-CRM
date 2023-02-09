@@ -12,25 +12,22 @@
   font-size: 36px;
   line-height: 48px;
   color: $auth-black-color;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
-.input {
-  margin-bottom: 32px;
-}
-
-.passInput {
-  margin-bottom: 48px;
-}
-
-.button {
-  margin-bottom: 26px;
-}
-
-.forgotPass {
+.descr {
+  margin-bottom: 28px;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
   line-height: 27px;
-  color: $auth-black-color;
+  color: $gray-color;
+}
+
+.input {
+  margin-bottom: 55px;
+}
+
+.button {
+  margin-bottom: 26px;
 }
