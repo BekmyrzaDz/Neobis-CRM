@@ -20,7 +20,7 @@ const Input: FC<InputProps> = ({ className, icon, ...props }) => {
       </div>
 
       {meta.touched && meta.error ? (
-        <div className={styles.error}>{meta.error}</div>
+        <small className={styles.error}>{meta.error}</small>
       ) : null}
     </div>
   )
