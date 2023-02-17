@@ -1,0 +1,108 @@
+@import "../../../../sass/base";
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 32px 16px;
+  height: 100%;
+  width: 247px;
+  background-color: $white-color;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.arrowLeft {
+  position: absolute;
+  top: 85px;
+  right: -10px;
+}
+
+.sidebar {
+  li {
+    height: 50px;
+    margin-top: 10px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    .menuIcon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 60px;
+      font-size: 20px;
+    }
+    svg,
+    .text {
+      transition: $tran-02;
+    }
+    svg {
+      fill: $auth-black-color;
+    }
+    .text {
+      color: $auth-black-color;
+    }
+    .text {
+      font-family: Segoe UI;
+      font-weight: 600;
+      font-size: 18px;
+    }
+    .link {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      border-radius: 16px;
+      transition: $tran-04;
+      &:hover {
+        background-color: $violet-color;
+        svg {
+          fill: $white-color;
+        }
+        .text {
+          color: $white-color;
+        }
+      }
+    }
+  }
+
+  .menuBar {
+    height: calc(100% - 64px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .logout {
+    height: 50px;
+    .logoutLink {
+      height: 100%;
+      // width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      cursor: pointer;
+      .logoutIcon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 60px;
+        font-size: 20px;
+        svg {
+          fill: $gray-color;
+        }
+      }
+      .logoutText {
+        font-family: Segoe UI;
+        font-weight: 600;
+        font-size: 18px;
+        color: $gray-color;
+      }
+    }
+  }
+}

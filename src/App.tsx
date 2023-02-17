@@ -1,10 +1,10 @@
-import { RouterProvider } from 'react-router-dom'
+import { RouterProvider } from "react-router-dom"
 
-import { router } from './routes/RoutesData'
+import { router } from "./routes/RoutesData"
 
 function App() {
   return (
-    <div className='App'>
+    <div className="App">
       <RouterProvider router={router} />
     </div>
   )
