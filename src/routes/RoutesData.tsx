@@ -10,15 +10,15 @@ import StudentsPage from "../pages/students/components/StudentsPage"
 import WaitingListPage from "../pages/waitingList/components/WaitingListPage"
 
 export const router = createBrowserRouter([
-  // {
-  //   path: "/",
-  //   element: <AuthPage />,
-  //   children: [
-  //     { path: "forgot-password", element: <AuthPage /> },
-  //     { path: "verification", element: <AuthPage /> },
-  //     { path: "reset-password", element: <AuthPage /> },
-  //   ],
-  // },
+  {
+    path: "/",
+    element: <AuthPage />,
+    children: [
+      { path: "forgot-password", element: <AuthPage /> },
+      { path: "verification", element: <AuthPage /> },
+      { path: "reset-password", element: <AuthPage /> },
+    ],
+  },
   {
     path: "/",
     element: <Layout />,
