@@ -7,7 +7,6 @@ interface IStyleOpen {
   height: string
   left: string
   width: string
-  background: string
   transition: string
 }
 
@@ -16,7 +15,6 @@ const openStyle: IStyleOpen = {
   left: "247px",
   height: "100vh",
   width: "calc(100% - 247px)",
-  background: "#aaaaaa",
   transition: "all 0.5s ease",
 }
 
@@ -25,7 +23,6 @@ interface IStyleClose {
   left: string
   height: string
   width: string
-  background: string
   transition: string
 }
 
@@ -34,7 +31,6 @@ const closeStyle = {
   left: "58px",
   height: "100vh",
   width: "calc(100% - 58px)",
-  background: "#aaaaaa",
   transition: "all 0.5s ease",
 }
 
