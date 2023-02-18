@@ -1,7 +1,8 @@
-import { useState } from "react"
 import styles from "./Sidebar.module.scss"
 import logo from "../../../../assets/images/logo.svg"
+import logoSmall from "../../../../assets/images/logo-small.svg"
 import arrowLeft from "../../assets/image/arrow-left.svg"
+import arrowRight from "../../assets/image/arrow-right.svg"
 import HomeSvgComponent from "./components/HomeSvgComponent"
 import StudentSvgComponent from "./components/StudentSvgComponet"
 import EmployeeSvgComponent from "./components/EmployeeSvgComponent"
@@ -10,7 +11,7 @@ import AnalyticsSvgComponent from "./components/AnalyticsSvgComponent"
 import WaitingListSvgComponent from "./components/WaitingListSvgComponent"
 import ArchiveSvgComponent from "./components/ArchiveSvgComponent"
 import LogoutSvgComponet from "./components/LogoutSvgComponet"
-import MenuButton from "../MenuButton/MenuButton"
+import { NavLink } from "react-router-dom"
 
 interface IItems {
   icon: JSX.Element
@@ -32,23 +33,47 @@ const menuItems: IItems[] = [
   { icon: <ArchiveSvgComponent />, name: "Архив", link: "archive" },
 ]
 
-const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+interface IProps {
+  isOpen: boolean
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Sidebar = ({ isOpen, setIsOpen }: IProps) => {
+  const setActive = ({ isActive }: { isActive: boolean }): string => {
+    return isActive ? styles.active : styles.link
+  }
+
+  const toggleSidebar = () => setIsOpen(!isOpen)
 
   return (
-    <aside className={styles.sidebar}>
-      <nav className={styles.nav}>
+    <aside>
+      <nav className={`${styles.sidebar} ${isOpen ? styles.close : ""}`}>
         <header className={styles.logo}>
-          <img className={styles.logoImg} src={logo} alt="logo" />
+          <img
+            className={styles.logoImg}
+            src={isOpen ? logoSmall : logo}
+            alt="logo"
+          />
         </header>
 
-        <img className={styles.arrowLeft} src={arrowLeft} alt="arrow-left" />
+        <img
+          className={styles.toggle}
+          onClick={toggleSidebar}
+          src={isOpen ? arrowRight : arrowLeft}
+          alt="arrow-left"
+        />
 
         <div className={styles.menuBar}>
           <div className={styles.menu}>
             <ul className={styles.menuLinks}>
               {menuItems?.map(({ icon, name, link }) => (
-                <MenuButton icon={icon} name={name} link={link} />
+                // <MenuButton icon={icon} name={name} link={link} />
+                <li className={styles.menuLink}>
+                  <NavLink className={setActive} to={link}>
+                    <div className={styles.menuIcon}>{icon}</div>
+                    <span className={styles.text}>{name}</span>
+                  </NavLink>
+                </li>
               ))}
             </ul>
           </div>
