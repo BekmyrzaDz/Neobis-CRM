@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom"
+import { useId } from "react"
 import styles from "./Sidebar.module.scss"
 import logo from "../../../../assets/images/logo.svg"
 import logoSmall from "../../../../assets/images/logo-small.svg"
@@ -11,7 +13,6 @@ import AnalyticsSvgComponent from "./components/AnalyticsSvgComponent"
 import WaitingListSvgComponent from "./components/WaitingListSvgComponent"
 import ArchiveSvgComponent from "./components/ArchiveSvgComponent"
 import LogoutSvgComponet from "./components/LogoutSvgComponet"
-import { NavLink } from "react-router-dom"
 
 interface IItems {
   icon: JSX.Element
@@ -39,6 +40,8 @@ interface IProps {
 }
 
 const Sidebar = ({ isOpen, setIsOpen }: IProps) => {
+  const menuItemId = useId()
+
   const setActive = ({ isActive }: { isActive: boolean }): string => {
     return isActive ? styles.active : styles.link
   }
@@ -66,9 +69,8 @@ const Sidebar = ({ isOpen, setIsOpen }: IProps) => {
         <div className={styles.menuBar}>
           <div className={styles.menu}>
             <ul className={styles.menuLinks}>
-              {menuItems?.map(({ icon, name, link }) => (
-                // <MenuButton icon={icon} name={name} link={link} />
-                <li className={styles.menuLink}>
+              {menuItems?.map(({ icon, name, link }, index) => (
+                <li className={styles.menuLink} key={`${menuItemId}-${index}`}>
                   <NavLink className={setActive} to={link}>
                     <div className={styles.menuIcon}>{icon}</div>
                     <span className={styles.text}>{name}</span>
