@@ -1,0 +1,33 @@
+@import "../../../../../../sass/base";
+
+.search {
+  display: flex;
+  align-items: center;
+  border: 1px solid $violet-color;
+  border-radius: 16px;
+  max-width: 324px;
+  position: relative;
+  & > .input {
+    background: $body-gray-color;
+    width: 100%;
+    height: 56px;
+    border-radius: 16px;
+    outline: none;
+    transition: $tran-03;
+    color: $auth-black-color;
+    font-size: 18px;
+    font-weight: 400;
+    font-family: Segoe UI;
+    line-height: 23.94px;
+    border: 2px solid transparent;
+    padding: 0 1rem;
+    padding-left: 72px;
+    &::placeholder {
+      color: $auth-black-color;
+    }
+  }
+  svg {
+    position: absolute;
+    left: 24px;
+  }
+}

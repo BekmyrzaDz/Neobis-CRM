@@ -1,0 +1,74 @@
+@import "../../../../../../sass/base";
+
+li {
+  height: 56px;
+  margin-top: 10px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  .menuIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 58px;
+    font-size: 20px;
+  }
+  svg,
+  .text {
+    transition: $tran-02;
+  }
+  svg {
+    fill: $auth-black-color;
+  }
+  .text {
+    color: $auth-black-color;
+  }
+  .text {
+    font-family: Segoe UI;
+    font-weight: 600;
+    font-size: 18px;
+  }
+  .link {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 16px;
+    transition: $tran-04;
+    &:hover {
+      background-color: $violet-color;
+      svg {
+        fill: $white-color;
+      }
+      .text {
+        color: $white-color;
+      }
+    }
+  }
+
+  .active {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 16px;
+    // transition: $tran-04;
+    background-color: $violet-color;
+    svg {
+      fill: $white-color;
+    }
+    .text {
+      color: $white-color;
+    }
+  }
+}
+
+.sidebar.close {
+  li {
+    .text {
+      opacity: 0;
+    }
+  }
+}

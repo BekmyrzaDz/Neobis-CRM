@@ -13,6 +13,7 @@ import AnalyticsSvgComponent from "./components/AnalyticsSvgComponent"
 import WaitingListSvgComponent from "./components/WaitingListSvgComponent"
 import ArchiveSvgComponent from "./components/ArchiveSvgComponent"
 import LogoutSvgComponet from "./components/LogoutSvgComponet"
+import MenuButton from "./components/MenuButton/MenuButton"
 
 interface IItems {
   icon: JSX.Element
@@ -76,6 +77,7 @@ const Sidebar = ({ isOpen, setIsOpen }: IProps) => {
                     <span className={styles.text}>{name}</span>
                   </NavLink>
                 </li>
+                // <MenuButton icon={icon} name={name} link={link} />
               ))}
             </ul>
           </div>

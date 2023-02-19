@@ -1,0 +1,12 @@
+@import "../../../../sass/base";
+
+.container {
+  padding: 24px;
+}
+
+.header {
+  .headerInner {
+    display: flex;
+    justify-content: space-between;
+  }
+}
