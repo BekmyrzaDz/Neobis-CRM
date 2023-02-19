@@ -1,0 +1,39 @@
+@import "../../../../../../sass/base";
+
+.button {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 58px;
+    font-size: 20px;
+  }
+  svg,
+  .text {
+    transition: $tran-02;
+  }
+  svg {
+    fill: $auth-black-color;
+  }
+  .text {
+    color: $auth-black-color;
+  }
+  .text {
+    font-family: Segoe UI;
+    font-weight: 600;
+    font-size: 18px;
+  }
+  .link {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 16px;
+    transition: $tran-04;
+    padding-right: 16px;
+  }
+}

@@ -3,7 +3,7 @@ import { InputProps } from "./Button.props"
 import styles from "./Button.module.scss"
 import { clsx } from "clsx"
 
-const Button: FC<InputProps> = ({ className, icon, name, ...props }) => {
+const ProfileButton: FC<InputProps> = ({ className, icon, name, ...props }) => {
   return (
     <button className={clsx(styles.button, className)}>
       <a className={styles.link} href="#">
@@ -14,4 +14,4 @@ const Button: FC<InputProps> = ({ className, icon, name, ...props }) => {
   )
 }
 
-export default Button
+export default ProfileButton

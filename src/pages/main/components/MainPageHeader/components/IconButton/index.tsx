@@ -3,15 +3,14 @@ import { InputProps } from "./Button.props"
 import styles from "./Button.module.scss"
 import { clsx } from "clsx"
 
-const Button: FC<InputProps> = ({ className, icon, name, ...props }) => {
+const IconButton: FC<InputProps> = ({ className, icon, ...props }) => {
   return (
     <button className={clsx(styles.button, className)}>
       <a className={styles.link} href="#">
         <div className={styles.icon}>{icon}</div>
-        <span className={styles.text}>{name}</span>
       </a>
     </button>
   )
 }
 
-export default Button
+export default IconButton
