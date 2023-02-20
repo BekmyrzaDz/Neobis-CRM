@@ -1,4 +1,5 @@
-import { useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import logo from '../../assets/images/logo.svg'
 import loginImg from '../../modules/Auth/assets/login-img.svg'
 import {
@@ -6,10 +7,27 @@ import {
   TLocation,
 } from '../../modules/auth/helpers/renderAuthForm'
 import styles from './AuthPage.module.scss'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import Spinner from '../../components/spinner/spinner'
+import { reset } from '../../modules/auth/redux/authSlice'
 
 const AuthPage = () => {
+  const navigate = useNavigate()
   const location = useLocation()
   const currentPath = location.pathname
+  const dispatch = useAppDispatch()
+  const { isLoading, isSuccess } = useAppSelector((state) => state.auth)
+
+  useEffect(() => {
+    if (isSuccess && currentPath === '/') {
+      navigate('/home-page')
+      dispatch(reset())
+    }
+  }, [isSuccess])
+
+  if (isLoading) {
+    return <Spinner />
+  }
 
   return (
     <section className={styles.login}>
