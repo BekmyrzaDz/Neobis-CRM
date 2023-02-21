@@ -1,6 +1,20 @@
 @import "../../../../sass/base.scss";
 
-.main {
-  height: 100vh;
+body {
   background-color: $body-gray-color;
+}
+
+.container {
+  padding: 10px 24px 70px;
+  display: flex;
+  gap: 24px;
+}
+
+.waitingForACall,
+.callCompleted,
+.SignedUpForAtrialLesson,
+.AttendedATrialLesson {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
