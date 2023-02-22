@@ -23,7 +23,12 @@ const AuthPage = () => {
       navigate('/home-page')
       dispatch(reset())
     }
-  }, [isSuccess])
+
+    if (isSuccess && currentPath === '/forgot-password') {
+      navigate('/verification')
+      dispatch(reset())
+    }
+  }, [isSuccess, currentPath])
 
   if (isLoading) {
     return <Spinner />
