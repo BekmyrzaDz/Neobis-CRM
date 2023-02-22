@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 // import $api from '../../../http'
 import { ILogin, IUser } from '../types'
 

@@ -29,6 +29,7 @@ export interface IUser {
   user_id: number
   expires_day: string
   is_superuser: boolean
+  user_type: string
   refresh: string
   access: string
 }
@@ -39,16 +40,4 @@ export interface IAuthState {
   isLoading: boolean
   isSuccess: boolean
   isError: boolean
-}
-
-// AxiosError
-interface AxiosError extends Error {
-  response?: {
-    data: any
-    status: number
-    statusText: string
-    headers: any
-    config: any
-    message: string
-  }
 }

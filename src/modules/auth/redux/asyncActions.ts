@@ -2,6 +2,7 @@ import { toast } from 'react-toastify'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import authService from '../services/authService'
 import { ILogin, IUser } from '../types'
+import { AxiosError } from 'axios'
 
 // Login
 export const login = createAsyncThunk<IUser, ILogin, { rejectValue: string }>(
@@ -13,16 +14,16 @@ export const login = createAsyncThunk<IUser, ILogin, { rejectValue: string }>(
         toast.success('Вы успешно вошли в систему')
       }
       return response
-    } catch (error) {
+    } catch (error: unknown) {
       if (typeof error === 'string') {
         toast.error(error)
         return thunkAPI.rejectWithValue(error)
       }
-      if (error instanceof Error) {
+      if (error instanceof AxiosError) {
         const message =
           (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
+            error.response?.data &&
+            error.response?.data?.message) ||
           error.message ||
           error.toString()
         toast.error(message)
