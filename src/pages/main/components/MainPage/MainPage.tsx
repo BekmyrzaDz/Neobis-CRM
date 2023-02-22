@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useId, useState } from "react"
 import MainPageHeader from "../MainPageHeader/MainPageHeader"
 import Button from "./components/Button"
 import styles from "./MainPage.module.scss"
@@ -23,6 +23,8 @@ const MainPage = () => {
     Aplication[]
   >(attendedATrialLessonData)
 
+  const cardId = useId()
+
   return (
     <div className={styles.main}>
       <MainPageHeader />
@@ -30,8 +32,9 @@ const MainPage = () => {
         <div className={styles.container}>
           <div className={styles.waitingForACall}>
             <Button name="Ждёт звонка" count={12} />
-            {waitingForACall.map((item) => (
+            {waitingForACall.map((item, index) => (
               <Card
+                key={`${cardId}-${index}`}
                 time={item.time}
                 id={item.id}
                 name={item.name}
@@ -43,8 +46,9 @@ const MainPage = () => {
           </div>
           <div className={styles.callCompleted}>
             <Button name="Звонок совершён" count={12} />
-            {callCompleted.map((item) => (
+            {callCompleted.map((item, index) => (
               <Card
+                key={`${cardId}-${index}`}
                 time={item.time}
                 id={item.id}
                 name={item.name}
@@ -56,8 +60,9 @@ const MainPage = () => {
           </div>
           <div className={styles.SignedUpForAtrialLesson}>
             <Button name="Записан на проб. урок" count={12} />
-            {signedUpTrialLesson.map((item) => (
+            {signedUpTrialLesson.map((item, index) => (
               <Card
+                key={`${cardId}-${index}`}
                 time={item.time}
                 id={item.id}
                 name={item.name}
@@ -69,8 +74,9 @@ const MainPage = () => {
           </div>
           <div className={styles.AttendedATrialLesson}>
             <Button name="Посетил проб. урок" count={12} />
-            {attendedATrialLesson.map((item) => (
+            {attendedATrialLesson.map((item, index) => (
               <Card
+                key={`${cardId}-${index}`}
                 time={item.time}
                 id={item.id}
                 name={item.name}
