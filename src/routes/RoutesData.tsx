@@ -1,13 +1,13 @@
 import { createBrowserRouter } from "react-router-dom"
 import ArchivePage from "../pages/archive/components/ArchivePage"
-
-import AuthPage from "../pages/auth/AuthPage"
 import CoursePage from "../pages/course/components/CoursePage"
 import EmployeePage from "../pages/employee/components/EmployeePage"
 import Layout from "../pages/Layout/components/Layout"
 import MainPage from "../pages/main/components/MainPage/MainPage"
 import StudentsPage from "../pages/students/components/StudentsPage"
 import WaitingListPage from "../pages/waitingList/components/WaitingListPage"
+import AuthPage from '../pages/auth/AuthPage'
+import  Page404  from '../pages/page404/Page404'
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/",
+    path: "/home-page",
     element: <Layout />,
     children: [
       { index: true, element: <MainPage /> },
@@ -31,5 +31,9 @@ export const router = createBrowserRouter([
       { path: "waiting-list", element: <WaitingListPage /> },
       { path: "archive", element: <ArchivePage /> },
     ],
+  },
+  {
+    path: '*',
+    element: <Page404 />,
   },
 ])

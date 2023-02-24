@@ -1,11 +1,12 @@
 @import '../../sass/base';
 
 .login {
-  width: 100vw;
+  // width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: $violet-color;
 }
 
 .loginContent {
@@ -13,7 +14,7 @@
   width: 1000px;
   min-height: 611px;
   background: $white-color;
-  border: 6px solid $violet-color;
+  border: 6px solid rgb(222, 221, 236);
   border-radius: 20px;
 }
 

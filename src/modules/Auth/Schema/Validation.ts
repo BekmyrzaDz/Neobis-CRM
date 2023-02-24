@@ -21,17 +21,17 @@ export const ForgotPasswordSchema = Yup.object({
 export const VerificationSchema = Yup.object({
   code: Yup.string()
     .required('Обязательное поле')
-    .matches(/^\d+$/, 'Число должно быть от 0 до 9'),
+    .min(6, 'Код должен быть не менее 6 символов'),
 })
 
 // Reset Password validation
 
 export const ResetPasswordSchema = Yup.object({
-  newPassword: Yup.string()
+  password: Yup.string()
     .min(8, 'Пароль должен быть не менее 8 символов')
     .required('Обязательное поле'),
-  newPasswordConfirmation: Yup.string().oneOf(
-    [Yup.ref('newPassword'), null],
+  password2: Yup.string().oneOf(
+    [Yup.ref('password'), null],
     'Пароли не совпадают'
   ),
 })
