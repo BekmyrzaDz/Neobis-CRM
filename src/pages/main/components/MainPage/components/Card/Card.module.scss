@@ -1,18 +1,14 @@
 @import "../../../../../../sass/base";
 
 .card {
-  width: 248px;
+  width: 268px;
   background-color: $white-color;
   border-radius: 16px;
   position: relative;
 }
 
 .cardRed {
-  width: 248px;
-  background-color: $white-color;
   border: 2px solid $notification-color;
-  border-radius: 16px;
-  position: relative;
 }
 
 .cardTop {
@@ -64,30 +60,30 @@
 }
 
 .directionUxUi {
-  background-color: $pink-color;
-  padding: 10px 16px;
-  border-radius: 16px;
+  // background-color: $pink-color;
+  // padding: 10px 16px;
+  // border-radius: 16px;
   display: inline-block;
   margin-bottom: 16px;
   span {
+    color: $pink-color;
     font-family: Segoe UI;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
-    color: $white-color;
   }
 }
 
 .directionFront {
-  background-color: $green-color;
-  padding: 10px 16px;
-  border-radius: 16px;
+  // background-color: $green-color;
+  // padding: 10px 16px;
+  // border-radius: 16px;
   display: inline-block;
   margin-bottom: 16px;
   span {
+    color: $green-color;
     font-family: Segoe UI;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
-    color: $white-color;
   }
 }
 
@@ -117,6 +113,6 @@
     cursor: pointer;
   }
   .note {
-    margin-right: 8px;
+    // margin-right: 8px;
   }
 }

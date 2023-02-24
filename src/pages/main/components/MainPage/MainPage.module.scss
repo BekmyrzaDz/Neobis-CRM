@@ -2,11 +2,14 @@
 
 .main {
   background-color: $body-gray-color;
+  // width: 100vw;
+  // height: auto;
 }
 
 .container {
   padding: 10px 24px 70px;
   display: flex;
+  // justify-content: space-between;
   gap: 24px;
 }
 

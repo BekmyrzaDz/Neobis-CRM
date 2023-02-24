@@ -31,7 +31,7 @@ const MainPage = () => {
       <div className={styles.content}>
         <div className={styles.container}>
           <div className={styles.waitingForACall}>
-            <Button name="Ждёт звонка" count={12} />
+            <Button name="Ждёт звонка" count={waitingForACall.length} />
             {waitingForACall.map((item, index) => (
               <Card
                 key={`${cardId}-${index}`}
@@ -45,7 +45,7 @@ const MainPage = () => {
             ))}
           </div>
           <div className={styles.callCompleted}>
-            <Button name="Звонок совершён" count={12} />
+            <Button name="Звонок совершён" count={callCompleted.length} />
             {callCompleted.map((item, index) => (
               <Card
                 key={`${cardId}-${index}`}
@@ -59,7 +59,10 @@ const MainPage = () => {
             ))}
           </div>
           <div className={styles.SignedUpForAtrialLesson}>
-            <Button name="Записан на проб. урок" count={12} />
+            <Button
+              name="Записан на проб. урок"
+              count={signedUpTrialLesson.length}
+            />
             {signedUpTrialLesson.map((item, index) => (
               <Card
                 key={`${cardId}-${index}`}
@@ -73,7 +76,10 @@ const MainPage = () => {
             ))}
           </div>
           <div className={styles.AttendedATrialLesson}>
-            <Button name="Посетил проб. урок" count={12} />
+            <Button
+              name="Посетил проб. урок"
+              count={attendedATrialLesson.length}
+            />
             {attendedATrialLesson.map((item, index) => (
               <Card
                 key={`${cardId}-${index}`}
