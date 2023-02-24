@@ -1,7 +1,13 @@
 import { toast } from 'react-toastify'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import authService from '../services/authService'
-import { IForgotPassword, ILogin, IUser, IVerification } from '../types'
+import {
+  IForgotPassword,
+  ILogin,
+  IResetPassword,
+  IUser,
+  IVerification,
+} from '../types'
 import { AxiosError } from 'axios'
 
 // Login Action
@@ -77,6 +83,37 @@ export const verification = createAsyncThunk<
     const response = await authService.verification(code)
     if (response) {
       toast.success('Проверка прошла успешно')
+    }
+    return response
+  } catch (error: unknown) {
+    if (typeof error === 'string') {
+      toast.error(error)
+      return thunkAPI.rejectWithValue(error)
+    }
+    if (error instanceof AxiosError) {
+      const message =
+        (error.response &&
+          error.response?.data &&
+          error.response?.data?.message) ||
+        error.message ||
+        error.toString()
+      toast.error(message)
+      return thunkAPI.rejectWithValue(message)
+    }
+    throw error
+  }
+})
+
+// Set new password
+export const setNewPassword = createAsyncThunk<
+  string,
+  IResetPassword,
+  { rejectValue: string }
+>('auth/setNewPassword', async (passwords: IResetPassword, thunkAPI) => {
+  try {
+    const response = await authService.setNewPassword(passwords)
+    if (response) {
+      toast.success('Ваш пароль был успешно изменен.')
     }
     return response
   } catch (error: unknown) {

@@ -19,6 +19,6 @@ export let verificationState: IVerification = {
 }
 
 export let resetPassword: IResetPassword = {
-  newPassword: '',
-  newPasswordConfirmation: '',
+  password: '',
+  password2: '',
 }

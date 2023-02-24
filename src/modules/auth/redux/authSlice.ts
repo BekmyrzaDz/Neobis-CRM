@@ -1,6 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { IAuthState, IUser } from '../types'
-import { login, resetPassword, verification } from './asyncActions'
+import {
+  login,
+  resetPassword,
+  setNewPassword,
+  verification,
+} from './asyncActions'
 
 // Get user from localStorage
 const userString = localStorage.getItem('user')
@@ -60,6 +65,17 @@ export const authSlice = createSlice({
         state.isSuccess = true
       })
       .addCase(verification.rejected, (state) => {
+        state.isLoading = false
+        state.isError = true
+      })
+      .addCase(setNewPassword.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(setNewPassword.fulfilled, (state) => {
+        state.isLoading = false
+        state.isSuccess = true
+      })
+      .addCase(setNewPassword.rejected, (state) => {
         state.isLoading = false
         state.isError = true
       })

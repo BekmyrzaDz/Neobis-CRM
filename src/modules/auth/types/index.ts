@@ -16,8 +16,8 @@ export interface IVerification {
 
 // Reset Password
 export interface IResetPassword {
-  newPassword: string
-  newPasswordConfirmation: string
+  password: string
+  password2: string
 }
 
 // User (auth)

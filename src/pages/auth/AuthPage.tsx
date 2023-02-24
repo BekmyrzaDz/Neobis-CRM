@@ -33,6 +33,12 @@ const AuthPage = () => {
       navigate('/reset-password')
       dispatch(reset())
     }
+
+    if (isSuccess && currentPath === '/reset-password') {
+      navigate('/')
+      dispatch(reset())
+    }
+    
   }, [isSuccess, currentPath])
 
   if (isLoading) {
