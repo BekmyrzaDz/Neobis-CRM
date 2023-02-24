@@ -6,13 +6,22 @@ import Input from '../../components/input'
 import { VerificationSchema } from '../../schema/validation'
 import { verificationState } from '../../state/state'
 import LockSvg from '../../assets/lock.svg'
+import { useAppDispatch } from '../../../../hooks/redux'
+import { IVerification } from '../../types'
+import { verification } from '../../redux/asyncActions'
 
 const Verification = () => {
+  const dispatch = useAppDispatch()
+
+  function onSubmit(values: IVerification) {
+    dispatch(verification(values))
+  }
+
   return (
     <Formik
       initialValues={verificationState}
       validationSchema={VerificationSchema}
-      onSubmit={(values) => console.log(JSON.stringify(values, null, 2))}
+      onSubmit={onSubmit}
     >
       <Form className={styles.wrapper}>
         <h2 className={styles.title}>Проверка</h2>

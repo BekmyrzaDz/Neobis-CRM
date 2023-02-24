@@ -28,6 +28,11 @@ const AuthPage = () => {
       navigate('/verification')
       dispatch(reset())
     }
+
+    if (isSuccess && currentPath === '/verification') {
+      navigate('/reset-password')
+      dispatch(reset())
+    }
   }, [isSuccess, currentPath])
 
   if (isLoading) {

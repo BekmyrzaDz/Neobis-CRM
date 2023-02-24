@@ -21,7 +21,7 @@ export const ForgotPasswordSchema = Yup.object({
 export const VerificationSchema = Yup.object({
   code: Yup.string()
     .required('Обязательное поле')
-    .matches(/^\d+$/, 'Число должно быть от 0 до 9'),
+    .min(6, 'Код должен быть не менее 6 символов')
 })
 
 // Reset Password validation

@@ -1,6 +1,6 @@
 import axios from 'axios'
 // import $api from '../../../http'
-import { IForgotPassword, ILogin, IUser } from '../types'
+import { IForgotPassword, ILogin, IUser, IVerification } from '../types'
 
 axios.defaults.baseURL = 'http://mikieok.pythonanywhere.com'
 const API_URL: string = '/api/'
@@ -22,9 +22,17 @@ const resetPassword = async (email: IForgotPassword): Promise<string> => {
   return response.data
 }
 
+// Verification code to reset password
+const verification = async (code: IVerification): Promise<string> => {
+  const response = await axios.post(API_URL + 'password_reset_code/', code)
+
+  return response.data
+}
+
 const authService = {
   login,
   resetPassword,
+  verification,
 }
 
 export default authService
