@@ -1,6 +1,7 @@
 import { useState } from "react"
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
 import Sidebar from "./Sidebar/Sidebar"
+import { renderMainPage, TLocation } from "../helpers/renderMainPage"
 
 interface IStyleOpen {
   position: string
@@ -26,7 +27,7 @@ interface IStyleClose {
   transition: string
 }
 
-const closeStyle = {
+const closeStyle: IStyleClose = {
   position: "relative",
   left: "58px",
   height: "100vh",
@@ -35,12 +36,15 @@ const closeStyle = {
 }
 
 const Layout = () => {
+  const location = useLocation()
+  const currentPath = location.pathname
   const [isOpen, setIsOpen] = useState<boolean>(false)
   return (
     <div>
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
       <div style={isOpen ? closeStyle : openStyle}>
         <Outlet />
+        {/* {renderMainPage(currentPath as TLocation)} */}
       </div>
     </div>
   )

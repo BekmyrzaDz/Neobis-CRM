@@ -22,7 +22,11 @@ interface IItems {
 }
 
 const menuItems: IItems[] = [
-  { icon: <HomeSvgComponent />, name: "Главный экран", link: "/" },
+  {
+    icon: <HomeSvgComponent />,
+    name: "Главный экран",
+    link: "home-page",
+  },
   { icon: <StudentSvgComponent />, name: "Студенты", link: "students" },
   { icon: <EmployeeSvgComponent />, name: "Сотрудники", link: "employees" },
   { icon: <CourseSvgComponent />, name: "Курсы", link: "courses" },
