@@ -1,9 +1,13 @@
-import React from "react"
+import EmployeesPageHeader from './EmployeesHeader/EmployeesPageHeader';
+import EmployeesTabs from './EmployeesTabs/EmployeesTabs';
 
-type Props = {}
+const EmployeePage = () => {
+  return (
+    <div style={{ backgroundColor: '#E5E5E5', height: '100vh' }}>
+      <EmployeesPageHeader />
+      <EmployeesTabs />
+    </div>
+  );
+};
 
-const EmployeePage = (props: Props) => {
-  return <div>EmployeePage</div>
-}
-
-export default EmployeePage
+export default EmployeePage;
