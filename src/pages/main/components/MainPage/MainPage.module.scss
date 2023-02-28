@@ -2,14 +2,12 @@
 
 .main {
   background-color: $body-gray-color;
-  // width: 100vw;
-  // height: auto;
 }
 
 .container {
   padding: 10px 24px 70px;
-  display: flex;
-  // justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 24px;
 }
 

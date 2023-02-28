@@ -23,34 +23,36 @@ const Card = ({ time, id, name, phone, direction, way }: Props) => {
 
   return (
     <div className={cardClasses}>
-      <div className={styles.cardTop}>
-        <div className={styles.clock}>
-          <ClockTimeSvgComponent />
-          <div className={styles.time}>{time}</div>
-        </div>
-        <div className={styles.id}>
-          <span>{id}</span>
-        </div>
-      </div>
-      <div className={styles.cardContent}>
-        <div className={styles.contentMiddle}>
-          <p className={styles.name}>{name}</p>
-          <p className={styles.number}>{phone}</p>
-          <div className={directionClasses}>
-            <span>{direction}</span>
+      <div className={styles.cardInner}>
+        <div className={styles.cardTop}>
+          <div className={styles.clock}>
+            <ClockTimeSvgComponent />
+            <div className={styles.time}>{time}</div>
+          </div>
+          <div className={styles.id}>
+            <span>{id}</span>
           </div>
         </div>
-        <div className={styles.contentBottom}>
-          <div className={styles.way}>
-            <span>{way}</span>
-          </div>
-          <div className={styles.noteAndClear}>
-            <div className={styles.note}>
-              <NoteSvgComponent />
+        <div className={styles.cardContent}>
+          <div className={styles.contentMiddle}>
+            <p className={styles.name}>{name}</p>
+            <p className={styles.number}>{phone}</p>
+            <div className={directionClasses}>
+              <span>{direction}</span>
             </div>
-            {/* <div className={styles.clear}>
+          </div>
+          <div className={styles.contentBottom}>
+            <div className={styles.way}>
+              <span>{way}</span>
+            </div>
+            <div className={styles.noteAndClear}>
+              <div className={styles.note}>
+                <NoteSvgComponent />
+              </div>
+              {/* <div className={styles.clear}>
               <ClearSvgComponent />
             </div> */}
+            </div>
           </div>
         </div>
       </div>

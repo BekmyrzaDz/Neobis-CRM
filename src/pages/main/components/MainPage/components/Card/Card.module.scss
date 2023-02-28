@@ -1,10 +1,9 @@
 @import "../../../../../../sass/base";
 
 .card {
-  width: 268px;
+  max-width: 316px;
   background-color: $white-color;
   border-radius: 16px;
-  position: relative;
 }
 
 .cardRed {
@@ -15,10 +14,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
 }
 
 .clock {
@@ -43,7 +38,7 @@
   padding: 4px 16px 16px;
 }
 
-.name {
+.contentMiddle .name {
   font-family: Segoe UI;
   font-size: 16px;
   font-weight: 600;
@@ -60,9 +55,6 @@
 }
 
 .directionUxUi {
-  // background-color: $pink-color;
-  // padding: 10px 16px;
-  // border-radius: 16px;
   display: inline-block;
   margin-bottom: 16px;
   span {
@@ -74,9 +66,6 @@
 }
 
 .directionFront {
-  // background-color: $green-color;
-  // padding: 10px 16px;
-  // border-radius: 16px;
   display: inline-block;
   margin-bottom: 16px;
   span {
@@ -111,8 +100,5 @@
   .note,
   .clear {
     cursor: pointer;
-  }
-  .note {
-    // margin-right: 8px;
   }
 }
