@@ -3,8 +3,7 @@
 .search {
   display: flex;
   align-items: center;
-  border: 1px solid $violet-color;
-  border-radius: 16px;
+  border-bottom: 1px solid $auth-black-color;
   max-width: 324px;
   position: relative;
   & > .input {

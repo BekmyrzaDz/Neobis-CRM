@@ -6,7 +6,7 @@ import SearchSvgComponent from "./components/Svg/SearchSvgComponent"
 import CalendarSvgComponent from "./components/Svg/CalendarSvgComponent"
 import styles from "./MainPageHeader.module.scss"
 import HistorySvgComponent from "./components/Svg/HistorySvgComponent"
-import ProfileButton from "./components/ProfileButton"
+import ProfileButton from "../../../../components/ProfileButton"
 import avatar from "./assets/image/avatar.svg"
 import AvatarSvgComponent from "./components/Svg/AvatarSvgComponent"
 

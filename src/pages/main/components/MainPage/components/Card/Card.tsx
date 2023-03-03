@@ -47,11 +47,8 @@ const Card = ({ time, id, name, phone, direction, way }: Props) => {
             </div>
             <div className={styles.noteAndClear}>
               <div className={styles.note}>
-                <NoteSvgComponent />
+                <NoteSvgComponent color="#756FB3" />
               </div>
-              {/* <div className={styles.clear}>
-              <ClearSvgComponent />
-            </div> */}
             </div>
           </div>
         </div>

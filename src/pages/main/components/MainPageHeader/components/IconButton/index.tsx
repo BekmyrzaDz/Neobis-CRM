@@ -6,9 +6,7 @@ import { clsx } from "clsx"
 const IconButton: FC<InputProps> = ({ className, icon, ...props }) => {
   return (
     <button className={clsx(styles.button, className)}>
-      <a className={styles.link} href="#">
-        <div className={styles.icon}>{icon}</div>
-      </a>
+      <div className={styles.icon}>{icon}</div>
     </button>
   )
 }

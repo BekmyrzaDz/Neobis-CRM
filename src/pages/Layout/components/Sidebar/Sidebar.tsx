@@ -2,9 +2,6 @@ import { NavLink } from "react-router-dom"
 import { useId } from "react"
 import styles from "./Sidebar.module.scss"
 import logo from "../../../../assets/images/logo.svg"
-import logoSmall from "../../../../assets/images/logo-small.svg"
-import arrowLeft from "../../assets/image/arrow-left.svg"
-import arrowRight from "../../assets/image/arrow-right.svg"
 import HomeSvgComponent from "./components/HomeSvgComponent"
 import StudentSvgComponent from "./components/StudentSvgComponet"
 import EmployeeSvgComponent from "./components/EmployeeSvgComponent"
@@ -39,37 +36,19 @@ const menuItems: IItems[] = [
   { icon: <ArchiveSvgComponent />, name: "Архив", link: "archive" },
 ]
 
-interface IProps {
-  isOpen: boolean
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-const Sidebar = ({ isOpen, setIsOpen }: IProps) => {
+const Sidebar = () => {
   const menuItemId = useId()
 
   const setActive = ({ isActive }: { isActive: boolean }): string => {
     return isActive ? styles.active : styles.link
   }
 
-  const toggleSidebar = () => setIsOpen(!isOpen)
-
   return (
     <aside>
-      <nav className={`${styles.sidebar} ${isOpen ? styles.close : ""}`}>
+      <nav className={styles.sidebar}>
         <header className={styles.logo}>
-          <img
-            className={styles.logoImg}
-            src={isOpen ? logoSmall : logo}
-            alt="logo"
-          />
+          <img className={styles.logoImg} src={logo} alt="logo" />
         </header>
-
-        <img
-          className={styles.toggle}
-          onClick={toggleSidebar}
-          src={isOpen ? arrowRight : arrowLeft}
-          alt="arrow-left"
-        />
 
         <div className={styles.menuBar}>
           <div className={styles.menu}>
@@ -81,7 +60,6 @@ const Sidebar = ({ isOpen, setIsOpen }: IProps) => {
                     <span className={styles.text}>{name}</span>
                   </NavLink>
                 </li>
-                // <MenuButton icon={icon} name={name} link={link} />
               ))}
             </ul>
           </div>

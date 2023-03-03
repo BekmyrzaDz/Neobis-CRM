@@ -1,8 +1,12 @@
-@import "../../../../../../sass/base";
+@import "../../sass/base";
 
 .button {
   height: 56px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   border-radius: 16px;
+  padding-right: 16px;
   background-color: $white-color;
   .icon {
     display: flex;
@@ -13,5 +17,11 @@
   }
   svg {
     fill: $auth-black-color;
+  }
+  .text {
+    font-family: Segoe UI;
+    font-weight: 600;
+    font-size: 18px;
+    color: $auth-black-color;
   }
 }
