@@ -1,6 +1,14 @@
-import React, { useState } from 'react';
-import { DataGrid, GridColDef } from '@material-ui/data-grid';
+import React, { useState, useMemo } from 'react';
+import { Avatar } from '@material-ui/core';
+import {
+  DataGrid,
+  GridCellParams,
+  GridColumns,
+  GridRowData,
+  GridColDef,
+} from '@material-ui/data-grid';
 import { makeStyles } from '@material-ui/styles';
+import trash from '../../assets/trash.png';
 import styles from './EmployeesDB.module.scss';
 
 const useStyles = makeStyles({
@@ -24,9 +32,18 @@ const useStyles = makeStyles({
 
 const columns: GridColDef[] = [
   {
+    field: 'photoURL',
+    headerName: 'Аватар',
+    width: 170,
+    renderCell: (params: GridCellParams) => <Avatar src={params.row.photoURL as string} />,
+    headerAlign: 'center',
+    align: 'center',
+    headerClassName: styles.headerName,
+  },
+  {
     field: 'id',
     headerName: 'ID',
-    width: 220,
+    width: 110,
     headerAlign: 'center',
     align: 'center',
     headerClassName: styles.headerName,
@@ -42,7 +59,7 @@ const columns: GridColDef[] = [
   {
     field: 'email',
     headerName: 'Почта',
-    width: 340,
+    width: 370,
     headerAlign: 'center',
     align: 'center',
     headerClassName: styles.headerName,
@@ -50,7 +67,7 @@ const columns: GridColDef[] = [
   {
     field: 'position',
     headerName: 'Должность ',
-    width: 360,
+    width: 300,
     headerAlign: 'center',
     align: 'center',
     headerClassName: styles.headerName,
@@ -58,7 +75,7 @@ const columns: GridColDef[] = [
   {
     field: 'contacts',
     headerName: 'Конакты',
-    width: 380,
+    width: 300,
     headerAlign: 'center',
     align: 'center',
     headerClassName: styles.headerName,
@@ -66,9 +83,9 @@ const columns: GridColDef[] = [
   {
     field: 'actions',
     headerName: 'Actions',
-    width: 40,
+    width: 53,
     type: 'actions',
-    renderCell: () => <span>...</span>,
+    renderCell: () => <img src={trash} alt="trash" />,
     headerAlign: 'center',
     align: 'center',
     headerClassName: styles.headerName,
@@ -77,6 +94,7 @@ const columns: GridColDef[] = [
 
 const rows = [
   {
+    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
     id: 1,
     name: 'Бексултан Маратов',
     email: 'myemailaddress@gmail.com',
@@ -84,6 +102,7 @@ const rows = [
     contacts: '+996555755755',
   },
   {
+    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
     id: 2,
     name: 'Бексултан Маратов',
     email: 'myemailaddress@gmail.com',
@@ -91,6 +110,8 @@ const rows = [
     contacts: '+996555755755',
   },
   {
+    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
+
     id: 3,
     name: 'Бексултан Маратов',
     email: 'myemailaddress@gmail.com',
@@ -98,6 +119,8 @@ const rows = [
     contacts: '+996555755755',
   },
   {
+    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
+
     id: 4,
     name: 'Бексултан Маратов',
     email: 'myemailaddress@gmail.com',
@@ -105,6 +128,7 @@ const rows = [
     contacts: '+996555755755',
   },
   {
+    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
     id: 5,
     name: 'Бексултан Маратов',
     email: 'myemailaddress@gmail.com',
@@ -112,6 +136,8 @@ const rows = [
     contacts: '+996555755755',
   },
   {
+    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
+
     id: 6,
     name: 'Бексултан Маратов',
     email: 'myemailaddress@gmail.com',
@@ -119,6 +145,8 @@ const rows = [
     contacts: '+996555755755',
   },
   {
+    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
+
     id: 7,
     name: 'Бексултан Маратов',
     email: 'myemailaddress@gmail.com',
@@ -126,6 +154,8 @@ const rows = [
     contacts: '+996555755755',
   },
   {
+    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
+
     id: 8,
     name: 'Бексултан Маратов',
     email: 'myemailaddress@gmail.com',
@@ -133,6 +163,8 @@ const rows = [
     contacts: '+996555755755',
   },
   {
+    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
+
     id: 9,
     name: 'Бексултан Маратов',
     email: 'myemailaddress@gmail.com',
@@ -140,6 +172,8 @@ const rows = [
     contacts: '+996555755755',
   },
   {
+    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
+
     id: 10,
     name: 'Бексултан Маратов',
     email: 'myemailaddress@gmail.com',
