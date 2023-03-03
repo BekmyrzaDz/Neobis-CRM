@@ -10,83 +10,11 @@
   background-color: $white-color;
   transition: $tran-05;
   z-index: 100;
-  li {
-    height: 56px;
-    margin-top: 10px;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    .menuIcon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 58px;
-      font-size: 20px;
-    }
-    svg,
-    .text {
-      transition: $tran-02;
-    }
-    svg {
-      fill: $auth-black-color;
-    }
-    .text {
-      font-family: Segoe UI;
-      font-weight: 600;
-      font-size: 18px;
-      color: $auth-black-color;
-      transition: $tran-04;
-      white-space: nowrap;
-      opacity: 1;
-    }
-    .link {
-      height: 100%;
-      width: 100%;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      border-radius: 16px;
-      transition: $tran-04;
-      &:hover {
-        background-color: $violet-color;
-        svg {
-          fill: $white-color;
-        }
-        .text {
-          color: $white-color;
-        }
-      }
-    }
-
-    .active {
-      height: 100%;
-      width: 100%;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      border-radius: 16px;
-      // transition: $tran-04;
-      background-color: $violet-color;
-      svg {
-        fill: $white-color;
-      }
-      .text {
-        color: $white-color;
-      }
-    }
-  }
 
   .logo {
     display: flex;
     justify-content: center;
     margin-bottom: 14px;
-  }
-
-  .toggle {
-    position: absolute;
-    top: 85px;
-    right: -10px;
-    cursor: pointer;
   }
 
   .menuBar {
@@ -100,7 +28,6 @@
     height: 50px;
     .logoutLink {
       height: 100%;
-      // width: 100%;
       display: flex;
       justify-content: flex-start;
       align-items: center;
@@ -124,21 +51,5 @@
         white-space: nowrap;
       }
     }
-  }
-}
-
-.sidebar.close {
-  width: 58px;
-  padding: 32px 0px;
-  li {
-    .text {
-      opacity: 0;
-    }
-  }
-}
-
-.sidebar.close {
-  .logoutText {
-    opacity: 0;
   }
 }

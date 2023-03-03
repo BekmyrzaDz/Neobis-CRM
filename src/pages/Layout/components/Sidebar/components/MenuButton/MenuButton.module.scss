@@ -21,12 +21,13 @@ li {
     fill: $auth-black-color;
   }
   .text {
-    color: $auth-black-color;
-  }
-  .text {
     font-family: Segoe UI;
     font-weight: 600;
     font-size: 18px;
+    color: $auth-black-color;
+    transition: $tran-04;
+    white-space: nowrap;
+    opacity: 1;
   }
   .link {
     height: 100%;
@@ -54,21 +55,12 @@ li {
     justify-content: flex-start;
     align-items: center;
     border-radius: 16px;
-    // transition: $tran-04;
     background-color: $violet-color;
     svg {
       fill: $white-color;
     }
     .text {
       color: $white-color;
-    }
-  }
-}
-
-.sidebar.close {
-  li {
-    .text {
-      opacity: 0;
     }
   }
 }

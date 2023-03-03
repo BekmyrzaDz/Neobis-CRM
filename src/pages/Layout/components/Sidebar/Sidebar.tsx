@@ -1,22 +1,16 @@
-import { NavLink } from "react-router-dom"
 import { useId } from "react"
 import styles from "./Sidebar.module.scss"
 import logo from "../../../../assets/images/logo.svg"
-import HomeSvgComponent from "./components/HomeSvgComponent"
-import StudentSvgComponent from "./components/StudentSvgComponet"
-import EmployeeSvgComponent from "./components/EmployeeSvgComponent"
-import CourseSvgComponent from "./components/CourseSvgComponent"
-import AnalyticsSvgComponent from "./components/AnalyticsSvgComponent"
-import WaitingListSvgComponent from "./components/WaitingListSvgComponent"
-import ArchiveSvgComponent from "./components/ArchiveSvgComponent"
-import LogoutSvgComponet from "./components/LogoutSvgComponet"
+import HomeSvgComponent from "./components/Svg/HomeSvgComponent"
+import StudentSvgComponent from "./components/Svg/StudentSvgComponet"
+import EmployeeSvgComponent from "./components/Svg/EmployeeSvgComponent"
+import CourseSvgComponent from "./components/Svg/CourseSvgComponent"
+import AnalyticsSvgComponent from "./components/Svg/AnalyticsSvgComponent"
+import WaitingListSvgComponent from "./components/Svg/WaitingListSvgComponent"
+import ArchiveSvgComponent from "./components/Svg/ArchiveSvgComponent"
+import LogoutSvgComponet from "./components/Svg/LogoutSvgComponet"
 import MenuButton from "./components/MenuButton/MenuButton"
-
-interface IItems {
-  icon: JSX.Element
-  name: string
-  link: string
-}
+import { IItems } from "./types"
 
 const menuItems: IItems[] = [
   {
@@ -39,10 +33,6 @@ const menuItems: IItems[] = [
 const Sidebar = () => {
   const menuItemId = useId()
 
-  const setActive = ({ isActive }: { isActive: boolean }): string => {
-    return isActive ? styles.active : styles.link
-  }
-
   return (
     <aside>
       <nav className={styles.sidebar}>
@@ -54,12 +44,12 @@ const Sidebar = () => {
           <div className={styles.menu}>
             <ul className={styles.menuLinks}>
               {menuItems?.map(({ icon, name, link }, index) => (
-                <li className={styles.menuLink} key={`${menuItemId}-${index}`}>
-                  <NavLink className={setActive} to={link}>
-                    <div className={styles.menuIcon}>{icon}</div>
-                    <span className={styles.text}>{name}</span>
-                  </NavLink>
-                </li>
+                <MenuButton
+                  key={`${menuItemId}-${index}`}
+                  icon={icon}
+                  name={name}
+                  link={link}
+                />
               ))}
             </ul>
           </div>
