@@ -1,10 +1,7 @@
 import { DetailedHTMLProps, HTMLAttributes, InputHTMLAttributes } from "react"
 
-export interface InputProps
-  extends DetailedHTMLProps<
-    InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  > {
+export interface ButtonProps
+  extends DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     name: string
     icon: React.ReactNode
   }  
