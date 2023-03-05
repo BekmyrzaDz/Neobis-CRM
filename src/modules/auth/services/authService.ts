@@ -8,8 +8,8 @@ import {
   IVerification,
 } from '../types'
 
-axios.defaults.baseURL = 'http://mikieok.pythonanywhere.com'
-const API_URL: string = '/api/'
+axios.defaults.baseURL = 'https://crm-backend-production.up.railway.app'
+const API_URL: string = '/api/auth/'
 
 // Login user
 const login = async (userData: ILogin): Promise<IUser> => {
