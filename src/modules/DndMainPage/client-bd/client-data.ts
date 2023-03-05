@@ -1,18 +1,11 @@
-export interface Aplication {
-  time: string
-  id: string
-  name: string
-  phone: string
-  direction: string
-  way: string
-}
+import { IClient } from './../types/index';
 
 const  today = new Date()
  
 const now = today.toLocaleTimeString('ru-RU')
 const sliceNow = now.slice(0, 2)
 
-const waitingForACallData: Aplication[] = [
+const waitingForACallData: IClient[] = [
   {
     time: `${sliceNow} ч.`,
     id: "ID654789",
@@ -39,7 +32,7 @@ const waitingForACallData: Aplication[] = [
   },
 ]
 
-const callCompletedData: Aplication[] = [
+const callCompletedData: IClient[] = [
   {
   time: `${24} ч.`,
     id: "ID654789",
@@ -58,7 +51,7 @@ const callCompletedData: Aplication[] = [
   },
 ]
 
-const signedUpTrialLessonData: Aplication[] = [
+const signedUpTrialLessonData: IClient[] = [
   {
     time: `${sliceNow} ч.`,
     id: "ID654789",
@@ -69,7 +62,7 @@ const signedUpTrialLessonData: Aplication[] = [
   },
 ]
 
-const attendedATrialLessonData: Aplication[] =[
+const attendedATrialLessonData: IClient[] =[
   {
     time: `${sliceNow} ч.`,
     id: "ID654789",
