@@ -1,15 +1,9 @@
 import React, { useState, useMemo } from 'react';
 import { Avatar } from '@material-ui/core';
-import {
-  DataGrid,
-  GridCellParams,
-  GridColumns,
-  GridRowData,
-  GridColDef,
-} from '@material-ui/data-grid';
+import { DataGrid, GridCellParams, GridColDef } from '@material-ui/data-grid';
 import { makeStyles } from '@material-ui/styles';
 import trash from '../../assets/trash.png';
-import styles from './EmployeesDB.module.scss';
+import styles from './DataBase.module.scss';
 
 const useStyles = makeStyles({
   box: {
@@ -182,7 +176,7 @@ const rows = [
   },
 ];
 
-const EmployeesDB: React.FC = () => {
+const DataBase: React.FC = () => {
   const classes = useStyles();
   const [pageSize, setPageSize] = useState(10);
 
@@ -201,4 +195,4 @@ const EmployeesDB: React.FC = () => {
   );
 };
 
-export default EmployeesDB;
+export default DataBase;

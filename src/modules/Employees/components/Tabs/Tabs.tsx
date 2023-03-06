@@ -2,8 +2,8 @@ import { useState } from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { makeStyles } from '@material-ui/core/styles';
-import EmployeesDB from '../EmployeesDB/EmployeesDB';
-import MentorsCards from '../MetorsCards/MentorsCards';
+import DataBase from '../../components/DataBase/DataBase';
+import Mentors from '../../components/Mentors/Mentors';
 
 interface TabsItems {
   title: string;
@@ -88,10 +88,10 @@ export default function TabComponent() {
           />
         ))}
       </Tabs>
-      {value === 0 && <EmployeesDB />}
-      {value === 1 && <EmployeesDB />}
-      {value === 2 && <MentorsCards />}
-      {value === 3 && <EmployeesDB />}
+      {value === 0 && <DataBase />}
+      {value === 1 && <DataBase />}
+      {value === 2 && <Mentors />}
+      {value === 3 && <DataBase />}
     </div>
   );
 }

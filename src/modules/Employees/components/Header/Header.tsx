@@ -1,12 +1,5 @@
 import { useState } from 'react';
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Avatar,
-  Button,
-  makeStyles,
-} from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Avatar, Button, makeStyles } from '@material-ui/core';
 import user from '../../assets/user.svg';
 import plus from '../../assets/plus.svg';
 
@@ -38,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function EmployeesPageHeader() {
+function Header() {
   const classes = useStyles();
   const [userName, setUserName] = useState<string>('Бексултан Маратов');
 
@@ -60,4 +53,4 @@ function EmployeesPageHeader() {
   );
 }
 
-export default EmployeesPageHeader;
+export default Header;
