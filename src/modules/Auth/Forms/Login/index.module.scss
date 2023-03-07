@@ -3,7 +3,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .title {
@@ -17,6 +17,7 @@
 
 .input {
   margin-bottom: 32px;
+  width: 100%;
 }
 
 .passInput {
@@ -25,6 +26,7 @@
 
 .button {
   margin-bottom: 26px;
+  width: 100%;
 }
 
 .forgotPass {

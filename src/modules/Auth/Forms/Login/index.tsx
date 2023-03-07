@@ -1,20 +1,29 @@
 import { Formik, Form } from 'formik'
+import { Link } from 'react-router-dom'
 
 import styles from './index.module.scss'
 import { LoginSchema } from '../../schema/validation'
 import { loginState } from '../../state/state'
 import MailSvg from '../../assets/mail.svg'
 import LockSvg from '../../assets/lock.svg'
-import { Link } from 'react-router-dom'
 import AuthButton from '../../components/button'
 import Input from '../../components/input'
+import { useAppDispatch } from '../../../../hooks/redux'
+import { login } from '../../redux/asyncActions'
+import { ILogin } from '../../types'
 
 const Login = () => {
+  const dispatch = useAppDispatch()
+
+  function onSubmit(values: ILogin) {
+    dispatch(login(values))
+  }
+
   return (
     <Formik
       initialValues={loginState}
       validationSchema={LoginSchema}
-      onSubmit={(values) => console.log(JSON.stringify(values, null, 2))}
+      onSubmit={onSubmit}
     >
       <Form className={styles.wrapper}>
         <h2 className={styles.title}>Вход в аккаунт</h2>

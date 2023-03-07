@@ -1,27 +1,23 @@
-import { NavLink } from "react-router-dom"
 import { useId } from "react"
 import styles from "./Sidebar.module.scss"
 import logo from "../../../../assets/images/logo.svg"
-import logoSmall from "../../../../assets/images/logo-small.svg"
-import arrowLeft from "../../assets/image/arrow-left.svg"
-import arrowRight from "../../assets/image/arrow-right.svg"
-import HomeSvgComponent from "./components/HomeSvgComponent"
-import StudentSvgComponent from "./components/StudentSvgComponet"
-import EmployeeSvgComponent from "./components/EmployeeSvgComponent"
-import CourseSvgComponent from "./components/CourseSvgComponent"
-import AnalyticsSvgComponent from "./components/AnalyticsSvgComponent"
-import WaitingListSvgComponent from "./components/WaitingListSvgComponent"
-import ArchiveSvgComponent from "./components/ArchiveSvgComponent"
-import LogoutSvgComponet from "./components/LogoutSvgComponet"
-
-interface IItems {
-  icon: JSX.Element
-  name: string
-  link: string
-}
+import HomeSvgComponent from "./components/Svg/HomeSvgComponent"
+import StudentSvgComponent from "./components/Svg/StudentSvgComponet"
+import EmployeeSvgComponent from "./components/Svg/EmployeeSvgComponent"
+import CourseSvgComponent from "./components/Svg/CourseSvgComponent"
+import AnalyticsSvgComponent from "./components/Svg/AnalyticsSvgComponent"
+import WaitingListSvgComponent from "./components/Svg/WaitingListSvgComponent"
+import ArchiveSvgComponent from "./components/Svg/ArchiveSvgComponent"
+import LogoutSvgComponet from "./components/Svg/LogoutSvgComponet"
+import MenuButton from "./components/MenuButton/MenuButton"
+import { IItems } from "./types"
 
 const menuItems: IItems[] = [
-  { icon: <HomeSvgComponent />, name: "Главный экран", link: "/" },
+  {
+    icon: <HomeSvgComponent />,
+    name: "Главный экран",
+    link: "home-page",
+  },
   { icon: <StudentSvgComponent />, name: "Студенты", link: "students" },
   { icon: <EmployeeSvgComponent />, name: "Сотрудники", link: "employees" },
   { icon: <CourseSvgComponent />, name: "Курсы", link: "courses" },
@@ -34,48 +30,26 @@ const menuItems: IItems[] = [
   { icon: <ArchiveSvgComponent />, name: "Архив", link: "archive" },
 ]
 
-interface IProps {
-  isOpen: boolean
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-const Sidebar = ({ isOpen, setIsOpen }: IProps) => {
+const Sidebar = () => {
   const menuItemId = useId()
-
-  const setActive = ({ isActive }: { isActive: boolean }): string => {
-    return isActive ? styles.active : styles.link
-  }
-
-  const toggleSidebar = () => setIsOpen(!isOpen)
 
   return (
     <aside>
-      <nav className={`${styles.sidebar} ${isOpen ? styles.close : ""}`}>
+      <nav className={styles.sidebar}>
         <header className={styles.logo}>
-          <img
-            className={styles.logoImg}
-            src={isOpen ? logoSmall : logo}
-            alt="logo"
-          />
+          <img className={styles.logoImg} src={logo} alt="logo" />
         </header>
-
-        <img
-          className={styles.toggle}
-          onClick={toggleSidebar}
-          src={isOpen ? arrowRight : arrowLeft}
-          alt="arrow-left"
-        />
 
         <div className={styles.menuBar}>
           <div className={styles.menu}>
             <ul className={styles.menuLinks}>
               {menuItems?.map(({ icon, name, link }, index) => (
-                <li className={styles.menuLink} key={`${menuItemId}-${index}`}>
-                  <NavLink className={setActive} to={link}>
-                    <div className={styles.menuIcon}>{icon}</div>
-                    <span className={styles.text}>{name}</span>
-                  </NavLink>
-                </li>
+                <MenuButton
+                  key={`${menuItemId}-${index}`}
+                  icon={icon}
+                  name={name}
+                  link={link}
+                />
               ))}
             </ul>
           </div>

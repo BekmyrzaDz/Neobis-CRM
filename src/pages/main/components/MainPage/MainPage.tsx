@@ -1,9 +1,13 @@
+import { FC } from "react"
+import MainPageHeader from "../MainPageHeader/MainPageHeader"
+import { DragAndDrop } from "../../../../modules/DndMainPage"
 import styles from "./MainPage.module.scss"
 
-const MainPage = () => {
+const MainPage: FC = () => {
   return (
     <div className={styles.main}>
-      <div className="text">Main</div>
+      <MainPageHeader />
+      <DragAndDrop />
     </div>
   )
 }

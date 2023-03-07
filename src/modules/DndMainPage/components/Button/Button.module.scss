@@ -1,0 +1,39 @@
+@import "../../../../sass/base";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+.button {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  .countBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $count-gray-color;
+    border-radius: 8px;
+    .count {
+      padding: 5px 6px;
+      font-family: Inter;
+      font-size: 12px;
+      font-weight: 400;
+      color: $auth-black-color;
+    }
+  }
+  .text {
+    color: $auth-black-color;
+    font-family: Segoe UI;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .link {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 16px;
+    transition: $tran-04;
+    background-color: $white-color;
+    padding: 0 16px;
+  }
+}
