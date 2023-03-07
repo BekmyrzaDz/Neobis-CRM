@@ -6,13 +6,22 @@ import Input from '../../components/input'
 import { ForgotPasswordSchema } from '../../schema/validation'
 import { forgotPasswordState } from '../../state/state'
 import MailSvg from '../../assets/mail.svg'
+import { useAppDispatch } from '../../../../hooks/redux'
+import { resetPassword } from '../../redux/asyncActions'
+import { IForgotPassword } from '../../types'
 
 const ForgotPassword = () => {
+  const dispatch = useAppDispatch()
+
+  function onSubmit(values: IForgotPassword) {
+    dispatch(resetPassword(values))
+  }
+
   return (
     <Formik
       initialValues={forgotPasswordState}
       validationSchema={ForgotPasswordSchema}
-      onSubmit={(values) => console.log(JSON.stringify(values, null, 2))}
+      onSubmit={onSubmit}
     >
       <Form className={styles.wrapper}>
         <h2 className={styles.title}>Забыли пароль?</h2>

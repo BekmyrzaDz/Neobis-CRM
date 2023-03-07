@@ -1,0 +1,103 @@
+@import "../../../../sass/base";
+
+.card {
+  background-color: $white-color;
+  border-radius: 16px;
+}
+
+.cardRed {
+  border: 2px solid $notification-color;
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.clock {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+}
+
+.id {
+  background-color: $count-gray-color;
+  padding: 10px 16px;
+  border-radius: 0px 16px 0px 16px;
+  span {
+    font-family: Segoe UI;
+    font-size: 12px;
+    color: $auth-black-color;
+  }
+}
+
+.cardContent {
+  padding: 4px 16px 16px;
+}
+
+.contentMiddle .name {
+  font-family: Segoe UI;
+  font-size: 16px;
+  font-weight: 600;
+  color: $auth-black-color;
+  padding-bottom: 8px;
+}
+
+.number {
+  font-family: Segoe UI;
+  font-size: 14px;
+  color: $auth-black-color;
+  font-weight: 350;
+  margin-bottom: 16px;
+}
+
+.directionUxUi {
+  display: inline-block;
+  margin-bottom: 16px;
+  span {
+    color: $pink-color;
+    font-family: Segoe UI;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+.directionFront {
+  display: inline-block;
+  margin-bottom: 16px;
+  span {
+    color: $green-color;
+    font-family: Segoe UI;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+.way {
+  background-color: $count-gray-color;
+  padding: 6px 8px;
+  border-radius: 12px;
+  display: inline-block;
+  span {
+    font-family: Segoe UI;
+    font-size: 12px;
+    font-weight: 600;
+    color: $auth-black-color;
+  }
+}
+
+.contentBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.noteAndClear {
+  display: flex;
+  .note,
+  .clear {
+    cursor: pointer;
+  }
+}
