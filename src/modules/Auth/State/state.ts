@@ -1,39 +1,24 @@
-// Login
-interface ILoginState {
-  email: string
-  password: string
-}
+import {
+  IForgotPassword,
+  ILogin,
+  IResetPassword,
+  IVerification,
+} from '../types'
 
-export let loginState: ILoginState = {
+export let loginState: ILogin = {
   email: '',
   password: '',
 }
 
-// Forgot Password
-interface IForgotPasswordState {
-  email: string
-}
-
-export let forgotPasswordState: IForgotPasswordState = {
+export let forgotPasswordState: IForgotPassword = {
   email: '',
-}
-
-// Verification
-interface IVerification {
-  code: string
 }
 
 export let verificationState: IVerification = {
   code: '',
 }
 
-// Reset Password
-interface IResetPassword {
-  newPassword: string
-  newPasswordConfirmation: string
-}
-
 export let resetPassword: IResetPassword = {
-  newPassword: '',
-  newPasswordConfirmation: '',
+  password: '',
+  password2: '',
 }

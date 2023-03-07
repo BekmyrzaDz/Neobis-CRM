@@ -6,29 +6,38 @@ import Input from '../../components/input'
 import { ResetPasswordSchema } from '../../schema/validation'
 import { resetPassword } from '../../state/state'
 import LockSvg from '../../assets/lock.svg'
+import { useAppDispatch } from '../../../../hooks/redux'
+import { IResetPassword } from '../../types'
+import { setNewPassword } from '../../redux/asyncActions'
 
 const ResetPassword = () => {
+  const dispatch = useAppDispatch()
+
+  function onSubmit(values: IResetPassword) {
+    dispatch(setNewPassword(values))
+  }
+
   return (
     <Formik
       initialValues={resetPassword}
       validationSchema={ResetPasswordSchema}
-      onSubmit={(values) => console.log(JSON.stringify(values, null, 2))}
+      onSubmit={onSubmit}
     >
       <Form className={styles.wrapper}>
         <h2 className={styles.title}>Создание нового пароля</h2>
         <span className={styles.descr}>Придумайте новый пароль</span>
         <Input
           className={styles.input}
-          name='newPassword'
-          id='newPassword'
+          name='password'
+          id='password'
           type='password'
           placeholder='Новый пароль'
           icon={LockSvg}
         />
         <Input
           className={styles.secondInput}
-          name='newPasswordConfirmation'
-          id='newPasswordConfirmation'
+          name='password2'
+          id='password2'
           type='password'
           placeholder='Повторите пароль'
           icon={LockSvg}
