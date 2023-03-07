@@ -33,12 +33,16 @@ const useStyles = makeStyles({
     textTransform: 'none',
     fontWeight: 'bold',
     letterSpacing: '1px',
+    border: '2px solid #aaa',
+    borderRadius: '16px',
+    margin: '0px 5px',
   },
   activeTab: {
     transition: 'all 0.5s',
     backgroundColor: '#FFFFFF',
     color: '#000000',
     borderRadius: '16px',
+    border: 'none',
   },
   tabCount: {
     backgroundColor: 'white',
