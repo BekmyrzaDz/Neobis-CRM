@@ -3,9 +3,16 @@ import { Avatar } from '@material-ui/core';
 import { DataGrid, GridCellParams, GridColDef } from '@material-ui/data-grid';
 import { makeStyles } from '@material-ui/styles';
 import trash from '../../assets/trash.png';
-import styles from './DataBase.Module.scss?inline';
 
 const useStyles = makeStyles({
+  headerName: {
+    position: 'relative',
+    left: ' 20px',
+    color: ' #aaaaaa',
+    fontWeight: '700',
+    fontSize: '18px',
+  },
+
   box: {
     height: '800px',
     width: '98%',
@@ -23,68 +30,6 @@ const useStyles = makeStyles({
     },
   },
 });
-
-const columns: GridColDef[] = [
-  {
-    field: 'photoURL',
-    headerName: 'Аватар',
-    width: 170,
-    renderCell: (params: GridCellParams) => <Avatar src={params.row.photoURL as string} />,
-    headerAlign: 'center',
-    align: 'center',
-    headerClassName: styles.headerName,
-  },
-  {
-    field: 'id',
-    headerName: 'ID',
-    width: 110,
-    headerAlign: 'center',
-    align: 'center',
-    headerClassName: styles.headerName,
-  },
-  {
-    field: 'name',
-    headerName: 'ФИО',
-    width: 270,
-    headerAlign: 'center',
-    align: 'center',
-    headerClassName: styles.headerName,
-  },
-  {
-    field: 'email',
-    headerName: 'Почта',
-    width: 370,
-    headerAlign: 'center',
-    align: 'center',
-    headerClassName: styles.headerName,
-  },
-  {
-    field: 'position',
-    headerName: 'Должность ',
-    width: 300,
-    headerAlign: 'center',
-    align: 'center',
-    headerClassName: styles.headerName,
-  },
-  {
-    field: 'contacts',
-    headerName: 'Конакты',
-    width: 300,
-    headerAlign: 'center',
-    align: 'center',
-    headerClassName: styles.headerName,
-  },
-  {
-    field: 'actions',
-    headerName: 'Actions',
-    width: 53,
-    type: 'actions',
-    renderCell: () => <img src={trash} alt="trash" />,
-    headerAlign: 'center',
-    align: 'center',
-    headerClassName: styles.headerName,
-  },
-];
 
 const rows = [
   {
@@ -183,7 +128,67 @@ const DataBase: React.FC = () => {
   return (
     <div className={classes.box}>
       <DataGrid
-        columns={columns}
+        columns={[
+          {
+            field: 'photoURL',
+            headerName: 'Аватар',
+            width: 170,
+            renderCell: (params: GridCellParams) => <Avatar src={params.row.photoURL as string} />,
+            headerAlign: 'center',
+            align: 'center',
+            headerClassName: classes.headerName,
+          },
+          {
+            field: 'id',
+            headerName: 'ID',
+            width: 110,
+            headerAlign: 'center',
+            align: 'center',
+            headerClassName: classes.headerName,
+          },
+          {
+            field: 'name',
+            headerName: 'ФИО',
+            width: 270,
+            headerAlign: 'center',
+            align: 'center',
+            headerClassName: classes.headerName,
+          },
+          {
+            field: 'email',
+            headerName: 'Почта',
+            width: 370,
+            headerAlign: 'center',
+            align: 'center',
+            headerClassName: classes.headerName,
+          },
+          {
+            field: 'position',
+            headerName: 'Должность ',
+            width: 300,
+            headerAlign: 'center',
+            align: 'center',
+            headerClassName: classes.headerName,
+          },
+          {
+            field: 'contacts',
+            headerName: 'Конакты',
+            width: 300,
+            headerAlign: 'center',
+            align: 'center',
+            headerClassName: classes.headerName,
+          },
+          {
+            field: 'actions',
+            headerName: 'Actions',
+            width: 53,
+            type: 'actions',
+            renderCell: () => <img src={trash} alt="trash" />,
+            headerAlign: 'center',
+            align: 'center',
+            headerClassName: classes.headerName,
+          },
+        ]}
         rows={rows}
         pagination
         className={classes.dataGrid}
