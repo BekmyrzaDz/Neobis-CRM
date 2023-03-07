@@ -1,11 +1,10 @@
 import Header from '../../modules/Employees/components/Header/Header';
-import DataBase from '../../modules/Employees/components/DataBase/DataBase';
-
+import Tabs from '../../modules/Employees/components/Tabs/Tabs';
 const EmployeesPage = () => {
   return (
     <div style={{ backgroundColor: '#E5E5E5', height: '100vh' }}>
       <Header />
-      <DataBase />
+      <Tabs />
     </div>
   );
 };

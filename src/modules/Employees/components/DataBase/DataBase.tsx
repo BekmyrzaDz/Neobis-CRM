@@ -3,7 +3,7 @@ import { Avatar } from '@material-ui/core';
 import { DataGrid, GridCellParams, GridColDef } from '@material-ui/data-grid';
 import { makeStyles } from '@material-ui/styles';
 import trash from '../../assets/trash.png';
-import styles from './DataBase.module.scss';
+import styles from './DataBase.Module.scss?inline';
 
 const useStyles = makeStyles({
   box: {
