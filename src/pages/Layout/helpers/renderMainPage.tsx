@@ -2,7 +2,7 @@ import { ReactNode } from "react"
 import AnalyticsPage from "../../analitics/components/AnalyticsPage"
 import ArchivePage from "../../archive/components/ArchivePage"
 import CoursePage from "../../course/components/CoursePage"
-import EmployeePage from "../../employee/components/EmployeePage"
+import EmployeesPage from "../../Employees/EmployeesPage"
 import MainPage from "../../main/components/MainPage/MainPage"
 import StudentsPage from "../../students/components/StudentsPage"
 import WaitingListPage from "../../waitingList/components/WaitingListPage"
@@ -23,7 +23,7 @@ export const renderMainPage = (location: TLocation): ReactNode => {
     case "/students":
       return <StudentsPage />
     case "/employees":
-      return <EmployeePage />
+      return <EmployeesPage />
     case "/courses":
       return <CoursePage />
     case "/analytics":
