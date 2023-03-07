@@ -9,6 +9,7 @@ import WaitingListPage from "../pages/waitingList/components/WaitingListPage"
 import AuthPage from "../pages/auth/AuthPage"
 import Page404 from "../pages/page404/Page404"
 import AnalyticsPage from "../pages/analitics/components/AnalyticsPage"
+import ProfilePage from "../pages/profile/ProfilePage"
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ export const router = createBrowserRouter([
       { path: "analytics", element: <AnalyticsPage /> },
       { path: "waiting-list", element: <WaitingListPage /> },
       { path: "archive", element: <ArchivePage /> },
+      { path: "profile", element: <ProfilePage /> },
     ],
   },
   {

@@ -3,7 +3,7 @@ import { AuthButtonProps } from './Button.props'
 import styles from './Button.module.scss'
 import { clsx } from 'clsx'
 
-const AuthButton = ({ children, className, ...props }: AuthButtonProps) => {
+const Button = ({ children, className, ...props }: AuthButtonProps) => {
   return (
     <button {...props} className={clsx(styles.button, className)}>
       {children}
@@ -11,4 +11,4 @@ const AuthButton = ({ children, className, ...props }: AuthButtonProps) => {
   )
 }
 
-export default AuthButton
+export default Button

@@ -1,0 +1,32 @@
+@import '../../../sass/base';
+
+.wrapper {
+  display: flex;
+  gap: 66px;
+  margin-top: 32px;
+}
+
+.firstCol {
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 57px;
+}
+
+.secondCol {
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 57px;
+}
+
+.emailInput {
+  color: $gray-color;
+}
+
+.button {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 21px;
+  padding: 13px 65px;
+}
