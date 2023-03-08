@@ -1,8 +1,6 @@
-import Button from '../../components/button'
-import profile from '../../assets/images/profile.svg'
-import editAva from '../../assets/icons/editAva.svg'
-import { ProfileForm } from '../../modules/profilePage'
 import { useNavigate } from 'react-router-dom'
+import Button from '../../components/button'
+import { AvaForm, ProfileForm } from '../../modules/profilePage'
 
 import styles from './profilePage.module.scss'
 
@@ -22,11 +20,7 @@ const ProfilePage = () => {
         <div className={styles.wrapper}>
           <div className={styles.left}>
             <span className={styles.leftSubtitle}>Фото профиля</span>
-            <img src={profile} alt='avatar' className={styles.ava} />
-            <div className={styles.action}>
-              <img src={editAva} alt='' />
-              <span className={styles.editAva}>Изменить фото</span>
-            </div>
+            <AvaForm />
           </div>
 
           <div className={styles.right}>

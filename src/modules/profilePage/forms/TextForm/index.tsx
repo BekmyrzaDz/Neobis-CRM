@@ -1,8 +1,8 @@
 import { Formik, Form } from 'formik'
-import { profileState } from '../state'
-import { profileSchema } from '../schema'
-import ProfileInput from '../components/input'
-import Button from '../../../components/button'
+import { profileState } from '../../state'
+import { profileSchema } from '../../schema'
+import ProfileInput from '../../components/input'
+import Button from '../../../../components/button'
 
 import styles from './index.module.scss'
 

@@ -1,3 +1,4 @@
-import ProfileForm from '../profilePage/forms'
+import ProfileForm from './forms/TextForm'
+import AvaForm from './forms/AvaForm'
 
-export { ProfileForm }
+export { ProfileForm, AvaForm }

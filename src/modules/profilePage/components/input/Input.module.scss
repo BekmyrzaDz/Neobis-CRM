@@ -1,11 +1,11 @@
 @import '../../../../sass/base';
 
-.wrapper {
-  position: relative;
-}
+// .wrapper {
+//   position: relative;
+// }
 
 .input {
-  width: 100%;
+  width: 350px; // 100%
   height: 48px;
   margin-top: 5px;
   padding: 5px 15px;
@@ -28,9 +28,10 @@
 
 .error {
   color: $error-color;
-  position: absolute;
-  top: 80px;
-  left: 0;
+  max-width: 350px;
+  // position: absolute;
+  // top: 80px;
+  // left: 0;
 }
 
 .label {
