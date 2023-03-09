@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { AppBar, Toolbar, Typography, Avatar, Button, makeStyles } from '@material-ui/core';
+import ModalPopap from '../ModalPopap/ModalPopap';
 import user from '../../assets/user.svg';
 import plus from '../../assets/plus.svg';
 
@@ -34,15 +35,17 @@ const useStyles = makeStyles((theme) => ({
 function Header() {
   const classes = useStyles();
   const [userName, setUserName] = useState<string>('Бексултан Маратов');
+  const [popap, setPopap] = useState<boolean>(false);
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
-          <Button className={classes.button} variant="contained">
+          <Button onClick={() => setPopap(!popap)} className={classes.button} variant="contained">
             <img src={plus} alt="plus" style={{ marginRight: '13px' }} />
             Добавить сотрудника
           </Button>
+          {popap ? <ModalPopap /> : null}
           <Avatar alt={userName} src={user} />
           <Typography className={classes.userName} variant="subtitle1">
             {userName}
