@@ -3,6 +3,10 @@
 .card {
   background-color: $white-color;
   border-radius: 16px;
+  transition: $tran-04;
+  &:hover {
+    background-color: $count-gray-color;
+  }
 }
 
 .cardRed {
@@ -76,14 +80,16 @@
 }
 
 .way {
-  background-color: $count-gray-color;
-  padding: 6px 8px;
   border-radius: 12px;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  .icon {
+    margin-right: 10px;
+  }
   span {
     font-family: Segoe UI;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 400;
     color: $auth-black-color;
   }
 }
