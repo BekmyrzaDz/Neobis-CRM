@@ -4,14 +4,14 @@ export interface IClient {
   id: string
   first_name: string
   last_name: string
-  surname: string
-  notes: string
+  surname?: string
+  notes?: string
   phone: string
-  laptop: boolean
+  laptop?: boolean
   department: IDepartment
   came_from: string
-  payment_method: IPaymentMethod
-  status: string
+  payment_method?: IPaymentMethod
+  status?: string
 }
 
 export interface IDepartment {

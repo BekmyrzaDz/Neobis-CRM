@@ -97,7 +97,7 @@ const clientData: IClient[] = [
     laptop: true,
     department: {
       id: 2,
-      name: 'Front-End',
+      name: 'Back-End',
     },
     came_from	: "Через Инстаграм",
     payment_method: {

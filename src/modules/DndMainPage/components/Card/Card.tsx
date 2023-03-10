@@ -16,11 +16,16 @@ const Card: FC<IClient> = ({
   phone,
   department,
   came_from,
-  status,
   index,
 }) => {
   const directionClasses = clsx(styles.directionUxUi, {
     [styles.directionFront]: department.name === "Front-End",
+    [styles.directionBack]: department.name === "Back-End",
+    [styles.directionPM]: department.name === "PM",
+    [styles.directionAndroid]: department.name === "Android",
+    [styles.directionIOS]: department.name === "IOS",
+    [styles.directionFlutter]: department.name === "Flutter",
+    [styles.directionOlimp]: department.name === "Олимпиадное программирование",
   })
   const cardClasses = clsx(styles.card, {
     [styles.cardRed]: time === "24 ч.",
@@ -66,10 +71,8 @@ const Card: FC<IClient> = ({
                   </div>
                   <span>{came_from}</span>
                 </div>
-                <div className={styles.noteAndClear}>
-                  <div className={styles.note}>
-                    <NoteSvgComponent color="#756FB3" />
-                  </div>
+                <div className={styles.note}>
+                  <NoteSvgComponent color="#756FB3" />
                 </div>
               </div>
             </div>

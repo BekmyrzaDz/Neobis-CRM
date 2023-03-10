@@ -61,7 +61,7 @@
   display: inline-block;
   margin-bottom: 16px;
   span {
-    color: $pink-color;
+    color: $ux-ui-color;
     font-family: Segoe UI;
     font-size: 16px;
     font-weight: 600;
@@ -72,7 +72,73 @@
   display: inline-block;
   margin-bottom: 16px;
   span {
-    color: $green-color;
+    color: $front-color;
+    font-family: Segoe UI;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+.directionBack {
+  display: inline-block;
+  margin-bottom: 16px;
+  span {
+    color: $back-color;
+    font-family: Segoe UI;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+.directionPM {
+  display: inline-block;
+  margin-bottom: 16px;
+  span {
+    color: $pm-color;
+    font-family: Segoe UI;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+.directionAndroid {
+  display: inline-block;
+  margin-bottom: 16px;
+  span {
+    color: $android-color;
+    font-family: Segoe UI;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+.directionIOS {
+  display: inline-block;
+  margin-bottom: 16px;
+  span {
+    color: $ios-color;
+    font-family: Segoe UI;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+.directionFlutter {
+  display: inline-block;
+  margin-bottom: 16px;
+  span {
+    color: $flutter-color;
+    font-family: Segoe UI;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+.directionOlimp {
+  display: inline-block;
+  margin-bottom: 16px;
+  span {
+    color: $olimp-color;
     font-family: Segoe UI;
     font-size: 16px;
     font-weight: 600;
@@ -100,10 +166,10 @@
   align-items: center;
 }
 
-.noteAndClear {
-  display: flex;
-  .note,
-  .clear {
-    cursor: pointer;
+.note {
+  display: none;
+  cursor: pointer;
+  &:hover {
+    display: block;
   }
 }
