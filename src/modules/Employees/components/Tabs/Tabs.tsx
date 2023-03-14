@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import { makeStyles } from '@material-ui/core/styles';
+import { Tab, Tabs } from '@material-ui/core';
 import DataBase from '../../components/DataBase/DataBase';
 import Mentors from '../../components/Mentors/Mentors';
+import { makeStyles } from '@material-ui/core/styles';
 
 interface TabsItems {
   title: string;

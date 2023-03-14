@@ -1,15 +1,14 @@
 import React, { useState, useMemo } from 'react';
 import { Avatar } from '@material-ui/core';
 import { DataGrid, GridCellParams, GridColDef } from '@material-ui/data-grid';
+import { trash } from '../../assets';
 import { makeStyles } from '@material-ui/styles';
-import trash from '../../assets/trash.png';
 
 const useStyles = makeStyles({
   headerName: {
     position: 'relative',
     left: ' 20px',
-    color: ' #aaaaaa',
-    fontWeight: '700',
+    color: '#aaaaaa',
     fontSize: '18px',
   },
 

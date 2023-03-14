@@ -1,8 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, CardMedia, Typography, Box } from '@material-ui/core';
-import calendar from '../../assets/calendar.svg';
-import time from '../../assets/time.svg';
+import { calendar, time } from '../../assets';
 
 const useStyles = makeStyles({
   card: {

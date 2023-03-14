@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { AppBar, Toolbar, Typography, Avatar, Button, makeStyles } from '@material-ui/core';
 import ModalPopap from '../ModalPopap/ModalPopap';
-import user from '../../assets/user.svg';
-import plus from '../../assets/plus.svg';
+import { user, plus } from '../../assets';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,7 +44,7 @@ function Header() {
             <img src={plus} alt="plus" style={{ marginRight: '13px' }} />
             Добавить сотрудника
           </Button>
-          {popap ? <ModalPopap /> : null}
+          {popap && <ModalPopap popap={popap} setPopap={setPopap} />}
           <Avatar alt={userName} src={user} />
           <Typography className={classes.userName} variant="subtitle1">
             {userName}
