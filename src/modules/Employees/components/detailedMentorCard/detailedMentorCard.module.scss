@@ -1,0 +1,346 @@
+@import '../../../../sass/base';
+
+.bg {
+  height: 100%;
+  width: 100%;
+  background-color: $violet-color;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  padding-right: 16px;
+}
+
+.modalPopap {
+  background: $white-color;
+  border-radius: 20px;
+  margin: 50px auto;
+  padding: 24px 32px;
+  position: relative;
+}
+
+.scroll {
+  padding-right: 26px;
+  height: 800px;
+  overflow-y: scroll;
+}
+
+.scroll::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+  border-radius: 20px;
+  height: 350px;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 20px;
+  border-radius: 20px;
+  height: 350px;
+  background-color: #f5f5f5;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  height: 350px;
+  background-color: #756fb3;
+}
+
+.close {
+  position: absolute;
+
+  top: -13px;
+  right: -10px;
+
+  cursor: pointer;
+}
+
+.title {
+  font-size: 30px;
+  line-height: 32px;
+  color: #000;
+  margin-bottom: 45px;
+}
+
+.roles {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.roles::after {
+  content: 'Выберите роль';
+  position: absolute;
+  top: -30px;
+  color: #aaa;
+}
+
+.role {
+  width: 170px;
+  height: 170px;
+  border: 2px solid #aaa;
+  padding: 15px 19px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.role:hover {
+  border: 3px solid #756fb3;
+}
+
+.role > p {
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #252525;
+}
+
+.photo {
+  margin-top: 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px dashed #aaa;
+  padding: 8px;
+  border-width: 3px;
+  border-radius: 12px;
+}
+
+.photo::after {
+  content: 'Добавить фото сотрудника';
+  position: absolute;
+  top: -30px;
+  left: 0;
+  color: #aaa;
+}
+
+.photo > span {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.photo > button {
+  background-color: #756fb3;
+  color: #fff;
+  padding: 10px 16px;
+  font-size: 17px;
+  border-radius: 12px;
+}
+
+.info {
+  margin: 40px 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 24px;
+}
+
+.info > div > input {
+  padding: 8px;
+  font-size: 18px;
+  border: 2px solid #aaa;
+  width: 300px;
+  height: 50px;
+  border-radius: 12px;
+}
+
+.info > div > p {
+  color: #aaa;
+  margin-bottom: 4px;
+}
+
+.add {
+  margin-top: 35px;
+  display: block;
+  width: 100%;
+  background-color: #756fb3;
+  color: #fff;
+  font-size: 17px;
+  letter-spacing: 0.3px;
+  padding: 12px 0;
+  border-radius: 12px;
+}
+
+.additionally {
+  border-top: 1px solid #252525;
+  padding-top: 40px;
+  position: relative;
+}
+
+.select {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  border: 1px solid #aaaaaa;
+  height: 40px;
+  border-radius: 12px;
+  padding-left: 8px;
+  font-size: 17px;
+  position: relative;
+  color: #756fb3;
+}
+
+.select > option {
+  height: 20px;
+  font-size: 17px;
+}
+
+.selectTitle {
+  color: #aaa;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.selectTitle::after {
+  content: '';
+  background: url(../../assets/arrow.png) no-repeat;
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  z-index: 1;
+  right: 15px;
+  top: 82px;
+}
+
+.patents {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.patentsNum {
+  position: relative;
+  width: 50%;
+}
+
+.patentsNum::before {
+  content: 'Номер патента';
+  position: absolute;
+  top: -25px;
+  color: #aaa;
+}
+
+.patentsNum > input {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #aaa;
+  border-radius: 12px;
+  font-size: 17px;
+  padding-left: 8px;
+}
+
+.patentsTime {
+  position: relative;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.patentsTime::before {
+  position: absolute;
+  content: 'Время патента';
+  top: -25px;
+  color: #aaa;
+}
+
+.patentsTime > input[type='date'] {
+  width: 142px;
+  font-size: 17px;
+  height: 44px;
+  border-radius: 12px;
+  padding: 4px 8px;
+  border: 1px solid #aaa;
+}
+
+.days {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.days::after {
+  position: absolute;
+  content: 'Время патента';
+  top: -25px;
+  color: #aaa;
+}
+
+.day {
+  background-color: #e5e5e5;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+.times {
+  display: flex;
+  gap: 10px;
+  margin-top: 40px;
+  position: relative;
+}
+
+.times::after {
+  content: 'Рабочие часы';
+  position: absolute;
+  top: -23px;
+  color: #aaa;
+}
+
+.time {
+  display: flex;
+  border-radius: 12px;
+  align-items: center;
+  padding: 6px 10px;
+  gap: 10px;
+  border: 1px solid #aaa;
+}
+
+.timeBtn {
+  background-color: $violet-color;
+  padding: 0px 12px 7px 12px;
+  color: #fff;
+  font-size: 27px;
+  border-radius: 12px;
+}
+
+.groups {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.groups::after {
+  content: 'Группы, которые он ведёт*';
+  position: absolute;
+  top: -25px;
+  color: #aaa;
+}
+
+.group {
+  border: 1px solid #aaa;
+  padding: 6px 8px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.groupSelect {
+  border: 1px solid #aaa;
+  color: #756fb3;
+  padding: 7px 13px;
+  font-size: 17px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
