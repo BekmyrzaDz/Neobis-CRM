@@ -1,5 +1,5 @@
 export interface IClient {
-  index?: number
+  index: number | undefined
   time: string
   id: string
   first_name: string

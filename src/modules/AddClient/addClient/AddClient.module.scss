@@ -1,0 +1,69 @@
+@import "../../../sass/base";
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-family: Segoe UI;
+  font-weight: 600;
+  font-size: 24px;
+  color: $black-color;
+}
+
+.left {
+  cursor: pointer;
+}
+
+.form {
+  .content {
+    .department {
+      margin-bottom: 24px;
+    }
+  }
+}
+
+.form {
+  .content {
+    .fullName {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+  }
+}
+
+.form {
+  .content {
+    .phoneAndLaptop {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      .laptop {
+        max-width: 129px;
+      }
+    }
+  }
+}
+
+.form {
+  .content {
+    .paymentMethodAndSource {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+  }
+}
+
+.form {
+  .content {
+    .notes {
+      margin-bottom: 32px;
+    }
+  }
+}

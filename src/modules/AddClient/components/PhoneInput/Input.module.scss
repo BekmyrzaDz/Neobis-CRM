@@ -1,0 +1,53 @@
+@import "../../../../sass/base";
+
+.box {
+  margin-bottom: 24px;
+
+  .inputLabel {
+    font-family: Segoe UI;
+    font-weight: 600;
+    font-size: 14px;
+    color: $gray-color;
+    span {
+      color: $violet-color;
+      font-weight: 600;
+    }
+  }
+
+  .group {
+    margin-top: 4px;
+    border: 1px solid $gray-color;
+    border-radius: 12px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    .icon {
+      min-width: 58px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .img {
+        position: absolute;
+        left: 16px;
+      }
+    }
+  }
+  .input {
+    border: none;
+    width: 100%;
+    height: 44px;
+    border-radius: 12px;
+    outline: none;
+    transition: $tran-03;
+    color: $auth-black-color;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: Segoe UI;
+    line-height: 23.94px;
+    padding: 0;
+    padding: 11px 16px 11px 0;
+    &::placeholder {
+      color: $auth-black-color;
+    }
+  }
+}

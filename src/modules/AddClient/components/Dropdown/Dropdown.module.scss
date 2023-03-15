@@ -1,0 +1,86 @@
+@import "../../../../sass/base";
+
+.dropdown {
+  width: 100%;
+  position: relative;
+  user-select: none;
+}
+
+.dropdownLabel {
+  font-family: Segoe UI;
+  font-weight: 600;
+  font-size: 14px;
+  color: $gray-color;
+  span {
+    color: $violet-color;
+    font-weight: 600;
+  }
+}
+
+.dropdownBtn {
+  margin-top: 4px;
+  height: 44px;
+  border: 1px solid $gray-color;
+  border-radius: 12px;
+  padding: 11px 16px;
+  font-family: Segoe UI;
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.dropdownContent {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  z-index: 1;
+  font-family: Segoe UI;
+  font-weight: 600;
+  font-size: 16px;
+  width: 100%;
+  background-color: $white-color;
+}
+
+.dropdownItem {
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: $tran-02;
+  &:hover {
+    background-color: #f4f4f4;
+  }
+}
+
+.dropdownUxUi {
+  color: $ux-ui-color;
+}
+
+.dropdownFront {
+  color: $front-color;
+}
+
+.dropdownBack {
+  color: $back-color;
+}
+
+.dropdownPM {
+  color: $pm-color;
+}
+
+.dropdownAndroid {
+  color: $android-color;
+}
+
+.dropdownIOS {
+  color: $ios-color;
+}
+
+.dropdownFlutter {
+  color: $flutter-color;
+}
+
+.dropdownOlimp {
+  color: $olimp-color;
+}

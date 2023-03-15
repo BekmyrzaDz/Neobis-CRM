@@ -1,0 +1,63 @@
+@import "../../../../sass/base";
+
+.dropdown {
+  width: 100%;
+  position: relative;
+  user-select: none;
+}
+.dropdown {
+  .dropdownLabel {
+    font-family: Segoe UI;
+    font-weight: 600;
+    font-size: 14px;
+    color: $gray-color;
+    span {
+      color: $violet-color;
+      font-weight: 600;
+    }
+  }
+}
+
+.dropdown {
+  .dropdownBtn {
+    margin-top: 4px;
+    height: 44px;
+    border: 1px solid $gray-color;
+    border-radius: 12px;
+    padding: 11px 16px;
+    font-weight: Segoe UI;
+    font-weight: 400;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+}
+
+.dropdown {
+  .dropdownContent {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    z-index: 1;
+    font-weight: Segoe UI;
+    font-weight: 400;
+    font-size: 16px;
+    width: 100%;
+    background-color: $white-color;
+  }
+}
+
+.dropdown {
+  .dropdownContent {
+    .dropdownItem {
+      padding: 10px 16px;
+      cursor: pointer;
+      transition: $tran-02;
+      &:hover {
+        background-color: #f4f4f4;
+      }
+    }
+  }
+}

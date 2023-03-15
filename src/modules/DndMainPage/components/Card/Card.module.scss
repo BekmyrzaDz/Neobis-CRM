@@ -6,6 +6,11 @@
   transition: $tran-04;
   &:hover {
     background-color: $count-gray-color;
+    .note {
+      svg {
+        display: block;
+      }
+    }
   }
 }
 
@@ -167,9 +172,12 @@
 }
 
 .note {
-  display: none;
   cursor: pointer;
-  &:hover {
-    display: block;
+  display: block;
+  width: 32px;
+  height: 32px;
+  svg {
+    transition: $tran-04;
+    display: none;
   }
 }
