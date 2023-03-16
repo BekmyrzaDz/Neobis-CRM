@@ -4,6 +4,7 @@ import ArchivePage from "../../archive/components/ArchivePage"
 import CoursePage from "../../course/components/CoursePage"
 import EmployeesPage from "../../Employees/EmployeesPage"
 import MainPage from "../../main/components/MainPage/MainPage"
+import ProfilePage from "../../profile/ProfilePage"
 import StudentsPage from "../../students/components/StudentsPage"
 import WaitingListPage from "../../waitingList/components/WaitingListPage"
 
@@ -15,6 +16,7 @@ export type TLocation =
   | "/analytics"
   | "/waiting-list"
   | "/archive"
+  | "/profile"
 
 export const renderMainPage = (location: TLocation): ReactNode => {
   switch (location) {
@@ -32,6 +34,8 @@ export const renderMainPage = (location: TLocation): ReactNode => {
       return <WaitingListPage />
     case "/archive":
       return <ArchivePage />
+    case "/profile":
+      return <ProfilePage />
     default:
       return null
   }

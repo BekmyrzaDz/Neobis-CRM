@@ -1,0 +1,43 @@
+@import '../../../../sass/base';
+
+// .wrapper {
+//   position: relative;
+// }
+
+.input {
+  width: 350px; // 100%
+  height: 48px;
+  margin-top: 5px;
+  padding: 5px 15px;
+  background: $white-color;
+  border: 1px solid #e2e2e2;
+  color: #252525;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21px;
+  &:focus {
+    outline: 1px solid $violet-color;
+  }
+}
+
+::placeholder {
+  color: $gray-color;
+  font-size: 16px;
+}
+
+.error {
+  color: $error-color;
+  max-width: 350px;
+  // position: absolute;
+  // top: 80px;
+  // left: 0;
+}
+
+.label {
+  font-style: normal;
+  font-weight: 350;
+  font-size: 14px;
+  line-height: 19px;
+  color: $gray-color;
+}

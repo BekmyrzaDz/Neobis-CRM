@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import authReducer from '../modules/auth/redux/authSlice'
+import profileReducer from '../modules/profilePage/redux/profileSlice'
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  profile: profileReducer,
 })
 
 export const setupStore = () => {
