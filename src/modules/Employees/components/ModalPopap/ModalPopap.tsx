@@ -1,53 +1,65 @@
-import React, { useState } from 'react';
-import { image, linkedin, arrow, closeIcon } from '../../assets';
-import { roles, departments } from '../../mockAPI/popapAPI';
+import React, { useState, useCallback } from 'react';
+import { image, arrow, closeIcon } from '../../assets';
+import { roles } from '../../mockAPI/popapAPI';
+import { Linkedin, MentorsInfo } from '../mentorsAddition/mentosAddition'
 import styles from './ModalPopap.module.scss';
 
 type TPopap = {
   popap: boolean;
-  setPopap: () => void;
+  setPopap: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const ModalPopap: React.FC<TPopap> = ({ popap, setPopap }) => {
   const [open, setOpen] = useState<boolean>(false);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<number | null>(null);
 
-  const handleClick = (idx: number) => {
+  const modalHeight = open ? '850px' : '850px';
+  const modalWidth = open ? '720px' : '700px';
+  const modalPadding = open ? '24px 20px 24px 32px' : '24px 32px';
+
+  const handleClick = useCallback((idx: number) => {
     setOpen(idx === 2 ? true : false);
     setValue(idx);
-  };
+  }, []);
+
   return (
-    <div className={styles.bg} style={{}}>
+    <div className={styles.bg}>
       <div
         className={styles.modalPopap}
         style={{
-          height: open ? '1400' : '850px',
-          width: open ? '720px' : '700px',
-          padding: open ? '24px 20px 24px 32px' : '24px 32px',
+          height: modalHeight,
+          width: modalWidth,
+          padding: modalPadding,
         }}>
         <div
-          className={`${open && styles.scroll}`}
-          style={{ overflowY: open ? 'scroll' : 'hidden' }}>
+          className={`${open && styles.scroll}`}>
           <h2 className={styles.title}>Создание сотрудника</h2>
           <img
-            onClick={() => setPopap(!popap)}
+            onClick={() => setPopap(false)}
             className={styles.close}
             src={closeIcon}
             alt="close"
           />
           <div className={styles.roles}>
-            {roles.map((item, idx: number) => (
-              <div
-                onClick={() => handleClick(idx)}
-                className={styles.role}
-                style={{
-                  backgroundColor: value === idx ? '#756fb3' : '#fff',
-                }}>
-                <img src={value === idx ? item.secondImg : item.img} alt="Teacher" />
-                <p style={{ color: value === idx ? '#fff' : '#252525' }}>{item.title}</p>
-              </div>
-            ))}
+            {roles.map((item, idx) => {
+              const isSelected = idx === value;
+              const backgroundColor = isSelected ? '#756fb3' : '#fff';
+              const textColor = isSelected ? '#fff' : '#252525';
+              const imgSrc = isSelected ? item.secondImg : item.img;
+              return (
+                <div
+                  key={item.id}
+                  onClick={() => handleClick(idx)}
+                  className={styles.role}
+                  style={{ backgroundColor }}
+                >
+                  <img src={imgSrc} alt="Teacher" />
+                  <p style={{ color: textColor }}>{item.title}</p>
+                </div>
+              );
+            })}
           </div>
+
           <div className={styles.photo}>
             <img src={image} alt="photo" />
             <span>Загрузите фото профиля. Макс. размер - 2MB</span>
@@ -75,50 +87,14 @@ const ModalPopap: React.FC<TPopap> = ({ popap, setPopap }) => {
               <p>Электронная почта</p>
               <input placeholder="Введите электронную почту" type="email" />
             </div>
-            {open && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <img style={{ width: '70px' }} src={linkedin} alt="linkedin" />
-                <input placeholder="Поставьте ссылку на Linkedin" type="email" />
-              </div>
-            )}
+            {open && <Linkedin />
+            }
           </div>
-
-          {open && (
-            <div className={styles.additionally}>
-              <p className={styles.selectTitle}>Выберите департамент</p>
-              <select className={styles.select}>
-                {departments.map((departament) => (
-                  <option style={{ color: `${departament.color}` }}>{departament.value}</option>
-                ))}
-              </select>
-              <div className={styles.patents}>
-                <div className={styles.patentsNum}>
-                  <input type="text" />
-                </div>
-                <div className={styles.patentsTime}>
-                  <input type="date" /> -
-                  <input type="date" />
-                </div>
-              </div>
-              <div className={styles.groups}>
-                <div className={styles.group}>
-                  <span>Python1</span>
-                  <img src={arrow} alt="arrow" />
-                </div>
-                <select className={styles.groupSelect}>
-                  <option>First group</option>
-                  <option>Second group</option>
-                  <option>Third group</option>
-                </select>
-                <button className={styles.timeBtn}>+</button>
-              </div>
-            </div>
-          )}
+          {open && <MentorsInfo />}
           <button className={styles.add}>Добавить сотрудника</button>
         </div>
       </div>
     </div>
   );
 };
-
 export default ModalPopap;
