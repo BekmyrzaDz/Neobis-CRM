@@ -7,7 +7,7 @@ const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
 const MentorsCards = () => {
 
-  const [popap, setPopap] = useState(true)
+  const [popap, setPopap] = useState(false)
 
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', width: '98%', gap: '24px' }}>

@@ -3,6 +3,35 @@ import { AppBar, Toolbar, Typography, Avatar, Button, makeStyles } from '@materi
 import ModalPopap from '../ModalPopap/ModalPopap';
 import { user, plus } from '../../assets';
 
+
+
+function Header() {
+  const classes = useStyles();
+  const [userName, setUserName] = useState<string>('Бексултан Маратов');
+  const [popap, setPopap] = useState<boolean>(false);
+
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar className={classes.toolbar}>
+          <Button onClick={() => setPopap(!popap)} className={classes.button} variant="contained">
+            <img src={plus} alt="plus" style={{ marginRight: '13px' }} />
+            Добавить сотрудника
+          </Button>
+          {popap && <ModalPopap popap={popap} setPopap={setPopap} />}
+          <Avatar alt={userName} src={user} />
+          <Typography className={classes.userName} variant="subtitle1">
+            {userName}
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+}
+
+export default Header;
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -30,29 +59,3 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '10px',
   },
 }));
-
-function Header() {
-  const classes = useStyles();
-  const [userName, setUserName] = useState<string>('Бексултан Маратов');
-  const [popap, setPopap] = useState<boolean>(false);
-
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar className={classes.toolbar}>
-          <Button onClick={() => setPopap(!popap)} className={classes.button} variant="contained">
-            <img src={plus} alt="plus" style={{ marginRight: '13px' }} />
-            Добавить сотрудника
-          </Button>
-          {popap && <ModalPopap popap={popap} setPopap={setPopap} />}
-          <Avatar alt={userName} src={user} />
-          <Typography className={classes.userName} variant="subtitle1">
-            {userName}
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
-}
-
-export default Header;
