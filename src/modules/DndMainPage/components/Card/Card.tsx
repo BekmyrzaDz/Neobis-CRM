@@ -3,10 +3,8 @@ import { FC } from "react"
 import { Draggable } from "react-beautiful-dnd"
 import ClockTimeSvgComponent from "../Svg/ClockTimeSvgComponent"
 import instagram from "../../assets/image/instagram.svg"
-import InstagramSvgComponent from "../Svg/InstagramSvgComponent"
-import NoteSvgComponent from "../Svg/NoteSvgComponet"
-import styles from "./Card.module.scss"
 import { IClient } from "../../types"
+import styles from "./Card.module.scss"
 
 const Card: FC<IClient> = ({
   time,
@@ -70,9 +68,6 @@ const Card: FC<IClient> = ({
                     )}
                   </div>
                   <span>{came_from}</span>
-                </div>
-                <div className={styles.note}>
-                  <NoteSvgComponent color="#756FB3" />
                 </div>
               </div>
             </div>

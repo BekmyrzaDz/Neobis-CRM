@@ -6,11 +6,6 @@
   transition: $tran-04;
   &:hover {
     background-color: $count-gray-color;
-    .note {
-      svg {
-        display: block;
-      }
-    }
   }
 }
 
@@ -74,79 +69,44 @@
 }
 
 .directionFront {
-  display: inline-block;
-  margin-bottom: 16px;
   span {
     color: $front-color;
-    font-family: Segoe UI;
-    font-size: 16px;
-    font-weight: 600;
   }
 }
 
 .directionBack {
-  display: inline-block;
-  margin-bottom: 16px;
   span {
     color: $back-color;
-    font-family: Segoe UI;
-    font-size: 16px;
-    font-weight: 600;
   }
 }
 
 .directionPM {
-  display: inline-block;
-  margin-bottom: 16px;
   span {
     color: $pm-color;
-    font-family: Segoe UI;
-    font-size: 16px;
-    font-weight: 600;
   }
 }
 
 .directionAndroid {
-  display: inline-block;
-  margin-bottom: 16px;
   span {
     color: $android-color;
-    font-family: Segoe UI;
-    font-size: 16px;
-    font-weight: 600;
   }
 }
 
 .directionIOS {
-  display: inline-block;
-  margin-bottom: 16px;
   span {
     color: $ios-color;
-    font-family: Segoe UI;
-    font-size: 16px;
-    font-weight: 600;
   }
 }
 
 .directionFlutter {
-  display: inline-block;
-  margin-bottom: 16px;
   span {
     color: $flutter-color;
-    font-family: Segoe UI;
-    font-size: 16px;
-    font-weight: 600;
   }
 }
 
 .directionOlimp {
-  display: inline-block;
-  margin-bottom: 16px;
   span {
     color: $olimp-color;
-    font-family: Segoe UI;
-    font-size: 16px;
-    font-weight: 600;
   }
 }
 
@@ -169,15 +129,4 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.note {
-  cursor: pointer;
-  display: block;
-  width: 32px;
-  height: 32px;
-  svg {
-    transition: $tran-04;
-    display: none;
-  }
 }
