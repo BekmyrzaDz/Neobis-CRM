@@ -1,62 +1,27 @@
 import { FC, useState } from "react"
 import Button from "../components/Button"
-import Modal from "../components/Modal/Modal"
+import Modal from "../../../components/ModalPopupMainPage/Modal"
 import PlusSvgComponent from "../components/Svg/PlusSvgComponent"
-import Dropdown from "../components/Dropdown/Dropdown"
-import Input from "../components/Input"
-import PhoneInput from "../components/PhoneInput"
-import LaptopDropdown from "../components/LaptopDropdown/LaptopDropdown"
-import PaymentDropdown from "../components/PaymentDropdown/PaymentDropdown"
-import styles from "./AddClient.module.scss"
-import Textarea from "../components/Textarea"
+import Dropdown from "../../../components/DropdownMainPage/Dropdown"
+import Input from "../../../components/InputMainPage"
+import PhoneInput from "../../../components/IconInputMainPage"
+import SimpleDropdown from "../../../components/SimpleDropdownMainPage/SimpleDropdown"
+import IconDropdown from "../../../components/IconDropdownMainPage/IconDropdown"
+import Textarea from "../../../components/TextareaMainPage"
 import ModalButton from "../components/ModalButton"
-import { IDepartmentOptions } from "../components/Dropdown"
-import {
-  advertisements,
-  cash,
-  creditCard,
-  dotsHorizontal,
-  flagKyrgyzstan,
-  instagram,
-  left,
-  wallet,
-  web,
-} from "../assets"
-import { IOptions } from "../components/PaymentDropdown"
-
-const departmentOptions: IDepartmentOptions[] = [
-  { id: 1, name: "UX/UI" },
-  { id: 2, name: "Front-End" },
-  { id: 3, name: "Back-End" },
-  { id: 4, name: "PM" },
-  { id: 5, name: "Android" },
-  { id: 6, name: "iOS" },
-  { id: 7, name: "Flutter" },
-  { id: 8, name: "Олимпиадное программирование" },
-]
-
-const paymentOptions: IOptions[] = [
-  { icon: cash, name: "Наличными" },
-  { icon: wallet, name: "Электронный кошелек" },
-  { icon: creditCard, name: "Картой" },
-]
-
-const sourceOptions: IOptions[] = [
-  { icon: instagram, name: "Через Instagram" },
-  { icon: advertisements, name: "Через объявление" },
-  { icon: web, name: "Через сайт" },
-  { icon: dotsHorizontal, name: "Другое(через друга и т.п.)" },
-]
+import { departmentOptions, paymentOptions, sourceOptions } from "../mockAPI"
+import { IDepartmentOptions, IOptions } from "../types"
+import { flagKyrgyzstan, left } from "../assets"
+import styles from "./AddClient.module.scss"
 
 const initialDepartmentState = departmentOptions[0]
 const initialPaymentState = paymentOptions[0]
 const initialSourceState = sourceOptions[0]
 
 export const AddClient: FC = () => {
-  const [modalActive, setModalActive] = useState<boolean>(true)
-  const [selected, setSelected] = useState<IDepartmentOptions>(
-    initialDepartmentState
-  )
+  const [modalActive, setModalActive] = useState<boolean>(false)
+  const [departmentSelected, setDepartmentSelected] =
+    useState<IDepartmentOptions>(initialDepartmentState)
   const [laptopSelected, setLaptopSelected] = useState<string>("")
   const [paymentSelected, setPaymentSelected] =
     useState<IOptions>(initialPaymentState)
@@ -78,7 +43,7 @@ export const AddClient: FC = () => {
             <img
               className={styles.left}
               src={left}
-              alt="left"
+              alt="icon left"
               onClick={() => setModalActive(false)}
             />
           </div>
@@ -87,8 +52,8 @@ export const AddClient: FC = () => {
               <Dropdown
                 label="Департамент"
                 options={departmentOptions}
-                selected={selected}
-                setSelected={setSelected}
+                selected={departmentSelected}
+                setSelected={setDepartmentSelected}
               />
             </div>
             <div className={styles.fullName}>
@@ -108,7 +73,7 @@ export const AddClient: FC = () => {
                 label="Номер телефона"
               />
               <div className={styles.laptop}>
-                <LaptopDropdown
+                <SimpleDropdown
                   label="Наличие ноутбука"
                   selected={laptopSelected}
                   setSelected={setLaptopSelected}
@@ -116,13 +81,13 @@ export const AddClient: FC = () => {
               </div>
             </div>
             <div className={styles.paymentMethodAndSource}>
-              <PaymentDropdown
+              <IconDropdown
                 label="Способ оплаты"
                 options={paymentOptions}
                 selected={paymentSelected}
                 setSelected={setPaymentSelected}
               />
-              <PaymentDropdown
+              <IconDropdown
                 label="Источник"
                 options={sourceOptions}
                 selected={sourceSelected}

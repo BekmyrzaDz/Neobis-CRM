@@ -1,16 +1,17 @@
-import { FC, useId, useState } from "react"
+import { FC, useState } from "react"
 import { IDropdown } from "."
-import { arrowDown } from "../../assets"
-import styles from "./PaymentDropdown.module.scss"
+import { arrowDown } from "../../modules/AddClient/assets"
+import styles from "./SimpleDropdown.module.scss"
 
-const PaymentDropdown: FC<IDropdown> = ({
+const options: string[] = ["Да", "Нет"]
+
+const SimpleDropdown: FC<IDropdown> = ({
   label,
-  options,
+  name,
   selected,
   setSelected,
 }) => {
   const [isActive, setIsActive] = useState<boolean>(false)
-  const keyId = useId()
 
   return (
     <div className={styles.dropdown}>
@@ -22,29 +23,20 @@ const PaymentDropdown: FC<IDropdown> = ({
         className={styles.dropdownBtn}
         onClick={() => setIsActive(!isActive)}
       >
-        <div className={styles.select}>
-          <div className={styles.icon}>
-            <img className={styles.img} src={selected?.icon} />
-          </div>
-          {selected?.name}
-        </div>
+        {selected ? selected : options[0]}
         <img className={styles.arrowDown} src={arrowDown} />
       </div>
       {isActive && (
         <div className={styles.dropdownContent}>
-          {options.map((option, index) => (
+          {options.map((option) => (
             <div
               className={styles.dropdownItem}
               onClick={() => {
                 setSelected(option)
                 setIsActive(false)
               }}
-              key={`${keyId}-${index}`}
             >
-              <div className={styles.icon}>
-                <img className={styles.img} src={option.icon} />
-              </div>
-              {option.name}
+              {option}
             </div>
           ))}
         </div>
@@ -53,4 +45,4 @@ const PaymentDropdown: FC<IDropdown> = ({
   )
 }
 
-export default PaymentDropdown
+export default SimpleDropdown

@@ -1,6 +1,6 @@
 import { FC } from "react"
 import clsx from "clsx"
-import { IModal } from "../../types"
+import { IModal } from "../../modules/AddClient/types"
 import styles from "./Modal.module.scss"
 
 const Modal: FC<IModal> = ({ active, setActive, children }) => {
