@@ -1,25 +1,50 @@
 import { Formik, Form } from 'formik'
-import { profileState } from '../../state'
 import { profileSchema } from '../../schema'
 import ProfileInput from '../../components/input'
 import Button from '../../../../components/button'
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
+import { IProfileFormikState } from '../../types'
+import { updateProfile } from '../../redux/asyncActions'
 
 import styles from './index.module.scss'
 
 const ProfileForm = () => {
+  const dispatch = useAppDispatch()
+  const { first_name, last_name, email, phone } = useAppSelector(
+    (state) => state.profile.profile
+  ) ?? { first_name: '', last_name: '', email: '', phone: '' }
+  const id = useAppSelector((state) => state.auth.user?.id) as number
+
+  const onUpdate = (values: IProfileFormikState) => {
+    const { first_name, last_name, phone } = values
+    const profileData = {
+      first_name,
+      last_name,
+      phone,
+    }
+
+    dispatch(updateProfile({ id, profileData }))
+  }
+
   return (
     <Formik
-      initialValues={profileState}
+      initialValues={{
+        first_name,
+        last_name,
+        email,
+        phone,
+      }}
+      enableReinitialize={true}
       validationSchema={profileSchema}
-      onSubmit={(values) => console.log(JSON.stringify(values, null, 2))}
+      onSubmit={onUpdate}
     >
       <Form className={styles.wrapper}>
         <div className={styles.firstCol}>
           <div className={styles.firstName}>
             <ProfileInput
               label='Имя'
-              name='firstName'
-              id='firstName'
+              name='first_name'
+              id='first_name'
               type='text'
             />
           </div>
@@ -27,8 +52,8 @@ const ProfileForm = () => {
           <div className={styles.phoneNumber}>
             <ProfileInput
               label='Номер телефона'
-              name='phoneNumber'
-              id='phoneNumber'
+              name='phone'
+              id='phone'
               type='text'
               placeholder='+996'
             />
@@ -39,8 +64,8 @@ const ProfileForm = () => {
           <div className={styles.secondName}>
             <ProfileInput
               label='Фамилия'
-              name='lastName'
-              id='lastName'
+              name='last_name'
+              id='last_name'
               type='text'
             />
           </div>

@@ -1,11 +1,31 @@
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '../../components/button'
+import Spinner from '../../components/spinner/spinner'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { AvaForm, ProfileForm } from '../../modules/profilePage'
+import { getProfileById } from '../../modules/profilePage/redux/asyncActions'
+import { reset } from '../../modules/profilePage/redux/profileSlice'
 
 import styles from './profilePage.module.scss'
 
 const ProfilePage = () => {
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const { isLoading, isSuccess } = useAppSelector((state) => state.profile)
+  const id = useAppSelector((state) => state.auth.user?.id)
+
+  useEffect(() => {
+    if (id !== undefined) dispatch(getProfileById(id))
+  }, [])
+
+  if (isSuccess) {
+    dispatch(reset())
+  }
+
+  if (isLoading) {
+    return <Spinner />
+  }
 
   return (
     <div className={styles.profile}>
