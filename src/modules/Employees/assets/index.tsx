@@ -15,8 +15,10 @@ import manager from './Roles/manager.svg';
 import managerDark from './Roles/managerDark.svg';
 import teacher from './Roles/teacher.svg';
 import teacherDark from './Roles/teacherDark.svg';
+import redTrash from './redTrash.svg'
 
 export {
+  redTrash,
   arrow,
   calendar,
   closeIcon,

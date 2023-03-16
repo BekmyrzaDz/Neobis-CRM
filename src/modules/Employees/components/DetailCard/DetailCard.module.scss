@@ -3,7 +3,7 @@
 .bg {
   height: 100%;
   width: 100%;
-  background-color: $violet-color;
+  background-color: rgba($color: #000000, $alpha: 0.4);
   position: fixed;
   top: 0;
   left: 0;
@@ -16,35 +16,11 @@
 .modalPopap {
   background: $white-color;
   border-radius: 20px;
-  margin: 50px auto;
+  margin: 40px auto;
   padding: 24px 32px;
   position: relative;
-}
-
-.scroll {
-  padding-right: 26px;
-  height: 800px;
-  overflow-y: scroll;
-}
-
-.scroll::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #f5f5f5;
-  border-radius: 20px;
-  height: 350px;
-}
-
-.scroll::-webkit-scrollbar {
-  width: 20px;
-  border-radius: 20px;
-  height: 350px;
-  background-color: #f5f5f5;
-}
-
-.scroll::-webkit-scrollbar-thumb {
-  border-radius: 20px;
-  height: 350px;
-  background-color: #756fb3;
+  height: 900px;
+  width: 700px;
 }
 
 .close {
@@ -60,45 +36,11 @@
   font-size: 30px;
   line-height: 32px;
   color: #000;
-  margin-bottom: 45px;
-}
-
-.roles {
-  width: 90%;
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-}
-
-.roles::after {
-  content: 'Выберите роль';
-  position: absolute;
-  top: -30px;
-  color: #aaa;
-}
-
-.role {
-  width: 170px;
-  height: 170px;
-  border: 2px solid #aaa;
-  padding: 15px 19px;
-  border-radius: 12px;
-  text-align: center;
-}
-
-.role:hover {
-  border: 3px solid #756fb3;
-}
-
-.role > p {
-  margin-top: 10px;
-  font-weight: 600;
-  font-size: 16px;
-  color: #252525;
 }
 
 .photo {
   margin-top: 50px;
+  height: 115px;
   position: relative;
   display: flex;
   align-items: center;
@@ -110,11 +52,22 @@
 }
 
 .photo::after {
-  content: 'Добавить фото сотрудника';
+  content: 'Фото преподавателя';
   position: absolute;
   top: -30px;
   left: 0;
   color: #aaa;
+}
+
+.teacherImg {
+  height: 90px;
+  width: 90px;
+  border-radius: 12px;
+}
+
+.teacherImg > img {
+  width: 100%;
+  height: 100%;
 }
 
 .photo > span {
@@ -131,11 +84,11 @@
 }
 
 .info {
-  margin: 40px 0;
+  margin: 20px 0;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  row-gap: 24px;
+  row-gap: 18px;
 }
 
 .info > div > input {
@@ -153,7 +106,7 @@
 }
 
 .add {
-  margin-top: 35px;
+  margin-top: 15px;
   display: block;
   width: 100%;
   background-color: #756fb3;
@@ -164,9 +117,24 @@
   border-radius: 12px;
 }
 
+.delete {
+  margin-top: 15px;
+  display: block;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  font-size: 17px;
+  letter-spacing: 0.3px;
+  padding: 12px 0;
+  border-radius: 12px;
+}
+
 .additionally {
-  border-top: 1px solid #252525;
-  padding-top: 40px;
   position: relative;
 }
 
@@ -193,6 +161,7 @@
   color: #aaa;
   font-size: 16px;
   margin-bottom: 5px;
+  position: relative;
 }
 
 .selectTitle::after {
@@ -203,7 +172,7 @@
   height: 12px;
   z-index: 1;
   right: 15px;
-  top: 82px;
+  top: 45px;
 }
 
 .patents {

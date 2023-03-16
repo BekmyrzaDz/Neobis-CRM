@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, CardMedia, Typography, Box } from '@material-ui/core';
-import DetailedMentorCard from '../detailedMentorCard/detailedMentorCard';
 
 import { calendar, time } from '../../assets';
 
@@ -38,6 +37,7 @@ const useStyles = makeStyles({
 });
 
 interface UserCardProps {
+  onClick: () => void;
   name: string;
   photoUrl: string;
   position: string;
@@ -68,7 +68,6 @@ const UserCard: React.FC<UserCardProps> = ({
           <img src={time} alt="time" /> {workingHours}
         </Box>
       </CardContent>
-      {open && DetailedMentorCard}
     </Card>
   );
 };
