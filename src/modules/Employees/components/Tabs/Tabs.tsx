@@ -1,21 +1,47 @@
 import { useState } from 'react';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import { makeStyles } from '@material-ui/core/styles';
+import { Tab, Tabs } from '@material-ui/core';
 import DataBase from '../../components/DataBase/DataBase';
 import Mentors from '../../components/Mentors/Mentors';
+import { TabsItem } from '../../mockAPI/tabAPI'
+import { makeStyles } from '@material-ui/core/styles';
 
-interface TabsItems {
-  title: string;
-  count: number;
+export default function TabComponent() {
+  const classes = useStyles();
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+  };
+
+  return (
+    <div className={classes.root}>
+      <Tabs value={value} onChange={handleChange}>
+        {TabsItem?.map((tab, idx: number) => (
+          <Tab
+            key={idx}
+            className={`${classes.Tab} ${value === idx ? classes.activeTab : ''}`}
+            label={
+              <div>
+                {tab.title}
+                <span
+                  className={`${classes.tabCount} ${value === idx ? classes.activeTabCount : ''}`}>
+                  {tab.count}
+                </span>
+              </div>
+            }
+          />
+        ))}
+      </Tabs>
+      {value === 0 && <DataBase />}
+      {value === 1 && <DataBase />}
+      {value === 2 && <Mentors />}
+      {value === 3 && <DataBase />}
+    </div>
+  );
 }
 
-const TabsItem: TabsItems[] = [
-  { title: 'Все сотрудники', count: 25 },
-  { title: 'Менеджеры', count: 10 },
-  { title: 'Преподаватели', count: 8 },
-  { title: 'Админы', count: 8 },
-];
+
+
 
 const useStyles = makeStyles({
   root: {
@@ -27,15 +53,17 @@ const useStyles = makeStyles({
       display: 'none',
     },
   },
-  Tabs: {
+  Tab: {
     marginBottom: '29px',
     fontSize: '18px',
     textTransform: 'none',
     fontWeight: 'bold',
-    letterSpacing: '1px',
-    border: '2px solid #aaa',
+    letterSpacing: '0.5px',
     borderRadius: '16px',
     margin: '0px 5px',
+    background: '#756fb3',
+    color: '#fff',
+    opacity: 'unset',
   },
   activeTab: {
     transition: 'all 0.5s',
@@ -64,38 +92,3 @@ const useStyles = makeStyles({
     background: '#E5E5E5',
   },
 });
-
-export default function TabComponent() {
-  const classes = useStyles();
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
-  };
-
-  return (
-    <div className={classes.root}>
-      <Tabs value={value} onChange={handleChange}>
-        {TabsItem?.map((tab, idx: number) => (
-          <Tab
-            key={idx}
-            className={`${classes.Tabs} ${value === idx ? classes.activeTab : ''}`}
-            label={
-              <div>
-                {tab.title}
-                <span
-                  className={`${classes.tabCount} ${value === idx ? classes.activeTabCount : ''}`}>
-                  {tab.count}
-                </span>
-              </div>
-            }
-          />
-        ))}
-      </Tabs>
-      {value === 0 && <DataBase />}
-      {value === 1 && <DataBase />}
-      {value === 2 && <Mentors />}
-      {value === 3 && <DataBase />}
-    </div>
-  );
-}

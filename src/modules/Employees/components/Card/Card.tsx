@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, CardMedia, Typography, Box } from '@material-ui/core';
-import calendar from '../../assets/calendar.svg';
-import time from '../../assets/time.svg';
+
+import { calendar, time } from '../../assets';
 
 const useStyles = makeStyles({
   card: {
+    cursor: 'pointer',
     width: 222,
     height: 265,
     borderRadius: 16,
@@ -36,6 +37,7 @@ const useStyles = makeStyles({
 });
 
 interface UserCardProps {
+  onClick: () => void;
   name: string;
   photoUrl: string;
   position: string;
@@ -51,7 +53,7 @@ const UserCard: React.FC<UserCardProps> = ({
   workingHours,
 }) => {
   const classes = useStyles();
-
+  const [open, setOpen] = useState(false);
   return (
     <Card className={classes.card}>
       <CardMedia className={classes.media} image={photoUrl} />
