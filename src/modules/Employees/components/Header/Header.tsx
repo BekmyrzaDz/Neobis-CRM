@@ -4,7 +4,6 @@ import ModalPopap from '../ModalPopap/ModalPopap';
 import { user, plus } from '../../assets';
 
 
-
 function Header() {
   const classes = useStyles();
   const [userName, setUserName] = useState<string>('Бексултан Маратов');
