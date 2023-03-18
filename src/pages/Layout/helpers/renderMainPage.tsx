@@ -1,7 +1,7 @@
 import { ReactNode } from "react"
 import AnalyticsPage from "../../analitics/components/AnalyticsPage"
 import ArchivePage from "../../archive/components/ArchivePage"
-import CoursePage from "../../course/components/CoursePage"
+import CoursePage from "../../course/CoursePage"
 import EmployeesPage from "../../Employees/EmployeesPage"
 import MainPage from "../../main/components/MainPage/MainPage"
 import ProfilePage from "../../profile/ProfilePage"
