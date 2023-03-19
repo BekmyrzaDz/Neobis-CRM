@@ -5,11 +5,13 @@ import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import GroupIcon from "@material-ui/icons/Group";
 
 interface ICourses {
+  id:number;
   color: string;
   img: string;
   title: string;
   month: number;
   groups: number;
+  onClick: () => void;
 }
 
 const CardExample: React.FC<ICourses> = ({ color, img, title, month, groups }) => {
