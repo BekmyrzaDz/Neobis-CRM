@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   toolbar: {
-    backgroundColor: '#E5E5E5',
+    backgroundColor: '#F1F1F1',
     color: '#252525',
     justifyContent: 'space-between',
   },
