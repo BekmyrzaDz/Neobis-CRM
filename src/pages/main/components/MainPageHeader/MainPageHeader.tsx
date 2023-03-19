@@ -9,8 +9,10 @@ import HistorySvgComponent from "./components/Svg/HistorySvgComponent"
 import ProfileButton from "../../../../components/ProfileButton"
 import avatar from "./assets/image/avatar.svg"
 import AvatarSvgComponent from "./components/Svg/AvatarSvgComponent"
+import { FC } from "react"
+import { AddClient } from "../../../../modules/AddClient"
 
-const MainPageHeader = () => {
+const MainPageHeader: FC = () => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -26,11 +28,12 @@ const MainPageHeader = () => {
           />
 
           <div className={styles.group}>
-            <Button
+            {/* <Button
               className={styles.item}
               icon={<PlusSvgComponent />}
               name="Добавить заявку"
-            />
+            /> */}
+            <AddClient />
 
             <IconButton
               className={styles.item}

@@ -1,21 +1,22 @@
+import { FC } from "react"
+
 interface IProps {
   color?: string
 }
 
-const NoteSvgComponent = (props: IProps) => {
-  const { color } = props
+const NoteSvgComponent: FC<IProps> = ({ color, ...props }) => {
   return (
     <svg
-      width={28}
-      height={28}
+      width={32}
+      height={32}
       fill={color}
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <rect width={28} height={28} rx={10} fill="#fff" />
+      <rect width={32} height={32} rx={12} fill="#756FB3" />
       <path
-        d="M6.5 9.833V8.167h1.667v-.834a1.667 1.667 0 0 1 1.666-1.666h5V11.5l2.084-1.25L19 11.5V5.667h.833c.875 0 1.667.791 1.667 1.666v13.334c0 .875-.792 1.666-1.667 1.666h-10c-.875 0-1.666-.791-1.666-1.666v-.834H6.5v-1.666h1.667v-3.334H6.5v-1.666h1.667V9.833H6.5Zm3.333 3.334H8.167v1.666h1.666v-1.666Zm0-3.334V8.167H8.167v1.666h1.666Zm0 10v-1.666H8.167v1.666h1.666Z"
-        fill={color}
+        d="M25 14v-1l-6-6H9c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h6v-1.87l8.39-8.39c.44-.44 1-.68 1.61-.74Zm-7-5.5 5.5 5.5H18V8.5Zm8.85 9.69-.98.98-2.04-2.04.98-.98c.19-.2.52-.2.72 0l1.32 1.32c.2.2.2.53 0 .72Zm-3.72-.36 2.04 2.04L19.04 26H17v-2.04l6.13-6.13Z"
+        fill="#fff"
       />
     </svg>
   )

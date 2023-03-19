@@ -1,0 +1,59 @@
+@import "../../sass/base";
+
+.modal {
+  height: 100vh;
+  width: calc(100% - 247px);
+  background-color: rgba($color: #000000, $alpha: 0.4);
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: $tran-05;
+  overflow-x: auto;
+}
+
+.modal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modalContent {
+  padding: 24px 16px;
+  border-radius: 12px;
+  background-color: $white-color;
+  transform: scale(0.5);
+  transition: $tran-04;
+}
+
+.contentInner {
+  width: 680px;
+  max-height: 70vh;
+  padding: 0 16px;
+  overflow: scroll;
+  @supports (scrollbar-gutter: stable) {
+    overflow: auto;
+    scrollbar-gutter: stable;
+  }
+  &::-webkit-scrollbar {
+    width: 15px;
+    background-color: $white-color;
+    border-radius: 0 12px 12px 0;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 12px;
+  }
+  &::-webkit-scrollbar-thumb {
+    scroll-padding-top: 24px;
+    height: 50%;
+    background-color: $violet-color;
+    border-radius: 12px;
+  }
+}
+
+.modalContent.active {
+  transform: scale(1);
+}

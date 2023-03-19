@@ -1,24 +1,37 @@
 import clsx from "clsx"
-import ClearSvgComponent from "../Svg/ClearSvgComponet"
+import { FC } from "react"
+import { Draggable } from "react-beautiful-dnd"
 import ClockTimeSvgComponent from "../Svg/ClockTimeSvgComponent"
-import NoteSvgComponent from "../Svg/NoteSvgComponet"
+import instagram from "../../assets/image/instagram.svg"
+import { IStudent } from "../../types"
 import styles from "./Card.module.scss"
+import { renderImg } from "../../helpers/renderImg"
 
-type Props = {
-  time: string
-  id: string
-  name: string
-  phone: string
-  direction: string
-  way: string
+interface Props {
+  student: IStudent
+  isDragging: boolean
 }
 
-const Card = ({ time, id, name, phone, direction, way }: Props) => {
+function Card<T>(props: Props) {
+  const { student, isDragging } = props
+
   const directionClasses = clsx(styles.directionUxUi, {
-    [styles.directionFront]: direction === "Front-End",
+    [styles.directionFront]: student?.department?.name === "Front-End",
+    [styles.directionBack]: student?.department?.name === "Back-End",
+    [styles.directionPM]: student?.department?.name === "PM",
+    [styles.directionAndroid]: student?.department?.name === "Android",
+    [styles.directionIOS]: student?.department?.name === "IOS",
+    [styles.directionFlutter]: student?.department?.name === "Flutter",
+    [styles.directionOlimp]:
+      student?.department?.name === "Олимпиадное программирование",
   })
+
   const cardClasses = clsx(styles.card, {
-    [styles.cardRed]: time === "24 ч.",
+    [styles.cardRed]: student?.time === "24 ч.",
+  })
+
+  const idClasses = clsx(styles.id, {
+    [styles.idDrag]: isDragging,
   })
 
   return (
@@ -27,28 +40,26 @@ const Card = ({ time, id, name, phone, direction, way }: Props) => {
         <div className={styles.cardTop}>
           <div className={styles.clock}>
             <ClockTimeSvgComponent />
-            <div className={styles.time}>{time}</div>
+            <div className={styles.time}>{student?.time}</div>
           </div>
-          <div className={styles.id}>
-            <span>{id}</span>
+          <div className={idClasses}>
+            <span>{student?.id}</span>
           </div>
         </div>
         <div className={styles.cardContent}>
           <div className={styles.contentMiddle}>
-            <p className={styles.name}>{name}</p>
-            <p className={styles.number}>{phone}</p>
+            <p className={styles.name}>
+              {student?.first_name} {student?.last_name}
+            </p>
+            <p className={styles.number}>{student?.phone}</p>
             <div className={directionClasses}>
-              <span>{direction}</span>
+              <span>{student?.department?.name}</span>
             </div>
           </div>
           <div className={styles.contentBottom}>
             <div className={styles.way}>
-              <span>{way}</span>
-            </div>
-            <div className={styles.noteAndClear}>
-              <div className={styles.note}>
-                <NoteSvgComponent color="#756FB3" />
-              </div>
+              <div className={styles.icon}>{renderImg(student.came_from)}</div>
+              <span>{student?.came_from}</span>
             </div>
           </div>
         </div>
