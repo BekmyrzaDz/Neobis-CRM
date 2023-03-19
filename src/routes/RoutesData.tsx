@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import ArchivePage from "../pages/archive/components/ArchivePage";
-import CoursePage from "../pages/course/components/CoursePage"
+import CoursePage from "../pages/course/CoursePage"
 import EmployeesPage from "../pages/Employees/EmployeesPage"
 import Layout from "../pages/Layout/components/Layout"
 import MainPage from "../pages/main/components/MainPage/MainPage"
