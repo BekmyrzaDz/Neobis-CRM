@@ -43,7 +43,7 @@ const CoursePage = (props: Props) => {
     setSelectedCard(card);
   };
 
-  return <div style={{ backgroundColor: '#E5E5E5', minHeight: '100vh' }}>
+  return <div style={{ backgroundColor: '#F1F1F1', minHeight: '100vh' }}>
     <Header />
     <div style={{ margin: '0 20px', display: 'flex', flexWrap: 'wrap', gap: '30px' }}>
       {
