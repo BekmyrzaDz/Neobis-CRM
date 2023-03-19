@@ -65,6 +65,8 @@ export const DragAndDrop: FC = () => {
       studentIds: startStudentIds,
     }
 
+    console.log(removed)
+
     const endStudentIds: number[] = Array.from(destinationCol.studentIds)
     endStudentIds.splice(destination.index, 0, removed)
 

@@ -5,6 +5,8 @@ const  today = new Date()
 const now = today.toLocaleTimeString('ru-RU')
 const sliceNow = now.slice(0, 2)
 
+// const ids: number[] = generateIds()
+
 const initialData: IData = {
   students: [
     {
@@ -127,12 +129,32 @@ const initialData: IData = {
       },
       status: 'Посетил пробный урок'
     },
+    {
+      time: `${sliceNow} ч.`,
+      id: 7,
+      first_name: "Бермет",
+      last_name: 'Миталипова',
+      surname: "Миталиповна",
+      notes: 'Родной, вообще не переживай на счет этого',
+      phone: "+996551552770",
+      laptop: true,
+      department: {
+        id: 2,
+        name: 'PM',
+      },
+      came_from	: "Через сайт",
+      payment_method: {
+        id: 1,
+        name: 'Наличными'
+      },
+      status: 'Посетил пробный урок'
+    },
   ],
   columns: {
     "column-1": {
       id: "column-1",
       title: "Ждёт звонка",
-      studentIds: [1, 2, 3, 4, 5, 6],
+      studentIds: [1, 2, 3, 4, 5, 6, 7],
     },
     "column-2": {
       id: "column-2",
@@ -154,6 +176,10 @@ const initialData: IData = {
   columnOrder: ["column-1", "column-2", "column-3", "column-4"],
 }
 
-// var ids: number[] = Array.from(initialData.students, (item) => item.id)
+function generateIds(): number[] {
+  const ids: number[] = Array.from(initialData.students, (item) => item.id)
+  return ids
+}
+
 
 export {initialData} 

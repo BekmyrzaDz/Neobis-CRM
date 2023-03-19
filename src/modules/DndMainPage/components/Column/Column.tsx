@@ -36,13 +36,8 @@ function Column<T>(props: Props) {
                     {...draggableProvided.dragHandleProps}
                   >
                     <Card
-                      time={student.time}
-                      id={student.id}
-                      first_name={student.first_name}
-                      last_name={student.last_name}
-                      phone={student.phone}
-                      department={student.department}
-                      came_from={student.came_from}
+                      student={student}
+                      isDragging={draggableSnapshot.isDragging}
                     />
                   </div>
                 )}
