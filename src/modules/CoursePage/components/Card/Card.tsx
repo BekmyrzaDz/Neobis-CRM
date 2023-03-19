@@ -4,8 +4,46 @@ import { Card, CardMedia, CardContent, Typography } from "@material-ui/core";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import GroupIcon from "@material-ui/icons/Group";
 
+interface ICourses {
+  color: string;
+  img: string;
+  title: string;
+  month: number;
+  groups: number;
+}
+
+const CardExample: React.FC<ICourses> = ({ color, img, title, month, groups }) => {
+  const classes = useStyles();
+  return (
+    <Card className={classes.root}>
+      <CardMedia
+        className={classes.media}
+        image={img}
+        title="Card Image"
+      />
+      <CardContent className={classes.content}>
+        <Typography className={classes.title} style={{ color: color }}>{title}</Typography>
+        <div className={classes.iconContainer}>
+          <div className={classes.iconPosition}>
+            <AccessTimeIcon className={classes.icon} />
+            <Typography className={classes.text}>{month}мес</Typography>
+          </div>
+          <div className={classes.iconPosition}>
+            <GroupIcon className={classes.icon} />
+            <Typography className={classes.text}>{groups} группы</Typography>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default CardExample;
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
+    cursor: 'pointer',
     padding: 16,
     width: 360,
     height: 300,
@@ -47,31 +85,3 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(0.5)
   }
 }));
-
-const CardExample = () => {
-  const classes = useStyles();
-  return (
-    <Card className={classes.root}>
-      <CardMedia
-        className={classes.media}
-        image="https://static.ditdot.hr/images/info/ux-ui/ux-ui-00.png"
-        title="Card Image"
-      />
-      <CardContent className={classes.content}>
-        <Typography className={classes.title}>UX/UI</Typography>
-        <div className={classes.iconContainer}>
-          <div className={classes.iconPosition}>
-            <AccessTimeIcon className={classes.icon} />
-            <Typography className={classes.text}>3мкс</Typography>
-          </div>
-          <div className={classes.iconPosition}>
-            <GroupIcon className={classes.icon} />
-            <Typography className={classes.text}>2 группы</Typography>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-};
-
-export default CardExample;
