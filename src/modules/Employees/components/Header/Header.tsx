@@ -71,8 +71,4 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '18px',
     marginLeft: '10px',
   },
-<<<<<<< HEAD
 }));
-=======
-}));
->>>>>>> coursePage
