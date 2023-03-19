@@ -30,7 +30,7 @@ export const ResetPasswordSchema = Yup.object({
   password: Yup.string()
     .min(8, 'Пароль должен быть не менее 8 символов')
     .required('Обязательное поле'),
-  password2: Yup.string().oneOf(
+  repeat_password: Yup.string().oneOf(
     [Yup.ref('password'), null],
     'Пароли не совпадают'
   ),

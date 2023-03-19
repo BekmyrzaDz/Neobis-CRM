@@ -25,22 +25,41 @@ const login = async (userData: ILogin): Promise<IUser> => {
 const resetPassword = async (email: IForgotPassword): Promise<string> => {
   const response = await axios.post(API_URL + 'password_reset/', email)
 
-  return response.data
-}
-
-// Verification code to reset password
-const verification = async (code: IVerification): Promise<string> => {
-  const response = await axios.post(API_URL + 'password_reset_code/', code)
+  if (response.data) {
+    localStorage.setItem('unique_id', JSON.stringify(response.data.unique_id))
+  }
 
   return response.data
 }
 
 // Verification code to reset password
-const setNewPassword = async (passwords: IResetPassword): Promise<string> => {
-  const response = await axios.post(
-    API_URL + 'password_reset_change/',
-    passwords
-  )
+const verification = async ({
+  code,
+  unique_id,
+}: IVerification): Promise<string> => {
+  const response = await axios.post(API_URL + 'password_reset_code/', {
+    code,
+    unique_id,
+  })
+
+  return response.data
+}
+
+// Verification code to reset password
+const setNewPassword = async ({
+  password,
+  repeat_password,
+  unique_id,
+}: IResetPassword): Promise<string> => {
+  const response = await axios.post(API_URL + 'password_reset_change/', {
+    password,
+    repeat_password,
+    unique_id,
+  })
+
+  if (response.data) {
+    localStorage.removeItem('unique_id')
+  }
 
   return response.data
 }

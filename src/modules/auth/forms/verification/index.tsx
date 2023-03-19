@@ -7,14 +7,21 @@ import { VerificationSchema } from '../../schema/validation'
 import { verificationState } from '../../state/state'
 import LockSvg from '../../assets/lock.svg'
 import { useAppDispatch } from '../../../../hooks/redux'
-import { IVerification } from '../../types'
 import { verification } from '../../redux/asyncActions'
 
 const Verification = () => {
   const dispatch = useAppDispatch()
 
-  function onSubmit(values: IVerification) {
-    dispatch(verification(values))
+  function onSubmit(values: any) {
+    const code = values.code
+
+    const uniqueId_string = localStorage.getItem('unique_id')
+    let unique_id
+    if (uniqueId_string !== null) {
+      unique_id = JSON.parse(uniqueId_string)
+    }
+
+    dispatch(verification({ code, unique_id }))
   }
 
   return (

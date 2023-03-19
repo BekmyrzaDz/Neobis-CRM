@@ -7,14 +7,24 @@ import { ResetPasswordSchema } from '../../schema/validation'
 import { resetPassword } from '../../state/state'
 import LockSvg from '../../assets/lock.svg'
 import { useAppDispatch } from '../../../../hooks/redux'
-import { IResetPassword } from '../../types'
 import { setNewPassword } from '../../redux/asyncActions'
 
 const ResetPassword = () => {
   const dispatch = useAppDispatch()
 
-  function onSubmit(values: IResetPassword) {
-    dispatch(setNewPassword(values))
+  function onSubmit(values: any) {
+    console.log(values)
+
+    const password = values.password
+    const repeat_password = values.repeat_password
+
+    const uniqueId_string = localStorage.getItem('unique_id')
+    let unique_id
+    if (uniqueId_string !== null) {
+      unique_id = JSON.parse(uniqueId_string)
+    }
+
+    dispatch(setNewPassword({ password, repeat_password, unique_id }))
   }
 
   return (
@@ -36,8 +46,8 @@ const ResetPassword = () => {
         />
         <Input
           className={styles.secondInput}
-          name='password2'
-          id='password2'
+          name='repeat_password'
+          id='repeat_password'
           type='password'
           placeholder='Повторите пароль'
           icon={LockSvg}

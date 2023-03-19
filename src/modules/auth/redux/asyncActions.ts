@@ -78,9 +78,9 @@ export const verification = createAsyncThunk<
   string,
   IVerification,
   { rejectValue: string }
->('auth/verification', async (code: IVerification, thunkAPI) => {
+>('auth/verification', async ({ code, unique_id }: IVerification, thunkAPI) => {
   try {
-    const response = await authService.verification(code)
+    const response = await authService.verification({ code, unique_id })
     if (response) {
       toast.success('Проверка прошла успешно')
     }
@@ -109,28 +109,38 @@ export const setNewPassword = createAsyncThunk<
   string,
   IResetPassword,
   { rejectValue: string }
->('auth/setNewPassword', async (passwords: IResetPassword, thunkAPI) => {
-  try {
-    const response = await authService.setNewPassword(passwords)
-    if (response) {
-      toast.success('Ваш пароль был успешно изменен.')
+>(
+  'auth/setNewPassword',
+  async (
+    { password, repeat_password, unique_id }: IResetPassword,
+    thunkAPI
+  ) => {
+    try {
+      const response = await authService.setNewPassword({
+        password,
+        repeat_password,
+        unique_id,
+      })
+      if (response) {
+        toast.success('Ваш пароль был успешно изменен.')
+      }
+      return response
+    } catch (error: unknown) {
+      if (typeof error === 'string') {
+        toast.error(error)
+        return thunkAPI.rejectWithValue(error)
+      }
+      if (error instanceof AxiosError) {
+        const message =
+          (error.response &&
+            error.response?.data &&
+            error.response?.data?.message) ||
+          error.message ||
+          error.toString()
+        toast.error(message)
+        return thunkAPI.rejectWithValue(message)
+      }
+      throw error
     }
-    return response
-  } catch (error: unknown) {
-    if (typeof error === 'string') {
-      toast.error(error)
-      return thunkAPI.rejectWithValue(error)
-    }
-    if (error instanceof AxiosError) {
-      const message =
-        (error.response &&
-          error.response?.data &&
-          error.response?.data?.message) ||
-        error.message ||
-        error.toString()
-      toast.error(message)
-      return thunkAPI.rejectWithValue(message)
-    }
-    throw error
   }
-})
+)

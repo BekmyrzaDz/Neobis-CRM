@@ -1,8 +1,8 @@
 import {
   IForgotPassword,
   ILogin,
-  IResetPassword,
-  IVerification,
+  IResetPasswordState,
+  IVerificationState,
 } from '../types'
 
 export let loginState: ILogin = {
@@ -14,11 +14,11 @@ export let forgotPasswordState: IForgotPassword = {
   email: '',
 }
 
-export let verificationState: IVerification = {
+export let verificationState: IVerificationState = {
   code: '',
 }
 
-export let resetPassword: IResetPassword = {
+export let resetPassword: IResetPasswordState = {
   password: '',
-  password2: '',
+  repeat_password: '',
 }
