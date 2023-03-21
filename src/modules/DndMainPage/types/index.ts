@@ -1,3 +1,11 @@
+// Redux profile state
+export interface IStudentState {
+  student: IStudent[] | null
+  isLoading: boolean
+  isSuccess: boolean
+  isError: boolean
+}
+
 export interface IData {
   students: IStudent[]
   columns: IColumns

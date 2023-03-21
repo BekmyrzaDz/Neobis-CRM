@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import authReducer from '../modules/auth/redux/authSlice'
 import profileReducer from '../modules/profilePage/redux/profileSlice'
+import clientReducer from '../modules/DndMainPage/redux/dndSlice'
 
 const rootReducer = combineReducers({
   auth: authReducer,
   profile: profileReducer,
+  // client: clientReducer
 })
 
 export const setupStore = () => {

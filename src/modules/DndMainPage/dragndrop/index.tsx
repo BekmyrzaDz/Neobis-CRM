@@ -1,9 +1,11 @@
-import { useId, useState, FC } from "react"
+import { useId, useState, FC, useEffect } from "react"
 import { DragDropContext, DropResult } from "react-beautiful-dnd"
 import Column from "../components/Column/Column"
 import { initialData } from "../client-bd/client-data"
 import { IColumn, IData, IStudent } from "../types"
 import styles from "./index.module.scss"
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux"
+import dndService from "../services/dndService"
 
 const reorderColumnList = (
   sourceCol: IColumn,
@@ -24,6 +26,14 @@ const reorderColumnList = (
 
 export const DragAndDrop: FC = () => {
   const [state, setState] = useState<IData>(initialData)
+  // const client = useAppSelector((state) => state.client)
+  // console.log(client)
+
+  useEffect(() => {
+    const users = dndService.getAllStudents()
+
+    console.log(users)
+  }, [])
 
   const onDragEnd = (result: DropResult) => {
     const { source, destination } = result
