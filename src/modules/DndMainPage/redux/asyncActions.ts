@@ -5,33 +5,38 @@ import dndService from '../services/dndService';
 // import { IStudent } from '../types';
 
 interface IDepartment {
+  id: number
   name: string
 }
 interface IPaymentMethod {
+  id: number
   name: string
 }
 
 interface IStatus {
+  id: number
   name: string
 }
 
 interface ISource {
+  id: number
   name: string
 }
 
 interface IReason {
+  id: number
   name: string
 }
 
 interface IStudent {
-  time: string
+  time?: string
   id: number
   first_name: string
   last_name: string
   surname?: string
-  notes?: string
+  notes: string
   phone: string
-  laptop?: boolean
+  laptop: boolean
   department: IDepartment
   came_from: ISource
   payment_method?: IPaymentMethod
@@ -42,7 +47,7 @@ interface IStudent {
 }
 
 // getAllStudents Action
-export const getAllStudents = createAsyncThunk<
+export const fetchAllStudents = createAsyncThunk<
   IStudent[],
   undefined,
   { rejectValue: string }

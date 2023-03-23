@@ -1,41 +1,46 @@
 // import { IStudentState, IStudent } from '../types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { getAllStudents } from './asyncActions'
+import { fetchAllStudents } from './asyncActions'
 
 interface IDepartment {
+  id: number
   name: string
 }
 interface IPaymentMethod {
+  id: number
   name: string
 }
 
 interface IStatus {
+  id: number
   name: string
 }
 
 interface ISource {
+  id: number
   name: string
 }
 
 interface IReason {
+  id: number
   name: string
 }
 
 interface IStudent {
-  time: string
+  time?: string
   id: number
   first_name: string
   last_name: string
   surname?: string
-  notes?: string
+  notes: string
   phone: string
-  laptop?: boolean
+  laptop: boolean
   department: IDepartment
   came_from: ISource
   payment_method?: IPaymentMethod
   status?: IStatus
   paid: boolean
-  reason: IReason
+  reason?: IReason
   on_request: boolean
 }
 
@@ -60,18 +65,18 @@ export const dndSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getAllStudents.pending, (state) => {
+      .addCase(fetchAllStudents.pending, (state) => {
         state.isLoading = true
       })
       .addCase(
-        getAllStudents.fulfilled,
+        fetchAllStudents.fulfilled,
         (state, action: PayloadAction<IStudent[]>) => {
           state.isLoading = false
           state.isSuccess = true
           state.student = action.payload
         }
       )
-      .addCase(getAllStudents.rejected, (state) => {
+      .addCase(fetchAllStudents.rejected, (state) => {
         state.isLoading = false
         state.isError = true
         state.student = null

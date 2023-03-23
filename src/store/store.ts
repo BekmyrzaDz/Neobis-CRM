@@ -6,7 +6,7 @@ import clientReducer from '../modules/DndMainPage/redux/dndSlice'
 const rootReducer = combineReducers({
   auth: authReducer,
   profile: profileReducer,
-  // client: clientReducer
+  client: clientReducer
 })
 
 export const setupStore = () => {

@@ -7,7 +7,7 @@ export interface IStudentState {
 }
 
 export interface IData {
-  students: IStudent[]
+  students: IStudent[] | null
   columns: IColumns
   columnOrder: string[]
 }
@@ -22,21 +22,6 @@ export interface IColumn {
   studentIds: number[] | never[]
 }
 
-export interface IStudent {
-  time: string
-  id: number
-  first_name: string
-  last_name: string
-  surname?: string
-  notes?: string
-  phone: string
-  laptop?: boolean
-  department: IDepartment
-  came_from: string
-  payment_method?: IPaymentMethod
-  status?: string
-}
-
 export interface IDepartment {
   id: number
   name: string
@@ -45,3 +30,60 @@ export interface IPaymentMethod {
   id: number
   name: string
 }
+
+export interface IStatus {
+  id: number
+  name: string
+}
+
+export interface ISource {
+  id: number
+  name: string
+}
+
+export interface IReason {
+  id: number
+  name: string
+}
+
+export interface IStudent {
+  // time?: string
+  id: number
+  first_name: string
+  last_name: string
+  surname?: string
+  notes: string
+  phone: string
+  laptop: boolean
+  department: IDepartment
+  came_from: ISource
+  payment_method?: IPaymentMethod
+  status?: IStatus
+  paid: boolean
+  reason: IReason | null
+  on_request: boolean
+}
+
+// export interface IStudent {
+//   time: string
+//   id: number
+//   first_name: string
+//   last_name: string
+//   surname?: string
+//   notes?: string
+//   phone: string
+//   laptop?: boolean
+//   department: IDepartment
+//   came_from: string
+//   payment_method?: IPaymentMethod
+//   status?: string
+// }
+
+// export interface IDepartment {
+//   id: number
+//   name: string
+// }
+// export interface IPaymentMethod {
+//   id: number
+//   name: string
+// }
