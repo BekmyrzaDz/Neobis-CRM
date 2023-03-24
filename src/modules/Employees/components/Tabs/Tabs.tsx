@@ -91,7 +91,6 @@ const useStyles = makeStyles({
     marginBottom: '29px',
     fontSize: '18px',
     textTransform: 'none',
-    fontWeight: 'bold',
     letterSpacing: '0.5px',
     borderRadius: '16px',
     margin: '0px 5px',

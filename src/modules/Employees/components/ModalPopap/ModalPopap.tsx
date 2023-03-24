@@ -13,12 +13,12 @@ const ModalPopap: React.FC<TPopap> = ({ popap, setPopap }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [value, setValue] = useState<number | null>(null);
 
-  const modalHeight = open ? '850px' : '850px';
-  const modalWidth = open ? '720px' : '700px';
+  const modalHeight = open ? '670px' : '670px';
+  const modalWidth = open ? '655px' : '655px';
   const modalPadding = open ? '24px 20px 24px 32px' : '24px 32px';
 
   const handleClick = useCallback((idx: number) => {
-    setOpen(idx === 2 ? true : false);
+    setOpen(idx === 2 && true);
     setValue(idx);
   }, []);
 
@@ -32,7 +32,7 @@ const ModalPopap: React.FC<TPopap> = ({ popap, setPopap }) => {
           padding: modalPadding,
         }}>
         <div
-          className={`${open && styles.scroll}`}>
+          className={styles.scroll}>
           <h2 className={styles.title}>Создание сотрудника</h2>
           <img
             onClick={() => setPopap(false)}
@@ -53,7 +53,9 @@ const ModalPopap: React.FC<TPopap> = ({ popap, setPopap }) => {
                   className={styles.role}
                   style={{ backgroundColor }}
                 >
-                  <img src={imgSrc} alt="Teacher" />
+                  <div className={styles.roleImages}>
+                    <img src={imgSrc} alt="Teacher" />
+                  </div>
                   <p style={{ color: textColor }}>{item.title}</p>
                 </div>
               );

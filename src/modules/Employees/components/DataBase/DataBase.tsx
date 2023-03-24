@@ -59,7 +59,7 @@ const DataBase: React.FC = (props: MyComponentProps): JSX.Element => {
           {
             field: 'image',
             headerName: 'Аватар',
-            width: 170,
+            width: 160,
             renderCell: renderAvatarCell,
             headerAlign: 'center',
             align: 'center',
@@ -68,7 +68,7 @@ const DataBase: React.FC = (props: MyComponentProps): JSX.Element => {
           {
             field: 'id',
             headerName: 'ID',
-            width: 110,
+            width: 90,
             headerAlign: 'center',
             align: 'center',
             headerClassName: classes.headerName,
@@ -76,7 +76,7 @@ const DataBase: React.FC = (props: MyComponentProps): JSX.Element => {
           {
             field: 'first_name',
             headerName: 'ФИО',
-            width: 270,
+            width: 160,
             headerAlign: 'center',
             align: 'center',
             headerClassName: classes.headerName,
@@ -84,7 +84,7 @@ const DataBase: React.FC = (props: MyComponentProps): JSX.Element => {
           {
             field: 'email',
             headerName: 'Почта',
-            width: 370,
+            width: 290,
             headerAlign: 'center',
             align: 'center',
             headerClassName: classes.headerName,
@@ -92,7 +92,7 @@ const DataBase: React.FC = (props: MyComponentProps): JSX.Element => {
           {
             field: 'user_type',
             headerName: 'Должность ',
-            width: 300,
+            width: 160,
             headerAlign: 'center',
             align: 'center',
             headerClassName: classes.headerName,
@@ -100,7 +100,7 @@ const DataBase: React.FC = (props: MyComponentProps): JSX.Element => {
           {
             field: 'phone',
             headerName: 'Конакты',
-            width: 300,
+            width: 160,
             headerAlign: 'center',
             align: 'center',
             headerClassName: classes.headerName,
@@ -108,7 +108,7 @@ const DataBase: React.FC = (props: MyComponentProps): JSX.Element => {
           {
             field: 'actions',
             headerName: 'Actions',
-            width: 53,
+            width: 160,
             type: 'actions',
             renderCell: () => <img src={trash} alt="trash" />,
             headerAlign: 'center',
@@ -121,7 +121,7 @@ const DataBase: React.FC = (props: MyComponentProps): JSX.Element => {
         className={classes.dataGrid}
         rowsPerPageOptions={pageSizeOptions}
         pageSize={pageSize}
-        rowHeight={70}
+        rowHeight={60}
       />
     </div>
   );
@@ -135,21 +135,22 @@ const useStyles = makeStyles({
     position: 'relative',
     left: ' 20px',
     color: '#aaaaaa',
-    fontSize: '18px',
   },
 
   box: {
     color: '#000',
-    height: '800px',
+    height: '555px',
     width: '98%',
     backgroundColor: '#FFFFFF',
     borderRadius: '16px',
-    padding: '30px',
+    padding: '20px',
+   
   },
+
   dataGrid: {
     border: 'none',
     '& .MuiDataGrid-cell': {
-      fontSize: 16,
+      fontSize: 14,
     },
     '& .MuiDataGrid-columnSeparator': {
       display: 'none',
