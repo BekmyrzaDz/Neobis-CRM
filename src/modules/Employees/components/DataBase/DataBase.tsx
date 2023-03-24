@@ -1,138 +1,66 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Avatar } from '@material-ui/core';
-import { DataGrid, GridCellParams, GridColDef } from '@material-ui/data-grid';
+import { GridCellParams, DataGrid } from '@material-ui/data-grid';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllEmployees } from '../../redux/allEmployees/allEmployeesSlice';
+import { RootState } from '../../../../store/store';
+import { toast } from 'react-toastify';
 import { trash } from '../../assets';
+import Spinner from '../../../../components/spinner/spinner';
 import { makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles({
-  headerName: {
-    position: 'relative',
-    left: ' 20px',
-    color: '#aaaaaa',
-    fontSize: '18px',
-  },
+interface IAllEmployees {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string | number;
+  user_type: string;
+  image: string;
+  token: void;
+}
 
-  box: {
-    height: '800px',
-    width: '98%',
-    backgroundColor: '#FFFFFF',
-    borderRadius: '16px',
-    padding: '30px',
-  },
-  dataGrid: {
-    border: 'none',
-    '& .MuiDataGrid-cell': {
-      fontSize: 16,
-    },
-    '& .MuiDataGrid-columnSeparator': {
-      display: 'none',
-    },
-  },
-});
+interface MyComponentProps {
+  employees: IAllEmployees;
+}
 
-const rows = [
-  {
-    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
-    id: 1,
-    name: 'Бексултан Маратов',
-    email: 'myemailaddress@gmail.com',
-    position: 'Менеджер',
-    contacts: '+996555755755',
-  },
-  {
-    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
-    id: 2,
-    name: 'Бексултан Маратов',
-    email: 'myemailaddress@gmail.com',
-    position: 'Менеджер',
-    contacts: '+996555755755',
-  },
-  {
-    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
-
-    id: 3,
-    name: 'Бексултан Маратов',
-    email: 'myemailaddress@gmail.com',
-    position: 'Менеджер',
-    contacts: '+996555755755',
-  },
-  {
-    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
-
-    id: 4,
-    name: 'Бексултан Маратов',
-    email: 'myemailaddress@gmail.com',
-    position: 'Менеджер',
-    contacts: '+996555755755',
-  },
-  {
-    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
-    id: 5,
-    name: 'Бексултан Маратов',
-    email: 'myemailaddress@gmail.com',
-    position: 'Менеджер',
-    contacts: '+996555755755',
-  },
-  {
-    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
-
-    id: 6,
-    name: 'Бексултан Маратов',
-    email: 'myemailaddress@gmail.com',
-    position: 'Менеджер',
-    contacts: '+996555755755',
-  },
-  {
-    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
-
-    id: 7,
-    name: 'Бексултан Маратов',
-    email: 'myemailaddress@gmail.com',
-    position: 'Менеджер',
-    contacts: '+996555755755',
-  },
-  {
-    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
-
-    id: 8,
-    name: 'Бексултан Маратов',
-    email: 'myemailaddress@gmail.com',
-    position: 'Менеджер',
-    contacts: '+996555755755',
-  },
-  {
-    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
-
-    id: 9,
-    name: 'Бексултан Маратов',
-    email: 'myemailaddress@gmail.com',
-    position: 'Менеджер',
-    contacts: '+996555755755',
-  },
-  {
-    photoURL: 'https://stuki-druki.com/biofoto4/hasbik-01.jpg',
-
-    id: 10,
-    name: 'Бексултан Маратов',
-    email: 'myemailaddress@gmail.com',
-    position: 'Менеджер',
-    contacts: '+996555755755',
-  },
-];
-
-const DataBase: React.FC = () => {
+const DataBase: React.FC = (props: MyComponentProps): JSX.Element => {
+  const dispatch = useDispatch()
   const classes = useStyles();
+
+  const { employees } = props;
+  console.log(employees)
+
+  const renderAvatarCell = (params: GridCellParams) => <Avatar src={params.row.image as string} />;
+  const pageSizeOptions = [10, 15, 25];
+
+  const { allEmployees, status, error } = useSelector((state: RootState) => state.allEmployees);
   const [pageSize, setPageSize] = useState(10);
+
+
+  useEffect(() => {
+    dispatch(getAllEmployees());
+  }, [dispatch]);
+
+  if (status === 'loading') {
+    return <Spinner />
+  }
+
+  if (status === 'failed') {
+    return toast.error('Ошибка сервера')
+  }
+
+
 
   return (
     <div className={classes.box}>
       <DataGrid
         columns={[
           {
-            field: 'photoURL',
+            field: 'image',
             headerName: 'Аватар',
             width: 170,
-            renderCell: (params: GridCellParams) => <Avatar src={params.row.photoURL as string} />,
+            renderCell: renderAvatarCell,
             headerAlign: 'center',
             align: 'center',
             headerClassName: classes.headerName,
@@ -146,7 +74,7 @@ const DataBase: React.FC = () => {
             headerClassName: classes.headerName,
           },
           {
-            field: 'name',
+            field: 'first_name',
             headerName: 'ФИО',
             width: 270,
             headerAlign: 'center',
@@ -162,7 +90,7 @@ const DataBase: React.FC = () => {
             headerClassName: classes.headerName,
           },
           {
-            field: 'position',
+            field: 'user_type',
             headerName: 'Должность ',
             width: 300,
             headerAlign: 'center',
@@ -170,7 +98,7 @@ const DataBase: React.FC = () => {
             headerClassName: classes.headerName,
           },
           {
-            field: 'contacts',
+            field: 'phone',
             headerName: 'Конакты',
             width: 300,
             headerAlign: 'center',
@@ -188,15 +116,43 @@ const DataBase: React.FC = () => {
             headerClassName: classes.headerName,
           },
         ]}
-        rows={rows}
+        rows={employees}
         pagination
         className={classes.dataGrid}
-        rowsPerPageOptions={[10, 15, 25]}
+        rowsPerPageOptions={pageSizeOptions}
         pageSize={pageSize}
-        rowHeight={60}
+        rowHeight={70}
       />
     </div>
   );
 };
 
 export default DataBase;
+
+
+const useStyles = makeStyles({
+  headerName: {
+    position: 'relative',
+    left: ' 20px',
+    color: '#aaaaaa',
+    fontSize: '18px',
+  },
+
+  box: {
+    color: '#000',
+    height: '800px',
+    width: '98%',
+    backgroundColor: '#FFFFFF',
+    borderRadius: '16px',
+    padding: '30px',
+  },
+  dataGrid: {
+    border: 'none',
+    '& .MuiDataGrid-cell': {
+      fontSize: 16,
+    },
+    '& .MuiDataGrid-columnSeparator': {
+      display: 'none',
+    },
+  },
+});

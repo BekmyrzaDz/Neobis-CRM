@@ -2,24 +2,43 @@ import React, { useState } from 'react';
 import DetailCard from '../DetailCard/DetailCard';
 import { user } from '../../assets';
 import UserCard from '../Card/Card';
+interface IMentors {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string | number;
+  image: string;
+  token: void;
+  patent_number: number;
+  patent_start: string;
+  patent_end: string;
+}
 
-const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+interface MyComponentProps {
+  employees: IMentors;
+}
 
-const MentorsCards = () => {
+const MentorsCards = (props: MyComponentProps) => {
 
   const [popap, setPopap] = useState(false)
 
+  const { employees } = props;
+
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', width: '98%', gap: '24px' }}>
-      <UserCard
-        onClick={() => setPopap(!popap)}
-        name="Кушбак Мамытов"
-        position="Front-end"
-        photoUrl={user}
-        workingDays="Пн/Ср/Пт"
-        workingHours="9am - 5pm"
-      />
-      {popap && <DetailCard popap={popap} setPopap={setPopap} />}
+      {
+        employees.map(mentor => (
+          <UserCard
+            onClick={() => setPopap(!popap)}
+            name={`${mentor.first_name} ${mentor.last_name}`}
+            position="Front-end"
+            photoUrl={mentor.image}
+            workingDays="Пн/Ср/Пт"
+            workingHours="9am - 5pm"
+          />
+        ))
+      }
     </div>
   );
 };
