@@ -3,9 +3,9 @@ export interface IDepartmentOptions {
   name: string
 }
 
-export interface IDropdown<T> {
+export interface IDropdown {
   label: string
   options: IDepartmentOptions[]
-  selected: IDepartmentOptions
-  setSelected: React.Dispatch<React.SetStateAction<IDepartmentOptions>>
+  // selected: IDepartmentOptions
+  // setSelected: React.Dispatch<React.SetStateAction<IDepartmentOptions>>
 }

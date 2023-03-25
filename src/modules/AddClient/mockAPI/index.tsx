@@ -17,18 +17,18 @@ export const departmentOptions: IDepartmentOptions[] = [
   { id: 5, name: "Android" },
   { id: 6, name: "iOS" },
   { id: 7, name: "Flutter" },
-  { id: 8, name: "Олимпиадное программирование" },
+  { id: 8, name: "Olymp programming" },
 ]
 
 export const paymentOptions: IOptions[] = [
-  { icon: cash, name: "Наличными" },
+  { icon: cash, name: "Наличные" },
   { icon: wallet, name: "Электронный кошелек" },
-  { icon: creditCard, name: "Картой" },
+  { icon: creditCard, name: "Карта" },
 ]
 
 export const sourceOptions: IOptions[] = [
-  { icon: instagram, name: "Через Instagram" },
-  { icon: advertisements, name: "Через объявление" },
-  { icon: web, name: "Через сайт" },
-  { icon: dotsHorizontal, name: "Другое(через друга и т.п.)" },
+  { icon: instagram, name: "Instagram" },
+  { icon: advertisements, name: "Announcement" },
+  { icon: web, name: "Via website" },
+  { icon: dotsHorizontal, name: "Other" },
 ]

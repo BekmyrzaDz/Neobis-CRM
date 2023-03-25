@@ -2,8 +2,10 @@ import { FC } from "react"
 import { InputProps } from "./Input.props"
 import styles from "./Input.module.scss"
 import { clsx } from "clsx"
+import { useField } from "formik"
 
 const PhoneInput: FC<InputProps> = ({ className, label, icon, ...props }) => {
+  const [field, meta] = useField(props)
   return (
     <div className={clsx(styles.box, className)}>
       <label className={styles.inputLabel}>
@@ -16,8 +18,12 @@ const PhoneInput: FC<InputProps> = ({ className, label, icon, ...props }) => {
           className={styles.input}
           placeholder={props.placeholder}
           {...props}
+          {...field}
         />
       </div>
+      {meta.touched && meta.error ? (
+        <small className={styles.error}>{meta.error}</small>
+      ) : null}
     </div>
   )
 }

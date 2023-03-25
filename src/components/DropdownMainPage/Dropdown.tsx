@@ -1,4 +1,5 @@
 import clsx from "clsx"
+import { useField } from "formik"
 import { FC, useId, useState } from "react"
 import { IDepartmentOptions, IDropdown } from "."
 import { arrowDown } from "../../modules/AddClient/assets"
@@ -32,32 +33,39 @@ function departmentsClasses<T>(props: IDepartmentOptions) {
   return classes
 }
 
-function Dropdown<T>(props: IDropdown<T>) {
+const Dropdown: FC<IDropdown> = ({ label, options, ...props }) => {
+  console.log(props)
+
   const [isActive, setIsActive] = useState<boolean>(false)
   const keyId = useId()
+  const [field, meta] = useField(props)
 
   return (
     <div className={styles.dropdown}>
       <label className={styles.dropdownLabel}>
-        {props.label}
+        {label}
         <span>*</span>
       </label>
-      <div
-        className={departmentClasses(props.selected)}
-        onClick={() => setIsActive(!isActive)}
+      <select
+        {...field}
+        {...props}
+        // className={departmentClasses(props.selected)}
+        // onClick={() => setIsActive(!isActive)}
       >
-        <>
+        {/* <>
           {props.selected.name}
           <img className={styles.arrowDown} src={arrowDown} />
-        </>
-      </div>
-      {isActive && (
+        </> */}
+      </select>
+      {/* {isActive && (
         <div className={styles.dropdownContent}>
-          {props.options?.map((item, index) => (
+          {options?.map((item, index) => (
             <div
               className={departmentsClasses(item)}
               onClick={() => {
                 props.setSelected(item)
+                console.log(item)
+
                 setIsActive(false)
               }}
               key={`${keyId}-${index}`}
@@ -66,7 +74,10 @@ function Dropdown<T>(props: IDropdown<T>) {
             </div>
           ))}
         </div>
-      )}
+      )} */}
+      {meta.touched && meta.error ? (
+        <small className={styles.error}>{meta.error}</small>
+      ) : null}
     </div>
   )
 }
