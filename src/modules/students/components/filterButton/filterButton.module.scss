@@ -1,0 +1,31 @@
+@import '../../../../sass/base';
+
+.btn {
+  padding: 15px 16px;
+  background: $white-color;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.text {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 21px;
+  text-align: center;
+  color: #252525;
+}
+
+.count {
+  padding: 4px 6px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 21px;
+  text-align: center;
+  color: #252525;
+  background-color: $count-gray-color;
+  border-radius: 8px;
+}

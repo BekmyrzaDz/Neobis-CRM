@@ -8,7 +8,7 @@ import {
   IVerification,
 } from '../types'
 
-axios.defaults.baseURL = 'https://crm-backend-production.up.railway.app'
+axios.defaults.baseURL = 'http://64.226.89.72'
 const API_URL: string = '/api/auth/'
 
 // Login user
