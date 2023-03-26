@@ -7,23 +7,23 @@ import { calendar, time } from '../../assets';
 const useStyles = makeStyles({
   card: {
     cursor: 'pointer',
-    width: 222,
-    height: 265,
+    width: 180,
+    height: 240,
     borderRadius: 16,
   },
   media: {
-    height: 100,
-    width: 100,
+    height: 80,
+    width: 80,
     borderRadius: '50%',
     margin: '16px auto',
   },
   name: {
     fontWeight: 'bold',
-    fontSize: '1.2rem',
+    fontSize: '15px',
   },
   position: {
     color: '#32B483',
-    fontSize: '18px',
+    fontSize: '14px',
     fontWeight: 'bold',
   },
   info: {

@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Avatar } from '@material-ui/core';
 import { GridCellParams, DataGrid } from '@material-ui/data-grid';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllEmployees } from '../../redux/allEmployees/allEmployeesSlice';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { RootState } from '../../../../store/store';
 import { toast } from 'react-toastify';
-import { trash } from '../../assets';
+import { IconButton } from '@material-ui/core';
+import { deleteEmployee } from '../../redux/allEmployees/allEmployeesSlice';
 import Spinner from '../../../../components/spinner/spinner';
 import { makeStyles } from '@material-ui/styles';
 
@@ -25,32 +26,33 @@ interface MyComponentProps {
 }
 
 const DataBase: React.FC = (props: MyComponentProps): JSX.Element => {
+
+  const { employees } = props;
+
   const dispatch = useDispatch()
   const classes = useStyles();
 
-  const { employees } = props;
-  console.log(employees)
 
   const renderAvatarCell = (params: GridCellParams) => <Avatar src={params.row.image as string} />;
   const pageSizeOptions = [10, 15, 25];
 
-  const { allEmployees, status, error } = useSelector((state: RootState) => state.allEmployees);
+  const { status } = useSelector((state: RootState) => state.allEmployees);
   const [pageSize, setPageSize] = useState(10);
+  const [value, setValue] = useState('')
 
 
-  useEffect(() => {
-    dispatch(getAllEmployees());
-  }, [dispatch]);
 
   if (status === 'loading') {
-    return <Spinner />
+    return <Spinner />;
   }
-
   if (status === 'failed') {
-    return toast.error('Ошибка сервера')
+    return toast.error('Ошибка сервера');
   }
 
 
+  const handleDelete = (id) => {
+    dispatch(deleteEmployee(id));
+  };
 
   return (
     <div className={classes.box}>
@@ -74,7 +76,7 @@ const DataBase: React.FC = (props: MyComponentProps): JSX.Element => {
             headerClassName: classes.headerName,
           },
           {
-            field: 'first_name',
+            field: 'fio',
             headerName: 'ФИО',
             width: 160,
             headerAlign: 'center',
@@ -106,14 +108,20 @@ const DataBase: React.FC = (props: MyComponentProps): JSX.Element => {
             headerClassName: classes.headerName,
           },
           {
-            field: 'actions',
-            headerName: 'Actions',
-            width: 160,
-            type: 'actions',
-            renderCell: () => <img src={trash} alt="trash" />,
-            headerAlign: 'center',
-            align: 'center',
-            headerClassName: classes.headerName,
+            field: 'delete',
+            headerName: 'Delete',
+            width: 130,
+            renderCell: (params) => (
+              <IconButton style={{ color: '#756FB3' }}
+                onClick={() => {
+                  if (window.confirm('Are you sure you want to delete this employee?')) {
+                    dispatch(handleDelete(params.id));
+                  }
+                }}
+              >
+                <DeleteIcon />
+              </IconButton>
+            ),
           },
         ]}
         rows={employees}
@@ -144,7 +152,7 @@ const useStyles = makeStyles({
     backgroundColor: '#FFFFFF',
     borderRadius: '16px',
     padding: '20px',
-   
+
   },
 
   dataGrid: {

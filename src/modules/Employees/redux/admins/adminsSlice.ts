@@ -23,6 +23,31 @@ const initialState: IAdminsState = {
   error: null,
 };
 
+interface ICreateAdminRequest {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string | number;
+  image: string;
+  is_archive: boolean;
+}
+
+export const createAdmin = createAsyncThunk<IAdmins, ICreateAdminRequest, AsyncThunkConfig>(
+  'admins/createAdmin',
+  async (adminData: ICreateAdminRequest, thunkApi) => {
+    try {
+      const response = await axios.post<IAdmins>('http://64.226.89.72/api/admins/', adminData, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      });
+      return response.data;
+    } catch (error: unknown) {
+      return thunkApi.rejectWithValue(error.response.data);
+    }
+  },
+);
+
 const userItem = localStorage.getItem('user');
 const access_token: string | undefined = userItem ? JSON.parse(userItem).access : undefined;
 
@@ -56,6 +81,17 @@ const adminsSlice = createSlice({
         state.admins = action.payload;
       })
       .addCase(getAdmins.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message ?? 'Something went wrong.';
+      })
+      .addCase(createAdmin.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(createAdmin.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.admins.push(action.payload);
+      })
+      .addCase(createAdmin.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message ?? 'Something went wrong.';
       });
