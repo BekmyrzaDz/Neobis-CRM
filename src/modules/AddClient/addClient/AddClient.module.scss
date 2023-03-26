@@ -67,3 +67,53 @@
     }
   }
 }
+
+.dropdownItem {
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: $tran-02;
+  &:hover {
+    background-color: #f4f4f4;
+  }
+}
+
+.dropdownItem {
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: $tran-02;
+  &:hover {
+    background-color: #f4f4f4;
+  }
+}
+
+.dropdownUxUi {
+  color: $ux-ui-color;
+}
+
+.dropdownFront {
+  color: $front-color;
+}
+
+.dropdownBack {
+  color: $back-color;
+}
+
+.dropdownPM {
+  color: $pm-color;
+}
+
+.dropdownAndroid {
+  color: $android-color;
+}
+
+.dropdownIOS {
+  color: $ios-color;
+}
+
+.dropdownFlutter {
+  color: $flutter-color;
+}
+
+.dropdownOlimp {
+  color: $olimp-color;
+}

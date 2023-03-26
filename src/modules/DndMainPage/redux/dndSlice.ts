@@ -4,48 +4,6 @@ import { reorderColumnList } from '../dragndrop'
 import { IColumn, IColumns, IData, IStudent, IUpdateStudent } from '../types'
 import { fetchAllStudents, fetchUpdateStudent } from './asyncActions'
 
-// interface IDepartment {
-//   id: number
-//   name: string
-// }
-// interface IPaymentMethod {
-//   id: number
-//   name: string
-// }
-
-// interface IStatus {
-//   id: number
-//   name: string
-// }
-
-// interface ISource {
-//   id: number
-//   name: string
-// }
-
-// interface IReason {
-//   id: number
-//   name: string
-// }
-
-// interface IStudent {
-//   time?: string
-//   id: number
-//   first_name: string
-//   last_name: string
-//   surname?: string
-//   notes: string
-//   phone: string
-//   laptop: boolean
-//   department: IDepartment
-//   came_from: ISource
-//   payment_method?: IPaymentMethod
-//   status?: IStatus
-//   paid: boolean
-//   reason?: IReason
-//   on_request: boolean
-// }
-
 export interface IStudentState {
   student: IStudent[] | null
   updatedStudent: IUpdateStudent | null

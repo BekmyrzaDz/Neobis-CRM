@@ -34,11 +34,10 @@ function departmentsClasses<T>(props: IDepartmentOptions) {
 }
 
 const Dropdown: FC<IDropdown> = ({ label, options, ...props }) => {
-  console.log(props)
-
   const [isActive, setIsActive] = useState<boolean>(false)
   const keyId = useId()
   const [field, meta] = useField(props)
+  console.log(options)
 
   return (
     <div className={styles.dropdown}>
@@ -49,7 +48,7 @@ const Dropdown: FC<IDropdown> = ({ label, options, ...props }) => {
       <select
         {...field}
         {...props}
-        // className={departmentClasses(props.selected)}
+        className={styles.dropdownBtn}
         // onClick={() => setIsActive(!isActive)}
       >
         {/* <>

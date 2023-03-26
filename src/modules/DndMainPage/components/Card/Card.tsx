@@ -61,7 +61,7 @@ function Card<T>(props: Props) {
               <div className={styles.icon}>
                 {renderImg(student?.came_from?.name)}
               </div>
-              <span>{student?.came_from?.name}</span>
+              {/* <span>{student?.came_from?.name}</span> */}
             </div>
           </div>
         </div>

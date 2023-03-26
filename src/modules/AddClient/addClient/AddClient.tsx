@@ -18,6 +18,7 @@ import { addClientSchema } from "../Schema/Validation"
 import { addClientState } from "../State/state"
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux"
 import { fetchCreateStudent } from "../redux/addClientActions"
+import clsx from "clsx"
 
 const initialDepartmentState = departmentOptions[0]
 const initialPaymentState = paymentOptions[0]
@@ -39,6 +40,20 @@ export const AddClient: FC = () => {
   const [sourceSelected, setSourceSelected] =
     useState<IOptions>(initialSourceState)
 
+  function departmentsClasses<T>(props: IDepartmentOptions) {
+    const classes = clsx(styles.dropdownItem, {
+      [styles.dropdownUxUi]: props.name === "UX/UI",
+      [styles.dropdownFront]: props.name === "Front-End",
+      [styles.dropdownBack]: props.name === "Back-End",
+      [styles.dropdownPM]: props.name === "PM",
+      [styles.dropdownAndroid]: props.name === "Android",
+      [styles.dropdownIOS]: props.name === "iOS",
+      [styles.dropdownFlutter]: props.name === "Flutter",
+      [styles.dropdownOlimp]: props.name === "Олимпиадное программирование",
+    })
+    return classes
+  }
+
   const onSubmit = (value: ICreateStudent) => {
     const {
       first_name,
@@ -54,7 +69,6 @@ export const AddClient: FC = () => {
       on_request,
       is_archive,
     } = value
-    console.log("value", value)
 
     const studentData: ICreateStudent = {
       first_name,
@@ -71,9 +85,23 @@ export const AddClient: FC = () => {
       is_archive: false,
     }
 
-    console.log("data", studentData)
+    const studentDataClear: ICreateStudent = {
+      first_name: "",
+      last_name: "",
+      surname: "",
+      notes: "",
+      phone: "",
+      laptop: laptopSelected === "Да" ? true : false,
+      department,
+      came_from,
+      payment_method,
+      paid: false,
+      on_request: true,
+      is_archive: false,
+    }
 
     dispatch(fetchCreateStudent(studentData))
+    setModalActive(false)
   }
 
   return (
@@ -88,6 +116,7 @@ export const AddClient: FC = () => {
         <Formik
           initialValues={addClientState}
           validationSchema={addClientSchema}
+          enableReinitialize={true}
           onSubmit={onSubmit}
         >
           <Form className={styles.form}>
@@ -109,17 +138,18 @@ export const AddClient: FC = () => {
                   selected={departmentSelected}
                   setSelected={setDepartmentSelected}
                 >
-                  <option value="">Plese select</option>
-                  {departmentOptions.map((option) => (
-                    <option value={option.name}>{option.name}</option>
+                  <option className={styles.option} value="">
+                    Выберите департамент
+                  </option>
+                  {departmentOptions.map((option, index) => (
+                    <option
+                      className={departmentsClasses(option)}
+                      key={index}
+                      value={option.name}
+                    >
+                      {option.name}
+                    </option>
                   ))}
-                  {/* <option value="Front-End">Front-End</option>
-                  <option value="Back-End">Back-End</option>
-                  <option value="PM">PM</option>
-                  <option value="Android">Android</option>
-                  <option value="iOS">iOS</option>
-                  <option value="Flutter">Flutter</option>
-                  <option value="Olymp programming">Olymp programming</option> */}
                 </Dropdown>
               </div>
               <div className={styles.fullName}>
@@ -155,7 +185,7 @@ export const AddClient: FC = () => {
                   id="phone"
                   icon={<img className={styles.img} src={flagKyrgyzstan} />}
                   type="tel"
-                  placeholder="+996 551552770"
+                  placeholder="+996"
                   label="Номер телефона"
                 />
                 <div className={styles.laptop}>
@@ -168,28 +198,23 @@ export const AddClient: FC = () => {
                 </div>
               </div>
               <div className={styles.paymentMethodAndSource}>
-                <IconDropdown
-                  name="payment_method.name"
-                  label="Способ оплаты"
-                  // options={paymentOptions}
-                  // selected={paymentSelected}
-                  // setSelected={setPaymentSelected}
-                >
-                  <option value="">Plese select</option>
-                  {paymentOptions.map((option) => (
-                    <option value={option.name}>{option.name}</option>
+                <IconDropdown name="payment_method.name" label="Способ оплаты">
+                  <option value="">Выберите способ оплаты</option>
+                  {paymentOptions.map((option, index) => (
+                    <option key={index} value={option.name}>
+                      <div className={styles.icon}>
+                        <img className={styles.img} src={option.icon} />
+                      </div>
+                      {option.name}
+                    </option>
                   ))}
                 </IconDropdown>
-                <IconDropdown
-                  name="came_from.name"
-                  label="Источник"
-                  // options={sourceOptions}
-                  // selected={sourceSelected}
-                  // setSelected={setSourceSelected}
-                >
-                  <option value="">Plese select</option>
-                  {sourceOptions.map((option) => (
-                    <option value={option.name}>{option.name}</option>
+                <IconDropdown name="came_from.name" label="Источник">
+                  <option value="">Выберите источник</option>
+                  {sourceOptions.map((option, index) => (
+                    <option key={index} value={option.name}>
+                      {option.name}
+                    </option>
                   ))}
                 </IconDropdown>
               </div>

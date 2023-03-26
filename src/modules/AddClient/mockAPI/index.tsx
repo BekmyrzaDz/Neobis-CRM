@@ -17,7 +17,7 @@ export const departmentOptions: IDepartmentOptions[] = [
   { id: 5, name: "Android" },
   { id: 6, name: "iOS" },
   { id: 7, name: "Flutter" },
-  { id: 8, name: "Olymp programming" },
+  { id: 8, name: "Olympiad programming" },
 ]
 
 export const paymentOptions: IOptions[] = [

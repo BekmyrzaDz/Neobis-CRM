@@ -2,6 +2,7 @@ import { FC } from "react"
 import { ButtonProps } from "./Button.props"
 import styles from "./Button.module.scss"
 import { clsx } from "clsx"
+import { Link } from "react-router-dom"
 
 const ProfileButton: FC<ButtonProps> = ({
   className,
@@ -10,10 +11,10 @@ const ProfileButton: FC<ButtonProps> = ({
   ...props
 }) => {
   return (
-    <button className={clsx(styles.button, className)}>
+    <Link to="/profile" className={clsx(styles.button, className)}>
       <div className={styles.icon}>{icon}</div>
       <span className={styles.text}>{name}</span>
-    </button>
+    </Link>
   )
 }
 

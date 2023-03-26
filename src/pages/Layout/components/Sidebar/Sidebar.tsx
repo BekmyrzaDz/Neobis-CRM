@@ -1,4 +1,4 @@
-import { useId } from "react"
+import { useId, useState, useEffect } from "react"
 import styles from "./Sidebar.module.scss"
 import logo from "../../../../assets/images/logo.svg"
 import HomeSvgComponent from "./components/Svg/HomeSvgComponent"
@@ -11,6 +11,8 @@ import ArchiveSvgComponent from "./components/Svg/ArchiveSvgComponent"
 import LogoutSvgComponet from "./components/Svg/LogoutSvgComponet"
 import MenuButton from "./components/MenuButton/MenuButton"
 import { IItems } from "./types"
+import { Navigate, useNavigate } from "react-router-dom"
+import { useAppSelector } from "../../../../hooks/redux"
 
 const menuItems: IItems[] = [
   {
@@ -32,6 +34,13 @@ const menuItems: IItems[] = [
 
 const Sidebar = () => {
   const menuItemId = useId()
+  const navigate = useNavigate()
+
+  const logout = () => {
+    localStorage.removeItem("user")
+    localStorage.removeItem("profile")
+    navigate("/")
+  }
 
   return (
     <aside>
@@ -56,12 +65,12 @@ const Sidebar = () => {
 
           <div className={styles.bottomContent}>
             <div className={styles.logout}>
-              <a className={styles.logoutLink} href="#">
+              <div className={styles.logoutLink} onClick={logout}>
                 <div className={styles.logoutIcon}>
                   <LogoutSvgComponet />
                 </div>
                 <span className={styles.logoutText}>Выйти</span>
-              </a>
+              </div>
             </div>
           </div>
         </div>

@@ -17,5 +17,6 @@ export let addClientState: ICreateStudent = {
     name: ''
   },
   paid: false,
-  on_request: true
+  on_request: true,
+  is_archive: false
 }

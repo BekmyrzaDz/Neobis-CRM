@@ -4,48 +4,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import dndService from '../services/dndService';
 import { IStudent, IUpdateStudentData } from '../types';
 
-// interface IDepartment {
-//   id: number
-//   name: string
-// }
-// interface IPaymentMethod {
-//   id: number
-//   name: string
-// }
-
-// interface IStatus {
-//   id: number
-//   name: string
-// }
-
-// interface ISource {
-//   id: number
-//   name: string
-// }
-
-// interface IReason {
-//   id: number
-//   name: string
-// }
-
-// interface IStudent {
-//   time?: string
-//   id: number
-//   first_name: string
-//   last_name: string
-//   surname?: string
-//   notes: string
-//   phone: string
-//   laptop: boolean
-//   department: IDepartment
-//   came_from: ISource
-//   payment_method?: IPaymentMethod
-//   status?: IStatus
-//   paid: boolean
-//   reason: IReason
-//   on_request: boolean
-// }
-
 // getAllStudents Action
 export const fetchAllStudents = createAsyncThunk<
   IStudent[],
