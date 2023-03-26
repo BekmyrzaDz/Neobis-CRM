@@ -5,6 +5,8 @@ import { IForgotPassword, ILogin, IResetPassword, IUser, IVerification } from '.
 axios.defaults.baseURL = 'http://64.226.89.72/';
 const API_URL: string = '/api/auth/';
 
+
+
 // Login user
 const login = async (userData: ILogin): Promise<IUser> => {
   const response = await axios.post(API_URL + 'login/personal/', userData);

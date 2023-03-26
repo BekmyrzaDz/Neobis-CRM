@@ -11,8 +11,11 @@ import avatar from "./assets/image/avatar.svg"
 import AvatarSvgComponent from "./components/Svg/AvatarSvgComponent"
 import { FC } from "react"
 import { AddClient } from "../../../../modules/AddClient"
+import { useAppSelector } from "../../../../hooks/redux"
+import imgAvatar from "./assets/image/imgAvatar.png"
 
 const MainPageHeader: FC = () => {
+  const state = useAppSelector((state) => state.auth.user)
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -34,7 +37,7 @@ const MainPageHeader: FC = () => {
               name="Добавить заявку"
             /> */}
             <AddClient />
-
+            {/* 
             <IconButton
               className={styles.item}
               icon={<CalendarSvgComponent />}
@@ -43,13 +46,13 @@ const MainPageHeader: FC = () => {
             <IconButton
               className={styles.item}
               icon={<HistorySvgComponent />}
-            />
+            /> */}
 
             <div className={styles.profile}>
               <ProfileButton
                 className={styles.item}
-                icon={<AvatarSvgComponent />}
-                name="Бексултан Маратов "
+                icon={<img className={styles.img} src={imgAvatar} />}
+                name={`${state?.first_name} ${state?.last_name}`}
               />
             </div>
           </div>

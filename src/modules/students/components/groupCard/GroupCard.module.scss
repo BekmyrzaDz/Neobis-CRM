@@ -1,0 +1,113 @@
+.card {
+  margin: auto;
+  width: 370px;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 18px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.room {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  & > .aboutRoom {
+    display: flex;
+    align-items: center;
+    & > img {
+      margin-right: 13px;
+    }
+    & > span {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+    }
+  }
+  & > .countRoom {
+    display: flex;
+    align-items: center;
+
+    & > span {
+      font-weight: 350;
+      font-size: 16px;
+      line-height: 21px;
+      margin-right: 11px;
+    }
+  }
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  & > h1 {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 21px;
+    margin-right: 16px;
+  }
+
+  & > div {
+    display: flex;
+    align-items: center;
+    border: 1px solid #756fb3;
+    border-radius: 16px;
+    padding: 6px 8px;
+    & > img {
+      margin-right: 11px;
+    }
+  }
+}
+
+.lang {
+  max-width: 120px;
+  background-color: #756fb3;
+  border-radius: 16px;
+  margin-bottom: 32px;
+  & > h3 {
+    text-align: center;
+    padding: 6px 10px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 21px;
+  }
+}
+
+.days {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  & > li {
+    width: 40px;
+    height: 40px;
+    padding: 10px 10.5px;
+    color: #fff;
+    background-color: #756fb3;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    border-radius: 8px;
+    margin-right: 16px;
+    text-align: center;
+  }
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  & > img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+  & > h3 {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+  }
+}

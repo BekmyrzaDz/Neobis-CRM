@@ -1,0 +1,27 @@
+@import '../../../../sass/base';
+
+.button {
+  max-height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 19px;
+  color: #252525;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  transition: .5s;
+  &:hover {
+    transform: scale(1.05);
+    transition: .5s;
+  }
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}

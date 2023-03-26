@@ -1,0 +1,36 @@
+@import '../../../sass//base';
+
+.studentPage {
+  padding: 24px;
+  background-color: $count-gray-color;
+  min-height: 100vh;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  & > .actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+}
+
+.filterBtns {
+  margin-top: 64px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.content {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+

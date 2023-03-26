@@ -5,6 +5,9 @@ import allEmployeesReducer from '../modules/Employees/redux/allEmployees/allEmpl
 import managersReducer from '../modules/Employees/redux/managers/managersSlice';
 import mentorsReducer from '../modules/Employees/redux/mentors/mentorsSlice';
 import adminsReducer from '../modules/Employees/redux/admins/adminsSlice';
+// import { createStudentSlice } from './../modules/AddClient/redux/addClientSlice';
+import clientReducer from '../modules/DndMainPage/redux/dndSlice'
+import createStudentSlice from '../modules/AddClient/redux/addClientSlice'
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -13,6 +16,8 @@ const rootReducer = combineReducers({
   managers: managersReducer,
   mentors: mentorsReducer,
   admins: adminsReducer,
+  client: clientReducer,
+  addClient: createStudentSlice,
 });
 
 export const setupStore = () => {

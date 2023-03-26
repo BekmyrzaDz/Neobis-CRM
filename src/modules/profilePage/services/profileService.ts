@@ -2,7 +2,7 @@ import axios from 'axios'
 import { IProfile, IUpdateAvatarData, IUpdateProfileData } from '../types'
 // import $api from '../../../http'
 
-axios.defaults.baseURL = 'https://crm-backend-production.up.railway.app'
+axios.defaults.baseURL = 'http://64.226.89.72'
 const API_URL: string = '/api/profiles/'
 
 // Login user
