@@ -6,3 +6,13 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 20px;
 }
+
+.alternativeContainer {
+  display: flex;
+  justify-content: center;
+  .title {
+    font-family: Segoe UI;
+    font-weight: 600;
+    font-size: 26px;
+  }
+}

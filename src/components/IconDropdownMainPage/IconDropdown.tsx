@@ -1,3 +1,4 @@
+import { useField } from "formik"
 import { FC, useId, useState } from "react"
 import { IDropdown } from "."
 import { arrowDown } from "../../modules/AddClient/assets"
@@ -6,11 +7,13 @@ import styles from "./IconDropdown.module.scss"
 const IconDropdown: FC<IDropdown> = ({
   label,
   options,
-  selected,
-  setSelected,
+  // selected,
+  // setSelected,
+  ...props
 }) => {
   const [isActive, setIsActive] = useState<boolean>(false)
   const keyId = useId()
+  const [field, meta] = useField(props)
 
   return (
     <div className={styles.dropdown}>
@@ -18,19 +21,24 @@ const IconDropdown: FC<IDropdown> = ({
         {label}
         <span>*</span>
       </label>
-      <div
+      <select
         className={styles.dropdownBtn}
-        onClick={() => setIsActive(!isActive)}
+        // onClick={() => setIsActive(!isActive)}
+        {...field}
+        {...props}
       >
-        <div className={styles.select}>
-          <div className={styles.icon}>
+        {/* <div className={styles.select}> */}
+        {/* <div className={styles.icon}>
             <img className={styles.img} src={selected?.icon} />
           </div>
           {selected?.name}
         </div>
-        <img className={styles.arrowDown} src={arrowDown} />
-      </div>
-      {isActive && (
+        <img className={styles.arrowDown} src={arrowDown} /> */}
+      </select>
+      {meta.touched && meta.error ? (
+        <small className={styles.error}>{meta.error}</small>
+      ) : null}
+      {/* {isActive && (
         <div className={styles.dropdownContent}>
           {options.map((option, index) => (
             <div
@@ -48,7 +56,7 @@ const IconDropdown: FC<IDropdown> = ({
             </div>
           ))}
         </div>
-      )}
+      )} */}
     </div>
   )
 }
