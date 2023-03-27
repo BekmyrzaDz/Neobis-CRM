@@ -1,10 +1,12 @@
-import { DetailedHTMLProps, HTMLAttributes, InputHTMLAttributes } from "react"
+import { DetailedHTMLProps, HTMLAttributes, InputHTMLAttributes } from 'react'
 
 export interface InputProps
   extends DetailedHTMLProps<
     InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   > {
-    name: string
-    icon: string
-  }  
+  name: string
+  icon: string
+  passwordIcon?: string
+  toggleShowPassword?: any
+}

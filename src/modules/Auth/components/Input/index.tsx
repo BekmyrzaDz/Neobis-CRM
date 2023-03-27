@@ -4,7 +4,7 @@ import { InputProps } from './Input.props'
 import styles from './Input.module.scss'
 import { clsx } from 'clsx'
 
-const Input: FC<InputProps> = ({ className, icon, ...props }) => {
+const Input: FC<InputProps> = ({ className, icon, passwordIcon, toggleShowPassword, ...props }) => {
   const [field, meta] = useField(props)
 
   return (
@@ -17,6 +17,7 @@ const Input: FC<InputProps> = ({ className, icon, ...props }) => {
           {...field}
           placeholder={props.placeholder}
         />
+        {passwordIcon ? <img src={passwordIcon} alt="eye" className={styles.showHide} onClick={toggleShowPassword} /> : null}
       </div>
 
       {meta.touched && meta.error ? (

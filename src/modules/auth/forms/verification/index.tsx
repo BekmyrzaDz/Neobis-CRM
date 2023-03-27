@@ -1,6 +1,4 @@
 import { Formik, Form } from 'formik'
-
-import styles from './index.module.scss'
 import AuthButton from '../../components/button'
 import Input from '../../components/input'
 import { VerificationSchema } from '../../schema/validation'
@@ -8,8 +6,15 @@ import { verificationState } from '../../state/state'
 import LockSvg from '../../assets/lock.svg'
 import { useAppDispatch } from '../../../../hooks/redux'
 import { verification } from '../../redux/asyncActions'
+import Show from '../../assets/show.png'
+import Hide from '../../assets/hide.png'
+
+import styles from './index.module.scss'
+import { useState } from 'react'
 
 const Verification = () => {
+  const [showPassword, setShowPassword] = useState(false)
+  const toggleShowPassword = () => setShowPassword(!showPassword)
   const dispatch = useAppDispatch()
 
   function onSubmit(values: any) {
@@ -37,9 +42,11 @@ const Verification = () => {
           className={styles.input}
           name='code'
           id='code'
-          type='password'
+          type={showPassword ? 'text' : 'password'}
           placeholder='Введите код'
           icon={LockSvg}
+          passwordIcon={showPassword ? Show : Hide}
+          toggleShowPassword={toggleShowPassword}
         />
         <AuthButton type='submit' className={styles.button}>
           Подтвердить
