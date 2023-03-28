@@ -13,6 +13,7 @@ import MenuButton from "./components/MenuButton/MenuButton"
 import { IItems } from "./types"
 import { Navigate, useNavigate } from "react-router-dom"
 import { useAppSelector } from "../../../../hooks/redux"
+import CashSvgComponent from "./components/Svg/CashSvgComponents"
 
 const menuItems: IItems[] = [
   {
@@ -24,12 +25,12 @@ const menuItems: IItems[] = [
   { icon: <EmployeeSvgComponent />, name: "Сотрудники", link: "employees" },
   { icon: <CourseSvgComponent />, name: "Курсы", link: "courses" },
   { icon: <AnalyticsSvgComponent />, name: "Аналитика", link: "analytics" },
-  {
-    icon: <WaitingListSvgComponent />,
-    name: "Лист ожидания",
-    link: "waiting-list",
-  },
   { icon: <ArchiveSvgComponent />, name: "Архив", link: "archive" },
+  {
+    icon: <CashSvgComponent />,
+    name: "Оплата",
+    link: "payment",
+  },
 ]
 
 const Sidebar = () => {
