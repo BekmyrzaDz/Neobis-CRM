@@ -1,5 +1,4 @@
 import IconButton from "./components/IconButton"
-import Input from "./components/Input"
 import SearchSvgComponent from "./components/Svg/SearchSvgComponent"
 import CalendarSvgComponent from "./components/Svg/CalendarSvgComponent"
 import styles from "./MainPageHeader.module.scss"
@@ -7,6 +6,7 @@ import ProfileButton from "../../../../components/ProfileButton"
 import { FC } from "react"
 import { AddClient } from "../../../../modules/AddClient"
 import { useAppSelector } from "../../../../hooks/redux"
+import SearchInput from "../../../../components/SearchInput"
 
 const MainPageHeader: FC = () => {
   const state = useAppSelector((state) => state.profile.profile)
@@ -14,7 +14,7 @@ const MainPageHeader: FC = () => {
     <header className={styles.header}>
       <div className={styles.container}>
         <div className={styles.headerInner}>
-          <Input
+          <SearchInput
             className={styles.search}
             name="search"
             id="search"
