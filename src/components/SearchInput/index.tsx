@@ -3,7 +3,7 @@ import { InputProps } from "./Input.props"
 import styles from "./Input.module.scss"
 import { clsx } from "clsx"
 
-const Input: FC<InputProps> = ({ className, icon, ...props }) => {
+const SearchInput: FC<InputProps> = ({ className, icon, ...props }) => {
   return (
     <div className={clsx(styles.search, className)}>
       {icon}
@@ -16,4 +16,4 @@ const Input: FC<InputProps> = ({ className, icon, ...props }) => {
   )
 }
 
-export default Input
+export default SearchInput
