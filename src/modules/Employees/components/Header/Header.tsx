@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#756FB3',
     borderRadius: '16px',
     marginRight: '16px',
-    padding: '17px 18px',
+    padding: '17px 16px',
     textTransform: 'none',
     fontSize: '16px',
     color: '#fff',
@@ -67,7 +67,6 @@ const useStyles = makeStyles((theme) => ({
     background: 'white',
     padding: ' 12px 19px',
     borderRadius: '16px',
-    marginRight: '20px',
   },
   userName: {
     paddingTop: '5px',
