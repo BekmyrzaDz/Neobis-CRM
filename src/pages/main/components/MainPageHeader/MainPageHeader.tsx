@@ -36,7 +36,7 @@ const MainPageHeader: FC = () => {
             <div className={styles.profile}>
               <ProfileButton
                 className={styles.item}
-                icon={<img className={styles.img} src={imgAvatar} />}
+                icon={imgAvatar}
                 name={`${state?.first_name} ${state?.last_name}`}
               />
             </div>
