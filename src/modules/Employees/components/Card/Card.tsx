@@ -1,15 +1,26 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, CardMedia, Typography, Box } from '@material-ui/core';
+import { MoreVert } from '@material-ui/icons';
+import Linkedin from '../../assets/largeLinkedin.svg'
+import email from '../../assets/email.png'
 
 import { calendar, time } from '../../assets';
 
 const useStyles = makeStyles({
   card: {
     cursor: 'pointer',
-    width: 180,
-    height: 240,
+    width: 200,
+    height: 260,
     borderRadius: 16,
+    position: 'relative',
+  },
+  box: {
+    color: '#756FB3',
+    fontWeight: 'bold',
+    position: 'absolute',
+    top: '10px',
+    right: '5px'
   },
   media: {
     height: 80,
@@ -34,6 +45,26 @@ const useStyles = makeStyles({
     gap: '5px',
     margin: '5px 0',
   },
+  linkedin: {
+    background: '#0077B5',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '10px',
+    margin: '5px 0'
+  },
+  email: {
+    fontSize: '13px',
+    textAlign: 'center',
+    background: '#756FB3',
+    padding: '10px 12px',
+    color: 'white',
+    borderRadius: '10px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '5px',
+    justifyContent: 'center',
+  }
 });
 
 interface UserCardProps {
@@ -56,17 +87,17 @@ const UserCard: React.FC<UserCardProps> = ({
   const [open, setOpen] = useState(false);
   return (
     <Card className={classes.card}>
+      <MoreVert className={classes.box} />
       <CardMedia className={classes.media} image={photoUrl} />
       <CardContent style={{ textAlign: 'center' }}>
         <Typography className={classes.name}>{name}</Typography>
         <Typography className={classes.position}>{position}</Typography>
-        <Box className={classes.info}>
-          <img src={calendar} alt="calendar" />
-          {workingDays}
-        </Box>
-        <Box className={classes.info}>
-          <img src={time} alt="time" /> {workingHours}
-        </Box>
+        <a className={classes.linkedin}>
+          <img src={Linkedin} alt="linkedin" />
+        </a>
+        <a className={classes.email}>
+          <img src={email} alt="email" /> Написать на email
+        </a>
       </CardContent>
     </Card>
   );
