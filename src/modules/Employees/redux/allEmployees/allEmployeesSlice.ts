@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, AsyncThunkConfig } from '@reduxjs/toolkit';
+import getToken from '../../helpers/getToken';
 import axios from 'axios';
 
 interface IAllEmployees {
@@ -28,20 +29,15 @@ const initialState: IAllEmployeesState = {
   deleteError: null,
 };
 
-const userItem = localStorage.getItem('user');
-const access_token: string | undefined = userItem ? JSON.parse(userItem).access : undefined;
-
 export const getAllEmployees = createAsyncThunk<IAllEmployees[], void, AsyncThunkConfig>(
   'allEmployees/getAllEmployees',
   async (_, thunkApi) => {
     try {
       const response = await axios.get<IAllEmployees[]>('http://64.226.89.72/api/all-users/', {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
+        headers: getToken(),
       });
       return response.data;
-    } catch (error: unknown) {
+    } catch (error: any) {
       return thunkApi.rejectWithValue(error.response.data);
     }
   },
@@ -52,11 +48,9 @@ export const deleteEmployee = createAsyncThunk<void, number, AsyncThunkConfig>(
   async (id: number, thunkApi) => {
     try {
       await axios.delete(`http://64.226.89.72/api/all-users/${id}/`, {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
+        headers: getToken(),
       });
-    } catch (error: unknown) {
+    } catch (error: any) {
       return thunkApi.rejectWithValue(error.response.data);
     }
   },

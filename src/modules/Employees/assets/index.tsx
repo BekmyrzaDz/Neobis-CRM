@@ -1,6 +1,6 @@
 import arrow from './arrow.png';
 import calendar from './calendar.svg';
-import closeIcon from './closeIcon.png';
+import closeIcon from './closeIcon1.png';
 import flag from './flag.svg';
 import image from './image.svg';
 import kushbak from './kushbak.png';

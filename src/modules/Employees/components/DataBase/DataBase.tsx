@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { IconButton } from '@material-ui/core';
 import { deleteEmployee } from '../../redux/allEmployees/allEmployeesSlice';
 import Spinner from '../../../../components/spinner/spinner';
+import Buttons from '../../components/Buttons/Buttons'
 import { makeStyles } from '@material-ui/styles';
 
 interface IAllEmployees {
@@ -109,18 +110,14 @@ const DataBase: React.FC = (props: MyComponentProps): JSX.Element => {
           },
           {
             field: 'delete',
-            headerName: 'Delete',
+            headerName: 'Actions',
             width: 130,
             renderCell: (params) => (
-              <IconButton style={{ color: '#756FB3' }}
-                onClick={() => {
-                  if (window.confirm('Are you sure you want to delete this employee?')) {
-                    dispatch(handleDelete(params.id));
-                  }
-                }}
-              >
-                <DeleteIcon />
-              </IconButton>
+              <Buttons onClick={() => {
+                if (window.confirm('Вы уверены что хотите удалить даноого сотрудника?')) {
+                  dispatch(handleDelete(params.id));
+                }
+              }} />
             ),
           },
         ]}

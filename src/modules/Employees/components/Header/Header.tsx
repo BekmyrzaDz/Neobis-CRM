@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { AppBar, Toolbar, Typography, Avatar, Button, makeStyles, Box } from '@material-ui/core';
+import ProfileButton from '../../../../components/ProfileButton';
 import SearchBar from '../../../CoursePage/components/SearchBar/SearchBar';
 import { user, plus } from '../../assets';
 import ModalPopap from '../ModalPopap/ModalPopap';
@@ -23,12 +24,7 @@ function Header() {
             </Button>
             {popap && <ModalPopap popap={popap} setPopap={setPopap} />}
 
-            <Box className={classes.userBox}>
-              <Avatar alt={userName} src={user} />
-              <Typography className={classes.userName} component="h2" variant="subtitle1">
-                {userName}
-              </Typography>
-            </Box>
+            <ProfileButton />
           </Box>
         </Toolbar>
       </AppBar>

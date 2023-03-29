@@ -20,7 +20,7 @@ const ModalPopap: React.FC<TPopap> = ({ popap, setPopap }) => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [image, setImage] = useState<File | null>(null);
+  // const [image, setImage] = useState<File | null>(null);
   const [archive, setarchive] = useState(true);
 
   const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,11 +76,11 @@ const ModalPopap: React.FC<TPopap> = ({ popap, setPopap }) => {
         className={styles.modalPopap}
         style={{
           height: '670px',
-          width: '655px',
+          width: `${open ? '650px' : '589px'}`,
           padding: '24px 32px',
         }}>
         <div
-          className={styles.scroll}>
+          className={`${open && styles.scroll}`}>
           <h2 className={styles.title}>Создание сотрудника</h2>
           <img
             onClick={() => setPopap(false)}
