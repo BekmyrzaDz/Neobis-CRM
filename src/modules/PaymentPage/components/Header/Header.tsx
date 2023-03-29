@@ -33,14 +33,8 @@ const Header = (props: Props) => {
           style={{ marginRight: "16px" }}
         />
         <ProfileButton
-          icon={
-            <img
-              style={{ width: "32px", height: "32px", borderRadius: "100%" }}
-              src={imgAvatar}
-              alt="avatar"
-            />
-          }
-          name={`${user?.first_name}${user?.last_name}`}
+          icon={imgAvatar}
+          name={`${user?.first_name} ${user?.last_name}`}
         />
       </div>
     </div>
