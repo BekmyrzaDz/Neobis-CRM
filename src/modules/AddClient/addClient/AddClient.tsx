@@ -1,5 +1,5 @@
 import { FC, useState } from "react"
-import Button from "../components/Button"
+import Button from "../../../components/AddButton"
 import Modal from "../../../components/ModalPopupMainPage/Modal"
 import PlusSvgComponent from "../components/Svg/PlusSvgComponent"
 import Dropdown from "../../../components/DropdownMainPage/Dropdown"
@@ -11,7 +11,7 @@ import Textarea from "../../../components/TextareaMainPage"
 import ModalButton from "../components/ModalButton"
 import { departmentOptions, paymentOptions, sourceOptions } from "../mockAPI"
 import { ICreateStudent, IDepartmentOptions, IOptions } from "../types"
-import { flagKyrgyzstan, left } from "../assets"
+import { flagKyrgyzstan, left, plusBox } from "../assets"
 import styles from "./AddClient.module.scss"
 import { Form, Formik } from "formik"
 import { addClientSchema } from "../Schema/Validation"
@@ -107,7 +107,7 @@ export const AddClient: FC = () => {
   return (
     <>
       <Button
-        icon={<PlusSvgComponent />}
+        icon={plusBox}
         name="Добавить заявку"
         active={modalActive}
         setActive={setModalActive}

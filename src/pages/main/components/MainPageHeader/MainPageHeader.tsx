@@ -8,6 +8,7 @@ import { AddClient } from "../../../../modules/AddClient"
 import { useAppSelector } from "../../../../hooks/redux"
 import SearchInput from "../../../../components/SearchInput"
 import imgAvatar from "./assets/image/imgAvatar.png"
+import search from "./assets/image/searchIcon.svg"
 
 const MainPageHeader: FC = () => {
   const state = useAppSelector((state) => state.auth.user)
@@ -22,7 +23,7 @@ const MainPageHeader: FC = () => {
             type="search"
             alt="search"
             placeholder="Поиск"
-            icon={<SearchSvgComponent />}
+            icon={search}
           />
 
           <div className={styles.group}>

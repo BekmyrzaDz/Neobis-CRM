@@ -5,7 +5,7 @@ export interface ButtonProps
    {
 
     name: string
-    icon: React.ReactNode
+    icon: string
     active: boolean
     setActive: React.Dispatch<React.SetStateAction<boolean>>
   }  

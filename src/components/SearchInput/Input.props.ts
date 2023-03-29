@@ -6,5 +6,6 @@ export interface InputProps
     HTMLInputElement
   > {
     name: string
-    icon: JSX.Element
+    icon: string
+    // icon: JSX.Element
   }  
