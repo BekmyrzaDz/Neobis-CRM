@@ -19,13 +19,13 @@ const ToggleButton = ({ setCardFilter }: any) => {
   return (
     <div className={styles.toggle}>
       <button
-        className={clsx(styles.btn, toggle && styles.active)}
+        className={clsx(styles.btn, !toggle && styles.active)}
         onClick={StudentSetToggleHandler}
       >
         Студенты
       </button>
       <button
-        className={clsx(styles.btn, !toggle && styles.active)}
+        className={clsx(styles.btn, toggle && styles.active)}
         onClick={GroupSetToggleHandler}
       >
         Группы

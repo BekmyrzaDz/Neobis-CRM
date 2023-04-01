@@ -1,9 +1,10 @@
-@import '../../../../sass/base';
+@import '../../sass/base';
 
 .button {
   max-height: 56px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 13px;
   background: #756FB3;
   border-radius: 16px;
