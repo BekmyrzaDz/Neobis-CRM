@@ -1,0 +1,88 @@
+@import "../../../../sass/base";
+
+.card {
+  width: auto;
+  min-height: 266px;
+  background-color: $white-color;
+  border-radius: 16px;
+  padding: 16px 24px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 27px;
+}
+
+.logo {
+  width: auto;
+  height: 33px;
+}
+
+.paymentTypeImg {
+  width: 32px;
+  height: 32px;
+}
+
+.cardNumber {
+  margin-bottom: 16px;
+}
+
+.numberTitle {
+  font-family: Segoe UI;
+  font-size: 12px;
+  color: $gray-color;
+}
+
+.number {
+  font-family: Segoe UI;
+  font-size: 24px;
+  color: $violet-color;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user {
+  margin-bottom: 16px;
+}
+
+.userTitle {
+  font-family: Segoe UI;
+  font-size: 12px;
+  color: $gray-color;
+}
+
+.userName {
+  font-family: Segoe UI;
+  font-weight: 600;
+  font-size: 18px;
+  color: $auth-black-color;
+}
+
+.limitTitle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: Segoe UI;
+  font-size: 12px;
+  color: $gray-color;
+}
+
+.limitDate {
+  font-family: Segoe UI;
+  font-size: 16px;
+  color: $auth-black-color;
+}
+
+.limitBox {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardTypeImg {
+  width: 56px;
+  height: 56px;
+}

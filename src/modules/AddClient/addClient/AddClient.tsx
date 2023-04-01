@@ -49,7 +49,7 @@ export const AddClient: FC = () => {
       [styles.dropdownAndroid]: props.name === "Android",
       [styles.dropdownIOS]: props.name === "iOS",
       [styles.dropdownFlutter]: props.name === "Flutter",
-      [styles.dropdownOlimp]: props.name === "Олимпиадное программирование",
+      [styles.dropdownOlimp]: props.name === "Olympiad programming",
     })
     return classes
   }
@@ -138,9 +138,6 @@ export const AddClient: FC = () => {
                   selected={departmentSelected}
                   setSelected={setDepartmentSelected}
                 >
-                  <option className={styles.option} value="">
-                    Выберите департамент
-                  </option>
                   {departmentOptions.map((option, index) => (
                     <option
                       className={departmentsClasses(option)}
@@ -199,7 +196,6 @@ export const AddClient: FC = () => {
               </div>
               <div className={styles.paymentMethodAndSource}>
                 <IconDropdown name="payment_method.name" label="Способ оплаты">
-                  <option value="">Выберите способ оплаты</option>
                   {paymentOptions.map((option, index) => (
                     <option key={index} value={option.name}>
                       <div className={styles.icon}>
@@ -210,7 +206,6 @@ export const AddClient: FC = () => {
                   ))}
                 </IconDropdown>
                 <IconDropdown name="came_from.name" label="Источник">
-                  <option value="">Выберите источник</option>
                   {sourceOptions.map((option, index) => (
                     <option key={index} value={option.name}>
                       {option.name}

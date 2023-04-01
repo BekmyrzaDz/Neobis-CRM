@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import Button from "../../../../components/AddButton"
+import Modal from "../../../../components/ModalPopupMainPage/Modal"
 import ProfileButton from "../../../../components/ProfileButton"
 import SearchInput from "../../../../components/SearchInput"
 import { useAppSelector } from "../../../../hooks/redux"
@@ -18,6 +19,7 @@ const Header = (props: Props) => {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
+        padding: "24px",
       }}
     >
       <SearchInput icon={search} name="Поиск" placeholder="Поиск" />
@@ -32,6 +34,9 @@ const Header = (props: Props) => {
           setActive={setActive}
           style={{ marginRight: "16px" }}
         />
+        <Modal active={active} setActive={setActive}>
+          <h1>Hello World</h1>
+        </Modal>
         <ProfileButton
           icon={imgAvatar}
           name={`${user?.first_name} ${user?.last_name}`}
