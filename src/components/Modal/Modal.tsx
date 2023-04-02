@@ -1,5 +1,6 @@
 import { IModalProps } from './Modal.props'
 import styles from './Modal.module.scss'
+import crossIcon from './cross.svg'
 
 const Modal: React.FC<IModalProps> = ({ active, setActive, children }) => {
   return (
@@ -15,6 +16,12 @@ const Modal: React.FC<IModalProps> = ({ active, setActive, children }) => {
         }
         onClick={(e) => e.stopPropagation()}
       >
+        <img
+          src={crossIcon}
+          alt='crossIcon'
+          className={styles.cross}
+          onClick={() => setActive(false)}
+        />
         {children}
       </div>
     </div>

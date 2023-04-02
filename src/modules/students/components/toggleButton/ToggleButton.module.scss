@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #756fb3;
+  background-color: #fff;
   padding: 5px;
   border-radius: 16px;
 }
@@ -21,6 +21,7 @@
 }
 
 .btn.active {
-  background-color: #756fb3;
+  background-color: #756FB3;
   transition: all 0.4s;
+  color: #fff;
 }

@@ -6,4 +6,5 @@ export interface IconButtonProps
     HTMLButtonElement
   > {
   text: string
+  icon?: string
 }

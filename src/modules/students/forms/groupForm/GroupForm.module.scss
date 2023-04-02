@@ -1,0 +1,61 @@
+@import '../../../../sass//base';
+
+.form {
+  margin: 0 auto;
+  padding: 26px 32px;
+  background-color: #fff;
+  border-radius: 20px;
+  & > .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 34px;
+    & > h3 {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 32px;
+      color: $black-color;
+    }
+  }
+
+  & > .depart,
+  .groupName,
+  .teacher {
+    margin-bottom: 24px;
+  }
+
+  & > .rowWrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    & > div {
+      width: 300px;
+    }
+    & > .halfDiv {
+      width: 150px;
+    }
+    & > .twoInOne {
+      width: 142px;
+    }
+  }
+
+  & > .btns {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    .deleteBtn {
+      background-color: #ebeaf8;
+      color: #d74245;
+      border: 2px solid #d74245;
+    }
+  }
+}
+
+.archiveBtn {
+  background-color: #ebeaf8;
+  color: $violet-color;
+  padding: 9px 13px;
+}
