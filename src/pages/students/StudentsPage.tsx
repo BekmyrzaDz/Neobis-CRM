@@ -1,63 +1,66 @@
-import ToggleButton from '../../modules/students/components/toggleButton/ToggleButton'
 import IconButton from '../../components/iconButton/IconButton'
 import ProfileIcon from '../../modules/students/components/profileIcon/ProfileIcon'
 import SearchBar from '../../modules/CoursePage/components/SearchBar/SearchBar'
 import StudentCard from '../../modules/students/components/studentCard/StudentCard'
 import FilterButton from '../../modules/students/components/filterButton/filterButton'
-import { Dispatch, SetStateAction, useCallback, useState } from 'react'
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 import GroupCard from '../../modules/students/components/groupCard/GroupCard'
 import StudentForm from '../../modules/students/forms/studentForm/StudentForm'
 import Modal from '../../components/Modal/Modal'
 import plusIcon from '../../modules/students/assets/icons/plus.svg'
+import GroupForm from '../../modules/students/forms/groupForm/GroupForm'
+import SwitcherButton from '../../modules/students/components/SwitcherButton/SwitcherButton'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { getProfileById } from '../../modules/profilePage/redux/asyncActions'
+import { reset } from '../../modules/profilePage/redux/profileSlice'
+import { useNavigate } from 'react-router-dom'
 
 import styles from './StudentsPage.module.scss'
-import GroupForm from '../../modules/students/forms/groupForm/GroupForm'
 
 type ModalState = [boolean, Dispatch<SetStateAction<boolean>>]
 
-export interface IFilter {
-  text: string
-  count: string
-}
-
-const DBFilter: IFilter[] = [
-  {
-    text: 'Все',
-    count: '24',
-  },
-  {
-    text: 'UX/UI',
-    count: '10',
-  },
-  {
-    text: 'Front-end',
-    count: '8',
-  },
-  {
-    text: 'Backend',
-    count: '8',
-  },
-  {
-    text: 'Andriod',
-    count: '8',
-  },
-  {
-    text: 'IOS',
-    count: '12',
-  },
-  {
-    text: 'Flutter',
-    count: '14',
-  },
-]
-
 const StudentsPage = () => {
-  const [cardFilter, setCardFilter] = useState('student')
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const [activeOption, setActiveOption] = useState<string>('Студенты')
   const [modalActive, setModalActive]: ModalState = useState(false)
+  const id = useAppSelector((state) => state.auth.user?.id)
+  const { first_name, last_name, image } = useAppSelector(
+    (state) => state.profile.profile
+  ) ?? { first_name: '', last_name: '', image: '' }
+  const { isSuccess } = useAppSelector((state) => state.profile)
+
+  useEffect(() => {
+    if (id !== undefined) dispatch(getProfileById(id))
+  }, [])
+
+  if (isSuccess) {
+    dispatch(reset())
+  }
 
   const onToggleModal = useCallback(() => {
     setModalActive((prev) => !prev)
   }, [])
+
+  const buttons = document.querySelectorAll('#filterBtns button')
+  buttons[0]?.classList?.add(`${styles.activeBtn}`)
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      // Remove "active" class from all buttons
+      buttons.forEach((button) => {
+        button.classList.remove(styles.activeBtn)
+      })
+
+      // Add "active" class to clicked button
+      button.classList.add(styles.activeBtn)
+    })
+  })
 
   return (
     <div className={styles.studentPage}>
@@ -65,9 +68,12 @@ const StudentsPage = () => {
         <SearchBar />
 
         <div className={styles.actions}>
-          <ToggleButton setCardFilter={setCardFilter} />
+          <SwitcherButton
+            activeOption={activeOption}
+            setActiveOption={setActiveOption}
+          />
 
-          {cardFilter === 'student' ? (
+          {activeOption === 'Студенты' ? (
             <IconButton
               text={'Добавить студента'}
               icon={plusIcon}
@@ -82,26 +88,63 @@ const StudentsPage = () => {
           )}
 
           <ProfileIcon
-            avatar={
-              'https://upload.wikimedia.org/wikipedia/commons/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg'
-            }
-            text={'Ruslan Sabitov'}
+            avatar={image}
+            text={`${first_name} ${last_name} `}
+            onClick={() => navigate('/profile')}
           />
         </div>
       </div>
 
-      <div className={styles.filterBtns}>
-        {DBFilter.map((filter) => (
-          <FilterButton
-            text={filter.text}
-            count={filter.count}
-            key={filter.text}
-          />
-        ))}
+      <div className={styles.filterBtns} id='filterBtns'>
+        <FilterButton
+          text={'Все'}
+          count={'24'}
+          className={`${styles.all}`}
+        />
+        <FilterButton
+          text={'UX/UI'}
+          count={'24'}
+          className={`${styles.ux}`}
+        />
+        <FilterButton
+          text={'Front-end'}
+          count={'24'}
+          className={`${styles.front}`}
+        />
+        <FilterButton
+          text={'PM'}
+          count={'24'}
+          className={`${styles.pm}`}
+        />
+        <FilterButton
+          text={'Back-end'}
+          count={'24'}
+          className={`${styles.back}`}
+        />
+        <FilterButton
+          text={'Android'}
+          count={'24'}
+          className={`${styles.android}`}
+        />
+        <FilterButton
+          text={'iOS'}
+          count={'24'}
+          className={`${styles.ios}`}
+        />
+        <FilterButton
+          text={'Flutter'}
+          count={'24'}
+          className={`${styles.flutter}`}
+        />
+        <FilterButton
+          text={'Олимп. программирование'}
+          count={'24'}
+          className={`${styles.olimp}`}
+        />
       </div>
 
       <div className={styles.content}>
-        {cardFilter === 'student' ? (
+        {activeOption === 'Студенты' ? (
           <>
             <StudentCard />
             <StudentCard />
@@ -125,7 +168,7 @@ const StudentsPage = () => {
         )}
       </div>
       <Modal active={modalActive} setActive={setModalActive}>
-        {cardFilter === 'student' ? <StudentForm /> : <GroupForm />}
+        {activeOption === 'Студенты' ? <StudentForm /> : <GroupForm />}
       </Modal>
     </div>
   )

@@ -24,6 +24,34 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  & .ux {
+    color: #c656a0;
+  }
+  & .front {
+    color: #32b483;
+  }
+  & .pm {
+    color: #70bf44;
+  }
+  & .back {
+    color: #756fb3;
+  }
+  & .android {
+    color: #c656a0;
+  }
+  & .ios {
+    color: #a6ce39;
+  }
+  & .flutter {
+    color: #00a64e;
+  }
+  & .olimp {
+    color: #7c51a1;
+  }
+}
+
+.activeBtn {
+  background-color: #fff;
 }
 
 .content {
@@ -32,5 +60,3 @@
   flex-wrap: wrap;
   gap: 20px;
 }
-
-
