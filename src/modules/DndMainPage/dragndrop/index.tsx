@@ -41,6 +41,7 @@ export const DragAndDrop: FC = () => {
   }, [dispatch])
 
   const client: IStudentState = useAppSelector((state) => state?.client)
+  console.log(client)
 
   // Filtering and display logic
   useEffect(() => {
