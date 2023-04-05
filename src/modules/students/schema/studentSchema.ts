@@ -23,10 +23,6 @@ export const StudentSchema = Yup.object({
   laptop: Yup.string()
     .min(2, 'Минимум 2 символа')
     .required('Обязательное поле'),
-  // notes: Yup.string().min(2, 'Минимум 2 символа').required('Обязательное поле'),
-  status: Yup.string()
-    .min(2, 'Минимум 2 символа')
-    .required('Обязательное поле'),
   paymantStatus: Yup.string()
     .min(2, 'Минимум 2 символа')
     .required('Обязательное поле'),

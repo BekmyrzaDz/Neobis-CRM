@@ -12,7 +12,6 @@ import {
   laptop,
   paymantStatus,
   source,
-  status,
 } from '../../selectOptions/studentFormOptions'
 
 import styles from './StudentForm.module.scss'
@@ -29,7 +28,6 @@ const StudentForm = () => {
         source: '',
         laptop: '',
         notes: '',
-        status: '',
         paymantStatus: '',
       }}
       validationSchema={StudentSchema}
@@ -110,12 +108,6 @@ const StudentForm = () => {
           className={styles.notes}
         />
         <div className={styles.rowWrapper}>
-          <MySelect
-            label='Статус обучения*'
-            id='status'
-            name='status'
-            options={status}
-          />
           <MySelect
             label='Статус оплаты'
             id='paymantStatus'

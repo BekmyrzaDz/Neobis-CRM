@@ -20,7 +20,7 @@ export const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
-    reset: (state) => {
+    profileReset: (state) => {
       state.isLoading = false
       state.isSuccess = false
       state.isError = false
@@ -78,5 +78,5 @@ export const profileSlice = createSlice({
   },
 })
 
-export const { reset } = profileSlice.actions
+export const { profileReset } = profileSlice.actions
 export default profileSlice.reducer

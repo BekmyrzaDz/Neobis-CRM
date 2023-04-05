@@ -5,7 +5,7 @@ import Spinner from '../../components/spinner/spinner'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { AvaForm, ProfileForm } from '../../modules/profilePage'
 import { getProfileById } from '../../modules/profilePage/redux/asyncActions'
-import { reset } from '../../modules/profilePage/redux/profileSlice'
+import { profileReset } from '../../modules/profilePage/redux/profileSlice'
 
 import styles from './profilePage.module.scss'
 
@@ -20,7 +20,7 @@ const ProfilePage = () => {
   }, [])
 
   if (isSuccess) {
-    dispatch(reset())
+    dispatch(profileReset())
   }
 
   if (isLoading) {

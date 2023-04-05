@@ -18,30 +18,57 @@ import GroupForm from '../../modules/students/forms/groupForm/GroupForm'
 import SwitcherButton from '../../modules/students/components/SwitcherButton/SwitcherButton'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { getProfileById } from '../../modules/profilePage/redux/asyncActions'
-import { reset } from '../../modules/profilePage/redux/profileSlice'
+import { profileReset } from '../../modules/profilePage/redux/profileSlice'
 import { useNavigate } from 'react-router-dom'
+import { getStudentsOnStudy } from '../../modules/students/redux/asyncActions'
+import { studentsOnStudyReset } from '../../modules/students/redux/studentsOnStudySlice'
 
 import styles from './StudentsPage.module.scss'
 
 type ModalState = [boolean, Dispatch<SetStateAction<boolean>>]
+type activeOptionState = [string, Dispatch<SetStateAction<string>>]
 
 const StudentsPage = () => {
+  const [activeOption, setActiveOption]: activeOptionState =
+    useState('Студенты')
+  const [modalActive, setModalActive]: ModalState = useState(false)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const [activeOption, setActiveOption] = useState<string>('Студенты')
-  const [modalActive, setModalActive]: ModalState = useState(false)
-  const id = useAppSelector((state) => state.auth.user?.id)
-  const { first_name, last_name, image } = useAppSelector(
-    (state) => state.profile.profile
-  ) ?? { first_name: '', last_name: '', image: '' }
-  const { isSuccess } = useAppSelector((state) => state.profile)
+  const token = useAppSelector((state) => state.auth.user?.access)
+  const authUserId = useAppSelector((state) => state.auth.user?.id)
+  const auth_first_name = useAppSelector(
+    (state) => state.profile.profile?.first_name
+  )
+  const auth_last_name = useAppSelector(
+    (state) => state.profile.profile?.last_name
+  )
+  const auth_avatar = useAppSelector((state) => state.profile.profile?.image!)
+  const isProfileSuccess = useAppSelector((state) => state.profile.isSuccess)
+  const isStudentOnStudySuccess = useAppSelector(
+    (state) => state.studentsOnStudy.isSuccess
+  )
+  const studentsOnStudy = useAppSelector(
+    (state) => state.studentsOnStudy.studentsOnStudy
+  )
 
   useEffect(() => {
-    if (id !== undefined) dispatch(getProfileById(id))
+    if (authUserId !== undefined) {
+      dispatch(getProfileById(authUserId))
+    }
   }, [])
 
-  if (isSuccess) {
-    dispatch(reset())
+  if (isProfileSuccess) {
+    dispatch(profileReset())
+  }
+
+  useEffect(() => {
+    if (activeOption === 'Студенты' && token !== undefined) {
+      dispatch(getStudentsOnStudy(token))
+    }
+  }, [])
+
+  if (isStudentOnStudySuccess) {
+    dispatch(studentsOnStudyReset())
   }
 
   const onToggleModal = useCallback(() => {
@@ -88,34 +115,22 @@ const StudentsPage = () => {
           )}
 
           <ProfileIcon
-            avatar={image}
-            text={`${first_name} ${last_name} `}
+            avatar={auth_avatar}
+            text={`${auth_first_name} ${auth_last_name} `}
             onClick={() => navigate('/profile')}
           />
         </div>
       </div>
 
       <div className={styles.filterBtns} id='filterBtns'>
-        <FilterButton
-          text={'Все'}
-          count={'24'}
-          className={`${styles.all}`}
-        />
-        <FilterButton
-          text={'UX/UI'}
-          count={'24'}
-          className={`${styles.ux}`}
-        />
+        <FilterButton text={'Все'} count={'24'} className={`${styles.all}`} />
+        <FilterButton text={'UX/UI'} count={'24'} className={`${styles.ux}`} />
         <FilterButton
           text={'Front-end'}
           count={'24'}
           className={`${styles.front}`}
         />
-        <FilterButton
-          text={'PM'}
-          count={'24'}
-          className={`${styles.pm}`}
-        />
+        <FilterButton text={'PM'} count={'24'} className={`${styles.pm}`} />
         <FilterButton
           text={'Back-end'}
           count={'24'}
@@ -126,11 +141,7 @@ const StudentsPage = () => {
           count={'24'}
           className={`${styles.android}`}
         />
-        <FilterButton
-          text={'iOS'}
-          count={'24'}
-          className={`${styles.ios}`}
-        />
+        <FilterButton text={'iOS'} count={'24'} className={`${styles.ios}`} />
         <FilterButton
           text={'Flutter'}
           count={'24'}
@@ -145,15 +156,20 @@ const StudentsPage = () => {
 
       <div className={styles.content}>
         {activeOption === 'Студенты' ? (
-          <>
-            <StudentCard />
-            <StudentCard />
-            <StudentCard />
-            <StudentCard />
-            <StudentCard />
-            <StudentCard />
-            <StudentCard />
-          </>
+          studentsOnStudy.map((student) => {
+            return (
+              <StudentCard
+                key={student.phone}
+                id={student.id}
+                first_name={student.first_name}
+                last_name={student.last_name}
+                phone={student.phone}
+                department={student.department.name}
+                came_from={student.came_from.name}
+                payment_status={student.payment_status}
+              />
+            )
+          })
         ) : (
           <>
             <GroupCard />
