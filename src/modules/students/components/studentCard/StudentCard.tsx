@@ -41,6 +41,42 @@ const StudentCard: FC<IStudentCardProps> = ({
       source = other
       break
   }
+
+  // department color
+  let departmentColor
+  switch (department) {
+    case 'ux-ui':
+      departmentColor = `${styles.position} ${styles.ux}`
+      break
+    case 'front-end':
+      departmentColor = `${styles.position} ${styles.front}`
+      break
+    case 'back-end':
+      departmentColor = `${styles.position} ${styles.back}`
+      break
+    case 'pm':
+      departmentColor = `${styles.position} ${styles.pm}`
+      break
+    case 'back-end':
+      departmentColor = `${styles.position} ${styles.back}`
+      break
+    case 'android':
+      departmentColor = `${styles.position} ${styles.android}`
+      break
+    case 'ios':
+      departmentColor = `${styles.position} ${styles.ios}`
+      break
+    case 'flutter':
+      departmentColor = `${styles.position} ${styles.flutter}`
+      break
+    case 'olimped_programming':
+      departmentColor = `${styles.position} ${styles.olymp}`
+      break
+    default:
+      source = other
+      break
+  }
+
   return (
     <div className={styles.card}>
       <div className={styles.paid}>
@@ -53,7 +89,7 @@ const StudentCard: FC<IStudentCardProps> = ({
       <div className={styles.about}>
         <h3 className={styles.name}>{`${first_name} ${last_name}`}</h3>
         <h5 className={styles.number}>{phone}</h5>
-        <h3 className={styles.position}>{department}</h3>
+        <h3 className={departmentColor}>{department}</h3>
       </div>
 
       <div className={styles.footer}>

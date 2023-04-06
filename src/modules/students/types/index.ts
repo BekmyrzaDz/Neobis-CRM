@@ -30,3 +30,10 @@ export interface IStudentOnStudyState {
   isSuccess: boolean
   isError: boolean
 }
+
+
+// get all students props
+export interface IGetAllStudentsOnStudy {
+  token: string
+  departmentFilter: string
+}

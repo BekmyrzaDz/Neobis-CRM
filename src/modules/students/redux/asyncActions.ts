@@ -3,16 +3,16 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { AxiosError } from 'axios'
 
 import studentsOnStudyService from '../services/StudentsOnStudy'
-import { IStudentOnStudy } from '../types'
+import { IGetAllStudentsOnStudy, IStudentOnStudy } from '../types'
 
 // Get all students on study
 export const getStudentsOnStudy = createAsyncThunk<
   IStudentOnStudy[],
-  string,
+  IGetAllStudentsOnStudy,
   { rejectValue: string }
->('studentsOnStudy/getStudentsOnStudy', async (token, thunkAPI) => {
+>('studentsOnStudy/getStudentsOnStudy', async ({token, departmentFilter}, thunkAPI) => {
   try {
-    const response = await studentsOnStudyService.getStudentsOnStudy(token)
+    const response = await studentsOnStudyService.getStudentsOnStudy({token, departmentFilter })
     return response
   } catch (error: unknown) {
     if (typeof error === 'string') {

@@ -24,6 +24,7 @@ import { getStudentsOnStudy } from '../../modules/students/redux/asyncActions'
 import { studentsOnStudyReset } from '../../modules/students/redux/studentsOnStudySlice'
 
 import styles from './StudentsPage.module.scss'
+import Spinner from '../../components/spinner/spinner'
 
 type ModalState = [boolean, Dispatch<SetStateAction<boolean>>]
 type activeOptionState = [string, Dispatch<SetStateAction<string>>]
@@ -31,6 +32,7 @@ type activeOptionState = [string, Dispatch<SetStateAction<string>>]
 const StudentsPage = () => {
   const [activeOption, setActiveOption]: activeOptionState =
     useState('Студенты')
+  const [departmentFilter, setDepartmentFilter] = useState('')
   const [modalActive, setModalActive]: ModalState = useState(false)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -44,8 +46,8 @@ const StudentsPage = () => {
   )
   const auth_avatar = useAppSelector((state) => state.profile.profile?.image!)
   const isProfileSuccess = useAppSelector((state) => state.profile.isSuccess)
-  const isStudentOnStudySuccess = useAppSelector(
-    (state) => state.studentsOnStudy.isSuccess
+  const { isSuccess, isLoading } = useAppSelector(
+    (state) => state.studentsOnStudy
   )
   const studentsOnStudy = useAppSelector(
     (state) => state.studentsOnStudy.studentsOnStudy
@@ -63,11 +65,11 @@ const StudentsPage = () => {
 
   useEffect(() => {
     if (activeOption === 'Студенты' && token !== undefined) {
-      dispatch(getStudentsOnStudy(token))
+      dispatch(getStudentsOnStudy({ token, departmentFilter }))
     }
-  }, [])
+  }, [departmentFilter])
 
-  if (isStudentOnStudySuccess) {
+  if (isSuccess) {
     dispatch(studentsOnStudyReset())
   }
 
@@ -75,19 +77,9 @@ const StudentsPage = () => {
     setModalActive((prev) => !prev)
   }, [])
 
-  const buttons = document.querySelectorAll('#filterBtns button')
-  buttons[0]?.classList?.add(`${styles.activeBtn}`)
-  buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-      // Remove "active" class from all buttons
-      buttons.forEach((button) => {
-        button.classList.remove(styles.activeBtn)
-      })
-
-      // Add "active" class to clicked button
-      button.classList.add(styles.activeBtn)
-    })
-  })
+  if (isLoading) {
+    return <Spinner />
+  }
 
   return (
     <div className={styles.studentPage}>
@@ -123,34 +115,95 @@ const StudentsPage = () => {
       </div>
 
       <div className={styles.filterBtns} id='filterBtns'>
-        <FilterButton text={'Все'} count={'24'} className={`${styles.all}`} />
-        <FilterButton text={'UX/UI'} count={'24'} className={`${styles.ux}`} />
+        <FilterButton
+          text={'Все'}
+          count={studentsOnStudy.length}
+          className={
+            departmentFilter === ''
+              ? `${styles.all} ${styles.activeBtn}`
+              : `${styles.all}`
+          }
+          onClick={() => setDepartmentFilter('')}
+        />
+        <FilterButton
+          text={'UX/UI'}
+          count={studentsOnStudy.length}
+          className={
+            departmentFilter === 'ux-ui'
+              ? `${styles.ux} ${styles.activeBtn}`
+              : `${styles.ux}`
+          }
+          onClick={() => setDepartmentFilter('ux-ui')}
+        />
         <FilterButton
           text={'Front-end'}
-          count={'24'}
-          className={`${styles.front}`}
+          count={studentsOnStudy.length}
+          className={
+            departmentFilter === 'front-end'
+              ? `${styles.front} ${styles.activeBtn}`
+              : `${styles.front}`
+          }
+          onClick={() => setDepartmentFilter('front-end')}
         />
-        <FilterButton text={'PM'} count={'24'} className={`${styles.pm}`} />
+        <FilterButton
+          text={'PM'}
+          count={studentsOnStudy.length}
+          className={
+            departmentFilter === 'pm'
+              ? `${styles.pm} ${styles.activeBtn}`
+              : `${styles.pm}`
+          }
+          onClick={() => setDepartmentFilter('pm')}
+        />
         <FilterButton
           text={'Back-end'}
-          count={'24'}
-          className={`${styles.back}`}
+          count={studentsOnStudy.length}
+          className={
+            departmentFilter === 'back-end'
+              ? `${styles.back} ${styles.activeBtn}`
+              : `${styles.back}`
+          }
+          onClick={() => setDepartmentFilter('back-end')}
         />
         <FilterButton
           text={'Android'}
-          count={'24'}
-          className={`${styles.android}`}
+          count={studentsOnStudy.length}
+          className={
+            departmentFilter === 'android'
+              ? `${styles.android} ${styles.activeBtn}`
+              : `${styles.android}`
+          }
+          onClick={() => setDepartmentFilter('android')}
         />
-        <FilterButton text={'iOS'} count={'24'} className={`${styles.ios}`} />
+        <FilterButton
+          text={'iOS'}
+          count={studentsOnStudy.length}
+          className={
+            departmentFilter === 'ios'
+              ? `${styles.ios} ${styles.activeBtn}`
+              : `${styles.ios}`
+          }
+          onClick={() => setDepartmentFilter('ios')}
+        />
         <FilterButton
           text={'Flutter'}
-          count={'24'}
-          className={`${styles.flutter}`}
+          count={studentsOnStudy.length}
+          className={
+            departmentFilter === 'flutter'
+              ? `${styles.flutter} ${styles.activeBtn}`
+              : `${styles.flutter}`
+          }
+          onClick={() => setDepartmentFilter('flutter')}
         />
         <FilterButton
           text={'Олимп. программирование'}
-          count={'24'}
-          className={`${styles.olimp}`}
+          count={studentsOnStudy.length}
+          className={
+            departmentFilter === 'olimped_programming'
+              ? `${styles.olymp} ${styles.activeBtn}`
+              : `${styles.olymp}`
+          }
+          onClick={() => setDepartmentFilter('olimped_programming')}
         />
       </div>
 
