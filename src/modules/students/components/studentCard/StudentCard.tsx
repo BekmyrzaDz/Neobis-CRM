@@ -1,9 +1,11 @@
-import payd from '../../assets/icons/payd.svg'
-import instagram from '../../assets/icons/instagram.svg'
-import website from '../../assets/icons/website.svg'
-import announcement from '../../assets/icons/announcement.svg'
-import other from '../../assets/icons/other.svg'
 import { FC } from 'react'
+import {
+  payd,
+  instagram,
+  website,
+  announcement,
+  other,
+} from '../../assets/icons'
 
 import styles from './StudentCard.module.scss'
 interface IStudentCardProps {

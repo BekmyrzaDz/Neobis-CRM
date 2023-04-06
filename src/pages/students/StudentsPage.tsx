@@ -1,8 +1,3 @@
-import IconButton from '../../components/iconButton/IconButton'
-import ProfileIcon from '../../modules/students/components/profileIcon/ProfileIcon'
-import SearchBar from '../../modules/CoursePage/components/SearchBar/SearchBar'
-import StudentCard from '../../modules/students/components/studentCard/StudentCard'
-import FilterButton from '../../modules/students/components/filterButton/filterButton'
 import {
   Dispatch,
   SetStateAction,
@@ -10,28 +5,35 @@ import {
   useEffect,
   useState,
 } from 'react'
-import GroupCard from '../../modules/students/components/groupCard/GroupCard'
-import StudentForm from '../../modules/students/forms/studentForm/StudentForm'
-import Modal from '../../components/Modal/Modal'
-import plusIcon from '../../modules/students/assets/icons/plus.svg'
-import allIcon from '../../modules/students/assets/icons/all.png'
-import uxuiIcon from '../../modules/students/assets/icons/uxui.png'
-import frontendIcon from '../../modules/students/assets/icons/frontend.png'
-import pmIcon from '../../modules/students/assets/icons/pm.png'
-import backendIcon from '../../modules/students/assets/icons/backend.png'
-import androidIcon from '../../modules/students/assets/icons/android.png'
-import iosIcon from '../../modules/students/assets/icons/ios.png'
-import flutterIcon from '../../modules/students/assets/icons/flutter.png'
-import olympIcon from '../../modules/students/assets/icons/olymp.png'
-import GroupForm from '../../modules/students/forms/groupForm/GroupForm'
-import SwitcherButton from '../../modules/students/components/SwitcherButton/SwitcherButton'
+import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import Spinner from '../../components/spinner/spinner'
+import Modal from '../../components/Modal/Modal'
+import IconButton from '../../components/iconButton/IconButton'
+import SearchBar from '../../modules/CoursePage/components/SearchBar/SearchBar'
+import SwitcherButton from '../../modules/students/components/SwitcherButton/SwitcherButton'
+import ProfileIcon from '../../modules/students/components/profileIcon/ProfileIcon'
+import FilterButton from '../../modules/students/components/filterButton/filterButton'
+import StudentCard from '../../modules/students/components/studentCard/StudentCard'
+import StudentForm from '../../modules/students/forms/studentForm/StudentForm'
+import GroupCard from '../../modules/students/components/groupCard/GroupCard'
+import GroupForm from '../../modules/students/forms/groupForm/GroupForm'
 import { getProfileById } from '../../modules/profilePage/redux/asyncActions'
 import { profileReset } from '../../modules/profilePage/redux/profileSlice'
-import { useNavigate } from 'react-router-dom'
 import { getStudentsOnStudy } from '../../modules/students/redux/asyncActions'
 import { studentsOnStudyReset } from '../../modules/students/redux/studentsOnStudySlice'
-import Spinner from '../../components/spinner/spinner'
+import {
+  plusIcon,
+  allIcon,
+  uxuiIcon,
+  frontendIcon,
+  pmIcon,
+  backendIcon,
+  androidIcon,
+  iosIcon,
+  flutterIcon,
+  olympIcon,
+} from '../../modules/students/assets/icons'
 
 import styles from './StudentsPage.module.scss'
 
@@ -45,22 +47,19 @@ const StudentsPage = () => {
     useState('Студенты')
   const [departmentFilter, setDepartmentFilter] = useState('')
   const [modalActive, setModalActive]: ModalState = useState(false)
-  const token = useAppSelector((state) => state.auth.user?.access)
-  const authUserId = useAppSelector((state) => state.auth.user?.id)
-  const auth_first_name = useAppSelector(
-    (state) => state.profile.profile?.first_name
-  )
-  const auth_last_name = useAppSelector(
-    (state) => state.profile.profile?.last_name
-  )
-  const auth_avatar = useAppSelector((state) => state.profile.profile?.image!)
-  const isProfileSuccess = useAppSelector((state) => state.profile.isSuccess)
-  const { isSuccess, isLoading } = useAppSelector(
-    (state) => state.studentsOnStudy
-  )
-  const studentsOnStudy = useAppSelector(
-    (state) => state.studentsOnStudy.studentsOnStudy
-  )
+
+  const auth = useAppSelector((state) => state.auth)
+  const profile = useAppSelector((state) => state.profile)
+  const study = useAppSelector((state) => state.studentsOnStudy)
+
+  const token = auth.user?.access
+  const authUserId = auth.user?.id
+  const auth_first_name = profile.profile?.first_name
+  const auth_last_name = profile.profile?.last_name
+  const auth_avatar = profile.profile?.image!
+  const isProfileSuccess = profile.isSuccess
+  const { isSuccess, isLoading } = study
+  const studentsOnStudy = study.studentsOnStudy
 
   useEffect(() => {
     if (authUserId !== undefined) {
