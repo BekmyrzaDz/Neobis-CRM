@@ -51,9 +51,6 @@ const StudentCard: FC<IStudentCardProps> = ({
     case 'front-end':
       departmentColor = `${styles.position} ${styles.front}`
       break
-    case 'back-end':
-      departmentColor = `${styles.position} ${styles.back}`
-      break
     case 'pm':
       departmentColor = `${styles.position} ${styles.pm}`
       break
@@ -73,7 +70,28 @@ const StudentCard: FC<IStudentCardProps> = ({
       departmentColor = `${styles.position} ${styles.olymp}`
       break
     default:
-      source = other
+      departmentColor = `${styles.position}`
+      break
+  }
+
+  // department color
+  let paydClass
+  let payment_status_value
+  switch (payment_status) {
+    case '1':
+      paydClass = `${styles.payStatus} ${styles.paidSpan}`
+      payment_status_value = 'Оплачено'
+      break
+    case '2':
+      paydClass = `${styles.payStatus} ${styles.mustPaySpan}`
+      payment_status_value = 'Должен оплатить'
+      break
+    case '3':
+      paydClass = `${styles.payStatus} ${styles.soonPaySpan}`
+      payment_status_value = 'Скоро оплата'
+      break
+    default:
+      paydClass = ''
       break
   }
 
@@ -81,7 +99,7 @@ const StudentCard: FC<IStudentCardProps> = ({
     <div className={styles.card}>
       <div className={styles.paid}>
         <img src={payd} alt='payd' />
-        <span>{payment_status}</span>
+        <span className={paydClass}>{payment_status_value}</span>
       </div>
 
       <div className={styles.id}>{id}</div>

@@ -31,9 +31,9 @@ const laptop: Option[] = [
 
 // Options for paymant status select
 const paymantStatus: Option[] = [
-  { key: 'Оплачено', value: 'payd' },
-  { key: 'Должен оплатить', value: 'must_pay' },
-  { key: 'Скоро оплата', value: 'soon_pay' },
+  { key: 'Оплачено', value: 1 },
+  { key: 'Должен оплатить', value: 2 },
+  { key: 'Скоро оплата', value: 3 },
 ]
 
 export { departments, source, laptop, paymantStatus }

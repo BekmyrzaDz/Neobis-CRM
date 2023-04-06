@@ -14,6 +14,15 @@ import GroupCard from '../../modules/students/components/groupCard/GroupCard'
 import StudentForm from '../../modules/students/forms/studentForm/StudentForm'
 import Modal from '../../components/Modal/Modal'
 import plusIcon from '../../modules/students/assets/icons/plus.svg'
+import allIcon from '../../modules/students/assets/icons/all.png'
+import uxuiIcon from '../../modules/students/assets/icons/uxui.png'
+import frontendIcon from '../../modules/students/assets/icons/frontend.png'
+import pmIcon from '../../modules/students/assets/icons/pm.png'
+import backendIcon from '../../modules/students/assets/icons/backend.png'
+import androidIcon from '../../modules/students/assets/icons/android.png'
+import iosIcon from '../../modules/students/assets/icons/ios.png'
+import flutterIcon from '../../modules/students/assets/icons/flutter.png'
+import olympIcon from '../../modules/students/assets/icons/olymp.png'
 import GroupForm from '../../modules/students/forms/groupForm/GroupForm'
 import SwitcherButton from '../../modules/students/components/SwitcherButton/SwitcherButton'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
@@ -22,20 +31,20 @@ import { profileReset } from '../../modules/profilePage/redux/profileSlice'
 import { useNavigate } from 'react-router-dom'
 import { getStudentsOnStudy } from '../../modules/students/redux/asyncActions'
 import { studentsOnStudyReset } from '../../modules/students/redux/studentsOnStudySlice'
+import Spinner from '../../components/spinner/spinner'
 
 import styles from './StudentsPage.module.scss'
-import Spinner from '../../components/spinner/spinner'
 
 type ModalState = [boolean, Dispatch<SetStateAction<boolean>>]
 type activeOptionState = [string, Dispatch<SetStateAction<string>>]
 
 const StudentsPage = () => {
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
   const [activeOption, setActiveOption]: activeOptionState =
     useState('Студенты')
   const [departmentFilter, setDepartmentFilter] = useState('')
   const [modalActive, setModalActive]: ModalState = useState(false)
-  const navigate = useNavigate()
-  const dispatch = useAppDispatch()
   const token = useAppSelector((state) => state.auth.user?.access)
   const authUserId = useAppSelector((state) => state.auth.user?.id)
   const auth_first_name = useAppSelector(
@@ -117,7 +126,7 @@ const StudentsPage = () => {
       <div className={styles.filterBtns} id='filterBtns'>
         <FilterButton
           text={'Все'}
-          count={studentsOnStudy.length}
+          count={departmentFilter === '' ? studentsOnStudy.length : allIcon}
           className={
             departmentFilter === ''
               ? `${styles.all} ${styles.activeBtn}`
@@ -127,7 +136,9 @@ const StudentsPage = () => {
         />
         <FilterButton
           text={'UX/UI'}
-          count={studentsOnStudy.length}
+          count={
+            departmentFilter === 'ux-ui' ? studentsOnStudy.length : uxuiIcon
+          }
           className={
             departmentFilter === 'ux-ui'
               ? `${styles.ux} ${styles.activeBtn}`
@@ -137,7 +148,11 @@ const StudentsPage = () => {
         />
         <FilterButton
           text={'Front-end'}
-          count={studentsOnStudy.length}
+          count={
+            departmentFilter === 'front-end'
+              ? studentsOnStudy.length
+              : frontendIcon
+          }
           className={
             departmentFilter === 'front-end'
               ? `${styles.front} ${styles.activeBtn}`
@@ -147,7 +162,7 @@ const StudentsPage = () => {
         />
         <FilterButton
           text={'PM'}
-          count={studentsOnStudy.length}
+          count={departmentFilter === 'pm' ? studentsOnStudy.length : pmIcon}
           className={
             departmentFilter === 'pm'
               ? `${styles.pm} ${styles.activeBtn}`
@@ -157,7 +172,11 @@ const StudentsPage = () => {
         />
         <FilterButton
           text={'Back-end'}
-          count={studentsOnStudy.length}
+          count={
+            departmentFilter === 'back-end'
+              ? studentsOnStudy.length
+              : backendIcon
+          }
           className={
             departmentFilter === 'back-end'
               ? `${styles.back} ${styles.activeBtn}`
@@ -167,7 +186,11 @@ const StudentsPage = () => {
         />
         <FilterButton
           text={'Android'}
-          count={studentsOnStudy.length}
+          count={
+            departmentFilter === 'android'
+              ? studentsOnStudy.length
+              : androidIcon
+          }
           className={
             departmentFilter === 'android'
               ? `${styles.android} ${styles.activeBtn}`
@@ -177,7 +200,7 @@ const StudentsPage = () => {
         />
         <FilterButton
           text={'iOS'}
-          count={studentsOnStudy.length}
+          count={departmentFilter === 'ios' ? studentsOnStudy.length : iosIcon}
           className={
             departmentFilter === 'ios'
               ? `${styles.ios} ${styles.activeBtn}`
@@ -187,7 +210,11 @@ const StudentsPage = () => {
         />
         <FilterButton
           text={'Flutter'}
-          count={studentsOnStudy.length}
+          count={
+            departmentFilter === 'flutter'
+              ? studentsOnStudy.length
+              : flutterIcon
+          }
           className={
             departmentFilter === 'flutter'
               ? `${styles.flutter} ${styles.activeBtn}`
@@ -197,7 +224,11 @@ const StudentsPage = () => {
         />
         <FilterButton
           text={'Олимп. программирование'}
-          count={studentsOnStudy.length}
+          count={
+            departmentFilter === 'olimped_programming'
+              ? studentsOnStudy.length
+              : olympIcon
+          }
           className={
             departmentFilter === 'olimped_programming'
               ? `${styles.olymp} ${styles.activeBtn}`

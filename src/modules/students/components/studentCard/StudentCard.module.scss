@@ -16,13 +16,26 @@
   & > img {
     margin-right: 8px;
   }
-  & > span {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 16px;
-    color: #32b483;
-  }
+}
+
+.payStatus {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  color: #32b483;
+}
+
+.paidSpan {
+  color: #32B483;
+}
+
+.mustPaySpan {
+  color: #D74245;
+}
+
+.soonPaySpan {
+  color: #FF9900;
 }
 
 .id {
