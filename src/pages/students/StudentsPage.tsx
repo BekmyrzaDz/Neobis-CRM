@@ -40,6 +40,43 @@ import styles from './StudentsPage.module.scss'
 type ModalState = [boolean, Dispatch<SetStateAction<boolean>>]
 type activeOptionState = [string, Dispatch<SetStateAction<string>>]
 
+const departmentFilters = [
+  { id: '', text: 'Все', icon: allIcon, extraClassForText: styles.all },
+  { id: 'ux-ui', text: 'UX/UI', icon: uxuiIcon, extraClassForText: styles.ux },
+  {
+    id: 'front-end',
+    text: 'Front-end',
+    icon: frontendIcon,
+    extraClassForText: styles.front,
+  },
+  { id: 'pm', text: 'PM', icon: pmIcon, extraClassForText: styles.pm },
+  {
+    id: 'back-end',
+    text: 'Back-end',
+    icon: backendIcon,
+    extraClassForText: styles.back,
+  },
+  {
+    id: 'android',
+    text: 'Android',
+    icon: androidIcon,
+    extraClassForText: styles.android,
+  },
+  { id: 'ios', text: 'iOS', icon: iosIcon, extraClassForText: styles.ios },
+  {
+    id: 'flutter',
+    text: 'Flutter',
+    icon: flutterIcon,
+    extraClassForText: styles.flutter,
+  },
+  {
+    id: 'olimped_programming',
+    text: 'Олимп. программирование',
+    icon: olympIcon,
+    extraClassForText: styles.olymp,
+  },
+]
+
 const StudentsPage = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -123,118 +160,16 @@ const StudentsPage = () => {
       </div>
 
       <div className={styles.filterBtns} id='filterBtns'>
-        <FilterButton
-          text={'Все'}
-          count={departmentFilter === '' ? studentsOnStudy.length : allIcon}
-          className={
-            departmentFilter === ''
-              ? `${styles.all} ${styles.activeBtn}`
-              : `${styles.all}`
-          }
-          onClick={() => setDepartmentFilter('')}
-        />
-        <FilterButton
-          text={'UX/UI'}
-          count={
-            departmentFilter === 'ux-ui' ? studentsOnStudy.length : uxuiIcon
-          }
-          className={
-            departmentFilter === 'ux-ui'
-              ? `${styles.ux} ${styles.activeBtn}`
-              : `${styles.ux}`
-          }
-          onClick={() => setDepartmentFilter('ux-ui')}
-        />
-        <FilterButton
-          text={'Front-end'}
-          count={
-            departmentFilter === 'front-end'
-              ? studentsOnStudy.length
-              : frontendIcon
-          }
-          className={
-            departmentFilter === 'front-end'
-              ? `${styles.front} ${styles.activeBtn}`
-              : `${styles.front}`
-          }
-          onClick={() => setDepartmentFilter('front-end')}
-        />
-        <FilterButton
-          text={'PM'}
-          count={departmentFilter === 'pm' ? studentsOnStudy.length : pmIcon}
-          className={
-            departmentFilter === 'pm'
-              ? `${styles.pm} ${styles.activeBtn}`
-              : `${styles.pm}`
-          }
-          onClick={() => setDepartmentFilter('pm')}
-        />
-        <FilterButton
-          text={'Back-end'}
-          count={
-            departmentFilter === 'back-end'
-              ? studentsOnStudy.length
-              : backendIcon
-          }
-          className={
-            departmentFilter === 'back-end'
-              ? `${styles.back} ${styles.activeBtn}`
-              : `${styles.back}`
-          }
-          onClick={() => setDepartmentFilter('back-end')}
-        />
-        <FilterButton
-          text={'Android'}
-          count={
-            departmentFilter === 'android'
-              ? studentsOnStudy.length
-              : androidIcon
-          }
-          className={
-            departmentFilter === 'android'
-              ? `${styles.android} ${styles.activeBtn}`
-              : `${styles.android}`
-          }
-          onClick={() => setDepartmentFilter('android')}
-        />
-        <FilterButton
-          text={'iOS'}
-          count={departmentFilter === 'ios' ? studentsOnStudy.length : iosIcon}
-          className={
-            departmentFilter === 'ios'
-              ? `${styles.ios} ${styles.activeBtn}`
-              : `${styles.ios}`
-          }
-          onClick={() => setDepartmentFilter('ios')}
-        />
-        <FilterButton
-          text={'Flutter'}
-          count={
-            departmentFilter === 'flutter'
-              ? studentsOnStudy.length
-              : flutterIcon
-          }
-          className={
-            departmentFilter === 'flutter'
-              ? `${styles.flutter} ${styles.activeBtn}`
-              : `${styles.flutter}`
-          }
-          onClick={() => setDepartmentFilter('flutter')}
-        />
-        <FilterButton
-          text={'Олимп. программирование'}
-          count={
-            departmentFilter === 'olimped_programming'
-              ? studentsOnStudy.length
-              : olympIcon
-          }
-          className={
-            departmentFilter === 'olimped_programming'
-              ? `${styles.olymp} ${styles.activeBtn}`
-              : `${styles.olymp}`
-          }
-          onClick={() => setDepartmentFilter('olimped_programming')}
-        />
+        {departmentFilters.map(({ id, text, icon, extraClassForText }) => (
+          <FilterButton
+            key={id}
+            text={text}
+            count={departmentFilter === id ? studentsOnStudy.length : icon}
+            isActive={departmentFilter === id}
+            onClick={() => setDepartmentFilter(id)}
+            extraClassForText={extraClassForText}
+          />
+        ))}
       </div>
 
       <div className={styles.content}>

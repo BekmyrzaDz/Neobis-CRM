@@ -1,22 +1,25 @@
 import { FC } from 'react'
 import { IFilterButton } from './filterButton.props'
-import clsx from 'clsx'
 
 import styles from './filterButton.module.scss'
 
 const FilterButton: FC<IFilterButton> = ({
-  className,
   text,
   count,
+  isActive,
   onClick,
+  extraClassForText,
 }) => {
   return (
-    <button className={clsx(styles.btn, className)} onClick={onClick}>
-      <span className={clsx(styles.text, className)}>{text}</span>
+    <button
+      className={`${styles.btn} ${isActive ? styles.activeBtn : ''}`}
+      onClick={onClick}
+    >
+      <span className={`${styles.text} ${extraClassForText}`}>{text}</span>
       {typeof count === 'number' ? (
-        <span className={styles.count}>{count}</span>
+        <span className={`${styles.count}`}>{count}</span>
       ) : (
-        <img className={styles.departIcon} src={count} alt='logo' />
+        <img src={count} alt='logo' className={styles.departIcon} />
       )}
     </button>
   )

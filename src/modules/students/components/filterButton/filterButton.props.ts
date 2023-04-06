@@ -1,6 +1,7 @@
 export interface IFilterButton {
   text: string
   count: any
-  className?: string
+  isActive: boolean
+  extraClassForText: string
   onClick?: () => void
 }
