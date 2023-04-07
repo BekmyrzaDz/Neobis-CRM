@@ -1,25 +1,15 @@
 import { FC, useState } from "react"
 import Button from "../../../components/AddButton"
 import Modal from "../../../components/ModalPopupMainPage/Modal"
-import PlusSvgComponent from "../components/Svg/PlusSvgComponent"
-import Dropdown from "../../../components/DropdownMainPage/Dropdown"
-// import Input from "../../../components/InputMainPage"
 import Input from "../../../components/Input/MyInput"
-import PhoneInput from "../../../components/IconInputMainPage"
-import SimpleDropdown from "../../../components/SimpleDropdownMainPage/SimpleDropdown"
-import IconDropdown from "../../../components/IconDropdownMainPage/IconDropdown"
-import Textarea from "../../../components/TextareaMainPage"
 import ModalButton from "../components/ModalButton"
-import { departmentOptions, paymentOptions, sourceOptions } from "../mockAPI"
 import { ICreateStudent, IDepartmentOptions, IOptions } from "../types"
 import { flagKyrgyzstan, left, plusBox } from "../assets"
 import styles from "./AddClient.module.scss"
 import { Form, Formik } from "formik"
 import { addClientSchema } from "../Schema/Validation"
-import { addClientState } from "../State/state"
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux"
 import { fetchCreateStudent } from "../redux/addClientActions"
-import clsx from "clsx"
 import MySelect from "../../../components/Select/MySelect"
 import {
   departments,
@@ -29,67 +19,13 @@ import {
 } from "../selectOptions/clientFormOptions"
 import MyTextarea from "../../../components/Textarea/MyTextarea"
 
-const initialDepartmentState = departmentOptions[0]
-const initialPaymentState = paymentOptions[0]
-const initialSourceState = sourceOptions[0]
-
 export const AddClient: FC = () => {
   const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state.addClient)
-  console.log(state)
 
   const [modalActive, setModalActive] = useState<boolean>(false)
-  const [departmentSelected, setDepartmentSelected] =
-    useState<IDepartmentOptions>(initialDepartmentState)
-  console.log(departmentSelected)
-  const [laptopSelected, setLaptopSelected] = useState<string>("")
 
   const onSubmit = (value: ICreateStudent) => {
-    // const {
-    //   first_name,
-    //   last_name,
-    //   surname,
-    //   notes,
-    //   phone,
-    //   laptop,
-    //   department,
-    //   payment_method,
-    //   came_from,
-    //   paid,
-    //   on_request,
-    //   is_archive,
-    // } = value
-
-    // const studentData: ICreateStudent = {
-    //   first_name,
-    //   last_name,
-    //   surname,
-    //   notes,
-    //   phone,
-    //   laptop: laptopSelected === "Да" ? true : false,
-    //   department,
-    //   came_from,
-    //   payment_method,
-    //   paid: false,
-    //   on_request: true,
-    //   is_archive: false,
-    // }
-
-    // const studentDataClear: ICreateStudent = {
-    //   first_name: "",
-    //   last_name: "",
-    //   surname: "",
-    //   notes: "",
-    //   phone: "",
-    //   laptop: laptopSelected === "Да" ? true : false,
-    //   department,
-    //   came_from,
-    //   payment_method,
-    //   paid: false,
-    //   on_request: true,
-    //   is_archive: false,
-    // }
-
     const changeValue = {
       ...value,
       laptop: value.laptop === "yes" ? true : false,
@@ -99,7 +35,6 @@ export const AddClient: FC = () => {
     }
 
     dispatch(fetchCreateStudent(changeValue))
-    // setModalActive(false)
   }
 
   const initialValues: ICreateStudent = {
@@ -128,6 +63,7 @@ export const AddClient: FC = () => {
         active={modalActive}
         setActive={setModalActive}
       />
+
       <Modal active={modalActive} setActive={setModalActive}>
         <Formik
           initialValues={initialValues}
@@ -138,12 +74,12 @@ export const AddClient: FC = () => {
           <Form className={styles.form}>
             <div className={styles.top}>
               <p className={styles.title}>Создание заявки</p>
-              <img
+              {/* <img
                 className={styles.left}
                 src={left}
                 alt="icon left"
                 onClick={() => setModalActive(false)}
-              />
+              /> */}
             </div>
             <div className={styles.content}>
               <div className={styles.department}>
