@@ -1,12 +1,22 @@
-// Redux profile state
 // export interface IStudentState {
 //   student: IStudent[] | null
+//   studentWithStatus1: IStudent[] | null
+//   studentWithStatus2: IStudent[] | null
+//   studentWithStatus3: IStudent[] | null
+//   studentWithStatus4: IStudent[] | null
+//   columns: IColumns
+//   columnOrder: string[]
 //   isLoading: boolean
 //   isSuccess: boolean
 //   isError: boolean
 // }
 export interface IStudentState {
   student: IStudent[] | null
+  studentWithStatus1: IStudent[] | null
+  studentWithStatus2: IStudent[] | null
+  studentWithStatus3: IStudent[] | null
+  studentWithStatus4: IStudent[] | null
+  updatedStudent: IUpdateStudent | null
   columns: IColumns
   columnOrder: string[]
   isLoading: boolean
@@ -31,7 +41,7 @@ export interface IColumn {
 }
 
 export interface IDepartment {
-  id: number
+  id?: number
   name: string
 }
 export interface IPaymentMethod {
@@ -55,21 +65,22 @@ export interface IReason {
 }
 
 export interface IStudent {
-  // time?: string
-  id: number
+  request_date?: string
+  id?: number
   first_name: string
   last_name: string
   surname?: string
-  notes: string
+  notes?: string
   phone: string
   laptop: boolean
   department: IDepartment
   came_from: ISource
-  payment_method?: IPaymentMethod
+  payment_method: IPaymentMethod
   status?: IStatus
-  paid: boolean
-  reason: IReason | null
-  on_request: boolean
+  paid?: boolean
+  reason?: IReason | null
+  on_request?: boolean
+  is_archive?: boolean
 }
 
 // Update types
@@ -95,16 +106,16 @@ export interface IUpdateStudent {
   first_name: string
   last_name: string
   surname?: string
-  notes: string
+  notes?: string
   phone: string
   laptop: boolean
   department: IUpdateDepartment
   came_from: IUpdateSource
-  payment_method?: IUpdatePaymentMethod
+  payment_method: IUpdatePaymentMethod
   status: IUpdateStatus
-  paid: boolean
-  // reason: IUpdateReason | null
-  on_request: boolean
+  paid?: boolean
+  on_request?: boolean
+  is_archive?: boolean
 }
 
 export interface IUpdateStudentData {

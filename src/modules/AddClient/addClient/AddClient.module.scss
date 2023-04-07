@@ -26,12 +26,20 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+  margin-bottom: 24px;
+}
+
+.columnOne {
+  & > .firstName {
+    margin-bottom: 24px;
+  }
 }
 
 .phoneAndLaptop {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+  margin-bottom: 24px;
 }
 
 .laptop {
@@ -47,51 +55,4 @@
 
 .notes {
   margin-bottom: 32px;
-}
-
-.dropdownItem {
-  padding: 10px 16px;
-  cursor: pointer;
-  transition: $tran-02;
-  &:hover {
-    background-color: #f4f4f4;
-  }
-}
-
-.dropdownUxUi {
-  color: $ux-ui-color;
-  padding: 10px 16px;
-  cursor: pointer;
-  transition: $tran-02;
-  &:hover {
-    background-color: #f4f4f4;
-  }
-}
-
-.dropdownFront {
-  color: $front-color;
-}
-
-.dropdownBack {
-  color: $back-color;
-}
-
-.dropdownPM {
-  color: $pm-color;
-}
-
-.dropdownAndroid {
-  color: $android-color;
-}
-
-.dropdownIOS {
-  color: $ios-color;
-}
-
-.dropdownFlutter {
-  color: $flutter-color;
-}
-
-.dropdownOlimp {
-  color: $olimp-color;
 }

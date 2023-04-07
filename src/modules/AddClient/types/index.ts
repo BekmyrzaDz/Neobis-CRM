@@ -39,13 +39,10 @@ export interface ICreateStudent {
   surname?: string
   notes: string
   phone: string
-  laptop: boolean
+  laptop: string | boolean
   department: ICreateDepartment
   came_from: ICreateSource
   payment_method?: ICreatePaymentMethod
-  paid: boolean
-  on_request: boolean
-  is_archive: boolean
 }
 
 export interface ICreateBaseStudent {

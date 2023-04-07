@@ -1,12 +1,9 @@
 import axios from "axios";
-
 import {IStudent, IUpdateStudentData} from '../types'
 import getToken from "../../../helpers/getToken";
 
-// axios.defaults.baseURL = 'http://mikieok.pythonanywhere.com'
 axios.defaults.baseURL = 'http://64.226.89.72'
 const API_URL: string = '/api/students/'
-
 
 // All students
 const getAllStudents = async (): Promise<IStudent[]> => {

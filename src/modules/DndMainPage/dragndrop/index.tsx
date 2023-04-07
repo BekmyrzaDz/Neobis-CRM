@@ -13,7 +13,6 @@ import {
 import styles from "./index.module.scss"
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux"
 import { fetchAllStudents, fetchUpdateStudent } from "../redux/asyncActions"
-import { fetchCreateStudent } from "../../AddClient/redux/addClientActions"
 
 export const reorderColumnList = (
   sourceCol: IColumn,
@@ -34,7 +33,6 @@ export const reorderColumnList = (
 
 export const DragAndDrop: FC = () => {
   const dispatch = useAppDispatch()
-  const [state, setState] = useState<IData>(initialData)
 
   useEffect(() => {
     dispatch(fetchAllStudents())
@@ -42,76 +40,77 @@ export const DragAndDrop: FC = () => {
 
   const client: IStudentState = useAppSelector((state) => state?.client)
 
+  const [state, setState] = useState<IData>(initialData)
+
+  const filterStudentsByStatus = (student: IStudent[], column: string) => {
+    const response = student
+      .filter(
+        (item) =>
+          item.status?.name.toLowerCase() ===
+            state.columns[column].title.toLowerCase() &&
+          item.on_request === true
+      )
+      .map((item) => item.id) as number[]
+
+    return response
+  }
+
+  enum Columns {
+    WaitingForAcall = "column-1",
+    CallCompleted = "column-2",
+    SignedUpForAtrialLesson = "column-3",
+    AttendedATrialLesson = "column-4",
+  }
+
   // Filtering and display logic
   useEffect(() => {
-    if (client.student) {
-      const newInitialState: IData = {
-        ...state,
-        students: [...client.student],
-        columns: {
-          ...state.columns,
-          "column-1": {
-            ...state.columns["column-1"],
-            studentIds: [
-              ...client.student
-                .filter(
-                  (item) =>
-                    item.status?.name.toLowerCase() ===
-                      state.columns["column-1"].title.toLowerCase() &&
-                    item.on_request === true
-                )
-                .map((item) => item.id),
-            ],
-          },
-          "column-2": {
-            ...state.columns["column-2"],
-            studentIds: [
-              ...client.student
-                .filter(
-                  (item) =>
-                    item.status?.name.toLowerCase() ===
-                      state.columns["column-2"].title.toLowerCase() &&
-                    item.on_request === true
-                )
-                .map((item) => item.id),
-            ],
-          },
-          "column-3": {
-            ...state.columns["column-3"],
-            studentIds: [
-              ...client.student
-                .filter(
-                  (item) =>
-                    item.status?.name.toLowerCase() ===
-                      state.columns["column-3"].title.toLowerCase() &&
-                    item.on_request === true
-                )
-                .map((item) => item.id),
-            ],
-          },
-          "column-4": {
-            ...state.columns["column-4"],
-            studentIds: [
-              ...client.student
-                .filter(
-                  (item) =>
-                    item.status?.name.toLowerCase() ===
-                      state.columns["column-4"].title.toLowerCase() &&
-                    item.on_request === true
-                )
-                .map((item) => item.id),
-            ],
-          },
-        },
-      }
-      setState(newInitialState)
+    if (!client || !client.student) {
+      return
     }
-  }, [client, dispatch])
+
+    const newInitialState: IData = {
+      ...state,
+      students: client.student,
+      columns: {
+        ...state.columns,
+        "column-1": {
+          ...state.columns[Columns.WaitingForAcall],
+          studentIds: [
+            ...filterStudentsByStatus(client.student, Columns.WaitingForAcall),
+          ],
+        },
+        "column-2": {
+          ...state.columns[Columns.CallCompleted],
+          studentIds: [
+            ...filterStudentsByStatus(client.student, Columns.CallCompleted),
+          ],
+        },
+        "column-3": {
+          ...state.columns[Columns.SignedUpForAtrialLesson],
+          studentIds: [
+            ...filterStudentsByStatus(
+              client.student,
+              Columns.SignedUpForAtrialLesson
+            ),
+          ],
+        },
+        "column-4": {
+          ...state.columns[Columns.AttendedATrialLesson],
+          studentIds: [
+            ...filterStudentsByStatus(
+              client.student,
+              Columns.AttendedATrialLesson
+            ),
+          ],
+        },
+      },
+    }
+
+    setState(newInitialState)
+  }, [client.student])
 
   const onDragEnd = (result: DropResult) => {
     const { source, destination } = result
-    console.log("Source", source)
-    console.log("Destination", destination)
 
     if (!destination) return
 
@@ -124,7 +123,6 @@ export const DragAndDrop: FC = () => {
 
     const sourceCol: IColumn = state.columns[source.droppableId]
     const destinationCol: IColumn = state.columns[destination.droppableId]
-    destinationCol.studentIds
 
     if (sourceCol.id === destinationCol.id) {
       const newColumn = reorderColumnList(
@@ -159,8 +157,8 @@ export const DragAndDrop: FC = () => {
       studentIds: endStudentIds,
     }
 
-    const removedStudent = state.students?.find((item) => {
-      if (item.id === removed) {
+    state.students?.find((student) => {
+      if (student.id === removed) {
         const {
           id,
           first_name,
@@ -175,7 +173,8 @@ export const DragAndDrop: FC = () => {
           status,
           paid,
           on_request,
-        } = item
+        } = student
+
         const updateStudentStatus: IUpdateStudent = {
           first_name,
           last_name,
@@ -198,16 +197,13 @@ export const DragAndDrop: FC = () => {
             name: state.columns[destination.droppableId].title,
           },
         }
-        console.log("update", updateStudentStatus)
 
         dispatch(fetchUpdateStudent({ id, updateStudentStatus }))
-        dispatch(fetchAllStudents())
       }
     })
 
     const newState: IData = {
       ...state,
-      // students: updatedStudents,
       columns: {
         ...state.columns,
         [newStartCol.id]: newStartCol,
@@ -215,41 +211,31 @@ export const DragAndDrop: FC = () => {
       },
     }
 
-    console.log(state.students?.find((item) => item.id === removed))
-    // const removedStudent = state.students?.find((item) => item.id === removed)
-    // removedStudent?.status?.name = ''
-
     setState(newState)
   }
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className={styles.content}>
-        {state.students ? (
-          <div className={styles.container}>
-            <>
-              {state?.columnOrder.map((columnId) => {
-                const column: IColumn = state?.columns[columnId]
-                const students: IStudent[] | undefined = column.studentIds.map(
-                  (studentId: number) =>
-                    state.students?.find((item) => item.id === studentId)
-                )
+        <div className={styles.container}>
+          <>
+            {state?.columnOrder.map((columnId) => {
+              const column: IColumn = state?.columns[columnId]
+              const students: IStudent[] | undefined = column.studentIds.map(
+                (studentId: number) =>
+                  state.students?.find((item) => item.id === studentId)
+              ) as IStudent[]
 
-                return (
-                  <Column
-                    key={column.id}
-                    column={column}
-                    students={students || []}
-                  />
-                )
-              })}
-            </>
-          </div>
-        ) : (
-          <div className={styles.alternativeContainer}>
-            <h1 className={styles.title}>Заявок пока нет</h1>
-          </div>
-        )}
+              return (
+                <Column
+                  key={column.id}
+                  column={column}
+                  students={students || []}
+                />
+              )
+            })}
+          </>
+        </div>
       </div>
     </DragDropContext>
   )
