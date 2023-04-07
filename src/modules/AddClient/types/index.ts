@@ -43,9 +43,6 @@ export interface ICreateStudent {
   department: ICreateDepartment
   came_from: ICreateSource
   payment_method?: ICreatePaymentMethod
-  paid: boolean
-  on_request: boolean
-  is_archive: boolean
 }
 
 export interface ICreateBaseStudent {

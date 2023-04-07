@@ -18,7 +18,8 @@ export const addClientSchema = Yup.object().shape({
     .max(30, 'Максимум 30 символа'),
   phone: Yup.string()
     .nullable()
-    .matches(/^\+996\d{9}$/, 'Введите верный номер'),
+    .matches(/^\+996\d{9}$/, 'Введите верный номер')
+    .required('Обязательное поле'),
   notes: Yup.string()
   .typeError('Должно быть строкой')
     .min(2, 'Минимум 2 символа')

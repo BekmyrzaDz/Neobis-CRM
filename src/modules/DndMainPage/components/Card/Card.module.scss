@@ -4,6 +4,7 @@
   background-color: $white-color;
   border-radius: 16px;
   transition: $tran-04;
+  min-height: 190px;
   &:hover {
     background-color: $count-gray-color;
   }

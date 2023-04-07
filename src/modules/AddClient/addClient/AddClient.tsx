@@ -93,6 +93,9 @@ export const AddClient: FC = () => {
     const changeValue = {
       ...value,
       laptop: value.laptop === "yes" ? true : false,
+      paid: false,
+      on_request: true,
+      is_archive: false,
     }
 
     dispatch(fetchCreateStudent(changeValue))
@@ -115,9 +118,6 @@ export const AddClient: FC = () => {
     payment_method: {
       name: "",
     },
-    paid: false,
-    on_request: true,
-    is_archive: false,
   }
 
   return (
