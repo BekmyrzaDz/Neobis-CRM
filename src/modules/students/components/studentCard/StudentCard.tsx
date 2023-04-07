@@ -15,7 +15,7 @@ interface IStudentCardProps {
   phone: string
   department: string
   came_from: string
-  payment_status: string
+  payment_status: string | number
 }
 
 const StudentCard: FC<IStudentCardProps> = ({
@@ -89,15 +89,15 @@ const StudentCard: FC<IStudentCardProps> = ({
   let paydClass
   let payment_status_value
   switch (payment_status) {
-    case '1':
+    case 1:
       paydClass = `${styles.payStatus} ${styles.paidSpan}`
       payment_status_value = 'Оплачено'
       break
-    case '2':
+    case 2:
       paydClass = `${styles.payStatus} ${styles.mustPaySpan}`
       payment_status_value = 'Должен оплатить'
       break
-    case '3':
+    case 3:
       paydClass = `${styles.payStatus} ${styles.soonPaySpan}`
       payment_status_value = 'Скоро оплата'
       break

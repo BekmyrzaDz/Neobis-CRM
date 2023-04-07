@@ -84,6 +84,7 @@ const StudentsPage = () => {
     useState('Студенты')
   const [departmentFilter, setDepartmentFilter] = useState('')
   const [modalActive, setModalActive]: ModalState = useState(false)
+  const [crudMode, setCrudMode] = useState('')
 
   const auth = useAppSelector((state) => state.auth)
   const profile = useAppSelector((state) => state.profile)
@@ -97,7 +98,6 @@ const StudentsPage = () => {
   const isProfileSuccess = profile.isSuccess
   const { isSuccess, isLoading } = study
   const studentsOnStudy = study.studentsOnStudy
-
   useEffect(() => {
     if (authUserId !== undefined) {
       dispatch(getProfileById(authUserId))
@@ -122,6 +122,11 @@ const StudentsPage = () => {
     setModalActive((prev) => !prev)
   }, [])
 
+  const onAddStudent = useCallback(() => {
+    setModalActive((prev) => !prev)
+    setCrudMode('newStudent')
+  }, [])
+
   if (isLoading) {
     return <Spinner />
   }
@@ -141,7 +146,7 @@ const StudentsPage = () => {
             <IconButton
               text={'Добавить студента'}
               icon={plusIcon}
-              onClick={onToggleModal}
+              onClick={onAddStudent}
             />
           ) : (
             <IconButton
@@ -174,20 +179,23 @@ const StudentsPage = () => {
 
       <div className={styles.content}>
         {activeOption === 'Студенты' ? (
-          studentsOnStudy.map((student) => {
-            return (
-              <StudentCard
-                key={student.phone}
-                id={student.id}
-                first_name={student.first_name}
-                last_name={student.last_name}
-                phone={student.phone}
-                department={student.department.name}
-                came_from={student.came_from.name}
-                payment_status={student.payment_status}
-              />
-            )
-          })
+          studentsOnStudy
+            .slice()
+            .reverse()
+            .map((student) => {
+              return (
+                <StudentCard
+                  key={student.phone}
+                  id={student.id}
+                  first_name={student.first_name}
+                  last_name={student.last_name}
+                  phone={student.phone}
+                  department={student.department.name}
+                  came_from={student.came_from.name}
+                  payment_status={student.payment_status}
+                />
+              )
+            })
         ) : (
           <>
             <GroupCard />
@@ -202,7 +210,15 @@ const StudentsPage = () => {
         )}
       </div>
       <Modal active={modalActive} setActive={setModalActive}>
-        {activeOption === 'Студенты' ? <StudentForm /> : <GroupForm />}
+        {activeOption === 'Студенты' ? (
+          <StudentForm
+            setModalActive={setModalActive}
+            departmentFilter={departmentFilter}
+            crudMode={crudMode}
+          />
+        ) : (
+          <GroupForm />
+        )}
       </Modal>
     </div>
   )

@@ -13,8 +13,8 @@ const departments: Option[] = [
   { key: 'Олимп. программирование', value: 'olimped_programming' },
 ]
 
-// Options for source select
-const source: Option[] = [
+// Options for came_from select
+const came_from: Option[] = [
   { key: 'Выберите источник', value: '' },
   { key: 'Через инстаграм', value: 'from_instagram' },
   { key: 'Через сайт ', value: 'from_website' },
@@ -24,16 +24,15 @@ const source: Option[] = [
 
 // Options for laptop select
 const laptop: Option[] = [
-  { key: 'Выбрать', value: false },
   { key: 'Да', value: true },
   { key: 'Нет', value: false },
 ]
 
 // Options for paymant status select
-const paymantStatus: Option[] = [
+const payment_status: Option[] = [
   { key: 'Оплачено', value: 1 },
   { key: 'Должен оплатить', value: 2 },
   { key: 'Скоро оплата', value: 3 },
 ]
 
-export { departments, source, laptop, paymantStatus }
+export { departments, came_from, laptop, payment_status }
