@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import { FC } from "react"
+import { FC, useState } from "react"
 import { Draggable } from "react-beautiful-dnd"
 import ClockTimeSvgComponent from "../Svg/ClockTimeSvgComponent"
 import instagram from "../../assets/image/instagram.svg"
@@ -7,6 +7,8 @@ import { IDepartment, ISource, IStudent } from "../../types"
 import styles from "./Card.module.scss"
 import { renderImg } from "../../helpers/renderImg"
 import { switchDepartmentName } from "../../helpers/switchDepartmentName"
+import Button from "../IconButton/Button"
+import { check, close } from "../../assets"
 
 interface Props {
   student: IStudent
@@ -15,6 +17,7 @@ interface Props {
 
 function Card<T>(props: Props) {
   const { student, isDragging } = props
+  const [color, setColor] = useState("")
 
   const directionClasses = clsx(styles.directionUxUi, {
     [styles.directionFront]:
@@ -73,7 +76,10 @@ function Card<T>(props: Props) {
               <div className={styles.icon}>
                 {renderImg(student?.came_from?.name)}
               </div>
-              {/* <span>{student?.came_from?.name}</span> */}
+            </div>
+            <div className={styles.deal}>
+              <Button icon={check} color="#756FB3" />
+              <Button icon={close} color="#D74245" />
             </div>
           </div>
         </div>

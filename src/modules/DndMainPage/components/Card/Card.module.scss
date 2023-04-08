@@ -7,6 +7,9 @@
   min-height: 190px;
   &:hover {
     background-color: $count-gray-color;
+    .fill {
+      background-color: #00a64e;
+    }
   }
 }
 
@@ -118,6 +121,7 @@
 .way {
   border-radius: 12px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   .icon {
     margin-right: 10px;
@@ -134,4 +138,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.deal {
+  display: flex;
+  gap: 8px;
 }
