@@ -3,7 +3,7 @@ import { Option } from '../../../components/Select/MySelect.props'
 // Options for departments select
 const departments: Option[] = [
   { key: 'Выберите департамент', value: '' },
-  { key: 'UX/UI', value: 'ux/ui' },
+  { key: 'UX/UI', value: 'ux-ui' },
   { key: 'Front-end', value: 'front-end' },
   { key: 'PM', value: 'pm' },
   { key: 'Back-end', value: 'back-end' },

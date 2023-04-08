@@ -6,31 +6,13 @@
   background-color: #fff;
   border-radius: 20px;
   & > .header {
-    display: flex;
-    align-items: center;
-    gap: 138px;
     margin-bottom: 34px;
-    & > .left {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      & > h3 {
-        font-style: normal;
-        font-weight: 600;
-        font-size: 24px;
-        line-height: 32px;
-        color: $black-color;
-      }
-      & > span {
-        padding: 10px 16px;
-        background: #e5e5e5;
-        border-radius: 16px;
-        font-style: normal;
-        font-weight: 350;
-        font-size: 14px;
-        line-height: 19px;
-        color: $auth-black-color;
-      }
+    & > h3 {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 32px;
+      color: $black-color;
     }
   }
 
@@ -59,20 +41,5 @@
     margin-top: 28px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    .blackListBtn {
-      background-color: #252525;
-    }
-    .deleteBtn {
-      background-color: #ebeaf8;
-      color: #d74245;
-      border: 2px solid #d74245;
-    }
   }
-}
-
-.archiveBtn {
-  background-color: #ebeaf8;
-  color: $violet-color;
-  padding: 9px 13px;
 }

@@ -84,7 +84,6 @@ const StudentsPage = () => {
     useState('Студенты')
   const [departmentFilter, setDepartmentFilter] = useState('')
   const [modalActive, setModalActive]: ModalState = useState(false)
-  const [crudMode, setCrudMode] = useState('')
 
   const auth = useAppSelector((state) => state.auth)
   const profile = useAppSelector((state) => state.profile)
@@ -124,7 +123,6 @@ const StudentsPage = () => {
 
   const onAddStudent = useCallback(() => {
     setModalActive((prev) => !prev)
-    setCrudMode('newStudent')
   }, [])
 
   if (isLoading) {
@@ -214,7 +212,6 @@ const StudentsPage = () => {
           <StudentForm
             setModalActive={setModalActive}
             departmentFilter={departmentFilter}
-            crudMode={crudMode}
           />
         ) : (
           <GroupForm />

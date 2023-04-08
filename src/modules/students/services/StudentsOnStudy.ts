@@ -2,6 +2,7 @@ import axios from 'axios'
 import {
   ICreateStudentonStudy,
   IGetAllStudentsOnStudy,
+  IGetStudentsOnStudyById,
   IStudentOnStudy,
 } from '../types'
 // import $api from '../../../http'
@@ -15,6 +16,20 @@ const getStudentsOnStudy = async ({
   departmentFilter,
 }: IGetAllStudentsOnStudy): Promise<IStudentOnStudy[]> => {
   const response = await axios.get(API_URL + departmentFilter, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  return response.data
+}
+
+// Get student o
+const getStudentOnStudyById = async ({
+  token,
+  id,
+}: IGetStudentsOnStudyById): Promise<IStudentOnStudy> => {
+  const response = await axios.get(API_URL + id, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -66,6 +81,7 @@ const createStudentOnStudy = async ({
 const studentsOnStudyService = {
   getStudentsOnStudy,
   createStudentOnStudy,
+  getStudentOnStudyById,
 }
 
 export default studentsOnStudyService

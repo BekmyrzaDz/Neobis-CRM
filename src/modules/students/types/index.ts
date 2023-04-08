@@ -37,6 +37,12 @@ export interface IGetAllStudentsOnStudy {
   departmentFilter: string
 }
 
+// get all student by ID
+export interface IGetStudentsOnStudyById {
+  token: string
+  id?: string
+}
+
 // Create student on study POST
 export interface ICreateStudentonStudy {
   token: string

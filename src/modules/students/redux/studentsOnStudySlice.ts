@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { IStudentOnStudy, IStudentOnStudyState } from '../types'
-import { createStudentOnStudy, getStudentsOnStudy } from './asyncActions'
+import {
+  createStudentOnStudy,
+  getStudentOnStudyById,
+  getStudentsOnStudy,
+} from './asyncActions'
 
 const initialState: IStudentOnStudyState = {
   studentsOnStudy: [],
@@ -50,6 +54,22 @@ export const studentsOnStudySlice = createSlice({
         }
       )
       .addCase(createStudentOnStudy.rejected, (state) => {
+        state.isLoading = false
+        state.isError = true
+        state.studentOnStudy = {}
+      })
+      .addCase(getStudentOnStudyById.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(
+        getStudentOnStudyById.fulfilled,
+        (state, action: PayloadAction<IStudentOnStudy>) => {
+          state.isLoading = false
+          state.isSuccess = true
+          state.studentOnStudy = action.payload
+        }
+      )
+      .addCase(getStudentOnStudyById.rejected, (state) => {
         state.isLoading = false
         state.isError = true
         state.studentOnStudy = {}

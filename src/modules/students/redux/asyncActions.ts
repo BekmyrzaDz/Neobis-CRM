@@ -6,6 +6,7 @@ import studentsOnStudyService from '../services/StudentsOnStudy'
 import {
   ICreateStudentonStudy,
   IGetAllStudentsOnStudy,
+  IGetStudentsOnStudyById,
   IStudentOnStudy,
 } from '../types'
 
@@ -42,6 +43,37 @@ export const getStudentsOnStudy = createAsyncThunk<
     }
   }
 )
+
+// Get student on study by ID
+export const getStudentOnStudyById = createAsyncThunk<
+  IStudentOnStudy,
+  IGetStudentsOnStudyById,
+  { rejectValue: string }
+>('studentsOnStudy/getStudentOnStudyById', async ({ token, id }, thunkAPI) => {
+  try {
+    const response = await studentsOnStudyService.getStudentOnStudyById({
+      token,
+      id,
+    })
+    return response
+  } catch (error: unknown) {
+    if (typeof error === 'string') {
+      toast.error(error)
+      return thunkAPI.rejectWithValue(error)
+    }
+    if (error instanceof AxiosError) {
+      const message =
+        (error.response &&
+          error.response?.data &&
+          error.response?.data?.message) ||
+        error.message ||
+        error.toString()
+      toast.error(message)
+      return thunkAPI.rejectWithValue(message)
+    }
+    throw error
+  }
+})
 
 // Create student on study
 export const createStudentOnStudy = createAsyncThunk<

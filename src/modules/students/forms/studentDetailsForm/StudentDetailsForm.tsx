@@ -4,6 +4,9 @@ import { StudentSchema } from '../../schema/studentSchema'
 import MySelect from '../../../../components/Select/MySelect'
 import MyTextarea from '../../../../components/Textarea/MyTextarea'
 import IconButton from '../../../../components/iconButton/IconButton'
+import busketIcon from '../../assets/icons/busket.svg'
+import blackListIcon from '../../assets/icons/blackList.svg'
+import deleteIcon from '../../assets/icons/delete.svg'
 import {
   departments,
   laptop,
@@ -11,13 +14,11 @@ import {
   came_from,
 } from '../../selectOptions/studentFormOptions'
 
-import styles from './StudentForm.module.scss'
+import styles from './StudentDetailsForm.module.scss'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
-import {
-  createStudentOnStudy,
-  getStudentsOnStudy,
-} from '../../redux/asyncActions'
-import { Dispatch, FC, SetStateAction } from 'react'
+import { useEffect } from 'react'
+import { getStudentOnStudyById } from '../../redux/asyncActions'
+import { useParams } from 'react-router-dom'
 
 interface IInitialValues {
   first_name: string
@@ -31,75 +32,50 @@ interface IInitialValues {
   payment_status: number
 }
 
-interface StudentFormProps {
-  setModalActive: Dispatch<SetStateAction<boolean>>
-  departmentFilter: string
-}
-
-const StudentForm: FC<StudentFormProps> = ({
-  setModalActive,
-  departmentFilter,
-}) => {
+const StudentDetailsForm = () => {
   const dispatch = useAppDispatch()
-  const auth = useAppSelector((state) => state.auth)
-  const token = auth.user?.access!
+  const token = useAppSelector((state) => state.auth.user?.access!)
+  const { id } = useParams()
+  const student = useAppSelector(
+    (state) => state.studentsOnStudy.studentOnStudy
+  )
+
+  useEffect(() => {
+    dispatch(getStudentOnStudyById({ token, id }))
+  }, [dispatch, token, id])
 
   const initialValues: IInitialValues = {
-    first_name: '',
-    last_name: '',
-    surname: '',
-    phone: '',
-    came_from: '',
-    department: '',
-    laptop: true,
-    notes: '',
-    payment_status: 1,
-  }
-
-  const onSubmit = async (values: IInitialValues) => {
-    const {
-      first_name,
-      last_name,
-      surname,
-      phone,
-      came_from,
-      department,
-      laptop,
-      notes,
-      payment_status,
-    } = values
-    try {
-      await dispatch(
-        createStudentOnStudy({
-          token,
-          first_name,
-          last_name,
-          surname,
-          phone,
-          came_from: { name: came_from },
-          department: { name: department },
-          on_request: false,
-          is_archive: false,
-          laptop: Boolean(laptop),
-          notes,
-          payment_status: +payment_status,
-        })
-      )
-      await dispatch(getStudentsOnStudy({ token, departmentFilter }))
-
-      setModalActive(false)
-    } catch (error) {}
+    first_name: student.first_name || '',
+    last_name: student.last_name || '',
+    surname: student.surname || '',
+    phone: student.phone || '',
+    came_from: student.came_from?.name || '',
+    department: student.department?.name || '',
+    laptop: student.laptop || true,
+    notes: student.notes || '',
+    payment_status: student.payment_status || 1,
   }
 
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={StudentSchema}
-      onSubmit={onSubmit}
+      enableReinitialize={true}
+      onSubmit={(values) => console.log(JSON.stringify(values, null, 2))}
     >
       <Form className={styles.form}>
         <div className={styles.header}>
-          <h3>Карточка студента</h3>
+          <div className={styles.left}>
+            <h3>Карточка студента</h3>
+            <span>{id}</span>
+          </div>
+
+          <IconButton
+            text={'Архивировать'}
+            icon={busketIcon}
+            className={styles.archiveBtn}
+            type={'button'}
+          />
         </div>
         <MySelect
           label='Департамент*'
@@ -171,10 +147,22 @@ const StudentForm: FC<StudentFormProps> = ({
         </div>
         <div className={styles.btns}>
           <IconButton text={'Сохранить изменения'} type={'submit'} />
+          <IconButton
+            text={'Удалить студента'}
+            icon={deleteIcon}
+            className={styles.deleteBtn}
+            type={'button'}
+          />
+          <IconButton
+            text={'Добавить в черный список'}
+            icon={blackListIcon}
+            className={styles.blackListBtn}
+            type={'button'}
+          />
         </div>
       </Form>
     </Formik>
   )
 }
 
-export default StudentForm
+export default StudentDetailsForm

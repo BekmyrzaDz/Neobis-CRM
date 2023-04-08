@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   payd,
   instagram,
@@ -8,6 +9,7 @@ import {
 } from '../../assets/icons'
 
 import styles from './StudentCard.module.scss'
+
 interface IStudentCardProps {
   id: number
   first_name: string
@@ -27,6 +29,8 @@ const StudentCard: FC<IStudentCardProps> = ({
   came_from,
   payment_status,
 }) => {
+  const navigate = useNavigate()
+
   // source icon render
   let source
   switch (came_from) {
@@ -107,7 +111,7 @@ const StudentCard: FC<IStudentCardProps> = ({
   }
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={() => navigate(`/students/${id}`)}>
       <div className={styles.paid}>
         <img src={payd} alt='payd' />
         <span className={paydClass}>{payment_status_value}</span>

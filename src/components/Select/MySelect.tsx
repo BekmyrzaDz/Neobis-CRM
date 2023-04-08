@@ -12,7 +12,7 @@ const MySelect: FC<SelectProps> = ({ label, options, className, ...props }) => {
     <div className={clsx(styles.wrapper, className)}>
       <label htmlFor={props.name}>{label}</label>
       <select className={styles.select} {...props} {...field}>
-        {options.map((option, index) => {
+        {options && options.map((option, index) => {
           return (
             <option key={index} value={option.value}>
               {option.key}
