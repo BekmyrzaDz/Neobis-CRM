@@ -6,17 +6,25 @@ interface Props {
   icon: string
   color?: string
   hoverColor?: string
+  isDragging?: boolean
 }
 
-const Button: FC<Props> = ({ icon, color, hoverColor, ...props }) => {
+const Button: FC<Props> = ({
+  icon,
+  color,
+  hoverColor,
+  isDragging,
+  ...props
+}) => {
   const buttonDefaultColors = clsx(styles.fill, {
     [styles.violet]: color?.toLowerCase() === "violet",
     [styles.red]: color?.toLowerCase() === "red",
     [styles.green]: hoverColor?.toLowerCase() === "green",
+    [styles.greenIsDragging]: isDragging,
   })
 
-  const buttonHoverColors = clsx(styles.fill, {
-    [styles.green]: hoverColor?.toLowerCase() === "green",
+  const buttonDraggingColors = clsx(styles.fill, {
+    [styles.greenIsDragging]: isDragging,
   })
 
   return (

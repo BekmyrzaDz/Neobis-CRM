@@ -88,7 +88,12 @@ function Card<T>(props: Props) {
               </div>
             </div>
             <div className={styles.deal}>
-              <Button icon={check} color={`violet`} hoverColor={color} />
+              <Button
+                icon={check}
+                color={`violet`}
+                hoverColor={color}
+                isDragging={isDragging}
+              />
               <Button icon={close} color={`red`} />
             </div>
           </div>
