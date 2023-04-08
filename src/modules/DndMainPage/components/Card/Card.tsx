@@ -1,9 +1,7 @@
 import clsx from "clsx"
 import { FC, useState } from "react"
-import { Draggable } from "react-beautiful-dnd"
 import ClockTimeSvgComponent from "../Svg/ClockTimeSvgComponent"
-import instagram from "../../assets/image/instagram.svg"
-import { IDepartment, ISource, IStudent } from "../../types"
+import { IStudent } from "../../types"
 import styles from "./Card.module.scss"
 import { renderImg } from "../../helpers/renderImg"
 import { switchDepartmentName } from "../../helpers/switchDepartmentName"
@@ -17,7 +15,7 @@ interface Props {
 
 function Card<T>(props: Props) {
   const { student, isDragging } = props
-  const [color, setColor] = useState("")
+  const [color, setColor] = useState<string>("")
 
   const directionClasses = clsx(styles.directionUxUi, {
     [styles.directionFront]:
@@ -34,7 +32,7 @@ function Card<T>(props: Props) {
       student?.department?.name.toLowerCase() === "Flutter".toLowerCase(),
     [styles.directionOlimp]:
       student?.department?.name.toLowerCase() ===
-      "Olimped programming".toLowerCase(),
+      "Olimped_programming".toLowerCase(),
   })
 
   // const cardClasses = clsx(styles.card, {
@@ -45,12 +43,24 @@ function Card<T>(props: Props) {
     [styles.idDrag]: isDragging,
   })
 
+  const handleMouseEnter = () => {
+    setColor("green")
+  }
+
+  const handleMouseLeave = () => {
+    setColor("")
+  }
+
   // const date = new Date(student.request_date as string)
   // const today = new Date()
   // const deadline = new Date(student.request_date as string)
 
   return (
-    <div className={styles.card}>
+    <div
+      className={styles.card}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className={styles.cardInner}>
         <div className={styles.cardTop}>
           <div className={styles.clock}>
@@ -78,8 +88,8 @@ function Card<T>(props: Props) {
               </div>
             </div>
             <div className={styles.deal}>
-              <Button icon={check} color="#756FB3" />
-              <Button icon={close} color="#D74245" />
+              <Button icon={check} color={`violet`} hoverColor={color} />
+              <Button icon={close} color={`red`} />
             </div>
           </div>
         </div>
