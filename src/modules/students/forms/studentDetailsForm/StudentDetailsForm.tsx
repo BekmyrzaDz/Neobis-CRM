@@ -16,8 +16,11 @@ import {
 
 import styles from './StudentDetailsForm.module.scss'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
-import { useEffect } from 'react'
-import { getStudentOnStudyById } from '../../redux/asyncActions'
+import { Dispatch, FC, SetStateAction, useEffect } from 'react'
+import {
+  editStudentOnStudyById,
+  getStudentOnStudyById,
+} from '../../redux/asyncActions'
 import { useParams } from 'react-router-dom'
 
 interface IInitialValues {
@@ -25,24 +28,32 @@ interface IInitialValues {
   last_name: string
   surname: string
   phone: string
-  came_from: string
-  department: string
-  laptop: boolean
-  notes: string
-  payment_status: number
+  came_from?: {
+    id: number
+    name: string
+  }
+  department?: {
+    id: number
+    name: string
+  }
+  laptop?: boolean
+  notes?: string
+  payment_status?: number
 }
 
-const StudentDetailsForm = () => {
+interface StudentDetailsFormProps {
+  setModalActive: Dispatch<SetStateAction<boolean>>
+}
+
+const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
+  setModalActive,
+}) => {
   const dispatch = useAppDispatch()
   const token = useAppSelector((state) => state.auth.user?.access!)
   const { id } = useParams()
   const student = useAppSelector(
     (state) => state.studentsOnStudy.studentOnStudy
   )
-
-  useEffect(() => {
-    dispatch(getStudentOnStudyById({ token, id }))
-  }, [dispatch, token, id])
 
   const initialValues: IInitialValues = {
     first_name: student.first_name || '',
@@ -56,12 +67,50 @@ const StudentDetailsForm = () => {
     payment_status: student.payment_status || 1,
   }
 
+  useEffect(() => {
+    dispatch(getStudentOnStudyById({ token, id }))
+  }, [dispatch, token, id])
+
+  const onSubmit = (values: IInitialValues) => {
+    const {
+      first_name,
+      last_name,
+      surname,
+      phone,
+      came_from,
+      department,
+      laptop,
+      notes,
+      payment_status,
+    } = values
+
+    dispatch(
+      editStudentOnStudyById({
+        token,
+        id,
+        first_name,
+        last_name,
+        surname,
+        phone,
+        came_from: { name: came_from },
+        department: { name: department },
+        on_request: false,
+        is_archive: false,
+        laptop: Boolean(laptop),
+        notes,
+        payment_status: +payment_status,
+      })
+    )
+
+    setModalActive(false)
+  }
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={StudentSchema}
       enableReinitialize={true}
-      onSubmit={(values) => console.log(JSON.stringify(values, null, 2))}
+      onSubmit={onSubmit}
     >
       <Form className={styles.form}>
         <div className={styles.header}>

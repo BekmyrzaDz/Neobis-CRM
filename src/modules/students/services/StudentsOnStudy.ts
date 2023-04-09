@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {
   ICreateStudentonStudy,
+  IEditStudentonStudy,
   IGetAllStudentsOnStudy,
   IGetStudentsOnStudyById,
   IStudentOnStudy,
@@ -24,7 +25,7 @@ const getStudentsOnStudy = async ({
   return response.data
 }
 
-// Get student o
+// Get student on study by ID
 const getStudentOnStudyById = async ({
   token,
   id,
@@ -78,10 +79,52 @@ const createStudentOnStudy = async ({
   return response.data
 }
 
+// Edit student on study by ID
+const editStudentOnStudyById = async ({
+  token,
+  id,
+  first_name,
+  last_name,
+  surname,
+  phone,
+  came_from,
+  department,
+  on_request,
+  is_archive,
+  laptop,
+  payment_status,
+  notes,
+}: IEditStudentonStudy): Promise<IStudentOnStudy> => {
+  const response = await axios.put(
+    API_URL + id + '/',
+    {
+      first_name,
+      last_name,
+      surname,
+      phone,
+      came_from,
+      department,
+      on_request,
+      is_archive,
+      laptop,
+      payment_status,
+      notes,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  )
+
+  return response.data
+}
+
 const studentsOnStudyService = {
   getStudentsOnStudy,
   createStudentOnStudy,
   getStudentOnStudyById,
+  editStudentOnStudyById,
 }
 
 export default studentsOnStudyService

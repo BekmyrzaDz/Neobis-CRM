@@ -7,27 +7,23 @@ export interface IStudentOnStudyState {
   isError: boolean
 }
 
-export type TDepartment = {
-  name: string
-}
-
-export type TCameFrom = {
-  id: number
-  name: string
-}
-
 export interface IStudentOnStudy {
   id: number
   first_name: string
   last_name: string
   surname: string
   phone: string
-  came_from: TCameFrom
-  department: TDepartment
+  came_from: {
+    id: number
+    name: string
+  }
+  department: {
+    name: string
+  }
   on_request: boolean
   is_archive: boolean
   laptop: boolean
-  payment_status: string
+  payment_status: number
   notes: string
 }
 
@@ -61,4 +57,9 @@ export interface ICreateStudentonStudy {
   laptop: boolean
   payment_status: number
   notes: string
+}
+
+// Edit student on study POST
+export interface IEditStudentonStudy extends ICreateStudentonStudy {
+  id: number
 }

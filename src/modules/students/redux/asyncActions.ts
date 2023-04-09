@@ -5,6 +5,7 @@ import { AxiosError } from 'axios'
 import studentsOnStudyService from '../services/StudentsOnStudy'
 import {
   ICreateStudentonStudy,
+  IEditStudentonStudy,
   IGetAllStudentsOnStudy,
   IGetStudentsOnStudyById,
   IStudentOnStudy,
@@ -118,6 +119,71 @@ export const createStudentOnStudy = createAsyncThunk<
         toast.success('Новый студент успешно создан')
       }
       return response[0]
+    } catch (error: unknown) {
+      if (typeof error === 'string') {
+        toast.error(error)
+        return thunkAPI.rejectWithValue(error)
+      }
+      if (error instanceof AxiosError) {
+        const message =
+          (error.response &&
+            error.response?.data &&
+            error.response?.data?.message) ||
+          error.message ||
+          error.toString()
+        toast.error(message)
+        return thunkAPI.rejectWithValue(message)
+      }
+      throw error
+    }
+  }
+)
+
+// Create student on study
+export const editStudentOnStudyById = createAsyncThunk<
+  IStudentOnStudy,
+  IEditStudentonStudy,
+  { rejectValue: string }
+>(
+  'studentsOnStudy/editStudentOnStudyById',
+  async (
+    {
+      token,
+      id,
+      first_name,
+      last_name,
+      surname,
+      phone,
+      came_from,
+      department,
+      on_request,
+      is_archive,
+      laptop,
+      payment_status,
+      notes,
+    },
+    thunkAPI
+  ) => {
+    try {
+      const response = await studentsOnStudyService.editStudentOnStudyById({
+        token,
+        id,
+        first_name,
+        last_name,
+        surname,
+        phone,
+        came_from,
+        department,
+        on_request,
+        is_archive,
+        laptop,
+        payment_status,
+        notes,
+      })
+      if (response) {
+        toast.success('Данные успешно обновлены')
+      }
+      return response
     } catch (error: unknown) {
       if (typeof error === 'string') {
         toast.error(error)
