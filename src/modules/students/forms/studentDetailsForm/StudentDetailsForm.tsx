@@ -18,6 +18,7 @@ import styles from './StudentDetailsForm.module.scss'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
 import { Dispatch, FC, SetStateAction, useEffect } from 'react'
 import {
+  deleteStudentOnStudyById,
   editStudentOnStudyById,
   getStudentOnStudyById,
 } from '../../redux/asyncActions'
@@ -52,7 +53,7 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
   const token = useAppSelector((state) => state.auth.user?.access!)
   const { id } = useParams()
   const student = useAppSelector(
-    (state) => state.studentsOnStudy.studentOnStudy
+    (state) => state.studentsOnStudy.studentOnStudy!
   )
 
   const initialValues: IInitialValues = {
@@ -105,6 +106,60 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
     setModalActive(false)
   }
 
+  const onArchive = (values: IInitialValues) => {
+    const {
+      first_name,
+      last_name,
+      surname,
+      phone,
+      came_from,
+      department,
+      laptop,
+      notes,
+      payment_status,
+    } = values
+
+    if (
+      window.confirm(
+        `Вы действительно хотите архивировать ${first_name} ${last_name}?`
+      )
+    ) {
+      dispatch(
+        editStudentOnStudyById({
+          token,
+          id,
+          first_name,
+          last_name,
+          surname,
+          phone,
+          came_from: { name: came_from },
+          department: { name: department },
+          on_request: false,
+          is_archive: true,
+          laptop: Boolean(laptop),
+          notes,
+          payment_status: +payment_status,
+        })
+      )
+
+      setModalActive(false)
+    }
+  }
+
+  const onDelete = (values: IInitialValues) => {
+    const { first_name, last_name } = values
+
+    if (
+      window.confirm(
+        `Вы действительно хотите удалить ${first_name} ${last_name}?`
+      )
+    ) {
+      dispatch(deleteStudentOnStudyById({ token, id }))
+
+      setModalActive(false)
+    }
+  }
+
   return (
     <Formik
       initialValues={initialValues}
@@ -124,6 +179,7 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
             icon={busketIcon}
             className={styles.archiveBtn}
             type={'button'}
+            onClick={() => onArchive(initialValues)}
           />
         </div>
         <MySelect
@@ -201,6 +257,7 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
             icon={deleteIcon}
             className={styles.deleteBtn}
             type={'button'}
+            onClick={() => onDelete(initialValues)}
           />
           <IconButton
             text={'Добавить в черный список'}

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {
   ICreateStudentonStudy,
+  IDeleteStudentsOnStudyById,
   IEditStudentonStudy,
   IGetAllStudentsOnStudy,
   IGetStudentsOnStudyById,
@@ -120,11 +121,26 @@ const editStudentOnStudyById = async ({
   return response.data
 }
 
+// Delete student on study by ID
+const deleteStudentOnStudyById = async ({
+  token,
+  id,
+}: IDeleteStudentsOnStudyById): Promise<string> => {
+  const response = await axios.delete(API_URL + id + '/', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  return response.data
+}
+
 const studentsOnStudyService = {
   getStudentsOnStudy,
   createStudentOnStudy,
   getStudentOnStudyById,
   editStudentOnStudyById,
+  deleteStudentOnStudyById,
 }
 
 export default studentsOnStudyService

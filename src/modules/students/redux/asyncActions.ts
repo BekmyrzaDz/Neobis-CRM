@@ -5,6 +5,7 @@ import { AxiosError } from 'axios'
 import studentsOnStudyService from '../services/StudentsOnStudy'
 import {
   ICreateStudentonStudy,
+  IDeleteStudentsOnStudyById,
   IEditStudentonStudy,
   IGetAllStudentsOnStudy,
   IGetStudentsOnStudyById,
@@ -32,6 +33,7 @@ export const getStudentsOnStudy = createAsyncThunk<
       }
       if (error instanceof AxiosError) {
         const message =
+          error.response?.data?.detail ||
           (error.response &&
             error.response?.data &&
             error.response?.data?.message) ||
@@ -64,6 +66,7 @@ export const getStudentOnStudyById = createAsyncThunk<
     }
     if (error instanceof AxiosError) {
       const message =
+        error.response?.data?.detail ||
         (error.response &&
           error.response?.data &&
           error.response?.data?.message) ||
@@ -126,6 +129,8 @@ export const createStudentOnStudy = createAsyncThunk<
       }
       if (error instanceof AxiosError) {
         const message =
+          error.response?.data?.detail ||
+          error.response?.data?.phone[0] || 
           (error.response &&
             error.response?.data &&
             error.response?.data?.message) ||
@@ -139,7 +144,7 @@ export const createStudentOnStudy = createAsyncThunk<
   }
 )
 
-// Create student on study
+// Edit student on study
 export const editStudentOnStudyById = createAsyncThunk<
   IStudentOnStudy,
   IEditStudentonStudy,
@@ -191,11 +196,45 @@ export const editStudentOnStudyById = createAsyncThunk<
       }
       if (error instanceof AxiosError) {
         const message =
+          error.response?.data?.detail ||
           (error.response &&
             error.response?.data &&
             error.response?.data?.message) ||
           error.message ||
           error.toString()
+        toast.error(message)
+        return thunkAPI.rejectWithValue(message)
+      }
+      throw error
+    }
+  }
+)
+
+// Delete student on study by ID
+export const deleteStudentOnStudyById = createAsyncThunk<
+  string,
+  IDeleteStudentsOnStudyById,
+  { rejectValue: string }
+>(
+  'studentsOnStudy/deleteStudentOnStudyById',
+  async ({ token, id }, thunkAPI) => {
+    try {
+      const response = await studentsOnStudyService.deleteStudentOnStudyById({
+        token,
+        id,
+      })
+      toast.success('Пользователь успешно удален')
+      return response
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        const message =
+          error.response?.data?.detail ||
+          (error.response &&
+            error.response?.data &&
+            error.response?.data?.message) ||
+          error.message ||
+          error.toString() ||
+          error.response?.data.details
         toast.error(message)
         return thunkAPI.rejectWithValue(message)
       }

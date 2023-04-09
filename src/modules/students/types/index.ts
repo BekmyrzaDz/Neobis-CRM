@@ -32,8 +32,14 @@ export interface IGetAllStudentsOnStudy {
   departmentFilter: string
 }
 
-// get all student by ID
+// get student by ID
 export interface IGetStudentsOnStudyById {
+  token: string
+  id?: string
+}
+
+// delete student by ID
+export interface IDeleteStudentsOnStudyById {
   token: string
   id?: string
 }
@@ -58,7 +64,7 @@ export interface ICreateStudentonStudy {
   notes: string
 }
 
-// Edit student on study POST
+// Edit student on study
 export interface IEditStudentonStudy extends ICreateStudentonStudy {
   id: number
 }
