@@ -18,10 +18,10 @@ import {
   source,
 } from "../selectOptions/clientFormOptions"
 import MyTextarea from "../../../components/Textarea/MyTextarea"
+import IconButton from "../../../components/iconButton/IconButton"
 
 export const AddClient: FC = () => {
   const dispatch = useAppDispatch()
-  const state = useAppSelector((state) => state.addClient)
 
   const [modalActive, setModalActive] = useState<boolean>(false)
 
@@ -74,12 +74,6 @@ export const AddClient: FC = () => {
           <Form className={styles.form}>
             <div className={styles.top}>
               <p className={styles.title}>Создание заявки</p>
-              {/* <img
-                className={styles.left}
-                src={left}
-                alt="icon left"
-                onClick={() => setModalActive(false)}
-              /> */}
             </div>
             <div className={styles.content}>
               <div className={styles.department}>
@@ -99,13 +93,6 @@ export const AddClient: FC = () => {
                     type="text"
                     placeholder="Имя"
                     className={styles.firstName}
-                  />
-                  <Input
-                    label="Отчество*"
-                    id="surname"
-                    name="surname"
-                    type="text"
-                    placeholder="Отчество"
                   />
                 </div>
                 <div className={styles.columnTwo}>
@@ -153,7 +140,9 @@ export const AddClient: FC = () => {
                 <MyTextarea label="Заметки" id="notes" name="notes" />
               </div>
             </div>
-            <ModalButton type="submit" name="Создать заявку" />
+            <div className={styles.btns}>
+              <IconButton text="Создать заявку" type="submit" />
+            </div>
           </Form>
         </Formik>
       </Modal>

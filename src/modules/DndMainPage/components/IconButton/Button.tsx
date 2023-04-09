@@ -7,6 +7,7 @@ interface Props {
   color?: string
   hoverColor?: string
   isDragging?: boolean
+  onClick?: () => void
 }
 
 const Button: FC<Props> = ({
@@ -23,12 +24,8 @@ const Button: FC<Props> = ({
     [styles.greenIsDragging]: isDragging,
   })
 
-  const buttonDraggingColors = clsx(styles.fill, {
-    [styles.greenIsDragging]: isDragging,
-  })
-
   return (
-    <div className={buttonDefaultColors}>
+    <div className={buttonDefaultColors} {...props}>
       <img className={styles.icon} src={icon} alt="icon" />
     </div>
   )

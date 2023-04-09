@@ -1,19 +1,33 @@
-import { useId, useState, FC, useEffect } from "react"
+import { useState, FC, useEffect } from "react"
 import { DragDropContext, DropResult } from "react-beautiful-dnd"
 import Column from "../components/Column/Column"
-import { initialData } from "../client-bd/client-data"
+import { initialData } from "../client-db/client-data"
 import {
   IColumn,
   IData,
   IStudent,
   IStudentState,
   IUpdateStudent,
-  IUpdateStudentData,
 } from "../types"
 import styles from "./index.module.scss"
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux"
 import { fetchAllStudents, fetchUpdateStudent } from "../redux/asyncActions"
+import Modal from "../../../components/ModalPopupMainPage/Modal"
+import { Form, Formik } from "formik"
+import MySelect from "../../../components/Select/MySelect"
+import Input from "../../../components/Input/MyInput"
+import MyTextarea from "../../../components/Textarea/MyTextarea"
+import { clientSchema } from "../Schema/Validation"
+import {
+  departments,
+  laptop,
+  payment,
+  source,
+} from "../selectOptions/clientFormOptions"
+import IconButton from "../../../components/iconButton/IconButton"
+import { busketIcon, clockTime, deleteIcon } from "../assets"
 
+// Reorder column list
 export const reorderColumnList = (
   sourceCol: IColumn,
   startIndex: number,
@@ -42,15 +56,14 @@ export const DragAndDrop: FC = () => {
 
   const [state, setState] = useState<IData>(initialData)
 
-  const filterStudentsByStatus = (student: IStudent[], column: string) => {
-    const response = student
-      .filter(
-        (item) =>
-          item.status?.name.toLowerCase() ===
-            state.columns[column].title.toLowerCase() &&
-          item.on_request === true
-      )
-      .map((item) => item.id) as number[]
+  // Filtering all students by status
+  const filterStudentsByStatus = (students: IStudent[], column: string) => {
+    const response = students.filter(
+      (student) =>
+        student.status?.name.toLowerCase() ===
+          state.columns[column].title.toLowerCase() &&
+        student.on_request === true
+    )
 
     return response
   }
@@ -76,31 +89,37 @@ export const DragAndDrop: FC = () => {
         "column-1": {
           ...state.columns[Columns.WaitingForAcall],
           studentIds: [
-            ...filterStudentsByStatus(client.student, Columns.WaitingForAcall),
+            ...(filterStudentsByStatus(
+              client.student,
+              Columns.WaitingForAcall
+            ).map((student) => student.id) as number[]),
           ],
         },
         "column-2": {
           ...state.columns[Columns.CallCompleted],
           studentIds: [
-            ...filterStudentsByStatus(client.student, Columns.CallCompleted),
+            ...(filterStudentsByStatus(
+              client.student,
+              Columns.CallCompleted
+            ).map((student) => student.id) as number[]),
           ],
         },
         "column-3": {
           ...state.columns[Columns.SignedUpForAtrialLesson],
           studentIds: [
-            ...filterStudentsByStatus(
+            ...(filterStudentsByStatus(
               client.student,
               Columns.SignedUpForAtrialLesson
-            ),
+            ).map((student) => student.id) as number[]),
           ],
         },
         "column-4": {
           ...state.columns[Columns.AttendedATrialLesson],
           studentIds: [
-            ...filterStudentsByStatus(
+            ...(filterStudentsByStatus(
               client.student,
               Columns.AttendedATrialLesson
-            ),
+            ).map((student) => student.id) as number[]),
           ],
         },
       },
@@ -109,6 +128,7 @@ export const DragAndDrop: FC = () => {
     setState(newInitialState)
   }, [client.student])
 
+  // Card dragging logic
   const onDragEnd = (result: DropResult) => {
     const { source, destination } = result
 
@@ -157,48 +177,27 @@ export const DragAndDrop: FC = () => {
       studentIds: endStudentIds,
     }
 
+    // Update student status
     state.students?.find((student) => {
       if (student.id === removed) {
-        const {
-          id,
-          first_name,
-          last_name,
-          surname,
-          notes,
-          phone,
-          laptop,
-          department,
-          came_from,
-          payment_method,
-          status,
-          paid,
-          on_request,
-        } = student
+        const { id, department, came_from, payment_method } = student
 
-        const updateStudentStatus: IUpdateStudent = {
-          first_name,
-          last_name,
-          surname,
-          notes,
-          phone,
-          laptop,
+        const updateStudent: IUpdateStudent = {
           department: {
-            name: department.name,
+            name: department?.name,
           },
           came_from: {
-            name: came_from.name,
+            name: came_from?.name,
           },
           payment_method: {
             name: payment_method?.name,
           },
-          paid,
-          on_request,
           status: {
             name: state.columns[destination.droppableId].title,
           },
         }
 
-        dispatch(fetchUpdateStudent({ id, updateStudentStatus }))
+        dispatch(fetchUpdateStudent({ id, updateStudent }))
       }
     })
 
@@ -213,6 +212,62 @@ export const DragAndDrop: FC = () => {
 
     setState(newState)
   }
+
+  const initialValues: IUpdateStudent = {
+    first_name: "",
+    last_name: "",
+    surname: "",
+    notes: "",
+    phone: "",
+    laptop: "",
+    department: {
+      name: "",
+    },
+    came_from: {
+      name: "",
+    },
+    payment_method: {
+      name: "",
+    },
+  }
+
+  const onSubmit = (value: IUpdateStudent) => {
+    const {
+      first_name,
+      last_name,
+      came_from,
+      laptop,
+      department,
+      payment_method,
+      phone,
+    } = value
+
+    const changeValue: IUpdateStudent = {
+      ...value,
+      first_name,
+      last_name,
+      came_from: {
+        name: came_from?.name as string,
+      },
+      department: {
+        name: department?.name as string,
+      },
+      payment_method: {
+        name: payment_method?.name as string,
+      },
+      phone,
+      laptop: laptop === "yes" ? true : false,
+      paid: false,
+      on_request: true,
+      is_archive: false,
+    }
+
+    console.log(JSON.stringify(changeValue, null, 2))
+
+    // dispatch(fetchUpdateStudent(id, changeValue))
+  }
+
+  const [open, setOpen] = useState<boolean>(false)
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -231,9 +286,122 @@ export const DragAndDrop: FC = () => {
                   key={column.id}
                   column={column}
                   students={students || []}
+                  setOpen={setOpen}
                 />
               )
             })}
+            {open && (
+              <Modal active={open} setActive={setOpen}>
+                <Formik
+                  initialValues={initialValues}
+                  validationSchema={clientSchema}
+                  enableReinitialize={true}
+                  onSubmit={onSubmit}
+                >
+                  <Form className={styles.form}>
+                    <div className={styles.top}>
+                      <div className={styles.topWrap}>
+                        <p className={styles.title}>Карточка клиента</p>
+                        <div className={styles.timeWrapper}>
+                          <img
+                            className={styles.timeIcon}
+                            src={clockTime}
+                            alt="time"
+                          />
+                          <p className={styles.time}>20 ч.</p>
+                        </div>
+                        <div className={styles.idWrap}>
+                          <p className={styles.id}>ID654789</p>
+                        </div>
+                      </div>
+                      <IconButton
+                        text={"Архивировать"}
+                        icon={busketIcon}
+                        className={styles.archiveBtn}
+                        type={"button"}
+                      />
+                    </div>
+                    <div className={styles.content}>
+                      <div className={styles.department}>
+                        <MySelect
+                          label="Департамент*"
+                          id="department"
+                          name="department.name"
+                          options={departments}
+                        />
+                      </div>
+                      <div className={styles.fullName}>
+                        <div className={styles.columnOne}>
+                          <Input
+                            label="Имя*"
+                            id="first_name"
+                            name="first_name"
+                            type="text"
+                            placeholder="Имя"
+                            className={styles.firstName}
+                          />
+                        </div>
+                        <div className={styles.columnTwo}>
+                          <Input
+                            label="Фамилия*"
+                            id="last_name"
+                            name="last_name"
+                            type="text"
+                            placeholder="Фамилия"
+                          />
+                        </div>
+                      </div>
+                      <div className={styles.phoneAndLaptop}>
+                        <Input
+                          label="Номер телефона*"
+                          id="phone"
+                          name="phone"
+                          type="text"
+                          placeholder="+996"
+                        />
+                        <div className={styles.laptop}>
+                          <MySelect
+                            label="Наличие ноутбука*"
+                            id="laptop"
+                            name="laptop"
+                            options={laptop}
+                          />
+                        </div>
+                      </div>
+                      <div className={styles.paymentMethodAndSource}>
+                        <MySelect
+                          label="Способ оплаты*"
+                          id="payment_method"
+                          name="payment_method.name"
+                          options={payment}
+                        />
+                        <MySelect
+                          label="Источник*"
+                          id="came_from"
+                          name="came_from.name"
+                          options={source}
+                        />
+                      </div>
+                      <div className={styles.notes}>
+                        <MyTextarea label="Заметки" id="notes" name="notes" />
+                      </div>
+                    </div>
+                    <div className={styles.btns}>
+                      <IconButton
+                        text={"Сохранить изменения"}
+                        type={"submit"}
+                      />
+                      <IconButton
+                        text={"Удалить заявку"}
+                        icon={deleteIcon}
+                        className={styles.deleteBtn}
+                        type={"button"}
+                      />
+                    </div>
+                  </Form>
+                </Formik>
+              </Modal>
+            )}
           </>
         </div>
       </div>

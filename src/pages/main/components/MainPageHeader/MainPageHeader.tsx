@@ -1,6 +1,3 @@
-import IconButton from "./components/IconButton"
-import SearchSvgComponent from "./components/Svg/SearchSvgComponent"
-import CalendarSvgComponent from "./components/Svg/CalendarSvgComponent"
 import styles from "./MainPageHeader.module.scss"
 import ProfileButton from "../../../../components/ProfileButton"
 import { FC } from "react"
@@ -28,10 +25,6 @@ const MainPageHeader: FC = () => {
 
           <div className={styles.group}>
             <AddClient />
-            <IconButton
-              className={styles.item}
-              icon={<CalendarSvgComponent />}
-            />
 
             <div className={styles.profile}>
               <ProfileButton

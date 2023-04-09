@@ -19,7 +19,7 @@ const updateStudent = async ({
   id,
   updateStudentStatus,
 }: IUpdateStudentData): Promise<IStudent> => {
-  console.log('service', id, updateStudentStatus);
+  console.log(JSON.stringify(updateStudentStatus, null, 2));
   
   const response = await axios.patch(`${API_URL}${id}/`, updateStudentStatus, {
     headers: getToken()

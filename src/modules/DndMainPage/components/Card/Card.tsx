@@ -11,6 +11,7 @@ import { check, close } from "../../assets"
 interface Props {
   student: IStudent
   isDragging: boolean
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 function Card<T>(props: Props) {
@@ -51,6 +52,10 @@ function Card<T>(props: Props) {
     setColor("")
   }
 
+  const handleOpen = () => {
+    props.setOpen(true)
+  }
+
   // const date = new Date(student.request_date as string)
   // const today = new Date()
   // const deadline = new Date(student.request_date as string)
@@ -60,6 +65,7 @@ function Card<T>(props: Props) {
       className={styles.card}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={handleOpen}
     >
       <div className={styles.cardInner}>
         <div className={styles.cardTop}>

@@ -32,13 +32,14 @@ export const fetchAllStudents = createAsyncThunk<
   }
 })
 
+// Update StudentStatus Action 
 export const fetchUpdateStudent = createAsyncThunk<
   IStudent,
   IUpdateStudentData,
   { rejectValue: string }
->('updateClient/fetchUpdateStudent', async ({id, updateStudentStatus}, {rejectWithValue, dispatch}) => {
+>('updateClient/fetchUpdateStudent', async ({id, updateStudent}, {rejectWithValue}) => {
   try {    
-    const response = await dndService.updateStudent({id, updateStudentStatus})
+    const response = await dndService.updateStudent({id, updateStudent})
 
     return response
   } catch (error: unknown) {
@@ -46,6 +47,7 @@ export const fetchUpdateStudent = createAsyncThunk<
       toast.error(error)
       return rejectWithValue(error)
     }
+
     if (error instanceof AxiosError) {
       const message =
         (error.response &&
