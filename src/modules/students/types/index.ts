@@ -3,7 +3,6 @@ export interface IStudentOnStudyState {
   studentsOnStudy: IStudentOnStudy[] | []
   studentOnStudy: IStudentOnStudy | {}
   isLoading: boolean
-  isSuccess: boolean
   isError: boolean
 }
 

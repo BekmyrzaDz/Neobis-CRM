@@ -11,7 +11,7 @@ export interface IProfile {
 export interface IProfileState {
   profile: IProfile | null
   isLoading: boolean
-  isSuccess: boolean
+  // isSuccess: boolean
   isError: boolean
 }
 

@@ -5,23 +5,18 @@ import Spinner from '../../components/spinner/spinner'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { AvaForm, ProfileForm } from '../../modules/profilePage'
 import { getProfileById } from '../../modules/profilePage/redux/asyncActions'
-import { profileReset } from '../../modules/profilePage/redux/profileSlice'
 
 import styles from './profilePage.module.scss'
 
 const ProfilePage = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const { isLoading, isSuccess } = useAppSelector((state) => state.profile)
+  const { isLoading } = useAppSelector((state) => state.profile)
   const id = useAppSelector((state) => state.auth.user?.id)
 
   useEffect(() => {
     if (id !== undefined) dispatch(getProfileById(id))
   }, [])
-
-  if (isSuccess) {
-    dispatch(profileReset())
-  }
 
   if (isLoading) {
     return <Spinner />

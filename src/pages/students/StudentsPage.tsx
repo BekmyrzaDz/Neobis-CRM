@@ -19,9 +19,7 @@ import StudentForm from '../../modules/students/forms/studentForm/StudentForm'
 import GroupCard from '../../modules/students/components/groupCard/GroupCard'
 import GroupForm from '../../modules/students/forms/groupForm/GroupForm'
 import { getProfileById } from '../../modules/profilePage/redux/asyncActions'
-import { profileReset } from '../../modules/profilePage/redux/profileSlice'
 import { getStudentsOnStudy } from '../../modules/students/redux/asyncActions'
-import { studentsOnStudyReset } from '../../modules/students/redux/studentsOnStudySlice'
 import {
   plusIcon,
   allIcon,
@@ -94,8 +92,7 @@ const StudentsPage = () => {
   const auth_first_name = profile.profile?.first_name
   const auth_last_name = profile.profile?.last_name
   const auth_avatar = profile.profile?.image!
-  const isProfileSuccess = profile.isSuccess
-  const { isSuccess, isLoading } = study
+  const { isLoading } = study
   const studentsOnStudy = study.studentsOnStudy
   useEffect(() => {
     if (authUserId !== undefined) {
@@ -103,19 +100,11 @@ const StudentsPage = () => {
     }
   }, [])
 
-  if (isProfileSuccess) {
-    dispatch(profileReset())
-  }
-
   useEffect(() => {
     if (activeOption === 'Студенты' && token !== undefined) {
       dispatch(getStudentsOnStudy({ token, departmentFilter }))
     }
   }, [departmentFilter])
-
-  if (isSuccess) {
-    dispatch(studentsOnStudyReset())
-  }
 
   const onToggleModal = useCallback(() => {
     setModalActive((prev) => !prev)

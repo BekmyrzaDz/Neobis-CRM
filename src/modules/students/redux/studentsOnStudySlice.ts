@@ -11,20 +11,13 @@ const initialState: IStudentOnStudyState = {
   studentsOnStudy: [],
   studentOnStudy: {},
   isLoading: false,
-  isSuccess: false,
   isError: false,
 }
 
 export const studentsOnStudySlice = createSlice({
   name: 'studentsOnStudy',
   initialState,
-  reducers: {
-    studentsOnStudyReset: (state) => {
-      state.isLoading = false
-      state.isSuccess = false
-      state.isError = false
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getStudentsOnStudy.pending, (state) => {
@@ -34,7 +27,6 @@ export const studentsOnStudySlice = createSlice({
         getStudentsOnStudy.fulfilled,
         (state, action: PayloadAction<IStudentOnStudy[]>) => {
           state.isLoading = false
-          state.isSuccess = true
           state.studentsOnStudy = action.payload
         }
       )
@@ -50,7 +42,6 @@ export const studentsOnStudySlice = createSlice({
         createStudentOnStudy.fulfilled,
         (state, action: PayloadAction<IStudentOnStudy>) => {
           state.isLoading = false
-          state.isSuccess = true
           state.studentOnStudy = action.payload
         }
       )
@@ -66,7 +57,6 @@ export const studentsOnStudySlice = createSlice({
         getStudentOnStudyById.fulfilled,
         (state, action: PayloadAction<IStudentOnStudy>) => {
           state.isLoading = false
-          state.isSuccess = true
           state.studentOnStudy = action.payload
         }
       )
@@ -82,7 +72,6 @@ export const studentsOnStudySlice = createSlice({
         editStudentOnStudyById.fulfilled,
         (state, action: PayloadAction<IStudentOnStudy>) => {
           state.isLoading = false
-          state.isSuccess = true
           state.studentOnStudy = action.payload
         }
       )
@@ -94,5 +83,4 @@ export const studentsOnStudySlice = createSlice({
   },
 })
 
-export const { studentsOnStudyReset } = studentsOnStudySlice.actions
 export default studentsOnStudySlice.reducer
