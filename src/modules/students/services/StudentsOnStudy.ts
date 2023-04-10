@@ -51,10 +51,11 @@ const createStudentOnStudy = async ({
   department,
   on_request,
   is_archive,
+  blacklist,
   laptop,
   payment_status,
   notes,
-}: ICreateStudentonStudy): Promise<IStudentOnStudy[]> => {
+}: ICreateStudentonStudy): Promise<IStudentOnStudy> => {
   const response = await axios.post(
     API_URL,
     {
@@ -66,6 +67,7 @@ const createStudentOnStudy = async ({
       department,
       on_request,
       is_archive,
+      blacklist,
       laptop,
       payment_status,
       notes,
@@ -92,6 +94,7 @@ const editStudentOnStudyById = async ({
   department,
   on_request,
   is_archive,
+  blacklist,
   laptop,
   payment_status,
   notes,
@@ -107,6 +110,7 @@ const editStudentOnStudyById = async ({
       department,
       on_request,
       is_archive,
+      blacklist,
       laptop,
       payment_status,
       notes,

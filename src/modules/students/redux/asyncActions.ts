@@ -97,6 +97,7 @@ export const createStudentOnStudy = createAsyncThunk<
       department,
       on_request,
       is_archive,
+      blacklist,
       laptop,
       payment_status,
       notes,
@@ -114,6 +115,7 @@ export const createStudentOnStudy = createAsyncThunk<
         department,
         on_request,
         is_archive,
+        blacklist,
         laptop,
         payment_status,
         notes,
@@ -121,7 +123,7 @@ export const createStudentOnStudy = createAsyncThunk<
       if (response) {
         toast.success('Новый студент успешно создан')
       }
-      return response[0]
+      return response
     } catch (error: unknown) {
       if (typeof error === 'string') {
         toast.error(error)
@@ -163,6 +165,7 @@ export const editStudentOnStudyById = createAsyncThunk<
       department,
       on_request,
       is_archive,
+      blacklist,
       laptop,
       payment_status,
       notes,
@@ -181,6 +184,7 @@ export const editStudentOnStudyById = createAsyncThunk<
         department,
         on_request,
         is_archive,
+        blacklist,
         laptop,
         payment_status,
         notes,

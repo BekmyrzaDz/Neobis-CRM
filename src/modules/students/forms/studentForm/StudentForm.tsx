@@ -80,6 +80,7 @@ const StudentForm: FC<StudentFormProps> = ({
           department: { name: department },
           on_request: false,
           is_archive: false,
+          blacklist: false,
           laptop: Boolean(laptop),
           notes,
           payment_status: +payment_status,

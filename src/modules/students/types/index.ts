@@ -21,6 +21,7 @@ export interface IStudentOnStudy {
   }
   on_request: boolean
   is_archive: boolean
+  blacklist: boolean
   laptop: boolean
   payment_status: number
   notes: string
@@ -59,6 +60,7 @@ export interface ICreateStudentonStudy {
   }
   on_request: boolean
   is_archive: boolean
+  blacklist: boolean
   laptop: boolean
   payment_status: number
   notes: string

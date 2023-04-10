@@ -97,6 +97,7 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
         department: { name: department },
         on_request: false,
         is_archive: false,
+        blacklist: false,
         laptop: Boolean(laptop),
         notes,
         payment_status: +payment_status,
@@ -136,6 +137,48 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
           department: { name: department },
           on_request: false,
           is_archive: true,
+          blacklist: false,
+          laptop: Boolean(laptop),
+          notes,
+          payment_status: +payment_status,
+        })
+      )
+
+      setModalActive(false)
+    }
+  }
+
+  const onBlock = (values: IInitialValues) => {
+    const {
+      first_name,
+      last_name,
+      surname,
+      phone,
+      came_from,
+      department,
+      laptop,
+      notes,
+      payment_status,
+    } = values
+
+    if (
+      window.confirm(
+        `Вы действительно хотите заблокировать ${first_name} ${last_name}?`
+      )
+    ) {
+      dispatch(
+        editStudentOnStudyById({
+          token,
+          id,
+          first_name,
+          last_name,
+          surname,
+          phone,
+          came_from: { name: came_from },
+          department: { name: department },
+          on_request: false,
+          is_archive: false,
+          blacklist: true,
           laptop: Boolean(laptop),
           notes,
           payment_status: +payment_status,
@@ -264,6 +307,7 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
             icon={blackListIcon}
             className={styles.blackListBtn}
             type={'button'}
+            onClick={() => onBlock(initialValues)}
           />
         </div>
       </Form>
