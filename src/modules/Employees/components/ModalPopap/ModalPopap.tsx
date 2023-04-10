@@ -2,6 +2,11 @@ import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { image, closeIcon } from '../../assets';
 import { createAdmin } from '../../redux/admins/adminsSlice'
+import Button from '../../../../components/button'
+import { Form, Formik } from "formik";
+import { addClientSchema } from '../../../AddClient/Schema/Validation'
+
+
 import { roles } from '../../mockAPI/popapAPI';
 import { Linkedin, MentorsInfo } from '../mentorsAddition/mentosAddition'
 import styles from './ModalPopap.module.scss';

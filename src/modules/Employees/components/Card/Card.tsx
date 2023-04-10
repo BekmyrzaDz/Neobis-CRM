@@ -3,9 +3,48 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, CardMedia, Typography, Box } from '@material-ui/core';
 import { MoreVert } from '@material-ui/icons';
 import Linkedin from '../../assets/largeLinkedin.svg'
-import email from '../../assets/email.png'
+import gmail from '../../assets/email.png'
+import DetailCard from '../DetailCard/DetailCard';
 
-import { calendar, time } from '../../assets';
+interface UserCardProps {
+  onCardClick: () => void;
+  name: string;
+  photoUrl: string;
+  position: string;
+  linkedin: string;
+  email: string;
+}
+
+const UserCard: React.FC<UserCardProps> = ({
+  name,
+  photoUrl,
+  position,
+  linkedin, email, onCardClick
+}) => {
+  const classes = useStyles();
+  return (
+    <>
+      <Card className={classes.card} onClick={onCardClick}>
+        <MoreVert className={classes.box} />
+        <CardMedia className={classes.media} image={photoUrl} />
+        <CardContent style={{ textAlign: 'center' }}>
+          <Typography className={classes.name}>{name}</Typography>
+          <Typography className={classes.position}>{position}</Typography>
+          <a className={classes.linkedin} href={linkedin} target="_blank">
+            <img src={Linkedin} alt="linkedin" />
+          </a>
+          <a className={classes.email} href={`mailto:${email}`} target="_blank">
+            <img src={gmail} alt="email" /> Написать на email
+          </a>
+        </CardContent>
+      </Card>
+
+    </>
+  );
+};
+
+export default UserCard;
+
 
 const useStyles = makeStyles({
   card: {
@@ -66,41 +105,3 @@ const useStyles = makeStyles({
     justifyContent: 'center',
   }
 });
-
-interface UserCardProps {
-  onClick: () => void;
-  name: string;
-  photoUrl: string;
-  position: string;
-  workingDays: string;
-  workingHours: string;
-}
-
-const UserCard: React.FC<UserCardProps> = ({
-  name,
-  photoUrl,
-  position,
-  workingDays,
-  workingHours,
-}) => {
-  const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  return (
-    <Card className={classes.card}>
-      <MoreVert className={classes.box} />
-      <CardMedia className={classes.media} image={photoUrl} />
-      <CardContent style={{ textAlign: 'center' }}>
-        <Typography className={classes.name}>{name}</Typography>
-        <Typography className={classes.position}>{position}</Typography>
-        <a className={classes.linkedin}>
-          <img src={Linkedin} alt="linkedin" />
-        </a>
-        <a className={classes.email}>
-          <img src={email} alt="email" /> Написать на email
-        </a>
-      </CardContent>
-    </Card>
-  );
-};
-
-export default UserCard;

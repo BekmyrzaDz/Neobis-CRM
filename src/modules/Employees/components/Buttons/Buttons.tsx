@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   iconButton: {
     padding: '5px 0 20px 0',
   },
-  box: {
+  button: {
     color: '#756FB3',
     fontWeight: 'bold',
   },
@@ -19,6 +19,7 @@ const useStyles = makeStyles({
   menuItem: {
     display: 'flex',
     gap: '10px',
+    fontSize: 14
   },
 });
 
@@ -47,7 +48,7 @@ const ThreeDotsButton = (props: ThreeDotsButtonProps) => {
   return (
     <>
       <IconButton className={classes.iconButton} onClick={handleClick}>
-        <Box className={classes.box}>...</Box>
+        <Box className={classes.button}>...</Box>
       </IconButton>
       <Menu
         classes={{ paper: classes.menu }}
