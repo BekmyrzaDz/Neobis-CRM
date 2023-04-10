@@ -8,7 +8,7 @@ import { addClientSchema } from '../../../AddClient/Schema/Validation'
 
 
 import { roles } from '../../mockAPI/popapAPI';
-import { Linkedin, MentorsInfo } from '../mentorsAddition/mentosAddition'
+import { Linkedin, MentorsInfo, flag } from '../mentorsAddition/mentosAddition'
 import styles from './ModalPopap.module.scss';
 
 type TPopap = {
@@ -79,11 +79,7 @@ const ModalPopap: React.FC<TPopap> = ({ popap, setPopap }) => {
     <div className={styles.bg}>
       <div
         className={styles.modalPopap}
-        style={{
-          height: '670px',
-          width: `${open ? '650px' : '589px'}`,
-          padding: '24px 32px',
-        }}>
+      >
         <div
           className={`${open && styles.scroll}`}>
           <h2 className={styles.title}>Создание сотрудника</h2>
