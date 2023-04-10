@@ -6,7 +6,7 @@ import { clsx } from "clsx"
 const SearchInput: FC<InputProps> = ({ className, icon, ...props }) => {
   return (
     <div className={clsx(styles.search, className)}>
-      {icon}
+      <img src={icon} alt="icon" />
       <input
         className={styles.input}
         {...props}

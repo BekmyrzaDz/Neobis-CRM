@@ -1,5 +1,9 @@
 @import "../../../sass/base";
 
+.form {
+  padding: 20px;
+}
+
 .top {
   display: flex;
   justify-content: space-between;
@@ -18,102 +22,41 @@
   cursor: pointer;
 }
 
-.form {
-  .content {
-    .department {
-      margin-bottom: 24px;
-    }
+.department {
+  margin-bottom: 24px;
+}
+
+.fullName {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.columnOne {
+  & > .firstName {
+    margin-bottom: 24px;
   }
 }
 
-.form {
-  .content {
-    .fullName {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-  }
+.phoneAndLaptop {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
-.form {
-  .content {
-    .phoneAndLaptop {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      .laptop {
-        max-width: 129px;
-      }
-    }
-  }
+.laptop {
+  max-width: 129px;
 }
 
-.form {
-  .content {
-    .paymentMethodAndSource {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-  }
+.paymentMethodAndSource {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
-.form {
-  .content {
-    .notes {
-      margin-bottom: 32px;
-    }
-  }
-}
-
-.dropdownItem {
-  padding: 10px 16px;
-  cursor: pointer;
-  transition: $tran-02;
-  &:hover {
-    background-color: #f4f4f4;
-  }
-}
-
-.dropdownItem {
-  padding: 10px 16px;
-  cursor: pointer;
-  transition: $tran-02;
-  &:hover {
-    background-color: #f4f4f4;
-  }
-}
-
-.dropdownUxUi {
-  color: $ux-ui-color;
-}
-
-.dropdownFront {
-  color: $front-color;
-}
-
-.dropdownBack {
-  color: $back-color;
-}
-
-.dropdownPM {
-  color: $pm-color;
-}
-
-.dropdownAndroid {
-  color: $android-color;
-}
-
-.dropdownIOS {
-  color: $ios-color;
-}
-
-.dropdownFlutter {
-  color: $flutter-color;
-}
-
-.dropdownOlimp {
-  color: $olimp-color;
+.notes {
+  margin-bottom: 32px;
 }

@@ -1,120 +1,72 @@
 import { FC, useState } from "react"
-import Button from "../components/Button"
+import Button from "../../../components/AddButton"
 import Modal from "../../../components/ModalPopupMainPage/Modal"
-import PlusSvgComponent from "../components/Svg/PlusSvgComponent"
-import Dropdown from "../../../components/DropdownMainPage/Dropdown"
-import Input from "../../../components/InputMainPage"
-import PhoneInput from "../../../components/IconInputMainPage"
-import SimpleDropdown from "../../../components/SimpleDropdownMainPage/SimpleDropdown"
-import IconDropdown from "../../../components/IconDropdownMainPage/IconDropdown"
-import Textarea from "../../../components/TextareaMainPage"
+import Input from "../../../components/Input/MyInput"
 import ModalButton from "../components/ModalButton"
-import { departmentOptions, paymentOptions, sourceOptions } from "../mockAPI"
 import { ICreateStudent, IDepartmentOptions, IOptions } from "../types"
-import { flagKyrgyzstan, left } from "../assets"
+import { flagKyrgyzstan, left, plusBox } from "../assets"
 import styles from "./AddClient.module.scss"
 import { Form, Formik } from "formik"
 import { addClientSchema } from "../Schema/Validation"
-import { addClientState } from "../State/state"
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux"
 import { fetchCreateStudent } from "../redux/addClientActions"
-import clsx from "clsx"
-
-const initialDepartmentState = departmentOptions[0]
-const initialPaymentState = paymentOptions[0]
-const initialSourceState = sourceOptions[0]
+import MySelect from "../../../components/Select/MySelect"
+import {
+  departments,
+  laptop,
+  payment,
+  source,
+} from "../selectOptions/clientFormOptions"
+import MyTextarea from "../../../components/Textarea/MyTextarea"
 
 export const AddClient: FC = () => {
   const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state.addClient)
-  console.log(state)
 
   const [modalActive, setModalActive] = useState<boolean>(false)
-  const [departmentSelected, setDepartmentSelected] =
-    useState<IDepartmentOptions>(initialDepartmentState)
-  console.log(departmentSelected)
-
-  const [laptopSelected, setLaptopSelected] = useState<string>("")
-  const [paymentSelected, setPaymentSelected] =
-    useState<IOptions>(initialPaymentState)
-  const [sourceSelected, setSourceSelected] =
-    useState<IOptions>(initialSourceState)
-
-  function departmentsClasses<T>(props: IDepartmentOptions) {
-    const classes = clsx(styles.dropdownItem, {
-      [styles.dropdownUxUi]: props.name === "UX/UI",
-      [styles.dropdownFront]: props.name === "Front-End",
-      [styles.dropdownBack]: props.name === "Back-End",
-      [styles.dropdownPM]: props.name === "PM",
-      [styles.dropdownAndroid]: props.name === "Android",
-      [styles.dropdownIOS]: props.name === "iOS",
-      [styles.dropdownFlutter]: props.name === "Flutter",
-      [styles.dropdownOlimp]: props.name === "Олимпиадное программирование",
-    })
-    return classes
-  }
 
   const onSubmit = (value: ICreateStudent) => {
-    const {
-      first_name,
-      last_name,
-      surname,
-      notes,
-      phone,
-      laptop,
-      department,
-      payment_method,
-      came_from,
-      paid,
-      on_request,
-      is_archive,
-    } = value
-
-    const studentData: ICreateStudent = {
-      first_name,
-      last_name,
-      surname,
-      notes,
-      phone,
-      laptop: laptopSelected === "Да" ? true : false,
-      department,
-      came_from,
-      payment_method,
+    const changeValue = {
+      ...value,
+      laptop: value.laptop === "yes" ? true : false,
       paid: false,
       on_request: true,
       is_archive: false,
     }
 
-    const studentDataClear: ICreateStudent = {
-      first_name: "",
-      last_name: "",
-      surname: "",
-      notes: "",
-      phone: "",
-      laptop: laptopSelected === "Да" ? true : false,
-      department,
-      came_from,
-      payment_method,
-      paid: false,
-      on_request: true,
-      is_archive: false,
-    }
+    dispatch(fetchCreateStudent(changeValue))
+  }
 
-    dispatch(fetchCreateStudent(studentData))
-    setModalActive(false)
+  const initialValues: ICreateStudent = {
+    first_name: "",
+    last_name: "",
+    surname: "",
+    notes: "",
+    phone: "",
+    laptop: "",
+    department: {
+      name: "",
+    },
+    came_from: {
+      name: "",
+    },
+    payment_method: {
+      name: "",
+    },
   }
 
   return (
     <>
       <Button
-        icon={<PlusSvgComponent />}
+        icon={plusBox}
         name="Добавить заявку"
         active={modalActive}
         setActive={setModalActive}
       />
+
       <Modal active={modalActive} setActive={setModalActive}>
         <Formik
-          initialValues={addClientState}
+          initialValues={initialValues}
           validationSchema={addClientSchema}
           enableReinitialize={true}
           onSubmit={onSubmit}
@@ -122,109 +74,83 @@ export const AddClient: FC = () => {
           <Form className={styles.form}>
             <div className={styles.top}>
               <p className={styles.title}>Создание заявки</p>
-              <img
+              {/* <img
                 className={styles.left}
                 src={left}
                 alt="icon left"
                 onClick={() => setModalActive(false)}
-              />
+              /> */}
             </div>
             <div className={styles.content}>
               <div className={styles.department}>
-                <Dropdown
-                  label="Департамент"
+                <MySelect
+                  label="Департамент*"
+                  id="department"
                   name="department.name"
-                  options={departmentOptions}
-                  selected={departmentSelected}
-                  setSelected={setDepartmentSelected}
-                >
-                  <option className={styles.option} value="">
-                    Выберите департамент
-                  </option>
-                  {departmentOptions.map((option, index) => (
-                    <option
-                      className={departmentsClasses(option)}
-                      key={index}
-                      value={option.name}
-                    >
-                      {option.name}
-                    </option>
-                  ))}
-                </Dropdown>
+                  options={departments}
+                />
               </div>
               <div className={styles.fullName}>
                 <div className={styles.columnOne}>
                   <Input
-                    name="first_name"
+                    label="Имя*"
                     id="first_name"
+                    name="first_name"
                     type="text"
-                    placeholder="Даниил"
-                    label="Имя"
+                    placeholder="Имя"
+                    className={styles.firstName}
                   />
                   <Input
-                    name="last_name"
-                    id="last_name"
+                    label="Отчество*"
+                    id="surname"
+                    name="surname"
                     type="text"
-                    placeholder="Сергеевич"
-                    label="Отчество"
+                    placeholder="Отчество"
                   />
                 </div>
                 <div className={styles.columnTwo}>
                   <Input
-                    name="surname"
-                    id="surname"
+                    label="Фамилия*"
+                    id="last_name"
+                    name="last_name"
                     type="text"
-                    placeholder="Алёшин"
-                    label="Фамилия"
+                    placeholder="Фамилия"
                   />
                 </div>
               </div>
               <div className={styles.phoneAndLaptop}>
-                <PhoneInput
-                  name="phone"
+                <Input
+                  label="Номер телефона*"
                   id="phone"
-                  icon={<img className={styles.img} src={flagKyrgyzstan} />}
-                  type="tel"
+                  name="phone"
+                  type="text"
                   placeholder="+996"
-                  label="Номер телефона"
                 />
                 <div className={styles.laptop}>
-                  <SimpleDropdown
+                  <MySelect
+                    label="Наличие ноутбука*"
+                    id="laptop"
                     name="laptop"
-                    label="Наличие ноутбука"
-                    selected={laptopSelected}
-                    setSelected={setLaptopSelected}
+                    options={laptop}
                   />
                 </div>
               </div>
               <div className={styles.paymentMethodAndSource}>
-                <IconDropdown name="payment_method.name" label="Способ оплаты">
-                  <option value="">Выберите способ оплаты</option>
-                  {paymentOptions.map((option, index) => (
-                    <option key={index} value={option.name}>
-                      <div className={styles.icon}>
-                        <img className={styles.img} src={option.icon} />
-                      </div>
-                      {option.name}
-                    </option>
-                  ))}
-                </IconDropdown>
-                <IconDropdown name="came_from.name" label="Источник">
-                  <option value="">Выберите источник</option>
-                  {sourceOptions.map((option, index) => (
-                    <option key={index} value={option.name}>
-                      {option.name}
-                    </option>
-                  ))}
-                </IconDropdown>
+                <MySelect
+                  label="Способ оплаты*"
+                  id="payment_method"
+                  name="payment_method.name"
+                  options={payment}
+                />
+                <MySelect
+                  label="Источник*"
+                  id="came_from"
+                  name="came_from.name"
+                  options={source}
+                />
               </div>
               <div className={styles.notes}>
-                <Textarea
-                  name="notes"
-                  id="notes"
-                  label="Заметки"
-                  placeholder="Родной, вообще не переживай на счет этого"
-                />
+                <MyTextarea label="Заметки" id="notes" name="notes" />
               </div>
             </div>
             <ModalButton type="submit" name="Создать заявку" />

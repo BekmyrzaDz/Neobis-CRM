@@ -32,7 +32,7 @@ const AvaForm = () => {
 
   return (
     <>
-      <Modal active={modalActive} setActive={setModalActive}>
+      <Modal active={modalActive} setActive={setModalActive} className={styles.content}>
         <div className={styles.upload}>
           {selectedImage ? (
             <img

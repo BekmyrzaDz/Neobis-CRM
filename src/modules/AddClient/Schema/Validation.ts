@@ -1,6 +1,6 @@
 import * as Yup from 'yup'
 
-// Profile Schema
+// Client Schema
 export const addClientSchema = Yup.object().shape({
   first_name: Yup.string()
     .typeError('Должно быть строкой')
@@ -15,30 +15,23 @@ export const addClientSchema = Yup.object().shape({
   surname: Yup.string()
   .typeError('Должно быть строкой')
     .min(2, 'Минимум 2 символа')
-    .max(30, 'Максимум 30 символа')
-    .required('Обязательное поле'),
+    .max(30, 'Максимум 30 символа'),
   phone: Yup.string()
     .nullable()
-    .matches(/^\+996\d{9}$/, 'Введите верный номер'),
+    .matches(/^\+996\d{9}$/, 'Введите верный номер')
+    .required('Обязательное поле'),
   notes: Yup.string()
   .typeError('Должно быть строкой')
     .min(2, 'Минимум 2 символа')
-    .max(200, 'Максимум 200 символа')
-    .required('Обязательное поле'),
-  // laptop: Yup.boolean().required('Обязательное поле'),
+    .max(200, 'Максимум 200 символа'),
+  laptop: Yup.string().required('Обязательное поле'),
   department: Yup.object().shape({
-    name: Yup.string()
-    .transform((value, originalValue) => originalValue.trim() === "" ? null: value)
-    .nullable()
+    name: Yup.string().required('Обязательное поле')
   }),
   came_from: Yup.object().shape({
-    name: Yup.string()    
-    .transform((value, originalValue) => originalValue.trim() === "" ? null: value)
-    .nullable()
+    name: Yup.string().required('Обязательное поле'),
   }),
   payment_method: Yup.object().shape({
-    name: Yup.string()    
-    .transform((value, originalValue) => originalValue.trim() === "" ? null: value)
-    .nullable()
+    name: Yup.string().required('Обязательное поле'),
   }),
 })

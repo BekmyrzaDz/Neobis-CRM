@@ -1,11 +1,13 @@
 import { FC } from 'react'
-import styles from './filterButton.module.scss'
 import { IFilterButton } from './filterButton.props'
+import clsx from 'clsx'
 
-const FilterButton: FC<IFilterButton> = ({ text, count }) => {
+import styles from './filterButton.module.scss'
+
+const FilterButton: FC<IFilterButton> = ({ className, text, count}) => {
   return (
-    <button className={styles.btn}>
-      <span className={styles.text}>{text}</span>
+    <button className={clsx(styles.btn, className)}>
+      <span className={clsx(styles.text, className)}>{text}</span>
       <span className={styles.count}>{count}</span>
     </button>
   )

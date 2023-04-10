@@ -25,7 +25,7 @@ export const fetchAllStudents = createAsyncThunk<
           error.response?.data?.message) ||
         error.message ||
         error.toString()
-      toast.error(message)
+      // toast.error(message)
       return rejectWithValue(message)
     }
     throw error
@@ -36,11 +36,10 @@ export const fetchUpdateStudent = createAsyncThunk<
   IStudent,
   IUpdateStudentData,
   { rejectValue: string }
->('updateClient/fetchUpdateStudent', async ({id, updateStudentStatus}, {rejectWithValue}) => {
-  try {
-    console.log('async', id, updateStudentStatus);
-    
+>('updateClient/fetchUpdateStudent', async ({id, updateStudentStatus}, {rejectWithValue, dispatch}) => {
+  try {    
     const response = await dndService.updateStudent({id, updateStudentStatus})
+
     return response
   } catch (error: unknown) {
     if (typeof error === 'string') {
@@ -54,7 +53,7 @@ export const fetchUpdateStudent = createAsyncThunk<
           error.response?.data?.message) ||
         error.message ||
         error.toString()
-      toast.error(message)
+      // toast.error(message)
       return rejectWithValue(message)
     }
     throw error

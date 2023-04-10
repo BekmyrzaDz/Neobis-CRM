@@ -1,0 +1,28 @@
+.fill {
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+}
+
+.red {
+  background-color: #d74245;
+}
+
+.violet {
+  background-color: #756fb3;
+}
+
+.green {
+  background-color: #00a64e;
+}
+
+.greenIsDragging {
+  background-color: #00a64e;
+}
+
+.icon {
+  padding: 6px;
+}

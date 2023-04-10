@@ -1,6 +1,5 @@
-import { useId } from "react"
 import { Draggable, Droppable } from "react-beautiful-dnd"
-import { IColumn, IColumns, IDepartment, ISource, IStudent } from "../../types"
+import { IColumn, IStudent } from "../../types"
 import Button from "../Button"
 import Card from "../Card/Card"
 import styles from "./Column.module.scss"
@@ -12,6 +11,7 @@ interface Props {
 
 function Column<T>(props: Props) {
   const { column, students } = props
+  console.log(students)
 
   return (
     <div className={styles.column}>
@@ -23,26 +23,27 @@ function Column<T>(props: Props) {
             ref={droppableProvided.innerRef}
             {...droppableProvided.droppableProps}
           >
-            {students?.map((student, index) => (
-              <Draggable
-                key={student?.id}
-                draggableId={`${student?.id}`}
-                index={index}
-              >
-                {(draggableProvided, draggableSnapshot) => (
-                  <div
-                    ref={draggableProvided.innerRef}
-                    {...draggableProvided.draggableProps}
-                    {...draggableProvided.dragHandleProps}
-                  >
-                    <Card
-                      student={student}
-                      isDragging={draggableSnapshot.isDragging}
-                    />
-                  </div>
-                )}
-              </Draggable>
-            ))}
+            {students &&
+              students.map((student, index) => (
+                <Draggable
+                  key={student?.id}
+                  draggableId={`${student?.id}`}
+                  index={index}
+                >
+                  {(draggableProvided, draggableSnapshot) => (
+                    <div
+                      ref={draggableProvided.innerRef}
+                      {...draggableProvided.draggableProps}
+                      {...draggableProvided.dragHandleProps}
+                    >
+                      <Card
+                        student={student}
+                        isDragging={draggableSnapshot.isDragging}
+                      />
+                    </div>
+                  )}
+                </Draggable>
+              ))}
           </div>
         )}
       </Droppable>

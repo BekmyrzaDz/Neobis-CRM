@@ -13,6 +13,10 @@ const sliceNow = now.slice(0, 2)
 
 const initialData: IData = {
   students: [],
+  studentWithStatus1: [],
+  studentWithStatus2: [],
+  studentWithStatus3: [],
+  studentWithStatus4: [],
   columns: {
     "column-1": {
       id: "column-1",

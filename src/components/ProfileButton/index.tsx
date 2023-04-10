@@ -12,7 +12,13 @@ const ProfileButton: FC<ButtonProps> = ({
 }) => {
   return (
     <Link to="/profile" className={clsx(styles.button, className)}>
-      <div className={styles.icon}>{icon}</div>
+      <div className={styles.icon}>
+        <img
+          style={{ width: "32px", height: "32px", borderRadius: "100%" }}
+          src={icon}
+          alt="avatar"
+        />
+      </div>
       <span className={styles.text}>{name}</span>
     </Link>
   )

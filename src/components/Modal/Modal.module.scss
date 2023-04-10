@@ -18,6 +18,9 @@
 }
 
 .content {
+  position: relative;
+  height: 85vh;
+  overflow-y: scroll;
   padding: 20px;
   border-radius: 10px;
   background-color: #fff;
@@ -26,4 +29,16 @@
   &.active {
     transform: scale(1);
   }
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+}
+
+// Лучше убрать эту иконку
+.cross {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
 }

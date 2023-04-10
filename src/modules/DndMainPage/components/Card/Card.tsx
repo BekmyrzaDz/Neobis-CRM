@@ -1,11 +1,12 @@
 import clsx from "clsx"
-import { FC } from "react"
-import { Draggable } from "react-beautiful-dnd"
+import { FC, useState } from "react"
 import ClockTimeSvgComponent from "../Svg/ClockTimeSvgComponent"
-import instagram from "../../assets/image/instagram.svg"
-import { IDepartment, ISource, IStudent } from "../../types"
+import { IStudent } from "../../types"
 import styles from "./Card.module.scss"
 import { renderImg } from "../../helpers/renderImg"
+import { switchDepartmentName } from "../../helpers/switchDepartmentName"
+import Button from "../IconButton/Button"
+import { check, close } from "../../assets"
 
 interface Props {
   student: IStudent
@@ -14,16 +15,24 @@ interface Props {
 
 function Card<T>(props: Props) {
   const { student, isDragging } = props
+  const [color, setColor] = useState<string>("")
 
   const directionClasses = clsx(styles.directionUxUi, {
-    [styles.directionFront]: student?.department?.name === "Front-End",
-    [styles.directionBack]: student?.department?.name === "Back-End",
-    [styles.directionPM]: student?.department?.name === "PM",
-    [styles.directionAndroid]: student?.department?.name === "Android",
-    [styles.directionIOS]: student?.department?.name === "IOS",
-    [styles.directionFlutter]: student?.department?.name === "Flutter",
+    [styles.directionFront]:
+      student?.department?.name.toLowerCase() === "Front-End".toLowerCase(),
+    [styles.directionBack]:
+      student?.department?.name.toLowerCase() === "Back-End".toLowerCase(),
+    [styles.directionPM]:
+      student?.department?.name.toLowerCase() === "PM".toLowerCase(),
+    [styles.directionAndroid]:
+      student?.department?.name.toLowerCase() === "Android".toLowerCase(),
+    [styles.directionIOS]:
+      student?.department?.name.toLowerCase() === "IOS".toLowerCase(),
+    [styles.directionFlutter]:
+      student?.department?.name.toLowerCase() === "Flutter".toLowerCase(),
     [styles.directionOlimp]:
-      student?.department?.name === "Олимпиадное программирование",
+      student?.department?.name.toLowerCase() ===
+      "Olimped_programming".toLowerCase(),
   })
 
   // const cardClasses = clsx(styles.card, {
@@ -34,13 +43,29 @@ function Card<T>(props: Props) {
     [styles.idDrag]: isDragging,
   })
 
+  const handleMouseEnter = () => {
+    setColor("green")
+  }
+
+  const handleMouseLeave = () => {
+    setColor("")
+  }
+
+  // const date = new Date(student.request_date as string)
+  // const today = new Date()
+  // const deadline = new Date(student.request_date as string)
+
   return (
-    <div className={styles.card}>
+    <div
+      className={styles.card}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className={styles.cardInner}>
         <div className={styles.cardTop}>
           <div className={styles.clock}>
             <ClockTimeSvgComponent />
-            <div className={styles.time}>{}</div>
+            <div className={styles.time}>{student?.request_date}</div>
           </div>
           <div className={idClasses}>
             <span>{student?.id}</span>
@@ -53,7 +78,7 @@ function Card<T>(props: Props) {
             </p>
             <p className={styles.number}>{student?.phone}</p>
             <div className={directionClasses}>
-              <span>{student?.department?.name}</span>
+              <span>{switchDepartmentName(student?.department?.name)}</span>
             </div>
           </div>
           <div className={styles.contentBottom}>
@@ -61,7 +86,15 @@ function Card<T>(props: Props) {
               <div className={styles.icon}>
                 {renderImg(student?.came_from?.name)}
               </div>
-              {/* <span>{student?.came_from?.name}</span> */}
+            </div>
+            <div className={styles.deal}>
+              <Button
+                icon={check}
+                color={`violet`}
+                hoverColor={color}
+                isDragging={isDragging}
+              />
+              <Button icon={close} color={`red`} />
             </div>
           </div>
         </div>

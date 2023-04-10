@@ -8,6 +8,7 @@ import web from "./image/web.svg"
 import wallet from "./image/wallet.svg"
 import left from "./image/left.svg"
 import flagKyrgyzstan from "./image/flagKyrgyzstan.svg"
+import plusBox from "./image/plusBox.svg"
 
 export {
   advertisements,
@@ -20,4 +21,5 @@ export {
   wallet,
   left,
   flagKyrgyzstan,
+  plusBox,
 }

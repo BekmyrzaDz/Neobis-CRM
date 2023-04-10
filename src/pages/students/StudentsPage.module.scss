@@ -1,0 +1,62 @@
+@import '../../sass//base';
+
+.studentPage {
+  padding: 24px;
+  background-color: $count-gray-color;
+  min-height: 100vh;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  & > .actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+}
+
+.filterBtns {
+  margin-top: 64px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  & .ux {
+    color: #c656a0;
+  }
+  & .front {
+    color: #32b483;
+  }
+  & .pm {
+    color: #70bf44;
+  }
+  & .back {
+    color: #756fb3;
+  }
+  & .android {
+    color: #c656a0;
+  }
+  & .ios {
+    color: #a6ce39;
+  }
+  & .flutter {
+    color: #00a64e;
+  }
+  & .olimp {
+    color: #7c51a1;
+  }
+}
+
+.activeBtn {
+  background-color: #fff;
+}
+
+.content {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}

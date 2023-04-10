@@ -34,10 +34,7 @@ function departmentsClasses<T>(props: IDepartmentOptions) {
 }
 
 const Dropdown: FC<IDropdown> = ({ label, options, ...props }) => {
-  const [isActive, setIsActive] = useState<boolean>(false)
-  const keyId = useId()
   const [field, meta] = useField(props)
-  console.log(options)
 
   return (
     <div className={styles.dropdown}>
