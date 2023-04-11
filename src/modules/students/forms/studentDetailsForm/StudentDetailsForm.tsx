@@ -27,7 +27,7 @@ import { useParams } from 'react-router-dom'
 interface IInitialValues {
   first_name: string
   last_name: string
-  surname: string
+  group: string
   phone: string
   came_from?: {
     id: number
@@ -59,7 +59,7 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
   const initialValues: IInitialValues = {
     first_name: student.first_name || '',
     last_name: student.last_name || '',
-    surname: student.surname || '',
+    group: student.group || '',
     phone: student.phone || '',
     came_from: student.came_from?.name || '',
     department: student.department?.name || '',
@@ -76,7 +76,7 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
     const {
       first_name,
       last_name,
-      surname,
+      group,
       phone,
       came_from,
       department,
@@ -91,7 +91,7 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
         id,
         first_name,
         last_name,
-        surname,
+        group,
         phone,
         came_from: { name: came_from },
         department: { name: department },
@@ -111,7 +111,7 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
     const {
       first_name,
       last_name,
-      surname,
+      group,
       phone,
       came_from,
       department,
@@ -131,7 +131,7 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
           id,
           first_name,
           last_name,
-          surname,
+          group,
           phone,
           came_from: { name: came_from },
           department: { name: department },
@@ -152,7 +152,7 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
     const {
       first_name,
       last_name,
-      surname,
+      group,
       phone,
       came_from,
       department,
@@ -172,7 +172,7 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
           id,
           first_name,
           last_name,
-          surname,
+          group,
           phone,
           came_from: { name: came_from },
           department: { name: department },
@@ -232,6 +232,14 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
           options={departments}
           className={styles.depart}
         />
+        <Input
+          label='Группа*'
+          id='group'
+          name='group'
+          type='text'
+          placeholder='Группа'
+          className={styles.group}
+        />
         <div className={styles.rowWrapper}>
           <Input
             label='Имя*'
@@ -249,12 +257,11 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
           />
         </div>
         <div className={styles.rowWrapper}>
-          <Input
-            label='Отчество*'
-            id='surname'
-            name='surname'
-            type='text'
-            placeholder='Отчество'
+          <MySelect
+            label='Источник*'
+            id='came_from'
+            name='came_from'
+            options={came_from}
           />
           <Input
             label='Номер телефона*'
@@ -266,17 +273,16 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
         </div>
         <div className={styles.rowWrapper}>
           <MySelect
-            label='Источник*'
-            id='came_from'
-            name='came_from'
-            options={came_from}
-          />
-          <MySelect
             label='Наличие ноутбука*'
             id='laptop'
             name='laptop'
             options={laptop}
-            className={styles.laptop}
+          />
+          <MySelect
+            label='Статус оплаты'
+            id='payment_status'
+            name='payment_status'
+            options={payment_status}
           />
         </div>
         <MyTextarea
@@ -285,14 +291,6 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
           name='notes'
           className={styles.notes}
         />
-        <div className={styles.rowWrapper}>
-          <MySelect
-            label='Статус оплаты'
-            id='payment_status'
-            name='payment_status'
-            options={payment_status}
-          />
-        </div>
         <div className={styles.btns}>
           <IconButton text={'Сохранить изменения'} type={'submit'} />
           <IconButton

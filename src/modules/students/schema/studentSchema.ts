@@ -10,7 +10,7 @@ export const StudentSchema = Yup.object({
   last_name: Yup.string()
     .min(2, 'Минимум 2 символа')
     .required('Обязательное поле'),
-  surname: Yup.string()
+  group: Yup.string()
     .min(2, 'Минимум 2 символа')
     .required('Обязательное поле'),
   phone: Yup.string()

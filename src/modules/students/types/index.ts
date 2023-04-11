@@ -11,7 +11,7 @@ export interface IStudentOnStudy {
   id: number
   first_name: string
   last_name: string
-  surname: string
+  group: string
   phone: string
   came_from: {
     id: number
@@ -51,7 +51,7 @@ export interface ICreateStudentonStudy {
   token: string
   first_name: string
   last_name: string
-  surname: string
+  group: string
   phone: string
   came_from: {
     name: string

@@ -38,6 +38,10 @@
     margin-bottom: 24px;
   }
 
+  & > .group {
+    margin-bottom: 24px;
+  }
+
   & > .rowWrapper {
     display: flex;
     align-items: center;
@@ -45,9 +49,6 @@
     margin-bottom: 24px;
     & > div {
       width: 300px;
-    }
-    & > .laptop {
-      width: 150px;
     }
   }
 
