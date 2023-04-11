@@ -26,6 +26,19 @@ const getStudentsOnStudy = async ({
   return response.data
 }
 
+// Get all for filters
+const getDepartmentFilters = async (
+  token: string
+): Promise<IStudentOnStudy[]> => {
+  const response = await axios.get(API_URL, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  return response.data
+}
+
 // Get student on study by ID
 const getStudentOnStudyById = async ({
   token,
@@ -145,6 +158,7 @@ const studentsOnStudyService = {
   getStudentOnStudyById,
   editStudentOnStudyById,
   deleteStudentOnStudyById,
+  getDepartmentFilters,
 }
 
 export default studentsOnStudyService

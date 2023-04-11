@@ -15,6 +15,7 @@ import styles from './StudentForm.module.scss'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
 import {
   createStudentOnStudy,
+  getDepartmentFilters,
   getStudentsOnStudy,
 } from '../../redux/asyncActions'
 import { Dispatch, FC, SetStateAction } from 'react'
@@ -87,6 +88,7 @@ const StudentForm: FC<StudentFormProps> = ({
         })
       )
       await dispatch(getStudentsOnStudy({ token, departmentFilter }))
+      await dispatch(getDepartmentFilters(token))
 
       setModalActive(false)
     } catch (error) {}

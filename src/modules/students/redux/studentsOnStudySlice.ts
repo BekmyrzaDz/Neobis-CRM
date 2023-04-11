@@ -4,12 +4,14 @@ import {
   createStudentOnStudy,
   deleteStudentOnStudyById,
   editStudentOnStudyById,
+  getDepartmentFilters,
   getStudentOnStudyById,
   getStudentsOnStudy,
 } from './asyncActions'
 
 const initialState: IStudentOnStudyState = {
   studentsOnStudy: [],
+  studentsOnStudyForFilters: [],
   studentOnStudy: {},
   isLoading: false,
   isError: false,
@@ -32,6 +34,21 @@ export const studentsOnStudySlice = createSlice({
         }
       )
       .addCase(getStudentsOnStudy.rejected, (state) => {
+        state.isLoading = false
+        state.isError = true
+        state.studentsOnStudy = []
+      })
+      .addCase(getDepartmentFilters.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(
+        getDepartmentFilters.fulfilled,
+        (state, action: PayloadAction<IStudentOnStudy[]>) => {
+          state.isLoading = false
+          state.studentsOnStudyForFilters = action.payload
+        }
+      )
+      .addCase(getDepartmentFilters.rejected, (state) => {
         state.isLoading = false
         state.isError = true
         state.studentsOnStudy = []

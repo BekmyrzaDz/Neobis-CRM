@@ -16,11 +16,7 @@ const FilterButton: FC<IFilterButton> = ({
       onClick={onClick}
     >
       <span className={`${styles.text} ${extraClassForText}`}>{text}</span>
-      {typeof count === 'number' ? (
-        <span className={`${styles.count}`}>{count}</span>
-      ) : (
-        <img src={count} alt='logo' className={styles.departIcon} />
-      )}
+      <span className={`${styles.count}`}>{count}</span>
     </button>
   )
 }

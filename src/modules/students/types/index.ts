@@ -1,6 +1,7 @@
 // Redux students-on-study state
 export interface IStudentOnStudyState {
   studentsOnStudy: IStudentOnStudy[] | []
+  studentsOnStudyForFilters: IStudentOnStudy[] | []
   studentOnStudy: IStudentOnStudy | {}
   isLoading: boolean
   isError: boolean

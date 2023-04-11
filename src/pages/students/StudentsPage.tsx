@@ -19,61 +19,16 @@ import StudentForm from '../../modules/students/forms/studentForm/StudentForm'
 import GroupCard from '../../modules/students/components/groupCard/GroupCard'
 import GroupForm from '../../modules/students/forms/groupForm/GroupForm'
 import { getProfileById } from '../../modules/profilePage/redux/asyncActions'
-import { getStudentsOnStudy } from '../../modules/students/redux/asyncActions'
 import {
-  plusIcon,
-  allIcon,
-  uxuiIcon,
-  frontendIcon,
-  pmIcon,
-  backendIcon,
-  androidIcon,
-  iosIcon,
-  flutterIcon,
-  olympIcon,
-} from '../../modules/students/assets/icons'
+  getDepartmentFilters,
+  getStudentsOnStudy,
+} from '../../modules/students/redux/asyncActions'
+import { plusIcon } from '../../modules/students/assets/icons'
 
 import styles from './StudentsPage.module.scss'
 
 type ModalState = [boolean, Dispatch<SetStateAction<boolean>>]
 type activeOptionState = [string, Dispatch<SetStateAction<string>>]
-
-const departmentFilters = [
-  { id: '', text: 'Все', icon: allIcon, extraClassForText: styles.all },
-  { id: 'ux-ui', text: 'UX/UI', icon: uxuiIcon, extraClassForText: styles.ux },
-  {
-    id: 'front-end',
-    text: 'Front-end',
-    icon: frontendIcon,
-    extraClassForText: styles.front,
-  },
-  { id: 'pm', text: 'PM', icon: pmIcon, extraClassForText: styles.pm },
-  {
-    id: 'back-end',
-    text: 'Back-end',
-    icon: backendIcon,
-    extraClassForText: styles.back,
-  },
-  {
-    id: 'android',
-    text: 'Android',
-    icon: androidIcon,
-    extraClassForText: styles.android,
-  },
-  { id: 'ios', text: 'iOS', icon: iosIcon, extraClassForText: styles.ios },
-  {
-    id: 'flutter',
-    text: 'Flutter',
-    icon: flutterIcon,
-    extraClassForText: styles.flutter,
-  },
-  {
-    id: 'olimped_programming',
-    text: 'Олимп. программирование',
-    icon: olympIcon,
-    extraClassForText: styles.olymp,
-  },
-]
 
 const StudentsPage = () => {
   const navigate = useNavigate()
@@ -94,9 +49,17 @@ const StudentsPage = () => {
   const auth_avatar = profile.profile?.image!
   const { isLoading } = study
   const studentsOnStudy = study.studentsOnStudy
+  const studentsOnStudyForFilters = study.studentsOnStudyForFilters
+
   useEffect(() => {
     if (authUserId !== undefined) {
       dispatch(getProfileById(authUserId))
+    }
+  }, [])
+
+  useEffect(() => {
+    if (token !== undefined) {
+      dispatch(getDepartmentFilters(token))
     }
   }, [])
 
@@ -113,6 +76,79 @@ const StudentsPage = () => {
   const onAddStudent = useCallback(() => {
     setModalActive((prev) => !prev)
   }, [])
+
+  const departmentFilters = [
+    {
+      id: '',
+      text: 'Все',
+      count: studentsOnStudyForFilters.length,
+      extraClassForText: styles.all,
+    },
+    {
+      id: 'ux-ui',
+      text: 'UX/UI',
+      count: studentsOnStudyForFilters.filter(
+        (student) => student.department.name === 'ux-ui'
+      ).length,
+      extraClassForText: styles.ux,
+    },
+    {
+      id: 'front-end',
+      text: 'Front-end',
+      count: studentsOnStudyForFilters.filter(
+        (student) => student.department.name === 'front-end'
+      ).length,
+      extraClassForText: styles.front,
+    },
+    {
+      id: 'pm',
+      text: 'PM',
+      count: studentsOnStudyForFilters.filter(
+        (student) => student.department.name === 'pm'
+      ).length,
+      extraClassForText: styles.pm,
+    },
+    {
+      id: 'back-end',
+      text: 'Back-end',
+      count: studentsOnStudyForFilters.filter(
+        (student) => student.department.name === 'back-end'
+      ).length,
+      extraClassForText: styles.back,
+    },
+    {
+      id: 'android',
+      text: 'Android',
+      count: studentsOnStudyForFilters.filter(
+        (student) => student.department.name === 'android'
+      ).length,
+      extraClassForText: styles.android,
+    },
+    {
+      id: 'ios',
+      text: 'iOS',
+      count: studentsOnStudyForFilters.filter(
+        (student) => student.department.name === 'ios'
+      ).length,
+      extraClassForText: styles.ios,
+    },
+    {
+      id: 'flutter',
+      text: 'Flutter',
+      count: studentsOnStudyForFilters.filter(
+        (student) => student.department.name === 'flutter'
+      ).length,
+      extraClassForText: styles.flutter,
+    },
+    {
+      id: 'olimped_programming',
+      text: 'Олимп. программирование',
+      count: studentsOnStudyForFilters.filter(
+        (student) => student.department.name === 'olimped_programming'
+      ).length,
+      extraClassForText: styles.olymp,
+    },
+  ]
 
   if (isLoading) {
     return <Spinner />
@@ -152,11 +188,11 @@ const StudentsPage = () => {
       </div>
 
       <div className={styles.filterBtns} id='filterBtns'>
-        {departmentFilters.map(({ id, text, icon, extraClassForText }) => (
+        {departmentFilters.map(({ id, text, count, extraClassForText }) => (
           <FilterButton
             key={id}
             text={text}
-            count={departmentFilter === id ? studentsOnStudy.length : icon}
+            count={count}
             isActive={departmentFilter === id}
             onClick={() => setDepartmentFilter(id)}
             extraClassForText={extraClassForText}

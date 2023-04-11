@@ -47,6 +47,35 @@ export const getStudentsOnStudy = createAsyncThunk<
   }
 )
 
+// Get all students on study
+export const getDepartmentFilters = createAsyncThunk<
+  IStudentOnStudy[],
+  string,
+  { rejectValue: string }
+>('studentsOnStudy/getDepartmentFilters', async (token, thunkAPI) => {
+  try {
+    const response = await studentsOnStudyService.getDepartmentFilters(token)
+    return response
+  } catch (error: unknown) {
+    if (typeof error === 'string') {
+      toast.error(error)
+      return thunkAPI.rejectWithValue(error)
+    }
+    if (error instanceof AxiosError) {
+      const message =
+        error.response?.data?.detail ||
+        (error.response &&
+          error.response?.data &&
+          error.response?.data?.message) ||
+        error.message ||
+        error.toString()
+      toast.error(message)
+      return thunkAPI.rejectWithValue(message)
+    }
+    throw error
+  }
+})
+
 // Get student on study by ID
 export const getStudentOnStudyById = createAsyncThunk<
   IStudentOnStudy,
@@ -132,7 +161,7 @@ export const createStudentOnStudy = createAsyncThunk<
       if (error instanceof AxiosError) {
         const message =
           error.response?.data?.detail ||
-          error.response?.data?.phone[0] || 
+          error.response?.data?.phone[0] ||
           (error.response &&
             error.response?.data &&
             error.response?.data?.message) ||
