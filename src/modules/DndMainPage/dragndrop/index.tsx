@@ -1,31 +1,39 @@
 import { useState, FC, useEffect } from "react"
 import { DragDropContext, DropResult } from "react-beautiful-dnd"
-import Column from "../components/Column/Column"
-import { initialData } from "../client-db/client-data"
+import { Form, Formik } from "formik"
 import {
   IColumn,
   IData,
   IStudent,
   IStudentState,
   IUpdateStudent,
+  IUpdateStudentData,
 } from "../types"
-import styles from "./index.module.scss"
-import { useAppDispatch, useAppSelector } from "../../../hooks/redux"
-import { fetchAllStudents, fetchUpdateStudent } from "../redux/asyncActions"
+import Column from "../components/Column/Column"
 import Modal from "../../../components/ModalPopupMainPage/Modal"
-import { Form, Formik } from "formik"
+import ModalDelete from "../../../components/ModalPopupDelete/Modal"
 import MySelect from "../../../components/Select/MySelect"
 import Input from "../../../components/Input/MyInput"
 import MyTextarea from "../../../components/Textarea/MyTextarea"
-import { clientSchema } from "../Schema/Validation"
+import IconButton from "../../../components/iconButton/IconButton"
+import {
+  fetchAllStudents,
+  fetchDeleteStudent,
+  fetchDetailUpdateStudent,
+  fetchStudentById,
+  fetchUpdateStudent,
+} from "../redux/asyncActions"
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux"
 import {
   departments,
   laptop,
   payment,
   source,
 } from "../selectOptions/clientFormOptions"
-import IconButton from "../../../components/iconButton/IconButton"
+import { initialData } from "../client-db/client-data"
+import { clientSchema } from "../Schema/Validation"
 import { busketIcon, clockTime, deleteIcon } from "../assets"
+import styles from "./index.module.scss"
 
 // Reorder column list
 export const reorderColumnList = (
@@ -62,7 +70,7 @@ export const DragAndDrop: FC = () => {
       (student) =>
         student.status?.name.toLowerCase() ===
           state.columns[column].title.toLowerCase() &&
-        student.on_request === true
+        (student.on_request === true || student.is_archive === false)
     )
 
     return response
@@ -213,21 +221,28 @@ export const DragAndDrop: FC = () => {
     setState(newState)
   }
 
+  const [open, setOpen] = useState<boolean>(false)
+  const [openDelete, setOpenDelete] = useState<boolean>(false)
+
+  const student = useAppSelector((state) => state?.client?.newStudent)
+  const id = useAppSelector((state) => state?.client?.newStudent?.id)
+  console.log(student)
+
   const initialValues: IUpdateStudent = {
-    first_name: "",
-    last_name: "",
+    first_name: student?.first_name ? student?.first_name : "",
+    last_name: student?.last_name ? student?.last_name : "",
     surname: "",
-    notes: "",
-    phone: "",
-    laptop: "",
+    notes: student?.notes ? student?.notes : "",
+    phone: student?.phone ? student?.phone : "",
+    laptop: student?.laptop === true ? "yes" : "no",
     department: {
-      name: "",
+      name: student?.department?.name as string,
     },
     came_from: {
-      name: "",
+      name: student?.came_from?.name as string,
     },
     payment_method: {
-      name: "",
+      name: student?.payment_method?.name as string,
     },
   }
 
@@ -242,7 +257,7 @@ export const DragAndDrop: FC = () => {
       phone,
     } = value
 
-    const changeValue: IUpdateStudent = {
+    const updateStudent: IUpdateStudent = {
       ...value,
       first_name,
       last_name,
@@ -255,6 +270,9 @@ export const DragAndDrop: FC = () => {
       payment_method: {
         name: payment_method?.name as string,
       },
+      status: {
+        name: student?.status?.name as string,
+      },
       phone,
       laptop: laptop === "yes" ? true : false,
       paid: false,
@@ -262,12 +280,48 @@ export const DragAndDrop: FC = () => {
       is_archive: false,
     }
 
-    console.log(JSON.stringify(changeValue, null, 2))
+    // console.log(JSON.stringify(updateStudent, null, 2))
 
-    // dispatch(fetchUpdateStudent(id, changeValue))
+    dispatch(
+      fetchDetailUpdateStudent({ id, updateStudent } as IUpdateStudentData)
+    )
   }
 
-  const [open, setOpen] = useState<boolean>(false)
+  const handleArchive = () => {
+    const updateStudent: IUpdateStudent = {
+      ...student,
+      came_from: {
+        name: student?.came_from?.name as string,
+      },
+      department: {
+        name: student?.department?.name as string,
+      },
+      payment_method: {
+        name: student?.payment_method?.name as string,
+      },
+      status: {
+        name: student?.status?.name as string,
+      },
+      paid: false,
+      on_request: true,
+      is_archive: true,
+    }
+
+    dispatch(
+      fetchDetailUpdateStudent({ id, updateStudent } as IUpdateStudentData)
+    )
+  }
+
+  const handleClick = () => {
+    setOpen(false)
+    setTimeout(() => {
+      setOpenDelete(true)
+    }, 100)
+  }
+
+  const handleDelete = () => {
+    dispatch(fetchDeleteStudent(id as number))
+  }
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -311,7 +365,7 @@ export const DragAndDrop: FC = () => {
                           <p className={styles.time}>20 ч.</p>
                         </div>
                         <div className={styles.idWrap}>
-                          <p className={styles.id}>ID654789</p>
+                          <p className={styles.id}>{student?.id}</p>
                         </div>
                       </div>
                       <IconButton
@@ -319,6 +373,7 @@ export const DragAndDrop: FC = () => {
                         icon={busketIcon}
                         className={styles.archiveBtn}
                         type={"button"}
+                        onClick={handleArchive}
                       />
                     </div>
                     <div className={styles.content}>
@@ -338,7 +393,7 @@ export const DragAndDrop: FC = () => {
                             name="first_name"
                             type="text"
                             placeholder="Имя"
-                            className={styles.firstName}
+                            value={student?.first_name}
                           />
                         </div>
                         <div className={styles.columnTwo}>
@@ -396,11 +451,30 @@ export const DragAndDrop: FC = () => {
                         icon={deleteIcon}
                         className={styles.deleteBtn}
                         type={"button"}
+                        onClick={handleClick}
                       />
                     </div>
                   </Form>
                 </Formik>
               </Modal>
+            )}
+            {openDelete && (
+              <ModalDelete active={openDelete} setActive={setOpenDelete}>
+                <h3 className={styles.deleteTitle}>
+                  Вы уверены что хотите удалить ?
+                </h3>
+                <div className={styles.btnsWrap}>
+                  <IconButton
+                    text={"Да"}
+                    className={styles.deleteBtn}
+                    onClick={handleDelete}
+                  />
+                  <IconButton
+                    text={"Нет"}
+                    onClick={() => setOpenDelete(false)}
+                  />
+                </div>
+              </ModalDelete>
             )}
           </>
         </div>

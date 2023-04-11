@@ -1,5 +1,6 @@
 export interface IStudentState {
-  student: IStudent[] | null
+  student?: IStudent[] | null
+  newStudent?: IStudent | null
   isLoading: boolean
   isSuccess: boolean
   isError: boolean

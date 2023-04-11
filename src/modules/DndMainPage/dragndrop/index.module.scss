@@ -127,3 +127,19 @@
   color: $violet-color;
   padding: 9px 13px;
 }
+
+.deleteTitle {
+  font-family: Segoe UI;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23.94px;
+  color: #252525;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.btnsWrap {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}

@@ -7,6 +7,7 @@ import mentorsReducer from '../modules/Employees/redux/mentors/mentorsSlice';
 import adminsReducer from '../modules/Employees/redux/admins/adminsSlice';
 // import { createStudentSlice } from './../modules/AddClient/redux/addClientSlice';
 import clientReducer from '../modules/DndMainPage/redux/dndSlice'
+import detailWiewReducer from '../modules/DndMainPage/redux/detailViewSlice'
 import createStudentSlice from '../modules/AddClient/redux/addClientSlice'
 
 const rootReducer = combineReducers({
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   admins: adminsReducer,
   client: clientReducer,
   addClient: createStudentSlice,
+  singelClient: detailWiewReducer,
 });
 
 export const setupStore = () => {

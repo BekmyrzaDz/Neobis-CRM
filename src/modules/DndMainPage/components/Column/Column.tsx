@@ -41,6 +41,7 @@ function Column<T>(props: Props) {
                         student={student}
                         isDragging={draggableSnapshot.isDragging}
                         setOpen={setOpen}
+                        // setClientId={setClientId}
                       />
                     </div>
                   )}

@@ -7,6 +7,8 @@ import { renderImg } from "../../helpers/renderImg"
 import { switchDepartmentName } from "../../helpers/switchDepartmentName"
 import Button from "../IconButton/Button"
 import { check, close } from "../../assets"
+import { useAppDispatch } from "../../../../hooks/redux"
+import { fetchStudentById } from "../../redux/asyncActions"
 
 interface Props {
   student: IStudent
@@ -15,7 +17,8 @@ interface Props {
 }
 
 function Card<T>(props: Props) {
-  const { student, isDragging } = props
+  const dispatch = useAppDispatch()
+  const { student, isDragging, setOpen } = props
   const [color, setColor] = useState<string>("")
 
   const directionClasses = clsx(styles.directionUxUi, {
@@ -52,20 +55,19 @@ function Card<T>(props: Props) {
     setColor("")
   }
 
-  const handleOpen = () => {
-    props.setOpen(true)
-  }
+  const { id } = student
 
-  // const date = new Date(student.request_date as string)
-  // const today = new Date()
-  // const deadline = new Date(student.request_date as string)
+  const handleClick = () => {
+    dispatch(fetchStudentById(id as number))
+    setOpen(true)
+  }
 
   return (
     <div
       className={styles.card}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={handleOpen}
+      onClick={handleClick}
     >
       <div className={styles.cardInner}>
         <div className={styles.cardTop}>

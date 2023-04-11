@@ -9,12 +9,13 @@ import { reset } from "../../../../modules/DndMainPage/redux/dndSlice"
 const MainPage: FC = () => {
   const dispatch = useAppDispatch()
   const client = useAppSelector((state) => state?.addClient)
+  const student = useAppSelector((state) => state?.singelClient)
 
   if (client.isSuccess) {
     dispatch(reset())
   }
 
-  if (client.isLoading) {
+  if (client.isLoading || student.isLoading) {
     return <Spinner />
   }
 

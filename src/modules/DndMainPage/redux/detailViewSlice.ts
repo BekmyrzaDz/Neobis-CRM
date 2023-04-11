@@ -1,18 +1,17 @@
 // import { IStudentState, IStudent } from '../types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { IData, IStudent, IUpdateStudent, IStudentState, IColumn } from '../types'
-import { fetchAllStudents, fetchDetailUpdateStudent, fetchStudentById } from './asyncActions'
+import { fetchAllStudents, fetchDeleteStudent, fetchDetailUpdateStudent, fetchStudentById } from './asyncActions'
 
 const initialState: IStudentState = {
-  student: [],
   newStudent: null,
   isLoading: false,
   isSuccess: false,
   isError: false,
 }
 
-export const dndSlice = createSlice({
-  name: 'client',
+export const detailViewSlice = createSlice({
+  name: 'singleClient',
   initialState,
   reducers: {
     reset: (state) => {
@@ -23,32 +22,32 @@ export const dndSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAllStudents.pending, (state) => {
+      .addCase(fetchDetailUpdateStudent.pending, (state) => {
         state.isLoading = true
       })
       .addCase(
-        fetchAllStudents.fulfilled,
-        (state, action: PayloadAction<IStudent[]>) => {
-          state.isLoading = false
-          state.isSuccess = true
-          state.student = action.payload
-      })
-      .addCase(fetchAllStudents.rejected, (state) => {
-        state.isLoading = false
-        state.isError = true
-        state.student = null
-      })
-      .addCase(fetchStudentById.pending, (state) => {
-        state.isLoading = true
-      })
-      .addCase(
-        fetchStudentById.fulfilled,
+        fetchDetailUpdateStudent.fulfilled,
         (state, action: PayloadAction<IStudent>) => {
           state.isLoading = false
           state.isSuccess = true
           state.newStudent = action.payload
       })
-      .addCase(fetchStudentById.rejected, (state) => {
+      .addCase(fetchDetailUpdateStudent.rejected, (state) => {
+        state.isLoading = false
+        state.isError = true
+        state.newStudent = null
+      })
+      .addCase(fetchDeleteStudent.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(
+        fetchDeleteStudent.fulfilled,
+        (state, action: PayloadAction<IStudent>) => {
+          state.isLoading = false
+          state.isSuccess = true
+          state.newStudent = action.payload
+      })
+      .addCase(fetchDeleteStudent.rejected, (state) => {
         state.isLoading = false
         state.isError = true
         state.newStudent = null
@@ -57,5 +56,5 @@ export const dndSlice = createSlice({
   
 })
 
-export const { reset } = dndSlice.actions
-export default dndSlice.reducer
+export const { reset } = detailViewSlice.actions
+export default detailViewSlice.reducer
