@@ -13,6 +13,53 @@ const rows = [
 
 
 
+
+type TPopap = {
+  popap: boolean;
+  setPopap: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+
+const MyTable: React.FC<TPopap> = ({ popap, setPopap }) => {
+  const classes = useStyles();
+
+
+  return (
+    <div className={classes.root} >
+      <div className={classes.tableTop}>
+        <h2 className={classes.tabelTitle}>
+          <img src={black} alt='blacklist' />
+          Черный список</h2>
+        <img onClick={() => setPopap(false)} src={close} alt='close' />
+      </div>
+
+      <DataGrid
+        rows={rows}
+        columns={[
+          {
+            field: 'fullName', headerName: 'ФИО', width: 180, headerClassName: classes.headerName, align: 'center'
+          },
+          {
+            field: 'date', headerName: 'Дата', width: 180, headerClassName: classes.headerName, align: 'center'
+          },
+          {
+            field: 'acceptedBy', headerName: 'Кто принял', width: 190, headerClassName: classes.headerName, align: 'center'
+          },
+        ]}
+        pageSize={5}
+        className={classes.table}
+        rowHeight={60}
+
+      />
+    </div>
+  );
+}
+
+
+export default MyTable;
+
+
+
 const useStyles = makeStyles({
   tableTop: {
     margin: '15px',
@@ -32,7 +79,7 @@ const useStyles = makeStyles({
   root: {
     color: '#fff',
     position: 'fixed',
-    top: '30%',
+    top: '20%',
     left: '35%',
     transform: 'translate(-50 %, -50 %)',
     zIndex: 1,
@@ -57,46 +104,3 @@ const useStyles = makeStyles({
     },
   }
 });
-
-export default function MyTable({ popap, setPopap }) {
-  const classes = useStyles();
-
-  const handleClick = (params) => {
-    setPopap({
-      open: true,
-      data: params.row,
-    });
-  };
-
-
-  return (
-    <div className={classes.root} >
-      <div className={classes.tableTop}>
-        <h2 className={classes.tabelTitle}>
-          <img src={black} alt='blacklist' />
-          Черный список</h2>
-        <img onClick={() => handleClick} src={close} alt='close' />
-      </div>
-
-      <DataGrid
-        rows={rows}
-        columns={[
-          {
-            field: 'fullName', headerName: 'ФИО', width: 180, headerClassName: classes.headerName, align: 'center'
-          },
-          {
-            field: 'date', headerName: 'Дата', width: 180, headerClassName: classes.headerName, align: 'center'
-          },
-          {
-            field: 'acceptedBy', headerName: 'Кто принял', width: 190, headerClassName: classes.headerName, align: 'center'
-          },
-        ]}
-        pageSize={5}
-        onRowClick={handleClick}
-        className={classes.table}
-        rowHeight={60}
-
-      />
-    </div>
-  );
-}
