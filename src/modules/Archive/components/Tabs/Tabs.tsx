@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 import ArchiveBase from '../ArchiveBase/ArchiveBase';
 import Students from '../Content/Students/Students';
+import Groups from '../Content/Groups/Groups';
 
 export default function TabComponent() {
   const classes = useStyles();
@@ -47,8 +48,8 @@ export default function TabComponent() {
 
   const TabsItem: TabsItems[] = [
     { title: 'Менеджеры', count: 5 },
-    { title: 'Преподаватели', count: 5 },
     { title: 'Админы', count: 5 },
+    { title: 'Преподаватели', count: 5 },
     { title: 'Студенты', count: 5 },
     { title: 'Группы', count: 5 },
     { title: 'Курсы', count: 5 },
@@ -77,6 +78,7 @@ export default function TabComponent() {
       {value === 1 && <ArchiveBase employees={rows} />}
       {value === 2 && <ArchiveBase employees={rows} />}
       {value === 3 && <Students />}
+      {value === 4 && <Groups />}
     </div>
   );
 }
