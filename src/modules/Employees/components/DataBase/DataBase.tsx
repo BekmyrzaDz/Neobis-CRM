@@ -205,7 +205,6 @@ const useStyles = makeStyles({
     backgroundColor: '#FFFFFF',
     borderRadius: '16px',
     padding: '20px',
-
   },
 
   dataGrid: {

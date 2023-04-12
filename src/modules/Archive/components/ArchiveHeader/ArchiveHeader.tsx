@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { getProfileById } from '../../../profilePage/redux/asyncActions'
 import SearchBar from '../../../CoursePage/components/SearchBar/SearchBar';
 import blackList from '../../assets/blackList.svg'
-// import ModalPopap from '../ModalPopap/ModalPopap';
+import BlackList from '../../components/BlackList/BlackList'
 import ProfileIcon from '../../../students/components/profileIcon/ProfileIcon';
 
 
@@ -41,7 +41,7 @@ function Header() {
               <img src={blackList} alt="blacklist" style={{ marginRight: '13px' }} />
               Черный список
             </Button>
-            {/* {popap && <ModalPopap popap={popap} setPopap={setPopap} />} */}
+            {popap && <BlackList popap={popap} setPopap={setPopap} />}
             <ProfileIcon
               avatar={image}
               text={`${first_name} ${last_name} `}
