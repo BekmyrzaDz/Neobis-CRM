@@ -9,8 +9,8 @@ import { IconButton } from '@material-ui/core';
 import Spinner from '../../../../components/spinner/spinner';
 import { makeStyles } from '@material-ui/styles';
 import { Menu, MenuItem, Box } from '@material-ui/core';
-// import archive from '../../assets/archive.png';
-// import trash from '../../assets/redTrash.svg';
+import archive from '../../assets/archive.png';
+import trash from '../../assets/redTrash.svg';
 
 interface IAllEmployees {
   id: number;
