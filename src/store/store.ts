@@ -8,12 +8,16 @@ import adminsReducer from '../modules/Employees/redux/admins/adminsSlice'
 // import { createStudentSlice } from './../modules/AddClient/redux/addClientSlice';
 import clientReducer from '../modules/DndMainPage/redux/dndSlice'
 import createStudentSlice from '../modules/AddClient/redux/addClientSlice'
-import studentsOnStudyReducer from '../modules/students/redux/studentsOnStudySlice'
+import studentsOnStudyReducer from '../modules/students/redux/students/studentsOnStudySlice'
+import groupsOnStudyReducer from '../modules/students/redux/groups/groupsOnStudySlice'
+
+
 
 const rootReducer = combineReducers({
   auth: authReducer,
   profile: profileReducer,
   studentsOnStudy: studentsOnStudyReducer,
+  groupsOnStudy: groupsOnStudyReducer,
   allEmployees: allEmployeesReducer,
   managers: managersReducer,
   mentors: mentorsReducer,

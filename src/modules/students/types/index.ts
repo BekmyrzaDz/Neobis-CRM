@@ -71,3 +71,50 @@ export interface ICreateStudentonStudy {
 export interface IEditStudentonStudy extends ICreateStudentonStudy {
   id: number
 }
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!GROUPS!!!!!!!!!!!!!!!!!!!!!
+
+// GroupsOnStudyState
+export interface GroupsOnStudyState {
+  groupsOnStudy: IGroupOnStudy[] | []
+  groupsOnStudyForFilters: IGroupOnStudy[] | []
+  groupOnStudy: IGroupOnStudy | {}
+  isLoading: boolean
+  isError: boolean
+}
+
+// Single group type
+export interface IGroupOnStudy {
+  id: number
+  name: string
+  mentor: {
+    id: number
+    first_name: string
+    last_name: string
+    image: string
+  }
+  department: {
+    name: string
+  }
+  students_max: number
+  status: {
+    id: number
+    status_name: string
+  }
+  schedule_type: number
+  classroom: {
+    id: number
+    name: string
+  }
+  is_archive: boolean
+  start_at_date: string
+  end_at_date: string
+  start_at_time: string
+  end_at_time: string
+}
+
+// Get all groups type
+export interface IGetAllGroupsOnStudy {
+  token: string
+  departmentFilter: string
+}

@@ -22,10 +22,14 @@ import { getProfileById } from '../../modules/profilePage/redux/asyncActions'
 import {
   getDepartmentFilters,
   getStudentsOnStudy,
-} from '../../modules/students/redux/asyncActions'
+} from '../../modules/students/redux/students/asyncActions'
 import { plusIcon } from '../../modules/students/assets/icons'
 
 import styles from './StudentsPage.module.scss'
+import {
+  getAllGroups,
+  getGroupDepartmentFilters,
+} from '../../modules/students/redux/groups/asyncActions'
 
 type ModalState = [boolean, Dispatch<SetStateAction<boolean>>]
 type activeOptionState = [string, Dispatch<SetStateAction<string>>]
@@ -40,16 +44,20 @@ const StudentsPage = () => {
 
   const auth = useAppSelector((state) => state.auth)
   const profile = useAppSelector((state) => state.profile)
-  const study = useAppSelector((state) => state.studentsOnStudy)
+  const studyStudents = useAppSelector((state) => state.studentsOnStudy)
+  const studyGroups = useAppSelector((state) => state.groupsOnStudy)
 
   const token = auth.user?.access
   const authUserId = auth.user?.id
   const auth_first_name = profile.profile?.first_name
   const auth_last_name = profile.profile?.last_name
   const auth_avatar = profile.profile?.image!
-  const { isLoading } = study
-  const studentsOnStudy = study.studentsOnStudy
-  const studentsOnStudyForFilters = study.studentsOnStudyForFilters
+  const studentsLoading = studyStudents.isLoading
+  const groupsLoading = studyGroups.isLoading
+  const studentsOnStudy = studyStudents.studentsOnStudy
+  const groupsOnStudy = studyGroups.groupsOnStudy
+  const studentsOnStudyForFilters = studyStudents.studentsOnStudyForFilters
+  const groupsOnStudyForFilters = studyGroups.groupsOnStudyForFilters
 
   useEffect(() => {
     if (authUserId !== undefined) {
@@ -58,16 +66,24 @@ const StudentsPage = () => {
   }, [])
 
   useEffect(() => {
-    if (token !== undefined) {
+    if (activeOption === 'Студенты' && token !== undefined) {
       dispatch(getDepartmentFilters(token))
     }
-  }, [])
+
+    if (activeOption === 'Группы' && token !== undefined) {
+      dispatch(getGroupDepartmentFilters(token))
+    }
+  }, [activeOption])
 
   useEffect(() => {
     if (activeOption === 'Студенты' && token !== undefined) {
       dispatch(getStudentsOnStudy({ token, departmentFilter }))
+    } else {
+      if (activeOption === 'Группы' && token !== undefined) {
+        dispatch(getAllGroups({ token, departmentFilter }))
+      }
     }
-  }, [departmentFilter])
+  }, [departmentFilter, activeOption])
 
   const onToggleModal = useCallback(() => {
     setModalActive((prev) => !prev)
@@ -81,76 +97,123 @@ const StudentsPage = () => {
     {
       id: '',
       text: 'Все',
-      count: studentsOnStudyForFilters.length,
+      count:
+        activeOption === 'Студенты'
+          ? studentsOnStudyForFilters.length
+          : groupsOnStudyForFilters.length,
       extraClassForText: styles.all,
     },
     {
       id: 'ux-ui',
       text: 'UX/UI',
-      count: studentsOnStudyForFilters.filter(
-        (student) => student.department.name === 'ux-ui'
-      ).length,
+      count:
+        activeOption === 'Студенты'
+          ? studentsOnStudyForFilters.filter(
+              (student) => student.department.name === 'ux-ui'
+            ).length
+          : groupsOnStudyForFilters.filter(
+              (group) => group.department.name === 'ux-ui'
+            ).length,
       extraClassForText: styles.ux,
     },
     {
       id: 'front-end',
       text: 'Front-end',
-      count: studentsOnStudyForFilters.filter(
-        (student) => student.department.name === 'front-end'
-      ).length,
+      count:
+        activeOption === 'Студенты'
+          ? studentsOnStudyForFilters.filter(
+              (student) => student.department.name === 'front-end'
+            ).length
+          : groupsOnStudyForFilters.filter(
+              (group) => group.department.name === 'front-end'
+            ).length,
       extraClassForText: styles.front,
     },
     {
       id: 'pm',
       text: 'PM',
-      count: studentsOnStudyForFilters.filter(
-        (student) => student.department.name === 'pm'
-      ).length,
+      count:
+        activeOption === 'Студенты'
+          ? studentsOnStudyForFilters.filter(
+              (student) => student.department.name === 'pm'
+            ).length
+          : groupsOnStudyForFilters.filter(
+              (group) => group.department.name === 'pm'
+            ).length,
       extraClassForText: styles.pm,
     },
     {
       id: 'back-end',
       text: 'Back-end',
-      count: studentsOnStudyForFilters.filter(
-        (student) => student.department.name === 'back-end'
-      ).length,
+      count:
+        activeOption === 'Студенты'
+          ? studentsOnStudyForFilters.filter(
+              (student) => student.department.name === 'back-end'
+            ).length
+          : groupsOnStudyForFilters.filter(
+              (group) => group.department.name === 'back-end'
+            ).length,
       extraClassForText: styles.back,
     },
     {
       id: 'android',
       text: 'Android',
-      count: studentsOnStudyForFilters.filter(
-        (student) => student.department.name === 'android'
-      ).length,
+      count:
+        activeOption === 'Студенты'
+          ? studentsOnStudyForFilters.filter(
+              (student) => student.department.name === 'android'
+            ).length
+          : groupsOnStudyForFilters.filter(
+              (group) => group.department.name === 'android'
+            ).length,
       extraClassForText: styles.android,
     },
     {
       id: 'ios',
       text: 'iOS',
-      count: studentsOnStudyForFilters.filter(
-        (student) => student.department.name === 'ios'
-      ).length,
+      count:
+        activeOption === 'Студенты'
+          ? studentsOnStudyForFilters.filter(
+              (student) => student.department.name === 'ios'
+            ).length
+          : groupsOnStudyForFilters.filter(
+              (group) => group.department.name === 'ios'
+            ).length,
       extraClassForText: styles.ios,
     },
     {
       id: 'flutter',
       text: 'Flutter',
-      count: studentsOnStudyForFilters.filter(
-        (student) => student.department.name === 'flutter'
-      ).length,
+      count:
+        activeOption === 'Студенты'
+          ? studentsOnStudyForFilters.filter(
+              (student) => student.department.name === 'flutter'
+            ).length
+          : groupsOnStudyForFilters.filter(
+              (group) => group.department.name === 'flutter'
+            ).length,
       extraClassForText: styles.flutter,
     },
     {
       id: 'olimped_programming',
       text: 'Олимп. программирование',
-      count: studentsOnStudyForFilters.filter(
-        (student) => student.department.name === 'olimped_programming'
-      ).length,
+      count:
+        activeOption === 'Студенты'
+          ? studentsOnStudyForFilters.filter(
+              (student) => student.department.name === 'olimped_programming'
+            ).length
+          : groupsOnStudyForFilters.filter(
+              (group) => group.department.name === 'olimped_programming'
+            ).length,
       extraClassForText: styles.olymp,
     },
   ]
 
-  if (isLoading) {
+  if (studentsLoading) {
+    return <Spinner />
+  }
+
+  if (groupsLoading) {
     return <Spinner />
   }
 
@@ -201,36 +264,42 @@ const StudentsPage = () => {
       </div>
 
       <div className={styles.content}>
-        {activeOption === 'Студенты' ? (
-          studentsOnStudy
-            .slice()
-            .reverse()
-            .map((student) => {
-              return (
-                <StudentCard
-                  key={student.phone}
-                  id={student.id}
-                  first_name={student.first_name}
-                  last_name={student.last_name}
-                  phone={student.phone}
-                  department={student.department.name}
-                  came_from={student.came_from.name}
-                  payment_status={student.payment_status}
-                />
-              )
-            })
-        ) : (
-          <>
-            <GroupCard />
-            <GroupCard />
-            <GroupCard />
-            <GroupCard />
-            <GroupCard />
-            <GroupCard />
-            <GroupCard />
-            <GroupCard />
-          </>
-        )}
+        {activeOption === 'Студенты'
+          ? studentsOnStudy
+              .slice()
+              .reverse()
+              .map((student) => {
+                return (
+                  <StudentCard
+                    key={student.phone}
+                    id={student.id}
+                    first_name={student.first_name}
+                    last_name={student.last_name}
+                    phone={student.phone}
+                    department={student.department.name}
+                    came_from={student.came_from.name}
+                    payment_status={student.payment_status}
+                  />
+                )
+              })
+          : groupsOnStudy
+              .slice()
+              .reverse()
+              .map((group) => {
+                return (
+                  <GroupCard
+                    key={group.id}
+                    classroom={group.classroom.name}
+                    students_max={group.students_max}
+                    name={group.name}
+                    start_at_time={group.start_at_time}
+                    end_at_time={group.end_at_time}
+                    department={group.department.name}
+                    schedule_type={group.schedule_type}
+                    mentor={group.mentor}
+                  />
+                )
+              })}
       </div>
       <Modal active={modalActive} setActive={setModalActive}>
         {activeOption === 'Студенты' ? (

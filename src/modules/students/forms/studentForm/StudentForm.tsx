@@ -17,7 +17,7 @@ import {
   createStudentOnStudy,
   getDepartmentFilters,
   getStudentsOnStudy,
-} from '../../redux/asyncActions'
+} from '../../redux/students/asyncActions'
 import { Dispatch, FC, SetStateAction } from 'react'
 
 interface IInitialValues {

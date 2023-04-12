@@ -21,7 +21,7 @@ import {
   deleteStudentOnStudyById,
   editStudentOnStudyById,
   getStudentOnStudyById,
-} from '../../redux/asyncActions'
+} from '../../redux/students/asyncActions'
 import { useParams } from 'react-router-dom'
 
 interface IInitialValues {

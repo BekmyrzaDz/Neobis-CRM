@@ -2,7 +2,7 @@ import { toast } from 'react-toastify'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { AxiosError } from 'axios'
 
-import studentsOnStudyService from '../services/StudentsOnStudy'
+import studentsOnStudyService from '../../services/StudentsOnStudy'
 import {
   ICreateStudentonStudy,
   IDeleteStudentsOnStudyById,
@@ -10,7 +10,7 @@ import {
   IGetAllStudentsOnStudy,
   IGetStudentsOnStudyById,
   IStudentOnStudy,
-} from '../types'
+} from '../../types'
 
 // Get all students on study
 export const getStudentsOnStudy = createAsyncThunk<

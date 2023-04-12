@@ -45,9 +45,9 @@
   & > h1 {
     display: flex;
     align-items: center;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 21px;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 32px;
     margin-right: 16px;
   }
 
@@ -86,8 +86,8 @@
     width: 40px;
     height: 40px;
     padding: 10px 10.5px;
-    color: #fff;
-    background-color: #756fb3;
+    color: #756FB3;
+    background-color: #EBEAF8;
     font-weight: 400;
     font-size: 14px;
     line-height: 19px;
@@ -103,6 +103,7 @@
   & > img {
     width: 24px;
     height: 24px;
+    border-radius: 50%;
     margin-right: 10px;
   }
   & > h3 {
@@ -110,4 +111,30 @@
     font-size: 16px;
     line-height: 21px;
   }
+}
+
+
+.ux {
+  background-color: #c656a0;
+}
+.front {
+  background-color: #32b483;
+}
+.pm {
+  background-color: #70bf44;
+}
+.back {
+  background-color: #756fb3;
+}
+.android {
+  background-color: #c656a0;
+}
+.ios {
+  background-color: #a6ce39;
+}
+.flutter {
+  background-color: #00a64e;
+}
+.olymp {
+  background-color: #7c51a1;
 }

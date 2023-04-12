@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { IStudentOnStudy, IStudentOnStudyState } from '../types'
+import { IStudentOnStudy, IStudentOnStudyState } from '../../types'
 import {
   createStudentOnStudy,
   deleteStudentOnStudyById,
