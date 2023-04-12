@@ -3,6 +3,7 @@ import { Tab, Tabs } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
+import ArchiveBase from '../ArchiveBase/ArchiveBase'
 
 export default function TabComponent() {
   const classes = useStyles();
@@ -17,6 +18,32 @@ export default function TabComponent() {
     title: string;
     count: number | string;
   }
+
+  const rows = [
+    {
+      id: 1,
+      first_name: 'Khaza',
+      last_name: 'khaan',
+      image: 'url/to/avatar',
+      fio: 'Иванов Иван Иванович',
+      email: 'ivanov@mail.com',
+      user_type: 'Менеджер',
+      phone: '+7 (123) 456-78-90',
+
+    },
+    {
+      id: 13,
+      first_name: 'Khaza',
+      last_name: 'khaan',
+      image: 'url/to/avatar',
+      fio: 'Иванов Иван Иванович',
+      email: 'ivanov@mail.com',
+      user_type: 'Менеджер',
+      phone: '+7 (123) 456-78-90',
+
+    },
+    // и так далее
+  ];
 
   const TabsItem: TabsItems[] = [
     { title: 'Менеджеры', count: 5 },
@@ -46,6 +73,7 @@ export default function TabComponent() {
           />
         ))}
       </Tabs>
+      {value === 0 && <ArchiveBase employees={rows} />}
       {/* {value === 0 && <DataBase employees={allEmployees} />}
       {value === 1 && <DataBase employees={managers} />}
       {value === 2 && <Mentors employees={mentors} />}
