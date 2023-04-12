@@ -98,7 +98,6 @@
 }
 
 .photo {
-  width: 89%;
   margin-top: 50px;
   position: relative;
   display: flex;
@@ -119,8 +118,8 @@
 }
 
 .photo > span {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .photo > button {
@@ -131,12 +130,50 @@
   border-radius: 12px;
 }
 
+.photo > img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.photo > input[type='file'] {
+  color: transparent;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #ccc;
+  outline: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.photo > input[type='file']::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.photo > input[type='file']::before {
+  content: 'Выбрать файл';
+  display: inline-block;
+  background-color: #756fb3;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.photo > input[type='file'] {
+  width: 158px;
+  padding: 12px 24px;
+  background: #756fb3;
+  color: #fff;
+  border-radius: 16px;
+  border: none;
+}
+
 .info {
   margin: 40px 0;
-  display: flex;
-  flex-wrap: wrap;
-  row-gap: 25px;
-  column-gap: 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
 .info > div > input {
