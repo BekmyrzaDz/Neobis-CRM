@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom"
-import ArchivePage from "../pages/archive/components/ArchivePage"
+import ArchivePage from "../pages/archive/ArchivePage"
 import CoursePage from "../pages/course/CoursePage"
 import EmployeesPage from "../pages/Employees/EmployeesPage"
 import Layout from "../pages/Layout/components/Layout"
