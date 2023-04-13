@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import ArchiveBase from '../ArchiveBase/ArchiveBase';
 import Students from '../Content/Students/Students';
 import Groups from '../Content/Groups/Groups';
+import Mentors from '../Content/Mentors/Mentors'
+import Courses from '../Content/Courses/Courses'
 
 export default function TabComponent() {
   const classes = useStyles();
@@ -76,9 +78,10 @@ export default function TabComponent() {
       </Tabs>
       {value === 0 && <ArchiveBase employees={rows} />}
       {value === 1 && <ArchiveBase employees={rows} />}
-      {value === 2 && <ArchiveBase employees={rows} />}
+      {value === 2 && <Mentors employees={rows} />}
       {value === 3 && <Students />}
       {value === 4 && <Groups />}
+      {value === 5 && <Courses />}
     </div>
   );
 }

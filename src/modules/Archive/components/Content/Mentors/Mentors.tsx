@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import DetailCard from '../DetailCard/DetailCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../../../../store/store';
-import { getMentorById } from '../../redux/mentors/mentorsSlice'
-import { user } from '../../assets';
-import UserCard from '../Card/Card';
+import MentorCard from '../../Cards/MentorCard/MentorCard';
+
 interface IMentors {
   id: number;
   first_name: string;
@@ -35,7 +32,7 @@ const MentorsCards = (props: MyComponentProps) => {
     dispatch(getMentorById(mentor.id));
   }
 
-  const { employees } = props;
+  // const { employees } = props;
 
 
   // useEffect(() => {
@@ -43,12 +40,13 @@ const MentorsCards = (props: MyComponentProps) => {
   // }, [dispatch]);
 
   const { mentor } = useSelector((state: RootState) => state.mentors);
+  const employees = [1, 2, 3, 4, 6]
 
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', width: '98%', gap: '24px' }}>
       {
         employees.map(mentor => (
-          <UserCard
+          <MentorCard
             key={mentor.id}
             onCardClick={() => handleCardClick(mentor)}
             name={`${mentor.first_name} ${mentor.last_name}`}
@@ -59,7 +57,6 @@ const MentorsCards = (props: MyComponentProps) => {
           />
         ))
       }
-      {showModal && <DetailCard mentor={mentor} onClose={() => setShowModal(false)} />}
     </div>
   );
 };
