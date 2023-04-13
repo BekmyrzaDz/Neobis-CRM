@@ -196,7 +196,7 @@ const StudentsPage = () => {
     },
     {
       id: 'olimped_programming',
-      text: 'Олимп. программирование',
+      text: 'PO',
       count:
         activeOption === 'Студенты'
           ? studentsOnStudyForFilters.filter(

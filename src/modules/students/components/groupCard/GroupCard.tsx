@@ -64,7 +64,7 @@ const GroupCard: FC<IGroupCardProps> = ({
       break
     case 'olimped_programming':
       departmentClassName = `${styles.lang} ${styles.olymp}`
-      departmentValue = 'Олимп. программирование'
+      departmentValue = 'PO'
       break
   }
   return (

@@ -82,7 +82,7 @@ const StudentCard: FC<IStudentCardProps> = ({
       break
     case 'olimped_programming':
       departmentColor = `${styles.position} ${styles.olymp}`
-      departmentValue = `Олимп. программирование`
+      departmentValue = `PO`
       break
     default:
       departmentColor = `${styles.position}`
