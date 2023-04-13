@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Tab, Tabs } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../../../../store/store';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import { useDispatch } from 'react-redux';
+import { gerArhiveManagers } from '../../redux/managerArchive/managerArhiveSlice';
+import { getArchiveAdmins } from '../../redux/adminArchive/adminArchiveSlice';
+import { getArchiveMentors } from '../../redux/mentorArchive/mentorArchiveSlice';
 import ArchiveBase from '../ArchiveBase/ArchiveBase';
 import Students from '../Content/Students/Students';
 import Groups from '../Content/Groups/Groups';
@@ -12,11 +15,23 @@ import Courses from '../Content/Courses/Courses'
 export default function TabComponent() {
   const classes = useStyles();
   const [value, setValue] = useState(0);
+  const dispatch = useDispatch<AppDispatch>()
+
+  const { managers } = useSelector((state: RootState) => state.managerArhive);
+  const { admins } = useSelector((state: RootState) => state.adminsArhive);
+  const { mentors } = useSelector((state: RootState) => state.mentorArchive);
 
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+    dispatch(gerArhiveManagers());
+    dispatch(getArchiveAdmins());
+    dispatch(getArchiveMentors());
+  }, [dispatch]);
+  console.log(managers)
 
   interface TabsItems {
     title: string;
@@ -45,13 +60,12 @@ export default function TabComponent() {
       image: 'url/to/avatar',
 
     },
-    // и так далее
   ];
 
   const TabsItem: TabsItems[] = [
-    { title: 'Менеджеры', count: 5 },
-    { title: 'Админы', count: 5 },
-    { title: 'Преподаватели', count: 5 },
+    { title: 'Менеджеры', count: managers.length },
+    { title: 'Админы', count: admins.length },
+    { title: 'Преподаватели', count: mentors.length },
     { title: 'Студенты', count: 5 },
     { title: 'Группы', count: 5 },
     { title: 'Курсы', count: 5 },
@@ -76,12 +90,12 @@ export default function TabComponent() {
           />
         ))}
       </Tabs>
-      {value === 0 && <ArchiveBase employees={rows} />}
-      {value === 1 && <ArchiveBase employees={rows} />}
-      {value === 2 && <Mentors employees={rows} />}
+      {value === 0 && <ArchiveBase employees={managers} />}
+      {value === 1 && <ArchiveBase employees={admins} />}
+      {value === 2 && <Mentors employees={mentors} />}
       {value === 3 && <Students />}
       {value === 4 && <Groups />}
-      {value === 5 && <Courses />}
+      {/* {value === 5 && <Courses />} */}
     </div>
   );
 }

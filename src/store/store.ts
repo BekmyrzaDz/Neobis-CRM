@@ -8,6 +8,9 @@ import adminsReducer from '../modules/Employees/redux/admins/adminsSlice';
 // import { createStudentSlice } from './../modules/AddClient/redux/addClientSlice';
 import clientReducer from '../modules/DndMainPage/redux/dndSlice';
 import createStudentSlice from '../modules/AddClient/redux/addClientSlice';
+import managerArhiveSlice from '../modules/Archive/redux/managerArchive/managerArhiveSlice';
+import adminArhiveSlice from '../modules/Archive/redux/adminArchive/adminArchiveSlice';
+import mentorArchiveSlice from '../modules/Archive/redux/mentorArchive/mentorArchiveSlice';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -18,6 +21,9 @@ const rootReducer = combineReducers({
   admins: adminsReducer,
   client: clientReducer,
   addClient: createStudentSlice,
+  managerArhive: managerArhiveSlice,
+  adminsArhive: adminArhiveSlice,
+  mentorArchive: mentorArchiveSlice,
 });
 
 export const setupStore = () => {
@@ -25,8 +31,6 @@ export const setupStore = () => {
     reducer: rootReducer,
   });
 };
-
-
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
