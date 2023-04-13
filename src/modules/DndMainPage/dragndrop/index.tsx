@@ -22,6 +22,13 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/redux"
 import { initialData } from "../client-db/client-data"
 import styles from "./index.module.scss"
 
+enum Columns {
+  WaitingForAcall = "column-1",
+  CallCompleted = "column-2",
+  SignedUpForAtrialLesson = "column-3",
+  AttendedATrialLesson = "column-4",
+}
+
 // Reorder column list
 export const reorderColumnList = (
   sourceCol: IColumn,
@@ -51,36 +58,28 @@ export const DragAndDrop: FC = () => {
   const client: IStudentState = useAppSelector((state) => state?.client)
 
   // Filtering all students by status function
-  const filterStudentsByStatus = (students: IStudent[], column: string) => {
-    const filteredStudents = students.filter(
+  const filterStudentsByStatus = (
+    students: IStudent[],
+    column: string
+  ): IStudent[] => {
+    return students.filter(
       (student) =>
         student.status?.name.toLowerCase() ===
           state.columns[column].title.toLowerCase() &&
         (student.on_request === true || student.is_archive === false)
     )
-
-    return filteredStudents
   }
 
   // Descending sort
-  const descendingSort = (arr: number[]): number[] => {
+  const sortBA = (arr: number[]): number[] => {
     return arr.sort((a, b) => b - a)
   }
 
-  const filteringColumn = () => {
-    const arr = filterStudentsByStatus(
-      client.student as IStudent[],
-      Columns.WaitingForAcall
-    ).map((student) => student.id) as number[]
-
-    return arr
-  }
-
-  enum Columns {
-    WaitingForAcall = "column-1",
-    CallCompleted = "column-2",
-    SignedUpForAtrialLesson = "column-3",
-    AttendedATrialLesson = "column-4",
+  // Get Array with ids
+  const getArrayWithIds = (students: IStudent[], column: string): number[] => {
+    return filterStudentsByStatus(students, column).map(
+      (student) => student.id
+    ) as number[]
   }
 
   // Filtering and display logic
@@ -97,34 +96,29 @@ export const DragAndDrop: FC = () => {
         "column-1": {
           ...state.columns[Columns.WaitingForAcall],
           studentIds: [
-            ...(descendingSort(filteringColumn() as number[]) as number[]),
+            ...sortBA(getArrayWithIds(client.student, Columns.WaitingForAcall)),
           ],
         },
         "column-2": {
           ...state.columns[Columns.CallCompleted],
           studentIds: [
-            ...(filterStudentsByStatus(
-              client.student,
-              Columns.CallCompleted
-            ).map((student) => student.id) as number[]),
+            ...sortBA(getArrayWithIds(client.student, Columns.CallCompleted)),
           ],
         },
         "column-3": {
           ...state.columns[Columns.SignedUpForAtrialLesson],
           studentIds: [
-            ...(filterStudentsByStatus(
-              client.student,
-              Columns.SignedUpForAtrialLesson
-            ).map((student) => student.id) as number[]),
+            ...sortBA(
+              getArrayWithIds(client.student, Columns.SignedUpForAtrialLesson)
+            ),
           ],
         },
         "column-4": {
           ...state.columns[Columns.AttendedATrialLesson],
           studentIds: [
-            ...(filterStudentsByStatus(
-              client.student,
-              Columns.AttendedATrialLesson
-            ).map((student) => student.id) as number[]),
+            ...sortBA(
+              getArrayWithIds(client.student, Columns.AttendedATrialLesson)
+            ),
           ],
         },
       },
