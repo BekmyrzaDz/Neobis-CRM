@@ -309,7 +309,10 @@ const StudentsPage = () => {
             departmentFilter={departmentFilter}
           />
         ) : (
-          <GroupForm />
+          <GroupForm
+            setModalActive={setModalActive}
+            departmentFilter={departmentFilter}
+          />
         )}
       </Modal>
     </div>

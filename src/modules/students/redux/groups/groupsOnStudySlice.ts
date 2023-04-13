@@ -1,6 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { getAllGroups, getGroupDepartmentFilters } from './asyncActions'
-import { GroupsOnStudyState, IGroupOnStudy } from '../../types'
+import {
+  createGroupOnStudy,
+  getAllGroups,
+  getGroupDepartmentFilters,
+} from './asyncActions'
+import {
+  GroupsOnStudyState,
+  ICreateGroupOnstudyRES,
+  IGroupOnStudy,
+} from '../../types'
 
 const initialState: GroupsOnStudyState = {
   groupsOnStudy: [],
@@ -45,6 +53,21 @@ export const groupsOnStudySlice = createSlice({
         state.isLoading = false
         state.isError = true
         state.groupsOnStudyForFilters = []
+      })
+      .addCase(createGroupOnStudy.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(
+        createGroupOnStudy.fulfilled,
+        (state, action: PayloadAction<ICreateGroupOnstudyRES>) => {
+          state.isLoading = false
+          state.groupOnStudy = action.payload
+        }
+      )
+      .addCase(createGroupOnStudy.rejected, (state) => {
+        state.isLoading = false
+        state.isError = true
+        state.groupOnStudy = {}
       })
   },
 })

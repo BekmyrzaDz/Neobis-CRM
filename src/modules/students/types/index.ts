@@ -119,3 +119,48 @@ export interface IGetAllGroupsOnStudy {
   token: string
   departmentFilter: string
 }
+
+// Create group type REQUEST_BODY
+export interface ICreateGroupOnstudyREQ {
+  token: string
+  name: string
+  mentor: {
+    id: number
+  }
+  department: {
+    name: string
+  }
+  students_max: number
+  schedule_type: number
+  classroom: {
+    name: string
+  }
+  is_archive: boolean
+  start_at_date: string
+  end_at_date: string
+  start_at_time: string
+  end_at_time: string
+}
+
+// Create group type RESPONSE_BODY
+export interface ICreateGroupOnstudyRES {
+  id: number
+  name: string
+  mentor: {
+    id: number
+  }
+  department: {
+    name: string
+  }
+  students_max: number
+  schedule_type: number
+  classroom: {
+    id: 0
+    name: string
+  }
+  is_archive: boolean
+  start_at_date: string
+  end_at_date: string
+  start_at_time: string
+  end_at_time: string
+}

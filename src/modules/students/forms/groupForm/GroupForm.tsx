@@ -6,33 +6,106 @@ import busketIcon from '../../assets/icons/busket.svg'
 import deleteIcon from '../../assets/icons/delete.svg'
 import {
   departments,
-  groupStatus,
-  rooms,
-  schedules,
-  teachers,
+  classrooms,
+  schedule_types,
+  mentors,
 } from '../../selectOptions/groupFormOptions'
 import { GroupSchema } from '../../schema/groupSchema'
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
+import { Dispatch, FC, SetStateAction } from 'react'
 
 import styles from './GroupForm.module.scss'
+import {
+  createGroupOnStudy,
+  getAllGroups,
+  getGroupDepartmentFilters,
+} from '../../redux/groups/asyncActions'
+import { formatDate } from '../../helpers/formatDate'
 
-const GroupForm = () => {
+interface GroupFormProps {
+  setModalActive: Dispatch<SetStateAction<boolean>>
+  departmentFilter: string
+}
+
+interface IInitialValues {
+  name: string
+  department: string
+  mentor: string
+  classroom: string
+  students_max: number
+  start_at_date: string
+  end_at_date: string
+  schedule_type: number
+  start_at_time: string
+  end_at_time: string
+}
+
+const GroupForm: FC<GroupFormProps> = ({
+  setModalActive,
+  departmentFilter,
+}) => {
+  const dispatch = useAppDispatch()
+  const token = useAppSelector((state) => state.auth.user?.access!)
+
+  const onSubmit = async (values: IInitialValues) => {
+    const {
+      name,
+      department,
+      mentor,
+      classroom,
+      students_max,
+      start_at_date,
+      end_at_date,
+      schedule_type,
+      start_at_time,
+      end_at_time,
+    } = values
+    try {
+      await dispatch(
+        createGroupOnStudy({
+          token,
+          name,
+          department: {
+            name: department,
+          },
+          mentor: {
+            id: +mentor,
+          },
+          classroom: {
+            name: classroom,
+          },
+          is_archive: false,
+          students_max: +students_max,
+          start_at_date: formatDate(start_at_date),
+          end_at_date: formatDate(end_at_date),
+          schedule_type: +schedule_type,
+          start_at_time,
+          end_at_time,
+        })
+      )
+      await dispatch(getAllGroups({ token, departmentFilter }))
+      await dispatch(getGroupDepartmentFilters(token))
+
+      setModalActive(false)
+    } catch (error) {}
+  }
+
   return (
     <Formik
       initialValues={{
-        groupName: '',
+        name: '',
         department: '',
-        teacher: '',
-        room: '',
-        studentCount: '',
-        start: '',
-        end: '',
-        groupStatus: '',
-        schedule: '',
-        from: '',
-        till: '',
+        mentor: '',
+        classroom: '',
+        students_max: 12,
+        start_at_date: '',
+        end_at_date: '',
+        schedule_type: 1,
+        start_at_time: '',
+        end_at_time: '',
       }}
       validationSchema={GroupSchema}
-      onSubmit={(values) => console.log(JSON.stringify(values, null, 2))}
+      onSubmit={onSubmit}
     >
       <Form className={styles.form}>
         <div className={styles.header}>
@@ -46,11 +119,11 @@ const GroupForm = () => {
         </div>
         <Input
           label='Название группы*'
-          id='groupName'
-          name='groupName'
+          id='name'
+          name='name'
           type='text'
           placeholder='Название группы'
-          className={styles.groupName}
+          className={styles.name}
         />
         <MySelect
           label='Департамент*'
@@ -61,17 +134,22 @@ const GroupForm = () => {
         />
         <MySelect
           label='Преподователь*'
-          id='teacher'
-          name='teacher'
-          options={teachers}
-          className={styles.teacher}
+          id='mentor'
+          name='mentor'
+          options={mentors}
+          className={styles.mentor}
         />
         <div className={styles.rowWrapper}>
-          <MySelect label='Аудитория*' id='room' name='room' options={rooms} />
+          <MySelect
+            label='Аудитория*'
+            id='classroom'
+            name='classroom'
+            options={classrooms}
+          />
           <Input
             label='Кол-во студентов*'
-            id='studentCount'
-            name='studentCount'
+            id='students_max'
+            name='students_max'
             type='text'
             placeholder='0'
             className={styles.halfDiv}
@@ -80,44 +158,38 @@ const GroupForm = () => {
         <div className={styles.rowWrapper}>
           <Input
             label='Старт курса*'
-            id='start'
-            name='start'
+            id='start_at_date'
+            name='start_at_date'
             type='date'
             className={styles.twoInOne}
           />
           <Input
             label='Конец курса*'
-            id='end'
-            name='end'
+            id='end_at_date'
+            name='end_at_date'
             type='date'
             className={styles.twoInOne}
-          />
-          <MySelect
-            label='Статус группы*'
-            id='groupStatus'
-            name='groupStatus'
-            options={groupStatus}
           />
         </div>
         <div className={styles.rowWrapper}>
           <MySelect
             label='Расписание*'
-            id='schedule'
-            name='schedule'
-            options={schedules}
+            id='schedule_type'
+            name='schedule_type'
+            options={schedule_types}
           />
           <Input
             label='От*'
-            id='from'
-            name='from'
+            id='start_at_time'
+            name='start_at_time'
             type='text'
             placeholder='00:00'
             className={styles.twoInOne}
           />
           <Input
             label='До*'
-            id='till'
-            name='till'
+            id='end_at_time'
+            name='end_at_time'
             type='text'
             placeholder='00:00'
             className={styles.twoInOne}

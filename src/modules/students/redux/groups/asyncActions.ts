@@ -1,7 +1,12 @@
 import { toast } from 'react-toastify'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { AxiosError } from 'axios'
-import { IGetAllGroupsOnStudy, IGroupOnStudy } from '../../types'
+import {
+  ICreateGroupOnstudyREQ,
+  ICreateGroupOnstudyRES,
+  IGetAllGroupsOnStudy,
+  IGroupOnStudy,
+} from '../../types'
 import groupsOnStudyService from '../../services/GroupsOnStudy'
 
 // Get all groups on study
@@ -67,3 +72,68 @@ export const getGroupDepartmentFilters = createAsyncThunk<
     throw error
   }
 })
+
+// Create group on study
+export const createGroupOnStudy = createAsyncThunk<
+  ICreateGroupOnstudyRES,
+  ICreateGroupOnstudyREQ,
+  { rejectValue: string }
+>(
+  'groupsOnStudy/createStudentOnStudy',
+  async (
+    {
+      token,
+      name,
+      mentor,
+      department,
+      students_max,
+      schedule_type,
+      classroom,
+      is_archive,
+      start_at_date,
+      end_at_date,
+      start_at_time,
+      end_at_time,
+    },
+    thunkAPI
+  ) => {
+    try {
+      const response = await groupsOnStudyService.createGroupOnStudy({
+        token,
+        name,
+        mentor,
+        department,
+        students_max,
+        schedule_type,
+        classroom,
+        is_archive,
+        start_at_date,
+        end_at_date,
+        start_at_time,
+        end_at_time,
+      })
+      if (response) {
+        toast.success('Новая группа успешно создана')
+      }
+      return response
+    } catch (error: unknown) {
+      if (typeof error === 'string') {
+        toast.error(error)
+        return thunkAPI.rejectWithValue(error)
+      }
+      if (error instanceof AxiosError) {
+        const message =
+          error.response?.data?.detail ||
+          error.response?.data?.phone[0] ||
+          (error.response &&
+            error.response?.data &&
+            error.response?.data?.message) ||
+          error.message ||
+          error.toString()
+        toast.error(message)
+        return thunkAPI.rejectWithValue(message)
+      }
+      throw error
+    }
+  }
+)
