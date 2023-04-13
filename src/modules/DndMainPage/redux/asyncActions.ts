@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import dndService from '../services/dndService';
 import { IStudent, IUpdateStudentData } from '../types';
-import { remove } from './detailViewSlice';
 
 // getAllStudents Action
 export const fetchAllStudents = createAsyncThunk<
@@ -26,7 +25,7 @@ export const fetchAllStudents = createAsyncThunk<
           error.response?.data?.message) ||
         error.message ||
         error.toString()
-      // toast.error(message)
+      toast.error(message)
       return rejectWithValue(message)
     }
     throw error
@@ -54,7 +53,7 @@ export const fetchStudentById = createAsyncThunk<
           error.response?.data?.message) ||
         error.message ||
         error.toString()
-      // toast.error(message)
+      toast.error(message)
       return rejectWithValue(message)
     }
     throw error
@@ -73,7 +72,7 @@ export const fetchUpdateStudent = createAsyncThunk<
     return response
   } catch (error: unknown) {
     if (typeof error === 'string') {
-      toast.error(error)
+      // toast.error(error)
       return rejectWithValue(error)
     }
 
@@ -99,7 +98,9 @@ export const fetchDetailUpdateStudent = createAsyncThunk<
 >('updateClient/fetchDetailUpdateStudent', async ({id, updateStudent}, {rejectWithValue}) => {
   try {    
     const response = await dndService.updateStudent({id, updateStudent})
-
+    if (response) {
+      toast.success('Данные успешно обновлены')
+    }
     return response
   } catch (error: unknown) {
     if (typeof error === 'string') {
@@ -114,7 +115,7 @@ export const fetchDetailUpdateStudent = createAsyncThunk<
           error.response?.data?.message) ||
         error.message ||
         error.toString()
-      // toast.error(message)
+      toast.error(message)
       return rejectWithValue(message)
     }
     throw error
@@ -123,13 +124,15 @@ export const fetchDetailUpdateStudent = createAsyncThunk<
 
 // deleteStudent Action 
 export const fetchDeleteStudent = createAsyncThunk<
-  IStudent,
+  number,
   number,
   { rejectValue: string }
->('updateClient/fetchDeleteStudent', async (id, {rejectWithValue, dispatch}) => {
+>('updateClient/fetchDeleteStudent', async (id, {rejectWithValue}) => {
   try {    
     const response = await dndService.deleteStudent(id)
-
+    if (response === 204) {
+      toast.success('Заявка успешно удалена')
+    }
     return response
   } catch (error: unknown) {
     if (typeof error === 'string') {
@@ -144,7 +147,8 @@ export const fetchDeleteStudent = createAsyncThunk<
           error.response?.data?.message) ||
         error.message ||
         error.toString()
-      // toast.error(message)
+      toast.error(message)
+      
       return rejectWithValue(message)
     }
     throw error

@@ -27,9 +27,7 @@ const getStudentById = async (id: number): Promise<IStudent> => {
 const updateStudent = async ({
   id,
   updateStudent,
-}: IUpdateStudentData): Promise<IStudent> => {
-  console.log(JSON.stringify(updateStudent, null, 2))
-  
+}: IUpdateStudentData): Promise<IStudent> => {  
   const response = await axios.patch(`${API_URL}${id}/`, updateStudent, {
     headers: getToken()
   })
@@ -38,14 +36,14 @@ const updateStudent = async ({
 }
 
 // Delete student
-const deleteStudent = async (id: number): Promise<IStudent> => {
+const deleteStudent = async (id: number): Promise<number> => {
   console.log(JSON.stringify(updateStudent, null, 2))
   
   const response = await axios.delete(`${API_URL}${id}/`, {
     headers: getToken()
-  })
+  })  
 
-  return response.data
+  return response.status
 }
 
 const dndService = {

@@ -3,18 +3,20 @@ import { toast } from 'react-toastify';
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import createService from "../services/addClientService";
 import { ICreateStudent, ICreateStudentData } from "../types";
-import { fetchAllStudents } from '../../DndMainPage/redux/asyncActions';
 
+// createStudent Action
 export const fetchCreateStudent = createAsyncThunk<
   ICreateStudent,
   ICreateStudent,
   { rejectValue: string }
->('createClient/fetchCreateStudent', async ({...studentData}, {rejectWithValue, dispatch}) => {
+>('createClient/fetchCreateStudent', async ({...studentData}, {rejectWithValue}) => {
   try {   
     const response = await createService.createStudent({...studentData})
-    dispatch(fetchAllStudents())
+    if (response) {
+      toast.success('Заявка успешно создана')
+    }
     return response
-  } catch (error: unknown) {
+  } catch (error: unknown) {    
     if (typeof error === 'string') {
       toast.error(error)
       return rejectWithValue(error)

@@ -57,9 +57,11 @@ function Card<T>(props: Props) {
 
   const { id } = student
 
-  const handleClick = () => {
-    dispatch(fetchStudentById(id as number))
-    setOpen(true)
+  const handleClick = async () => {
+    try {
+      await dispatch(fetchStudentById(id as number))
+      setOpen(true)
+    } catch (error) {}
   }
 
   return (
