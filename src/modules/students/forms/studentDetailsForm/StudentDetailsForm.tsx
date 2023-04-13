@@ -23,6 +23,7 @@ import {
   getStudentOnStudyById,
 } from '../../redux/students/asyncActions'
 import { useParams } from 'react-router-dom'
+import StudentFormSkeleton from '../../components/skeleton/StudentFormSkeleton'
 
 interface IInitialValues {
   first_name: string
@@ -55,6 +56,7 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
   const student = useAppSelector(
     (state) => state.studentsOnStudy.studentOnStudy!
   )
+  const { isLoading } = useAppSelector((state) => state.studentsOnStudy)
 
   const initialValues: IInitialValues = {
     first_name: student.first_name || '',
@@ -70,7 +72,7 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
 
   useEffect(() => {
     dispatch(getStudentOnStudyById({ token, id }))
-  }, [dispatch, token, id])
+  }, [])
 
   const onSubmit = (values: IInitialValues) => {
     const {
@@ -201,6 +203,10 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
 
       setModalActive(false)
     }
+  }
+
+  if (isLoading) {
+    return <StudentFormSkeleton />
   }
 
   return (

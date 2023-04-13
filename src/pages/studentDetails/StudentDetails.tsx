@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Modal from '../../components/Modal/Modal'
 import { useNavigate } from 'react-router-dom'
 import StudentDetailsForm from '../../modules/students/forms/studentDetailsForm/StudentDetailsForm'
@@ -8,9 +8,11 @@ const StudentDetails = () => {
   const navigate = useNavigate()
   const [modalActive, setModalActive]: ModalState = useState(true)
 
-  if (!modalActive) {
-    navigate('/students')
-  }
+  useEffect(() => {
+    if (!modalActive) {
+      navigate('/students')
+    }
+  }, [modalActive, navigate])
 
   return (
     <div>
