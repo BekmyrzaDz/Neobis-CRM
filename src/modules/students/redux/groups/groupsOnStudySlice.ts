@@ -3,6 +3,7 @@ import {
   createGroupOnStudy,
   getAllGroups,
   getGroupDepartmentFilters,
+  getGroupOnStudyById,
 } from './asyncActions'
 import {
   GroupsOnStudyState,
@@ -65,6 +66,21 @@ export const groupsOnStudySlice = createSlice({
         }
       )
       .addCase(createGroupOnStudy.rejected, (state) => {
+        state.isLoading = false
+        state.isError = true
+        state.groupOnStudy = {}
+      })
+      .addCase(getGroupOnStudyById.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(
+        getGroupOnStudyById.fulfilled,
+        (state, action: PayloadAction<IGroupOnStudy>) => {
+          state.isLoading = false
+          state.groupOnStudy = action.payload
+        }
+      )
+      .addCase(getGroupOnStudyById.rejected, (state) => {
         state.isLoading = false
         state.isError = true
         state.groupOnStudy = {}

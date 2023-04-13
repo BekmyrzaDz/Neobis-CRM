@@ -5,6 +5,7 @@ import {
   ICreateGroupOnstudyREQ,
   ICreateGroupOnstudyRES,
   IGetAllGroupsOnStudy,
+  IGetGroupOnStudyById,
   IGroupOnStudy,
 } from '../../types'
 import groupsOnStudyService from '../../services/GroupsOnStudy'
@@ -137,3 +138,35 @@ export const createGroupOnStudy = createAsyncThunk<
     }
   }
 )
+
+// Get group on study by ID
+export const getGroupOnStudyById = createAsyncThunk<
+  IGroupOnStudy,
+  IGetGroupOnStudyById,
+  { rejectValue: string }
+>('groupsOnStudy/getGroupOnStudyById', async ({ token, id }, thunkAPI) => {
+  try {
+    const response = await groupsOnStudyService.getGroupOnStudyById({
+      token,
+      id,
+    })
+    return response
+  } catch (error: unknown) {
+    if (typeof error === 'string') {
+      toast.error(error)
+      return thunkAPI.rejectWithValue(error)
+    }
+    if (error instanceof AxiosError) {
+      const message =
+        error.response?.data?.detail ||
+        (error.response &&
+          error.response?.data &&
+          error.response?.data?.message) ||
+        error.message ||
+        error.toString()
+      toast.error(message)
+      return thunkAPI.rejectWithValue(message)
+    }
+    throw error
+  }
+})

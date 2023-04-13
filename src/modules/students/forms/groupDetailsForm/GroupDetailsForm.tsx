@@ -2,6 +2,8 @@ import { Formik, Form } from 'formik'
 import Input from '../../../../components/Input/MyInput'
 import MySelect from '../../../../components/Select/MySelect'
 import IconButton from '../../../../components/iconButton/IconButton'
+import busketIcon from '../../assets/icons/busket.svg'
+import deleteIcon from '../../assets/icons/delete.svg'
 import {
   departments,
   classrooms,
@@ -10,18 +12,21 @@ import {
 } from '../../selectOptions/groupFormOptions'
 import { GroupSchema } from '../../schema/groupSchema'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
-import { Dispatch, FC, SetStateAction } from 'react'
+import { Dispatch, FC, SetStateAction, useEffect } from 'react'
 
+import styles from './GroupDetailsForm.module.scss'
 import {
   createGroupOnStudy,
   getAllGroups,
   getGroupDepartmentFilters,
+  getGroupOnStudyById,
 } from '../../redux/groups/asyncActions'
+import { toLocalDate } from '../../helpers/toLocalDate'
+import { useParams } from 'react-router-dom'
+import StudentFormSkeleton from '../../components/skeleton/StudentFormSkeleton'
 
-import styles from './GroupForm.module.scss'
-interface GroupFormProps {
+interface GroupDetailsFormProps {
   setModalActive: Dispatch<SetStateAction<boolean>>
-  departmentFilter: string
 }
 
 interface IInitialValues {
@@ -37,76 +42,54 @@ interface IInitialValues {
   end_at_time: string
 }
 
-const GroupForm: FC<GroupFormProps> = ({
-  setModalActive,
-  departmentFilter,
-}) => {
+const GroupDetailsForm: FC<GroupDetailsFormProps> = ({ setModalActive }) => {
   const dispatch = useAppDispatch()
+  const { id } = useParams()
   const token = useAppSelector((state) => state.auth.user?.access!)
+  const group = useAppSelector((state) => state.groupsOnStudy.groupOnStudy!)
+  const { isLoading } = useAppSelector((state) => state.groupsOnStudy)
 
-  const onSubmit = async (values: IInitialValues) => {
-    const {
-      name,
-      department,
-      mentor,
-      classroom,
-      students_max,
-      start_at_date,
-      end_at_date,
-      schedule_type,
-      start_at_time,
-      end_at_time,
-    } = values
-    try {
-      await dispatch(
-        createGroupOnStudy({
-          token,
-          name,
-          department: {
-            name: department,
-          },
-          mentor: {
-            id: +mentor,
-          },
-          classroom: {
-            name: classroom,
-          },
-          is_archive: false,
-          students_max: +students_max,
-          start_at_date,
-          end_at_date,
-          schedule_type: +schedule_type,
-          start_at_time,
-          end_at_time,
-        })
-      )
-      await dispatch(getAllGroups({ token, departmentFilter }))
-      await dispatch(getGroupDepartmentFilters(token))
+  const initialValues = {
+    name: (group && group.name) || '',
+    department: (group && group.department?.name) || '',
+    mentor: (group && group.mentor && group.mentor.id) || '',
+    classroom: group && group.classroom?.name,
+    students_max: group && group.students_max,
+    start_at_date: (group && group.start_at_date) || '',
+    end_at_date: (group && group.end_at_date) || '',
+    schedule_type: (group && group.schedule_type) || '',
+    start_at_time: (group && group.start_at_time) || '',
+    end_at_time: (group && group.end_at_time) || '',
+  }
 
-      setModalActive(false)
-    } catch (error) {}
+  useEffect(() => {
+    dispatch(getGroupOnStudyById({ token, id }))
+  }, [])
+
+  if (isLoading) {
+    return <StudentFormSkeleton />
   }
 
   return (
     <Formik
-      initialValues={{
-        name: '',
-        department: '',
-        mentor: '',
-        classroom: '',
-        students_max: 12,
-        start_at_date: '',
-        end_at_date: '',
-        schedule_type: 1,
-        start_at_time: '',
-        end_at_time: '',
-      }}
+      initialValues={initialValues}
       validationSchema={GroupSchema}
-      onSubmit={onSubmit}
+      enableReinitialize={true}
+      onSubmit={(values) => console.log(JSON.stringify(values, null, 2))}
     >
       <Form className={styles.form}>
         <div className={styles.header}>
-          <h3>Карточка группы</h3>
+          <div className={styles.left}>
+            <h3>Карточка группы</h3>
+            <span>{id}</span>
+          </div>
+
+          <IconButton
+            text={'Архивировать'}
+            icon={busketIcon}
+            className={styles.archiveBtn}
+            type={'button'}
+          />
         </div>
         <Input
           label='Название группы*'
@@ -188,10 +171,16 @@ const GroupForm: FC<GroupFormProps> = ({
         </div>
         <div className={styles.btns}>
           <IconButton text={'Сохранить изменения'} type={'submit'} />
+          <IconButton
+            text={'Удалить группу'}
+            icon={deleteIcon}
+            className={styles.deleteBtn}
+            type={'button'}
+          />
         </div>
       </Form>
     </Formik>
   )
 }
 
-export default GroupForm
+export default GroupDetailsForm

@@ -11,6 +11,7 @@ import AnalyticsPage from '../pages/analitics/components/AnalyticsPage'
 import ProfilePage from '../pages/profile/ProfilePage'
 import PaymentPage from '../pages/payment/components/PaymentPage'
 import StudentDetails from '../pages/studentDetails/studentDetails'
+import GroupDetails from '../pages/groupDetails/GroupDetails'
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ export const router = createBrowserRouter([
       { path: 'home-page', element: <MainPage /> },
       { path: 'students', element: <StudentsPage /> },
       { path: `students/:id`, element: <StudentDetails /> },
+      { path: `students/groups/:id`, element: <GroupDetails /> },
       { path: 'employees', element: <EmployeesPage /> },
       { path: 'courses', element: <CoursePage /> },
       { path: 'analytics', element: <AnalyticsPage /> },

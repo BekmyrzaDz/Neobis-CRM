@@ -288,6 +288,7 @@ const StudentsPage = () => {
               .map((group) => {
                 return (
                   <GroupCard
+                    id={group.id}
                     key={group.id}
                     classroom={group.classroom.name}
                     students_max={group.students_max}

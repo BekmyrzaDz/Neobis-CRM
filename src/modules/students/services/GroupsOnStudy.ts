@@ -3,6 +3,7 @@ import {
   ICreateGroupOnstudyREQ,
   ICreateGroupOnstudyRES,
   IGetAllGroupsOnStudy,
+  IGetGroupOnStudyById,
   IGroupOnStudy,
 } from '../types'
 // import $api from '../../../http'
@@ -29,6 +30,20 @@ const getGroupDepartmentFilters = async (
   token: string
 ): Promise<IGroupOnStudy[]> => {
   const response = await axios.get(API_URL, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  return response.data
+}
+
+// Get group on study by ID
+const getGroupOnStudyById = async ({
+  token,
+  id,
+}: IGetGroupOnStudyById): Promise<IGroupOnStudy> => {
+  const response = await axios.get(API_URL + id, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -81,6 +96,7 @@ const groupsOnStudyService = {
   getAllGroupsOnStudy,
   getGroupDepartmentFilters,
   createGroupOnStudy,
+  getGroupOnStudyById,
 }
 
 export default groupsOnStudyService

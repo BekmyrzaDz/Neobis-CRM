@@ -97,10 +97,6 @@ export interface IGroupOnStudy {
     name: string
   }
   students_max: number
-  status: {
-    id: number
-    status_name: string
-  }
   schedule_type: number
   classroom: {
     id: number
@@ -163,4 +159,9 @@ export interface ICreateGroupOnstudyRES {
   end_at_date: string
   start_at_time: string
   end_at_time: string
+}
+
+export interface IGetGroupOnStudyById {
+  token: string
+  id?: string
 }

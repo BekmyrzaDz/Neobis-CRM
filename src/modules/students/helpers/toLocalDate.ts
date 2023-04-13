@@ -1,4 +1,4 @@
-export function formatDate(dateStr: string) {
+export function toLocalDate(dateStr: string) {
   const dateArr = dateStr.split('-')
   const year = dateArr[0]
   const month = dateArr[1]

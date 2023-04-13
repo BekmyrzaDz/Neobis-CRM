@@ -3,8 +3,10 @@ import timer from '../../assets/icons/timer.svg'
 import door from '../../assets/icons/door.svg'
 import student from '../../assets/icons/student.svg'
 import { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 interface IGroupCardProps {
+  id: number
   classroom: string
   students_max: number
   name: string
@@ -22,6 +24,7 @@ interface IGroupCardProps {
 }
 
 const GroupCard: FC<IGroupCardProps> = ({
+  id,
   classroom,
   students_max,
   name,
@@ -32,6 +35,9 @@ const GroupCard: FC<IGroupCardProps> = ({
   mentor,
   current_students,
 }) => {
+  const navigate = useNavigate()
+
+
   // DEPARTMENT SWITCHCASE
   let departmentClassName
   let departmentValue
@@ -70,7 +76,7 @@ const GroupCard: FC<IGroupCardProps> = ({
       break
   }
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={() => navigate(`/students/groups/${id}`)}>
       <div className={styles.room}>
         <div className={styles.aboutRoom}>
           <img src={door} alt='door' />
