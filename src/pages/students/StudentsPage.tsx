@@ -297,6 +297,7 @@ const StudentsPage = () => {
                     department={group.department.name}
                     schedule_type={group.schedule_type}
                     mentor={group.mentor}
+                    current_students={group.current_students}
                   />
                 )
               })}

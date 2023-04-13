@@ -18,6 +18,7 @@ interface IGroupCardProps {
     last_name: string
     image: string
   }
+  current_students: number
 }
 
 const GroupCard: FC<IGroupCardProps> = ({
@@ -29,6 +30,7 @@ const GroupCard: FC<IGroupCardProps> = ({
   department,
   schedule_type,
   mentor,
+  current_students,
 }) => {
   // DEPARTMENT SWITCHCASE
   let departmentClassName
@@ -75,7 +77,9 @@ const GroupCard: FC<IGroupCardProps> = ({
           <span>{classroom}</span>
         </div>
         <div className={styles.countRoom}>
-          <span>{students_max}</span>
+          <span>
+            {current_students}/{students_max}
+          </span>
           <img src={student} alt='student' />
         </div>
       </div>

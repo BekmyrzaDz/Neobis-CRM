@@ -111,6 +111,7 @@ export interface IGroupOnStudy {
   end_at_date: string
   start_at_time: string
   end_at_time: string
+  current_students: number
 }
 
 // Get all groups type
