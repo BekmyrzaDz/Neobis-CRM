@@ -15,13 +15,7 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
 import { Dispatch, FC, SetStateAction, useEffect } from 'react'
 
 import styles from './GroupDetailsForm.module.scss'
-import {
-  createGroupOnStudy,
-  getAllGroups,
-  getGroupDepartmentFilters,
-  getGroupOnStudyById,
-} from '../../redux/groups/asyncActions'
-import { toLocalDate } from '../../helpers/toLocalDate'
+import { getGroupOnStudyById } from '../../redux/groups/asyncActions'
 import { useParams } from 'react-router-dom'
 import StudentFormSkeleton from '../../components/skeleton/StudentFormSkeleton'
 
@@ -32,7 +26,7 @@ interface GroupDetailsFormProps {
 interface IInitialValues {
   name: string
   department: string
-  mentor: string
+  mentor: number
   classroom: string
   students_max: number
   start_at_date: string
@@ -49,17 +43,17 @@ const GroupDetailsForm: FC<GroupDetailsFormProps> = ({ setModalActive }) => {
   const group = useAppSelector((state) => state.groupsOnStudy.groupOnStudy!)
   const { isLoading } = useAppSelector((state) => state.groupsOnStudy)
 
-  const initialValues = {
-    name: (group && group.name) || '',
-    department: (group && group.department?.name) || '',
-    mentor: (group && group.mentor && group.mentor.id) || '',
-    classroom: group && group.classroom?.name,
-    students_max: group && group.students_max,
-    start_at_date: (group && group.start_at_date) || '',
-    end_at_date: (group && group.end_at_date) || '',
-    schedule_type: (group && group.schedule_type) || '',
-    start_at_time: (group && group.start_at_time) || '',
-    end_at_time: (group && group.end_at_time) || '',
+  const initialValues: IInitialValues = {
+    name:          group?.name             ?? '',
+    department:    group?.department?.name ?? '',
+    mentor:        group?.mentor?.id       ?? '',
+    classroom:     group?.classroom?.name  ?? '',
+    students_max:  group?.students_max     ?? '',
+    start_at_date: group?.start_at_date    ?? '',
+    end_at_date:   group?.end_at_date      ?? '',
+    schedule_type: group?.schedule_type    ?? '',
+    start_at_time: group?.start_at_time    ?? '',
+    end_at_time:   group?.end_at_time      ?? '',
   }
 
   useEffect(() => {

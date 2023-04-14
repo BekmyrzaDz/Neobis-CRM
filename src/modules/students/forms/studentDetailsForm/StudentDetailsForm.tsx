@@ -30,17 +30,11 @@ interface IInitialValues {
   last_name: string
   group: string
   phone: string
-  came_from?: {
-    id: number
-    name: string
-  }
-  department?: {
-    id: number
-    name: string
-  }
-  laptop?: boolean
-  notes?: string
-  payment_status?: number
+  came_from: string
+  department: string
+  laptop: boolean
+  notes: string
+  payment_status: number
 }
 
 interface StudentDetailsFormProps {
@@ -59,15 +53,15 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
   const { isLoading } = useAppSelector((state) => state.studentsOnStudy)
 
   const initialValues: IInitialValues = {
-    first_name: student.first_name || '',
-    last_name: student.last_name || '',
-    group: student.group || '',
-    phone: student.phone || '',
-    came_from: student.came_from?.name || '',
-    department: student.department?.name || '',
-    laptop: student.laptop || true,
-    notes: student.notes || '',
-    payment_status: student.payment_status || 1,
+    first_name:     student?.first_name       ?? '',
+    last_name:      student?.last_name        ?? '',
+    group:          student?.group            ?? '',
+    phone:          student?.phone            ?? '',
+    came_from:      student?.came_from?.name  ?? '',
+    department:     student?.department?.name ?? '',
+    laptop:         student?.laptop           ?? true,
+    notes:          student?.notes            ?? '',
+    payment_status: student?.payment_status   ?? 1,
   }
 
   useEffect(() => {

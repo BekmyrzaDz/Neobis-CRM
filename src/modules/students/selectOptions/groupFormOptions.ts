@@ -31,8 +31,8 @@ const classrooms: Option[] = [
 // Options for schedules select
 const schedule_types: Option[] = [
   { key: 'Выберите расписание', value: '' },
-  { key: 'Пн / Ср / Пт', value: '1' },
-  { key: 'Вт / Чт / Сб', value: '2' },
+  { key: 'Пн / Ср / Пт', value: 1 },
+  { key: 'Вт / Чт / Сб', value: 2 },
 ]
 
 export { departments, mentors, classrooms, schedule_types }
