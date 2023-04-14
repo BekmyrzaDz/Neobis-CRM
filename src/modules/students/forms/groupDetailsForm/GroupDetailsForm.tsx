@@ -106,6 +106,51 @@ const GroupDetailsForm: FC<GroupDetailsFormProps> = ({ setModalActive }) => {
     setModalActive(false)
   }
 
+  const onArchive = (values: IInitialValues) => {
+    const {
+      name,
+      department,
+      mentor,
+      classroom,
+      students_max,
+      start_at_date,
+      end_at_date,
+      schedule_type,
+      start_at_time,
+      end_at_time,
+    } = values
+
+    if (window.confirm(`Вы действительно хотите архивировать ${name}?`)) {
+      if (id !== undefined) {
+        dispatch(
+          editGroupOnStudyById({
+            token,
+            id,
+            name,
+            department: {
+              name: department,
+            },
+            mentor: {
+              id: mentor,
+            },
+            classroom: {
+              name: classroom,
+            },
+            is_archive: true,
+            students_max,
+            start_at_date,
+            end_at_date,
+            schedule_type,
+            start_at_time,
+            end_at_time,
+          })
+        )
+      }
+
+      setModalActive(false)
+    }
+  }
+
   if (isLoading) {
     return <StudentFormSkeleton />
   }
@@ -129,6 +174,7 @@ const GroupDetailsForm: FC<GroupDetailsFormProps> = ({ setModalActive }) => {
             icon={busketIcon}
             className={styles.archiveBtn}
             type={'button'}
+            onClick={() => onArchive(initialValues)}
           />
         </div>
         <Input
