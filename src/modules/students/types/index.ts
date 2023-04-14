@@ -69,7 +69,7 @@ export interface ICreateStudentonStudy {
 
 // Edit student on study
 export interface IEditStudentonStudy extends ICreateStudentonStudy {
-  id: number
+  id: string
 }
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!GROUPS!!!!!!!!!!!!!!!!!!!!!
@@ -164,4 +164,8 @@ export interface ICreateGroupOnstudyRES {
 export interface IGetGroupOnStudyById {
   token: string
   id?: string
+}
+
+export interface IEditGroupOnStudy extends ICreateGroupOnstudyREQ {
+  id: string
 }

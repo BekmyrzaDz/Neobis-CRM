@@ -4,6 +4,7 @@ import { AxiosError } from 'axios'
 import {
   ICreateGroupOnstudyREQ,
   ICreateGroupOnstudyRES,
+  IEditGroupOnStudy,
   IGetAllGroupsOnStudy,
   IGetGroupOnStudyById,
   IGroupOnStudy,
@@ -170,3 +171,69 @@ export const getGroupOnStudyById = createAsyncThunk<
     throw error
   }
 })
+
+// Edit student on study
+export const editGroupOnStudyById = createAsyncThunk<
+  IGroupOnStudy,
+  IEditGroupOnStudy,
+  { rejectValue: string }
+>(
+  'groupsOnStudy/editGroupOnStudyById',
+  async (
+    {
+      token,
+      id,
+      name,
+      mentor,
+      department,
+      students_max,
+      schedule_type,
+      classroom,
+      is_archive,
+      start_at_date,
+      end_at_date,
+      start_at_time,
+      end_at_time,
+    },
+    thunkAPI
+  ) => {
+    try {
+      const response = await groupsOnStudyService.editGroupOnStudyById({
+        token,
+        id,
+        name,
+        mentor,
+        department,
+        students_max,
+        schedule_type,
+        classroom,
+        is_archive,
+        start_at_date,
+        end_at_date,
+        start_at_time,
+        end_at_time,
+      })
+      if (response) {
+        toast.success('Данные успешно обновлены')
+      }
+      return response
+    } catch (error: unknown) {
+      if (typeof error === 'string') {
+        toast.error(error)
+        return thunkAPI.rejectWithValue(error)
+      }
+      if (error instanceof AxiosError) {
+        const message =
+          error.response?.data?.detail ||
+          (error.response &&
+            error.response?.data &&
+            error.response?.data?.message) ||
+          error.message ||
+          error.toString()
+        toast.error(message)
+        return thunkAPI.rejectWithValue(message)
+      }
+      throw error
+    }
+  }
+)

@@ -53,15 +53,15 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
   const { isLoading } = useAppSelector((state) => state.studentsOnStudy)
 
   const initialValues: IInitialValues = {
-    first_name:     student?.first_name       ?? '',
-    last_name:      student?.last_name        ?? '',
-    group:          student?.group            ?? '',
-    phone:          student?.phone            ?? '',
-    came_from:      student?.came_from?.name  ?? '',
-    department:     student?.department?.name ?? '',
-    laptop:         student?.laptop           ?? true,
-    notes:          student?.notes            ?? '',
-    payment_status: student?.payment_status   ?? 1,
+    first_name: student?.first_name ?? '',
+    last_name: student?.last_name ?? '',
+    group: student?.group ?? '',
+    phone: student?.phone ?? '',
+    came_from: student?.came_from?.name ?? '',
+    department: student?.department?.name ?? '',
+    laptop: student?.laptop ?? true,
+    notes: student?.notes ?? '',
+    payment_status: student?.payment_status ?? 1,
   }
 
   useEffect(() => {
@@ -81,24 +81,26 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
       payment_status,
     } = values
 
-    dispatch(
-      editStudentOnStudyById({
-        token,
-        id,
-        first_name,
-        last_name,
-        group,
-        phone,
-        came_from: { name: came_from },
-        department: { name: department },
-        on_request: false,
-        is_archive: false,
-        blacklist: false,
-        laptop: Boolean(laptop),
-        notes,
-        payment_status: +payment_status,
-      })
-    )
+    if (id !== undefined) {
+      dispatch(
+        editStudentOnStudyById({
+          token,
+          id,
+          first_name,
+          last_name,
+          group,
+          phone,
+          came_from: { name: came_from },
+          department: { name: department },
+          on_request: false,
+          is_archive: false,
+          blacklist: false,
+          laptop: Boolean(laptop),
+          notes,
+          payment_status: +payment_status,
+        })
+      )
+    }
 
     setModalActive(false)
   }
@@ -121,24 +123,26 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
         `Вы действительно хотите архивировать ${first_name} ${last_name}?`
       )
     ) {
-      dispatch(
-        editStudentOnStudyById({
-          token,
-          id,
-          first_name,
-          last_name,
-          group,
-          phone,
-          came_from: { name: came_from },
-          department: { name: department },
-          on_request: false,
-          is_archive: true,
-          blacklist: false,
-          laptop: Boolean(laptop),
-          notes,
-          payment_status: +payment_status,
-        })
-      )
+      if (id !== undefined) {
+        dispatch(
+          editStudentOnStudyById({
+            token,
+            id,
+            first_name,
+            last_name,
+            group,
+            phone,
+            came_from: { name: came_from },
+            department: { name: department },
+            on_request: false,
+            is_archive: true,
+            blacklist: false,
+            laptop: Boolean(laptop),
+            notes,
+            payment_status: +payment_status,
+          })
+        )
+      }
 
       setModalActive(false)
     }
@@ -162,24 +166,26 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
         `Вы действительно хотите заблокировать ${first_name} ${last_name}?`
       )
     ) {
-      dispatch(
-        editStudentOnStudyById({
-          token,
-          id,
-          first_name,
-          last_name,
-          group,
-          phone,
-          came_from: { name: came_from },
-          department: { name: department },
-          on_request: false,
-          is_archive: false,
-          blacklist: true,
-          laptop: Boolean(laptop),
-          notes,
-          payment_status: +payment_status,
-        })
-      )
+      if (id !== undefined) {
+        dispatch(
+          editStudentOnStudyById({
+            token,
+            id,
+            first_name,
+            last_name,
+            group,
+            phone,
+            came_from: { name: came_from },
+            department: { name: department },
+            on_request: false,
+            is_archive: false,
+            blacklist: true,
+            laptop: Boolean(laptop),
+            notes,
+            payment_status: +payment_status,
+          })
+        )
+      }
 
       setModalActive(false)
     }

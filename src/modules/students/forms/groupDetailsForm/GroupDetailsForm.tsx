@@ -15,7 +15,10 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
 import { Dispatch, FC, SetStateAction, useEffect } from 'react'
 
 import styles from './GroupDetailsForm.module.scss'
-import { getGroupOnStudyById } from '../../redux/groups/asyncActions'
+import {
+  editGroupOnStudyById,
+  getGroupOnStudyById,
+} from '../../redux/groups/asyncActions'
 import { useParams } from 'react-router-dom'
 import StudentFormSkeleton from '../../components/skeleton/StudentFormSkeleton'
 
@@ -44,21 +47,64 @@ const GroupDetailsForm: FC<GroupDetailsFormProps> = ({ setModalActive }) => {
   const { isLoading } = useAppSelector((state) => state.groupsOnStudy)
 
   const initialValues: IInitialValues = {
-    name:          group?.name             ?? '',
-    department:    group?.department?.name ?? '',
-    mentor:        group?.mentor?.id       ?? '',
-    classroom:     group?.classroom?.name  ?? '',
-    students_max:  group?.students_max     ?? '',
-    start_at_date: group?.start_at_date    ?? '',
-    end_at_date:   group?.end_at_date      ?? '',
-    schedule_type: group?.schedule_type    ?? '',
-    start_at_time: group?.start_at_time    ?? '',
-    end_at_time:   group?.end_at_time      ?? '',
+    name: group?.name ?? '',
+    department: group?.department?.name ?? '',
+    mentor: group?.mentor?.id ?? '',
+    classroom: group?.classroom?.name ?? '',
+    students_max: group?.students_max ?? '',
+    start_at_date: group?.start_at_date ?? '',
+    end_at_date: group?.end_at_date ?? '',
+    schedule_type: group?.schedule_type ?? '',
+    start_at_time: group?.start_at_time ?? '',
+    end_at_time: group?.end_at_time ?? '',
   }
 
   useEffect(() => {
     dispatch(getGroupOnStudyById({ token, id }))
   }, [])
+
+  const onSubmit = (values: IInitialValues) => {
+    const {
+      name,
+      department,
+      mentor,
+      classroom,
+      students_max,
+      start_at_date,
+      end_at_date,
+      schedule_type,
+      start_at_time,
+      end_at_time,
+    } = values
+
+    if (id !== undefined) {
+      dispatch(
+        editGroupOnStudyById({
+          token,
+          id,
+          name,
+          department: {
+            name: department,
+          },
+          mentor: {
+            id: mentor,
+          },
+          classroom: {
+            name: classroom,
+          },
+          is_archive: false,
+          students_max,
+          start_at_date,
+          end_at_date,
+          schedule_type,
+          start_at_time,
+          end_at_time,
+        })
+      )
+    }
+
+    setModalActive(false)
+  }
 
   if (isLoading) {
     return <StudentFormSkeleton />
@@ -69,7 +115,7 @@ const GroupDetailsForm: FC<GroupDetailsFormProps> = ({ setModalActive }) => {
       initialValues={initialValues}
       validationSchema={GroupSchema}
       enableReinitialize={true}
-      onSubmit={(values) => console.log(JSON.stringify(values, null, 2))}
+      onSubmit={onSubmit}
     >
       <Form className={styles.form}>
         <div className={styles.header}>

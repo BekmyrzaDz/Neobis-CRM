@@ -2,6 +2,7 @@ import axios from 'axios'
 import {
   ICreateGroupOnstudyREQ,
   ICreateGroupOnstudyRES,
+  IEditGrouponStudy,
   IGetAllGroupsOnStudy,
   IGetGroupOnStudyById,
   IGroupOnStudy,
@@ -92,11 +93,55 @@ const createGroupOnStudy = async ({
   return response.data
 }
 
+// Edit group on study by ID
+const editGroupOnStudyById = async ({
+  id,
+  token,
+  name,
+  mentor,
+  department,
+  students_max,
+  schedule_type,
+  classroom,
+  is_archive,
+  start_at_date,
+  end_at_date,
+  start_at_time,
+  end_at_time,
+}: IEditGrouponStudy): Promise<IGroupOnStudy> => {
+  const response = await axios.put(
+    API_URL + id + '/',
+    {
+      token,
+      id,
+      name,
+      mentor,
+      department,
+      students_max,
+      schedule_type,
+      classroom,
+      is_archive,
+      start_at_date,
+      end_at_date,
+      start_at_time,
+      end_at_time,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  )
+
+  return response.data
+}
+
 const groupsOnStudyService = {
   getAllGroupsOnStudy,
   getGroupDepartmentFilters,
   createGroupOnStudy,
   getGroupOnStudyById,
+  editGroupOnStudyById,
 }
 
 export default groupsOnStudyService
