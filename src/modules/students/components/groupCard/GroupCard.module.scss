@@ -9,10 +9,9 @@
   cursor: pointer;
   transition: 0.3s;
   &:hover {
-    // background-color: #E5E5E5;
     transition: 0.3s;
-    transform: scale(0.9);
-    box-shadow: 0px 0px 4px 4px #b4b2d4;
+    transform: scale(1.02);
+    box-shadow: 0px 0px 4px 4px #e5e5e5;
   }
 }
 
@@ -94,8 +93,8 @@
     width: 40px;
     height: 40px;
     padding: 10px 10.5px;
-    color: #756FB3;
-    background-color: #EBEAF8;
+    color: #756fb3;
+    background-color: #ebeaf8;
     font-weight: 400;
     font-size: 14px;
     line-height: 19px;
@@ -120,7 +119,6 @@
     line-height: 21px;
   }
 }
-
 
 .ux {
   background-color: #c656a0;
