@@ -4,4 +4,5 @@ export interface IFilterButton {
   isActive: boolean
   extraClassForText: string
   onClick?: () => void
+  departmentFilter: string
 }

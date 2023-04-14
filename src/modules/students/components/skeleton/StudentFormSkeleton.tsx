@@ -8,48 +8,48 @@ const StudentFormSkeleton = () => {
     <div>
       <br />
       <br />
-      <Skeleton height={50} width={200} borderRadius={50} />
+      <Skeleton height={50} width={280} borderRadius={50} />
       <br />
       <br />
       <div className={styles.double}>
-        <Skeleton height={32} width={280} borderRadius={50} />
+        <Skeleton height={32} width={320} borderRadius={50} />
         <br />
-        <Skeleton height={32} width={280} borderRadius={50} />
+        <Skeleton height={32} width={320} borderRadius={50} />
       </div>
       <br />
       <div className={styles.double}>
-        <Skeleton height={32} width={280} borderRadius={50} />
+        <Skeleton height={32} width={320} borderRadius={50} />
         <br />
-        <Skeleton height={32} width={280} borderRadius={50} />
+        <Skeleton height={32} width={320} borderRadius={50} />
       </div>
       <br />
       <div className={styles.double}>
-        <Skeleton height={32} width={280} borderRadius={50} />
+        <Skeleton height={32} width={320} borderRadius={50} />
         <br />
-        <Skeleton height={32} width={280} borderRadius={50} />
+        <Skeleton height={32} width={320} borderRadius={50} />
       </div>
       <br />
       <div className={styles.double}>
-        <Skeleton height={32} width={280} borderRadius={50} />
+        <Skeleton height={32} width={320} borderRadius={50} />
         <br />
-        <Skeleton height={32} width={280} borderRadius={50} />
+        <Skeleton height={32} width={320} borderRadius={50} />
       </div>
       <br />
       <div className={styles.double}>
-        <Skeleton height={32} width={280} borderRadius={50} />
+        <Skeleton height={32} width={320} borderRadius={50} />
         <br />
-        <Skeleton height={32} width={280} borderRadius={50} />
+        <Skeleton height={32} width={320} borderRadius={50} />
       </div>
       <br />
       <br />
-      <Skeleton height={90} width={600} borderRadius={15} />
+      <Skeleton height={140} width={680} borderRadius={15} />
       <br />
       <br />
-      <Skeleton height={32} width={600} borderRadius={50} />
+      <Skeleton height={32} width={680} borderRadius={50} />
       <br />
-      <Skeleton height={32} width={600} borderRadius={50} />
+      <Skeleton height={32} width={680} borderRadius={50} />
       <br />
-      <Skeleton height={32} width={600} borderRadius={50} />
+      <Skeleton height={32} width={680} borderRadius={50} />
       <br />
       <br />
     </div>

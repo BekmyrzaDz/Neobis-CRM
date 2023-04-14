@@ -32,14 +32,19 @@ import {
 } from '../../modules/students/redux/groups/asyncActions'
 
 type ModalState = [boolean, Dispatch<SetStateAction<boolean>>]
-type activeOptionState = [string, Dispatch<SetStateAction<string>>]
+// type activeOptionState = [string, Dispatch<SetStateAction<string>>]
 
 const StudentsPage = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const [activeOption, setActiveOption]: activeOptionState =
-    useState('Студенты')
-  const [departmentFilter, setDepartmentFilter] = useState('')
+  const [activeOption, setActiveOption] = useState(() => {
+    const option = localStorage.getItem('activeOption')
+    return option || 'Студенты'
+  })
+  const [departmentFilter, setDepartmentFilter] = useState(() => {
+    const filter = localStorage.getItem('activeFilter')
+    return filter || ''
+  })
   const [modalActive, setModalActive]: ModalState = useState(false)
 
   const auth = useAppSelector((state) => state.auth)
@@ -86,10 +91,6 @@ const StudentsPage = () => {
   }, [departmentFilter, activeOption])
 
   const onToggleModal = useCallback(() => {
-    setModalActive((prev) => !prev)
-  }, [])
-
-  const onAddStudent = useCallback(() => {
     setModalActive((prev) => !prev)
   }, [])
 
@@ -228,19 +229,15 @@ const StudentsPage = () => {
             setActiveOption={setActiveOption}
           />
 
-          {activeOption === 'Студенты' ? (
-            <IconButton
-              text={'Добавить студента'}
-              icon={plusIcon}
-              onClick={onAddStudent}
-            />
-          ) : (
-            <IconButton
-              text={'Добавить группу'}
-              icon={plusIcon}
-              onClick={onToggleModal}
-            />
-          )}
+          <IconButton
+            text={
+              activeOption === 'Студенты'
+                ? 'Добавить студента'
+                : 'Добавить группу'
+            }
+            icon={plusIcon}
+            onClick={onToggleModal}
+          />
 
           <ProfileIcon
             avatar={auth_avatar}
@@ -259,6 +256,7 @@ const StudentsPage = () => {
             isActive={departmentFilter === id}
             onClick={() => setDepartmentFilter(id)}
             extraClassForText={extraClassForText}
+            departmentFilter={departmentFilter}
           />
         ))}
       </div>

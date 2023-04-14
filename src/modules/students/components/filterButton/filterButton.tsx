@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { IFilterButton } from './filterButton.props'
 
 import styles from './filterButton.module.scss'
@@ -9,7 +9,11 @@ const FilterButton: FC<IFilterButton> = ({
   isActive,
   onClick,
   extraClassForText,
+  departmentFilter,
 }) => {
+  useEffect(() => {
+    localStorage.setItem('activeFilter', departmentFilter)
+  }, [departmentFilter])
   return (
     <button
       className={`${styles.btn} ${isActive ? styles.activeBtn : ''}`}
