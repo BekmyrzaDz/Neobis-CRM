@@ -15,6 +15,7 @@ import studentArchiveSlice from '../modules/Archive/redux/studentArchive/studden
 import groupArchiveSlice from '../modules/Archive/redux/groupArchive/groupArchiveSlice';
 import detailWiewReducer from '../modules/DndMainPage/redux/detailViewSlice';
 import studentsOnStudyReducer from '../modules/students/redux/students/studentsOnStudySlice';
+import courseArchiveReducer from '../modules/Archive/redux/courseArchive/courseArchiveSlice';
 import groupsOnStudyReducer from '../modules/students/redux/groups/groupsOnStudySlice';
 
 const rootReducer = combineReducers({
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   mentorArchive: mentorArchiveSlice,
   studentArchive: studentArchiveSlice,
   groupArchive: groupArchiveSlice,
+  courseArchive: courseArchiveReducer,
   singelClient: detailWiewReducer,
 });
 

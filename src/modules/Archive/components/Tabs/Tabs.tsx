@@ -8,6 +8,7 @@ import { getArchiveAdmins } from '../../redux/adminArchive/adminArchiveSlice';
 import { getArchiveMentors } from '../../redux/mentorArchive/mentorArchiveSlice';
 import { getArchiveStudent } from '../../redux/studentArchive/studdentArchiveSlice';
 import { getArchiveGroup } from '../../redux/groupArchive/groupArchiveSlice';
+import { getArchiveGourse } from '../../redux/courseArchive/courseArchiveSlice'
 import ArchiveBase from '../ArchiveBase/ArchiveBase';
 import Students from '../Content/Students/Students';
 import Groups from '../Content/Groups/Groups';
@@ -24,7 +25,7 @@ export default function TabComponent() {
   const { mentors } = useSelector((state: RootState) => state.mentorArchive);
   const { students } = useSelector((state: RootState) => state.studentArchive);
   const { groups } = useSelector((state: RootState) => state.groupArchive);
-
+  const { courses } = useSelector((state: RootState) => state.courseArchive);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -36,6 +37,7 @@ export default function TabComponent() {
     dispatch(getArchiveMentors());
     dispatch(getArchiveStudent());
     dispatch(getArchiveGroup())
+    dispatch(getArchiveGourse())
   }, [dispatch]);
   console.log(managers)
 
@@ -101,7 +103,7 @@ export default function TabComponent() {
       {value === 2 && <Mentors employees={mentors} />}
       {value === 3 && <Students employees={students} />}
       {value === 4 && <Groups employees={groups} />}
-      {/* {value === 5 && <Courses />} */}
+      {value === 5 && <Courses employees={courses} />}
     </div>
   );
 }

@@ -5,7 +5,7 @@ import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import GroupIcon from "@material-ui/icons/Group";
 
 interface ICourses {
-  id:number;
+  id: number;
   color: string;
   img: string;
   title: string;
@@ -14,25 +14,26 @@ interface ICourses {
   onClick: () => void;
 }
 
-const CardExample: React.FC<ICourses> = ({ color, img, title, month, groups }) => {
+const CardExample: React.FC<ICourses> = (course) => {
+  console.log(course)
   const classes = useStyles();
   return (
     <Card className={classes.root}>
       <CardMedia
         className={classes.media}
-        image={img}
+        image={course.course.image}
         title="Card Image"
       />
       <CardContent className={classes.content}>
-        <Typography className={classes.title} style={{ color: color }}>{title}</Typography>
+        <Typography className={classes.title} style={{ color: course.course.color }}>{course.course.name}</Typography>
         <div className={classes.iconContainer}>
           <div className={classes.iconPosition}>
             <AccessTimeIcon className={classes.icon} />
-            <Typography className={classes.text}>{month}мес</Typography>
+            <Typography className={classes.text}>{course.month}мес</Typography>
           </div>
           <div className={classes.iconPosition}>
             <GroupIcon className={classes.icon} />
-            <Typography className={classes.text}>{groups} группы</Typography>
+            <Typography className={classes.text}>{course.coirse?.group_set[0]} группы</Typography>
           </div>
         </div>
       </CardContent>
