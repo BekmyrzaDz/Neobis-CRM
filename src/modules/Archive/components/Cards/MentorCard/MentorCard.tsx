@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, CardMedia, Typography, Box } from '@material-ui/core';
 import { MoreVert } from '@material-ui/icons';
-//import Linkedin from '../../assets/largeLinkedin.svg'
-import gmail from '../../assets/email.png'
+import Linkedin from '../../../assets/largeLinkedin.svg'
+import gmail from '../../../assets/email.png'
 
 interface UserCardProps {
   onCardClick: () => void;
