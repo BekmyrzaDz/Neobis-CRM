@@ -6,6 +6,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { gerArhiveManagers } from '../../redux/managerArchive/managerArhiveSlice';
 import { getArchiveAdmins } from '../../redux/adminArchive/adminArchiveSlice';
 import { getArchiveMentors } from '../../redux/mentorArchive/mentorArchiveSlice';
+import { getArchiveStudent } from '../../redux/studentArchive/studdentArchiveSlice';
+import { getArchiveGroup } from '../../redux/groupArchive/groupArchiveSlice';
 import ArchiveBase from '../ArchiveBase/ArchiveBase';
 import Students from '../Content/Students/Students';
 import Groups from '../Content/Groups/Groups';
@@ -20,6 +22,8 @@ export default function TabComponent() {
   const { managers } = useSelector((state: RootState) => state.managerArhive);
   const { admins } = useSelector((state: RootState) => state.adminsArhive);
   const { mentors } = useSelector((state: RootState) => state.mentorArchive);
+  const { students } = useSelector((state: RootState) => state.studentArchive);
+  const { groups } = useSelector((state: RootState) => state.groupArchive);
 
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -30,6 +34,8 @@ export default function TabComponent() {
     dispatch(gerArhiveManagers());
     dispatch(getArchiveAdmins());
     dispatch(getArchiveMentors());
+    dispatch(getArchiveStudent());
+    dispatch(getArchiveGroup())
   }, [dispatch]);
   console.log(managers)
 
@@ -66,8 +72,8 @@ export default function TabComponent() {
     { title: 'Менеджеры', count: managers.length },
     { title: 'Админы', count: admins.length },
     { title: 'Преподаватели', count: mentors.length },
-    { title: 'Студенты', count: 5 },
-    { title: 'Группы', count: 5 },
+    { title: 'Студенты', count: students.length },
+    { title: 'Группы', count: groups.length },
     { title: 'Курсы', count: 5 },
   ];
 
@@ -93,8 +99,8 @@ export default function TabComponent() {
       {value === 0 && <ArchiveBase employees={managers} />}
       {value === 1 && <ArchiveBase employees={admins} />}
       {value === 2 && <Mentors employees={mentors} />}
-      {value === 3 && <Students />}
-      {value === 4 && <Groups />}
+      {value === 3 && <Students employees={students} />}
+      {value === 4 && <Groups employees={groups} />}
       {/* {value === 5 && <Courses />} */}
     </div>
   );

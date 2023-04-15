@@ -20,13 +20,13 @@ interface MyComponentProps {
 const Groups = (props: MyComponentProps) => {
 
 
-  const employees = [1, 2, 3]
+  const { employees } = props
 
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%', gap: '20px', rowGap: '30px' }}>
       {
-        employees.map(mentor => (
-          <GroupCard />
+        employees.map(group => (
+          <GroupCard info={group} />
         ))
       }
     </div>

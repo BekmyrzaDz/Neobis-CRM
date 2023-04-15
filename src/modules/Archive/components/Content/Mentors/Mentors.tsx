@@ -27,19 +27,12 @@ const MentorsCards = (props: MyComponentProps) => {
 
   const [showModal, setShowModal] = useState(false);
 
-  const handleCardClick = (mentor) => {
-    setShowModal(true);
-    dispatch(getMentorById(mentor.id));
-  }
+
 
   const { employees } = props;
 
 
-  // useEffect(() => {
-  //   dispatch(getMentorById(5));
-  // }, [dispatch]);
 
-  const { mentor } = useSelector((state: RootState) => state.mentors);
 
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', width: '98%', gap: '24px' }}>

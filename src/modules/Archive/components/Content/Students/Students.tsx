@@ -21,13 +21,14 @@ interface MyComponentProps {
 const Students = (props: MyComponentProps) => {
 
 
-  const employees = [1, 2, 3, 4, 5, 6, 9, 7]
+  const { employees } = props;
+
 
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%', gap: '24px' }}>
       {
-        employees.map(mentor => (
-          <StudentCard />
+        employees.map(student => (
+          <StudentCard info={student} />
         ))
       }
     </div>

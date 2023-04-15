@@ -1,35 +1,40 @@
 import { createAsyncThunk, createSlice, AsyncThunkConfig } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-interface IStudents {
+interface IGroup {
   id: number;
-  first_name: string;
-  last_name: string;
-  group: string;
-  phone: string;
-  came_from: {
+  name: string;
+  mentor: {
     id: number;
-    name: string;
+    first_name: string;
+    last_name: string;
+    image: string;
   };
   department: {
     name: string;
   };
-  on_request: boolean;
+  students_max: number;
+  schedule_type: number;
+  classroom: {
+    id: number;
+    name: string;
+  };
   is_archive: boolean;
-  blacklist: boolean;
-  laptop: boolean;
-  payment_status: number;
-  notes: string;
+  start_at_date: string;
+  end_at_date: string;
+  start_at_time: string;
+  end_at_time: string;
+  current_students: number;
 }
 
-interface IStudentsState {
-  students: IStudents[];
+interface IGroupsState {
+  groups: IGroup[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
 
-const initialState: IStudentsState = {
-  students: [],
+const initialState: IGroupsState = {
+  groups: [],
   status: 'idle',
   error: null,
 };
@@ -37,11 +42,11 @@ const initialState: IStudentsState = {
 const userItem = localStorage.getItem('user');
 const access_token: string | undefined = userItem ? JSON.parse(userItem).access : undefined;
 
-export const getArchiveStudent = createAsyncThunk<IStudents[], void, AsyncThunkConfig>(
-  'managers/gerArhiveStudents',
+export const getArchiveGroup = createAsyncThunk<IGroup[], void, AsyncThunkConfig>(
+  'managers/gerArhiveGroups',
   async (_, thunkApi) => {
     try {
-      const response = await axios.get<IStudents[]>('http://64.226.89.72/api/archive/students/', {
+      const response = await axios.get<IGroup[]>('http://64.226.89.72/api/archive/groups/', {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
@@ -53,24 +58,24 @@ export const getArchiveStudent = createAsyncThunk<IStudents[], void, AsyncThunkC
   },
 );
 
-const studentArhiveSlice = createSlice({
+const groupArhiveSlice = createSlice({
   name: 'managers',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getArchiveStudent.pending, (state) => {
+      .addCase(getArchiveGroup.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(getArchiveStudent.fulfilled, (state, action) => {
+      .addCase(getArchiveGroup.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.students = action.payload;
+        state.groups = action.payload;
       })
-      .addCase(getArchiveStudent.rejected, (state, action) => {
+      .addCase(getArchiveGroup.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message ?? 'Something went wrong.';
       });
   },
 });
 
-export default studentArhiveSlice.reducer;
+export default groupArhiveSlice.reducer;
