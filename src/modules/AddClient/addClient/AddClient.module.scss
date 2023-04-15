@@ -33,21 +33,11 @@
   margin-bottom: 24px;
 }
 
-.columnOne {
-  & > .firstName {
-    margin-bottom: 24px;
-  }
-}
-
 .phoneAndLaptop {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-bottom: 24px;
-}
-
-.laptop {
-  max-width: 129px;
 }
 
 .paymentMethodAndSource {
@@ -59,4 +49,12 @@
 
 .notes {
   margin-bottom: 32px;
+}
+
+.btns {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
 }

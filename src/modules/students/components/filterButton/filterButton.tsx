@@ -1,14 +1,26 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { IFilterButton } from './filterButton.props'
-import clsx from 'clsx'
 
 import styles from './filterButton.module.scss'
 
-const FilterButton: FC<IFilterButton> = ({ className, text, count}) => {
+const FilterButton: FC<IFilterButton> = ({
+  text,
+  count,
+  isActive,
+  onClick,
+  extraClassForText,
+  departmentFilter,
+}) => {
+  useEffect(() => {
+    localStorage.setItem('activeFilter', departmentFilter)
+  }, [departmentFilter])
   return (
-    <button className={clsx(styles.btn, className)}>
-      <span className={clsx(styles.text, className)}>{text}</span>
-      <span className={styles.count}>{count}</span>
+    <button
+      className={`${styles.btn} ${isActive ? styles.activeBtn : ''}`}
+      onClick={onClick}
+    >
+      <span className={`${styles.text} ${extraClassForText}`}>{text}</span>
+      <span className={`${styles.count}`}>{count}</span>
     </button>
   )
 }

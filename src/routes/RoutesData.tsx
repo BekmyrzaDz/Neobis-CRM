@@ -10,33 +10,37 @@ import Page404 from "../pages/page404/Page404"
 import AnalyticsPage from "../pages/analitics/components/AnalyticsPage"
 import ProfilePage from "../pages/profile/ProfilePage"
 import PaymentPage from "../pages/payment/components/PaymentPage"
+import StudentDetails from '../pages/studentDetails/studentDetails'
+import GroupDetails from '../pages/groupDetails/GroupDetails'
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <AuthPage />,
     children: [
-      { path: "forgot-password", element: <AuthPage /> },
-      { path: "verification", element: <AuthPage /> },
-      { path: "reset-password", element: <AuthPage /> },
+      { path: 'forgot-password', element: <AuthPage /> },
+      { path: 'verification', element: <AuthPage /> },
+      { path: 'reset-password', element: <AuthPage /> },
     ],
   },
   {
-    path: "/",
+    path: '/',
     element: <Layout />,
     children: [
-      { path: "home-page", element: <MainPage /> },
-      { path: "students", element: <StudentsPage /> },
-      { path: "employees", element: <EmployeesPage /> },
-      { path: "courses", element: <CoursePage /> },
-      { path: "analytics", element: <AnalyticsPage /> },
-      { path: "payment", element: <PaymentPage /> },
-      { path: "archive", element: <ArchivePage /> },
-      { path: "profile", element: <ProfilePage /> },
+      { path: 'home-page', element: <MainPage /> },
+      { path: 'students', element: <StudentsPage /> },
+      { path: `students/:id`, element: <StudentDetails /> },
+      { path: `students/groups/:id`, element: <GroupDetails /> },
+      { path: 'employees', element: <EmployeesPage /> },
+      { path: 'courses', element: <CoursePage /> },
+      { path: 'analytics', element: <AnalyticsPage /> },
+      { path: 'payment', element: <PaymentPage /> },
+      { path: 'archive', element: <ArchivePage /> },
+      { path: 'profile', element: <ProfilePage /> },
     ],
   },
   {
-    path: "*",
+    path: '*',
     element: <Page404 />,
   },
 ])

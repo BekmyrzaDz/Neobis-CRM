@@ -6,6 +6,13 @@
   display: flex;
   flex-direction: column;
   border-radius: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    transition: 0.3s;
+    transform: scale(1.02);
+    box-shadow: 0px 0px 4px 4px #e5e5e5;
+  }
 }
 
 .paid {
@@ -16,13 +23,26 @@
   & > img {
     margin-right: 8px;
   }
-  & > span {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 16px;
-    color: #32b483;
-  }
+}
+
+.payStatus {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  color: #32b483;
+}
+
+.paidSpan {
+  color: #32b483;
+}
+
+.mustPaySpan {
+  color: #d74245;
+}
+
+.soonPaySpan {
+  color: #ff9900;
 }
 
 .id {
@@ -69,6 +89,31 @@
   font-size: 16px;
   line-height: 21px;
   color: #32b483;
+}
+
+.ux {
+  color: #c656a0;
+}
+.front {
+  color: #32b483;
+}
+.pm {
+  color: #70bf44;
+}
+.back {
+  color: #756fb3;
+}
+.android {
+  color: #c656a0;
+}
+.ios {
+  color: #a6ce39;
+}
+.flutter {
+  color: #00a64e;
+}
+.olymp {
+  color: #7c51a1;
 }
 
 .footer {

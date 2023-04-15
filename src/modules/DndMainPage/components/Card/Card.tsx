@@ -7,14 +7,18 @@ import { renderImg } from "../../helpers/renderImg"
 import { switchDepartmentName } from "../../helpers/switchDepartmentName"
 import Button from "../IconButton/Button"
 import { check, close } from "../../assets"
+import { useAppDispatch } from "../../../../hooks/redux"
+import { fetchStudentById } from "../../redux/asyncActions"
 
 interface Props {
   student: IStudent
   isDragging: boolean
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 function Card<T>(props: Props) {
-  const { student, isDragging } = props
+  const dispatch = useAppDispatch()
+  const { student, isDragging, setOpen } = props
   const [color, setColor] = useState<string>("")
 
   const directionClasses = clsx(styles.directionUxUi, {
@@ -51,15 +55,19 @@ function Card<T>(props: Props) {
     setColor("")
   }
 
-  // const date = new Date(student.request_date as string)
-  // const today = new Date()
-  // const deadline = new Date(student.request_date as string)
+  const { id } = student
+
+  const handleClick = () => {
+    dispatch(fetchStudentById(id as number))
+    setOpen(true)
+  }
 
   return (
     <div
       className={styles.card}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
     >
       <div className={styles.cardInner}>
         <div className={styles.cardTop}>

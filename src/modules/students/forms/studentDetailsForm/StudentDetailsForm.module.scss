@@ -1,0 +1,79 @@
+@import '../../../../sass//base';
+
+.form {
+  margin: 0 auto;
+  padding: 26px 32px;
+  background-color: #fff;
+  border-radius: 20px;
+  & > .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 34px;
+    & > .left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      & > h3 {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 32px;
+        color: $black-color;
+      }
+      & > span {
+        padding: 10px 16px;
+        background: #e5e5e5;
+        border-radius: 16px;
+        font-style: normal;
+        font-weight: 350;
+        font-size: 14px;
+        line-height: 19px;
+        color: $auth-black-color;
+      }
+    }
+  }
+
+  & > .depart {
+    margin-bottom: 24px;
+  }
+
+  & > .group {
+    margin-bottom: 24px;
+  }
+
+  & > .rowWrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    & > div {
+      width: 300px;
+    }
+  }
+
+  & > .notes {
+    margin-bottom: 24px;
+  }
+
+  & > .btns {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    .blackListBtn {
+      background-color: #252525;
+    }
+    .deleteBtn {
+      background-color: #ebeaf8;
+      color: #d74245;
+      border: 2px solid #d74245;
+    }
+  }
+}
+
+.archiveBtn {
+  background-color: #ebeaf8;
+  color: $violet-color;
+  padding: 9px 13px;
+}

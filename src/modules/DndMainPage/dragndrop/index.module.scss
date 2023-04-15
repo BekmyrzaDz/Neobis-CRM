@@ -16,3 +16,130 @@
     font-size: 26px;
   }
 }
+
+.form {
+  padding: 20px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-family: Segoe UI;
+  font-weight: 600;
+  font-size: 24px;
+  color: $black-color;
+  margin-right: 16px;
+}
+
+.topWrap {
+  display: flex;
+  align-items: center;
+}
+
+.timeWrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7.5px 8px;
+  border-radius: 16px;
+  border: 1px solid $violet-color;
+  margin-right: 6px;
+}
+
+.time {
+  font-family: Segoe UI;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21.28px;
+}
+
+.idWrap {
+  padding: 10px;
+  border-radius: 16px;
+  background-color: $count-gray-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.id {
+  font-family: Segoe UI;
+  font-weight: 350;
+  font-size: 14px;
+  color: $auth-black-color;
+  line-height: 18.62px;
+}
+
+.left {
+  cursor: pointer;
+}
+
+.department {
+  margin-bottom: 24px;
+}
+
+.fullName {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.phoneAndLaptop {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.paymentMethodAndSource {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.notes {
+  margin-bottom: 32px;
+}
+
+.btns {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.deleteBtn {
+  background-color: #ebeaf8 !important;
+  color: #d74245 !important;
+  border: 2px solid #d74245;
+}
+
+.archiveBtn {
+  background-color: #ebeaf8;
+  color: $violet-color;
+  padding: 9px 13px;
+}
+
+.deleteTitle {
+  font-family: Segoe UI;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23.94px;
+  color: #252525;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.btnsWrap {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}

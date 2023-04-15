@@ -4,50 +4,105 @@ import { StudentSchema } from '../../schema/studentSchema'
 import MySelect from '../../../../components/Select/MySelect'
 import MyTextarea from '../../../../components/Textarea/MyTextarea'
 import IconButton from '../../../../components/iconButton/IconButton'
-import busketIcon from '../../assets/icons/busket.svg'
-import blackListIcon from '../../assets/icons/blackList.svg'
-import deleteIcon from '../../assets/icons/delete.svg'
 import {
   departments,
   laptop,
-  paymantStatus,
-  source,
-  status,
+  payment_status,
+  came_from,
 } from '../../selectOptions/studentFormOptions'
 
 import styles from './StudentForm.module.scss'
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
+import {
+  createStudentOnStudy,
+  getDepartmentFilters,
+  getStudentsOnStudy,
+} from '../../redux/students/asyncActions'
+import { Dispatch, FC, SetStateAction } from 'react'
 
-const StudentForm = () => {
+interface IInitialValues {
+  first_name: string
+  last_name: string
+  group: string
+  phone: string
+  came_from: string
+  department: string
+  laptop: boolean
+  notes: string
+  payment_status: number
+}
+
+interface StudentFormProps {
+  setModalActive: Dispatch<SetStateAction<boolean>>
+  departmentFilter: string
+}
+
+const StudentForm: FC<StudentFormProps> = ({
+  setModalActive,
+  departmentFilter,
+}) => {
+  const dispatch = useAppDispatch()
+  const auth = useAppSelector((state) => state.auth)
+  const token = auth.user?.access!
+
+  const initialValues: IInitialValues = {
+    first_name: '',
+    last_name: '',
+    group: '',
+    phone: '',
+    came_from: '',
+    department: '',
+    laptop: true,
+    notes: '',
+    payment_status: 1,
+  }
+
+  const onSubmit = async (values: IInitialValues) => {
+    const {
+      first_name,
+      last_name,
+      group,
+      phone,
+      came_from,
+      department,
+      laptop,
+      notes,
+      payment_status,
+    } = values
+    try {
+      await dispatch(
+        createStudentOnStudy({
+          token,
+          first_name,
+          last_name,
+          group,
+          phone,
+          came_from: { name: came_from },
+          department: { name: department },
+          on_request: false,
+          is_archive: false,
+          blacklist: false,
+          laptop: Boolean(laptop),
+          notes,
+          payment_status: +payment_status,
+        })
+      )
+      await dispatch(getStudentsOnStudy({ token, departmentFilter }))
+      await dispatch(getDepartmentFilters(token))
+
+      setModalActive(false)
+    } catch (error) {}
+  }
+
   return (
     <Formik
-      initialValues={{
-        department: '',
-        firstName: '',
-        lastName: '',
-        patronymic: '',
-        phone: '',
-        source: '',
-        laptop: '',
-        notes: '',
-        status: '',
-        paymantStatus: '',
-      }}
+      initialValues={initialValues}
       validationSchema={StudentSchema}
-      onSubmit={(values) => console.log(JSON.stringify(values, null, 2))}
+      onSubmit={onSubmit}
     >
       <Form className={styles.form}>
         <div className={styles.header}>
-          <div className={styles.left}>
-            <h3>Карточка студента</h3>
-            <span>ID654789</span>
-          </div>
-
-          <IconButton
-            text={'Архивировать'}
-            icon={busketIcon}
-            className={styles.archiveBtn}
-            type={'button'}
-          />
+          <h3>Карточка студента</h3>
         </div>
         <MySelect
           label='Департамент*'
@@ -56,29 +111,36 @@ const StudentForm = () => {
           options={departments}
           className={styles.depart}
         />
+        <Input
+          label='Группа*'
+          id='group'
+          name='group'
+          type='text'
+          placeholder='Группа'
+          className={styles.group}
+        />
         <div className={styles.rowWrapper}>
           <Input
             label='Имя*'
-            id='firstName'
-            name='firstName'
+            id='first_name'
+            name='first_name'
             type='text'
             placeholder='Имя'
           />
           <Input
             label='Фамилия*'
-            id='lastName'
-            name='lastName'
+            id='last_name'
+            name='last_name'
             type='text'
             placeholder='Фамилия'
           />
         </div>
         <div className={styles.rowWrapper}>
-          <Input
-            label='Отчество*'
-            id='patronymic'
-            name='patronymic'
-            type='text'
-            placeholder='Отчество'
+          <MySelect
+            label='Источник*'
+            id='came_from'
+            name='came_from'
+            options={came_from}
           />
           <Input
             label='Номер телефона*'
@@ -90,17 +152,16 @@ const StudentForm = () => {
         </div>
         <div className={styles.rowWrapper}>
           <MySelect
-            label='Источник*'
-            id='source'
-            name='source'
-            options={source}
-          />
-          <MySelect
             label='Наличие ноутбука*'
             id='laptop'
             name='laptop'
             options={laptop}
-            className={styles.laptop}
+          />
+          <MySelect
+            label='Статус оплаты'
+            id='payment_status'
+            name='payment_status'
+            options={payment_status}
           />
         </div>
         <MyTextarea
@@ -109,34 +170,8 @@ const StudentForm = () => {
           name='notes'
           className={styles.notes}
         />
-        <div className={styles.rowWrapper}>
-          <MySelect
-            label='Статус обучения*'
-            id='status'
-            name='status'
-            options={status}
-          />
-          <MySelect
-            label='Статус оплаты'
-            id='paymantStatus'
-            name='paymantStatus'
-            options={paymantStatus}
-          />
-        </div>
         <div className={styles.btns}>
           <IconButton text={'Сохранить изменения'} type={'submit'} />
-          <IconButton
-            text={'Удалить студента'}
-            icon={deleteIcon}
-            className={styles.deleteBtn}
-            type={'button'}
-          />
-          <IconButton
-            text={'Добавить в черный список'}
-            icon={blackListIcon}
-            className={styles.blackListBtn}
-            type={'button'}
-          />
         </div>
       </Form>
     </Formik>

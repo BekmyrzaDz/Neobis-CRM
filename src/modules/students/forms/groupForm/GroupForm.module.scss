@@ -20,8 +20,8 @@
   }
 
   & > .depart,
-  .groupName,
-  .teacher {
+  .name,
+  .mentor {
     margin-bottom: 24px;
   }
 
@@ -46,16 +46,5 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    .deleteBtn {
-      background-color: #ebeaf8;
-      color: #d74245;
-      border: 2px solid #d74245;
-    }
   }
-}
-
-.archiveBtn {
-  background-color: #ebeaf8;
-  color: $violet-color;
-  padding: 9px 13px;
 }

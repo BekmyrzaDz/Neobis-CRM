@@ -1,24 +1,6 @@
-// export interface IStudentState {
-//   student: IStudent[] | null
-//   studentWithStatus1: IStudent[] | null
-//   studentWithStatus2: IStudent[] | null
-//   studentWithStatus3: IStudent[] | null
-//   studentWithStatus4: IStudent[] | null
-//   columns: IColumns
-//   columnOrder: string[]
-//   isLoading: boolean
-//   isSuccess: boolean
-//   isError: boolean
-// }
 export interface IStudentState {
-  student: IStudent[] | null
-  studentWithStatus1: IStudent[] | null
-  studentWithStatus2: IStudent[] | null
-  studentWithStatus3: IStudent[] | null
-  studentWithStatus4: IStudent[] | null
-  updatedStudent: IUpdateStudent | null
-  columns: IColumns
-  columnOrder: string[]
+  student?: IStudent[] | null
+  newStudent?: IStudent | null
   isLoading: boolean
   isSuccess: boolean
   isError: boolean
@@ -103,16 +85,16 @@ export interface IUpdateReason {
   name: string
 }
 export interface IUpdateStudent {
-  first_name: string
-  last_name: string
+  first_name?: string
+  last_name?: string
   surname?: string
   notes?: string
-  phone: string
-  laptop: boolean
-  department: IUpdateDepartment
-  came_from: IUpdateSource
-  payment_method: IUpdatePaymentMethod
-  status: IUpdateStatus
+  phone?: string
+  laptop?: string | boolean
+  department?: IUpdateDepartment
+  came_from?: IUpdateSource
+  payment_method?: IUpdatePaymentMethod
+  status?: IUpdateStatus
   paid?: boolean
   on_request?: boolean
   is_archive?: boolean
@@ -120,5 +102,36 @@ export interface IUpdateStudent {
 
 export interface IUpdateStudentData {
   id: number
-  updateStudentStatus: IUpdateStudent
+  updateStudent: IUpdateStudent
+}
+
+// Change student types
+export interface ICreateDepartment {
+  name: string
+}
+export interface ICreatePaymentMethod {
+  name: string
+}
+
+export interface ICreateStatus {
+  name: string
+}
+
+export interface ICreateSource {
+  name: string
+}
+
+export interface IUpdateReason {
+  name: string
+}
+export interface ICreateStudent {
+  first_name: string
+  last_name: string
+  surname?: string
+  notes: string
+  phone: string
+  laptop: string | boolean
+  department: ICreateDepartment
+  came_from: ICreateSource
+  payment_method?: ICreatePaymentMethod
 }

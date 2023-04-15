@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background-color: #EBEAF8;
+  background-color: #ebeaf8;
 }
 
 .text {
@@ -29,4 +29,13 @@
   color: #252525;
   background-color: $count-gray-color;
   border-radius: 8px;
+}
+
+.departIcon {
+  width: 21px;
+  height: 21px;
+}
+
+.activeBtn {
+  background-color: #fff;
 }

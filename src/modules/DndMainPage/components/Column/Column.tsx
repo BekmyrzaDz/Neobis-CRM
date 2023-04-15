@@ -1,3 +1,4 @@
+import React, { useState } from "react"
 import { Draggable, Droppable } from "react-beautiful-dnd"
 import { IColumn, IStudent } from "../../types"
 import Button from "../Button"
@@ -7,11 +8,11 @@ import styles from "./Column.module.scss"
 interface Props {
   column: IColumn
   students: IStudent[]
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 function Column<T>(props: Props) {
-  const { column, students } = props
-  console.log(students)
+  const { column, students, setOpen } = props
 
   return (
     <div className={styles.column}>
@@ -39,6 +40,8 @@ function Column<T>(props: Props) {
                       <Card
                         student={student}
                         isDragging={draggableSnapshot.isDragging}
+                        setOpen={setOpen}
+                        // setClientId={setClientId}
                       />
                     </div>
                   )}

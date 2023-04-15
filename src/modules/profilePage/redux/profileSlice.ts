@@ -12,7 +12,7 @@ if (profileString !== null) {
 const initialState: IProfileState = {
   profile: profile ? profile : null,
   isLoading: false,
-  isSuccess: false,
+  // isSuccess: false,
   isError: false,
 }
 
@@ -20,11 +20,11 @@ export const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
-    reset: (state) => {
-      state.isLoading = false
-      state.isSuccess = false
-      state.isError = false
-    },
+    // profileReset: (state) => {
+    //   state.isLoading = false
+    //   state.isSuccess = false
+    //   state.isError = false
+    // },
   },
   extraReducers: (builder) => {
     builder
@@ -35,7 +35,7 @@ export const profileSlice = createSlice({
         getProfileById.fulfilled,
         (state, action: PayloadAction<IProfile>) => {
           state.isLoading = false
-          state.isSuccess = true
+          // state.isSuccess = true
           state.profile = action.payload
         }
       )
@@ -51,7 +51,7 @@ export const profileSlice = createSlice({
         updateProfile.fulfilled,
         (state, action: PayloadAction<IProfile>) => {
           state.isLoading = false
-          state.isSuccess = true
+          // state.isSuccess = true
           state.profile = action.payload
         }
       )
@@ -67,7 +67,7 @@ export const profileSlice = createSlice({
         updateAvatar.fulfilled,
         (state, action: PayloadAction<IProfile>) => {
           state.isLoading = false
-          state.isSuccess = true
+          // state.isSuccess = true
         }
       )
       .addCase(updateAvatar.rejected, (state) => {
@@ -78,5 +78,5 @@ export const profileSlice = createSlice({
   },
 })
 
-export const { reset } = profileSlice.actions
+// export const { profileReset } = profileSlice.actions
 export default profileSlice.reducer

@@ -1,10 +1,4 @@
-import { IStudentState } from '../types';
-import { useState } from 'react';
-import { useAppSelector } from './../../../hooks/redux';
-import { fetchAllStudents } from './../redux/asyncActions';
-import { useEffect } from 'react';
-import { useAppDispatch } from '../../../hooks/redux';
-import { IData } from './../types/index';
+import { IData } from '../types/index';
 
 const  today = new Date()
  
@@ -13,10 +7,6 @@ const sliceNow = now.slice(0, 2)
 
 const initialData: IData = {
   students: [],
-  studentWithStatus1: [],
-  studentWithStatus2: [],
-  studentWithStatus3: [],
-  studentWithStatus4: [],
   columns: {
     "column-1": {
       id: "column-1",

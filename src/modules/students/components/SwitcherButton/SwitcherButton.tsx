@@ -1,5 +1,5 @@
 import styles from './SwitcherButton.module.scss'
-import { Dispatch, FC, SetStateAction } from 'react'
+import { Dispatch, FC, SetStateAction, useEffect } from 'react'
 
 interface SwitcherButtonProps {
   activeOption: string
@@ -10,6 +10,10 @@ const SwitcherButton: FC<SwitcherButtonProps> = ({
   activeOption,
   setActiveOption,
 }) => {
+  useEffect(() => {
+    localStorage.setItem('activeOption', activeOption)
+  }, [activeOption])
+
   const handleOptionClick = (option: string) => {
     setActiveOption(option)
   }

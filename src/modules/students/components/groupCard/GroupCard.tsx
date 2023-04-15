@@ -2,43 +2,129 @@ import styles from './GroupCard.module.scss'
 import timer from '../../assets/icons/timer.svg'
 import door from '../../assets/icons/door.svg'
 import student from '../../assets/icons/student.svg'
-import avatar from '../../assets/icons/avatar.svg'
+import { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-const GroupCard = () => {
+interface IGroupCardProps {
+  id: number
+  classroom: string
+  students_max: number
+  name: string
+  start_at_time: string
+  end_at_time: string
+  department: string
+  schedule_type: number
+  mentor: {
+    id: number
+    first_name: string
+    last_name: string
+    image: string
+  }
+  current_students: number
+}
+
+const GroupCard: FC<IGroupCardProps> = ({
+  id,
+  classroom,
+  students_max,
+  name,
+  start_at_time,
+  end_at_time,
+  department,
+  schedule_type,
+  mentor,
+  current_students,
+}) => {
+  const navigate = useNavigate()
+
+
+  // DEPARTMENT SWITCHCASE
+  let departmentClassName
+  let departmentValue
+  switch (department) {
+    case 'ux-ui':
+      departmentClassName = `${styles.lang} ${styles.ux}`
+      departmentValue = 'UX/UI'
+      break
+    case 'front-end':
+      departmentClassName = `${styles.lang} ${styles.front}`
+      departmentValue = 'Front-End'
+      break
+    case 'pm':
+      departmentClassName = `${styles.lang} ${styles.pm}`
+      departmentValue = 'PM'
+      break
+    case 'back-end':
+      departmentClassName = `${styles.lang} ${styles.back}`
+      departmentValue = 'Back-End'
+      break
+    case 'android':
+      departmentClassName = `${styles.lang} ${styles.android}`
+      departmentValue = 'Android'
+      break
+    case 'ios':
+      departmentClassName = `${styles.lang} ${styles.ios}`
+      departmentValue = 'iOS'
+      break
+    case 'flutter':
+      departmentClassName = `${styles.lang} ${styles.flutter}`
+      departmentValue = 'Flutter'
+      break
+    case 'olimped_programming':
+      departmentClassName = `${styles.lang} ${styles.olymp}`
+      departmentValue = 'PO'
+      break
+  }
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={() => navigate(`/students/groups/${id}`)}>
       <div className={styles.room}>
         <div className={styles.aboutRoom}>
           <img src={door} alt='door' />
-          <span>Средняя комната</span>
+          <span>{classroom}</span>
         </div>
         <div className={styles.countRoom}>
-          <span>12</span>
+          <span>
+            {current_students}/{students_max}
+          </span>
           <img src={student} alt='student' />
         </div>
       </div>
 
       <div className={styles.group}>
-        <h1>Java 1</h1>
+        <h1>{name}</h1>
         <div>
           <img src={timer} alt='timer' />
-          <span>18:30 - 20:00</span>
+          <span>
+            {start_at_time} - {end_at_time}
+          </span>
         </div>
       </div>
 
-      <div className={styles.lang}>
-        <h3>Back-End</h3>
+      <div className={departmentClassName}>
+        <h3>{departmentValue}</h3>
       </div>
 
       <ul className={styles.days}>
-        <li>Пн</li>
-        <li>Ср</li>
-        <li>Пт</li>
+        {schedule_type === 1 ? (
+          <>
+            <li>Пн</li>
+            <li>Ср</li>
+            <li>Пт</li>
+          </>
+        ) : (
+          <>
+            <li>Вт</li>
+            <li>Чт</li>
+            <li>Сб</li>
+          </>
+        )}
       </ul>
 
       <div className={styles.user}>
-        <img src={avatar} alt='avatar' />
-        <h3>Рашид Назарбеков</h3>
+        <img src={mentor.image} alt='avatar' />
+        <h3>
+          {mentor.first_name} {mentor.last_name}
+        </h3>
       </div>
     </div>
   )
