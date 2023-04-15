@@ -16,6 +16,7 @@ import { Dispatch, FC, SetStateAction, useEffect } from 'react'
 
 import styles from './GroupDetailsForm.module.scss'
 import {
+  deleteGroupOnStudyById,
   editGroupOnStudyById,
   getGroupOnStudyById,
 } from '../../redux/groups/asyncActions'
@@ -151,6 +152,18 @@ const GroupDetailsForm: FC<GroupDetailsFormProps> = ({ setModalActive }) => {
     }
   }
 
+  const onDelete = (values: IInitialValues) => {
+    const { name } = values
+
+    if (window.confirm(`Вы действительно хотите удалить ${name}?`)) {
+      if (id !== undefined) {
+        dispatch(deleteGroupOnStudyById({ token, id }))
+      }
+
+      setModalActive(false)
+    }
+  }
+
   if (isLoading) {
     return <StudentFormSkeleton />
   }
@@ -262,6 +275,7 @@ const GroupDetailsForm: FC<GroupDetailsFormProps> = ({ setModalActive }) => {
             icon={deleteIcon}
             className={styles.deleteBtn}
             type={'button'}
+            onClick={() => onDelete(initialValues)}
           />
         </div>
       </Form>

@@ -199,7 +199,9 @@ const StudentDetailsForm: FC<StudentDetailsFormProps> = ({
         `Вы действительно хотите удалить ${first_name} ${last_name}?`
       )
     ) {
-      dispatch(deleteStudentOnStudyById({ token, id }))
+      if (id !== undefined) {
+        dispatch(deleteStudentOnStudyById({ token, id }))
+      }
 
       setModalActive(false)
     }

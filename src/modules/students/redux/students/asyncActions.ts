@@ -5,7 +5,7 @@ import { AxiosError } from 'axios'
 import studentsOnStudyService from '../../services/StudentsOnStudy'
 import {
   ICreateStudentonStudy,
-  IDeleteStudentsOnStudyById,
+  IDeleteStudentOnStudyById,
   IEditStudentonStudy,
   IGetAllStudentsOnStudy,
   IGetStudentsOnStudyById,
@@ -246,7 +246,7 @@ export const editStudentOnStudyById = createAsyncThunk<
 // Delete student on study by ID
 export const deleteStudentOnStudyById = createAsyncThunk<
   string,
-  IDeleteStudentsOnStudyById,
+  IDeleteStudentOnStudyById,
   { rejectValue: string }
 >(
   'studentsOnStudy/deleteStudentOnStudyById',

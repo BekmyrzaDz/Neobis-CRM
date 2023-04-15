@@ -41,9 +41,9 @@ export interface IGetStudentsOnStudyById {
 }
 
 // delete student by ID
-export interface IDeleteStudentsOnStudyById {
+export interface IDeleteStudentOnStudyById {
   token: string
-  id?: string
+  id: string
 }
 
 // Create student on study POST
@@ -167,5 +167,11 @@ export interface IGetGroupOnStudyById {
 }
 
 export interface IEditGroupOnStudy extends ICreateGroupOnstudyREQ {
+  id: string
+}
+
+// delete group by ID
+export interface IDeleteGroupOnStudy {
+  token: string
   id: string
 }

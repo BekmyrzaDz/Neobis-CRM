@@ -4,6 +4,7 @@ import { AxiosError } from 'axios'
 import {
   ICreateGroupOnstudyREQ,
   ICreateGroupOnstudyRES,
+  IDeleteGroupOnStudy,
   IEditGroupOnStudy,
   IGetAllGroupsOnStudy,
   IGetGroupOnStudyById,
@@ -237,3 +238,33 @@ export const editGroupOnStudyById = createAsyncThunk<
     }
   }
 )
+
+// Delete group on study by ID
+export const deleteGroupOnStudyById = createAsyncThunk<
+  string,
+  IDeleteGroupOnStudy,
+  { rejectValue: string }
+>('groupsOnStudy/deleteGroupOnStudyById', async ({ token, id }, thunkAPI) => {
+  try {
+    const response = await groupsOnStudyService.deleteGroupOnStudyById({
+      token,
+      id,
+    })
+    toast.success('Группа успешно удалена')
+    return response
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      const message =
+        error.response?.data?.detail ||
+        (error.response &&
+          error.response?.data &&
+          error.response?.data?.message) ||
+        error.message ||
+        error.toString() ||
+        error.response?.data.details
+      toast.error(message)
+      return thunkAPI.rejectWithValue(message)
+    }
+    throw error
+  }
+})

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {
   createGroupOnStudy,
+  deleteGroupOnStudyById,
   editGroupOnStudyById,
   getAllGroups,
   getGroupDepartmentFilters,
@@ -100,6 +101,16 @@ export const groupsOnStudySlice = createSlice({
         state.isLoading = false
         state.isError = true
         state.groupOnStudy = {}
+      })
+      .addCase(deleteGroupOnStudyById.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deleteGroupOnStudyById.fulfilled, (state) => {
+        state.isLoading = false
+      })
+      .addCase(deleteGroupOnStudyById.rejected, (state) => {
+        state.isLoading = false
+        state.isError = true
       })
   },
 })
