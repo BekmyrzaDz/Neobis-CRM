@@ -27,6 +27,7 @@ export const login = createAsyncThunk<IUser, ILogin, { rejectValue: string }>(
       }
       if (error instanceof AxiosError) {
         const message =
+          error.response?.data?.detail ||
           (error.response &&
             error.response?.data &&
             error.response?.data?.message) ||
@@ -61,6 +62,7 @@ export const resetPassword = createAsyncThunk<
     }
     if (error instanceof AxiosError) {
       const message =
+        error.response?.data ||
         (error.response &&
           error.response?.data &&
           error.response?.data?.message) ||
@@ -92,6 +94,7 @@ export const verification = createAsyncThunk<
     }
     if (error instanceof AxiosError) {
       const message =
+        error.response?.data ||
         (error.response &&
           error.response?.data &&
           error.response?.data?.message) ||
@@ -132,6 +135,7 @@ export const setNewPassword = createAsyncThunk<
       }
       if (error instanceof AxiosError) {
         const message =
+          error.response?.data?.password[0] ||
           (error.response &&
             error.response?.data &&
             error.response?.data?.message) ||

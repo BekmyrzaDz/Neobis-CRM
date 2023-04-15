@@ -20,8 +20,6 @@ const ResetPassword = () => {
   const dispatch = useAppDispatch()
 
   function onSubmit(values: any) {
-    console.log(values)
-
     const password = values.password
     const repeat_password = values.repeat_password
 

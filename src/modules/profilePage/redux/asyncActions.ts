@@ -21,6 +21,7 @@ export const getProfileById = createAsyncThunk<
     }
     if (error instanceof AxiosError) {
       const message =
+        error.response?.data?.detail ||
         (error.response &&
           error.response?.data &&
           error.response?.data?.message) ||
@@ -49,6 +50,7 @@ export const updateProfile = createAsyncThunk<
     }
     if (error instanceof AxiosError) {
       const message =
+        error.response?.data.detail ||
         (error.response &&
           error.response?.data &&
           error.response?.data?.message) ||
@@ -77,6 +79,7 @@ export const updateAvatar = createAsyncThunk<
     }
     if (error instanceof AxiosError) {
       const message =
+        error.response?.data?.detail ||
         (error.response &&
           error.response?.data &&
           error.response?.data?.message) ||

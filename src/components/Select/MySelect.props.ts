@@ -5,7 +5,7 @@ import {
 
 export interface Option {
   key: string
-  value: string
+  value: string | number | boolean
 }
 
 export interface SelectProps
