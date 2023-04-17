@@ -60,7 +60,7 @@ const GroupCard = (props: MyComponentProps) => {
 
       <div className={styles.user}>
         <img src={avatar} alt='avatar' />
-        <h3>Рашид Назарбеков</h3>
+        <h3>{`${info.mentor.first_name} ${info.mentor.last_name}`}</h3>
       </div>
     </div>
   )

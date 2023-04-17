@@ -49,7 +49,7 @@ const Courses = (props: MyComponentProps) => {
   };
 
   return <div style={{ backgroundColor: '#F1F1F1', minHeight: '100vh' }}>
-    <div style={{ margin: '0 20px', display: 'flex', flexWrap: 'wrap', gap: '30px' }}>
+    <div style={{  display: 'flex', flexWrap: 'wrap', gap: '30px' }}>
       {
         employees.map((course, idx: number) =>
           <CourseCard course={course} />)

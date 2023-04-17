@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, CardMedia, CardContent, Typography } from "@material-ui/core";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
@@ -15,7 +15,8 @@ interface ICourses {
 }
 
 const CardExample: React.FC<ICourses> = (course) => {
-  console.log(course)
+  
+
   const classes = useStyles();
   return (
     <Card className={classes.root}>
@@ -29,11 +30,11 @@ const CardExample: React.FC<ICourses> = (course) => {
         <div className={classes.iconContainer}>
           <div className={classes.iconPosition}>
             <AccessTimeIcon className={classes.icon} />
-            <Typography className={classes.text}>{course.month}мес</Typography>
+            <Typography className={classes.text}>{course.course.duration_month}мес</Typography>
           </div>
           <div className={classes.iconPosition}>
             <GroupIcon className={classes.icon} />
-            <Typography className={classes.text}>{course.coirse?.group_set[0]} группы</Typography>
+            <Typography className={classes.text}>{course.course.group_set.length} группы</Typography>
           </div>
         </div>
       </CardContent>

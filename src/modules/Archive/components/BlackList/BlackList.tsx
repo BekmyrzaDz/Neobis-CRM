@@ -1,15 +1,14 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import { makeStyles } from '@material-ui/styles';
+import { getBlackList } from "../../redux/blackListSlice/blackListSlice";
+import { RootState, AppDispatch } from '../../../../store/store';
+import { useSelector, useDispatch } from 'react-redux';
+
 import black from '../../assets/blackList.svg';
 import close from '../../assets/close.png'
 
-const rows = [
-  { id: 1, fullName: 'Иванов Иван Иванович', date: '2022-04-11', acceptedBy: 'Петров Петр Петрович' },
-  { id: 2, fullName: 'Петров Петр Петрович', date: '2022-04-10', acceptedBy: 'Иванов Иван Иванович' },
-  { id: 3, fullName: 'Сидоров Сидор Сидорович', date: '2022-04-09', acceptedBy: 'Николаев Николай Николаевич' },
-  { id: 4, fullName: 'Николаев Николай Николаевич', date: '2022-04-08', acceptedBy: 'Сидоров Сидор Сидорович' },
-];
+
 
 
 
@@ -23,6 +22,16 @@ type TPopap = {
 const MyTable: React.FC<TPopap> = ({ popap, setPopap }) => {
   const classes = useStyles();
 
+  const dispatch = useDispatch<AppDispatch>()
+
+  useEffect(() => {
+    dispatch(getBlackList())
+  }, [])
+
+
+  const { blacklist } = useSelector((state: RootState) => state.blackList);
+  console.log(blacklist);
+
 
   return (
     <div className={classes.root} >
@@ -30,20 +39,20 @@ const MyTable: React.FC<TPopap> = ({ popap, setPopap }) => {
         <h2 className={classes.tabelTitle}>
           <img src={black} alt='blacklist' />
           Черный список</h2>
-        <img onClick={() => setPopap(false)} src={close} alt='close' />
+        <img style={{ cursor: 'pointer' }} onClick={() => setPopap(false)} src={close} alt='close' />
       </div>
 
       <DataGrid
-        rows={rows}
+        rows={blacklist}
         columns={[
           {
-            field: 'fullName', headerName: 'ФИО', width: 180, headerClassName: classes.headerName, align: 'center'
+            field: 'fio', headerName: 'ФИО', width: 180, headerClassName: classes.headerName, align: 'center'
           },
           {
-            field: 'date', headerName: 'Дата', width: 180, headerClassName: classes.headerName, align: 'center'
+            field: 'blacklist_created_at', headerName: 'Дата', width: 180, headerClassName: classes.headerName, align: 'center'
           },
           {
-            field: 'acceptedBy', headerName: 'Кто принял', width: 190, headerClassName: classes.headerName, align: 'center'
+            field: 'acceptBy', headerName: 'Кто принял', width: 190, headerClassName: classes.headerName, align: 'center'
           },
         ]}
         pageSize={5}
@@ -74,7 +83,7 @@ const useStyles = makeStyles({
     position: 'relative',
     left: '50px',
     color: '#fff',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   root: {
     color: '#fff',
@@ -92,7 +101,7 @@ const useStyles = makeStyles({
     color: '#fff',
     padding: '15px',
     borderRadius: '10px',
-    height: '400px',
+    height: '450px',
     width: '600px',
     borderRight: 'none',
     border: 'none',

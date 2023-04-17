@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { AppDispatch } from '../../../../store/store';
 import { IconButton } from '@material-ui/core';
 import Spinner from '../../../../components/spinner/spinner';
+import { deleteArchiveManagerBuId, unzippingManagers } from '../../redux/managerArchive/managerArhiveSlice'
 import { makeStyles } from '@material-ui/styles';
 import { Menu, MenuItem, Box } from '@material-ui/core';
 import archive from '../../assets/archive.png';
@@ -74,16 +75,16 @@ const DataBase: React.FC<MyComponentProps> = (props: MyComponentProps): JSX.Elem
 
   const handleDelete = (itemId: string | number | true | object) => {
     const id = Number(itemId);
-    // dispatch(deleteEmployee(id)).then(() => {
-    //   window.location.reload();
-    // });
+    dispatch(deleteArchiveManagerBuId(id)).then(() => {
+      window.location.reload();
+    });
   };
 
   const handleArchive = (itemId: string | number | true | object) => {
     const id = Number(itemId);
-    // dispatch(archiveEmployee(id)).then(() => {
-    //   window.location.reload();
-    // });
+    dispatch(unzippingManagers(id)).then(() => {
+      window.location.reload();
+    });
   };
 
   return (
@@ -164,7 +165,7 @@ const DataBase: React.FC<MyComponentProps> = (props: MyComponentProps): JSX.Elem
                   >
                     <MenuItem className={classes.menuItem} onClick={handleArchiveClick}>
                       <img src={archive} alt='archive' />
-                      Архивировать
+                      Разархивировать
                     </MenuItem>
                     <MenuItem className={classes.menuItem} onClick={handleDeleteClick}>
                       <img src={trash} alt='trash' />

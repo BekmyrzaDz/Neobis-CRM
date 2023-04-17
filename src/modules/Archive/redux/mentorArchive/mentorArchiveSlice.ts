@@ -60,11 +60,14 @@ export const getArchiveMentors = createAsyncThunk<IMentorsState[], void, AsyncTh
   'mentors/getArhiveMentors',
   async (_, thunkApi) => {
     try {
-      const response = await axios.get<IMentorsState[]>('http://64.226.89.72/api/mentors/', {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
+      const response = await axios.get<IMentorsState[]>(
+        'http://64.226.89.72/api/archive/mentors/',
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
         },
-      });
+      );
       return response.data;
     } catch (error: any) {
       return thunkApi.rejectWithValue(error.response.data);
