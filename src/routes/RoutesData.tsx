@@ -7,10 +7,10 @@ import MainPage from '../pages/main/components/MainPage/MainPage'
 import StudentsPage from '../pages/students/StudentsPage'
 import AuthPage from '../pages/auth/AuthPage'
 import Page404 from '../pages/page404/Page404'
-import AnalyticsPage from '../pages/analitics/components/AnalyticsPage'
+import AnalyticsPage from '../pages/analitics/AnalyticsPage'
 import ProfilePage from '../pages/profile/ProfilePage'
 import PaymentPage from '../pages/payment/components/PaymentPage'
-import StudentDetails from '../pages/studentDetails/studentDetails'
+import StudentDetails from '../pages/studentDetails/StudentDetails'
 import GroupDetails from '../pages/groupDetails/GroupDetails'
 
 export const router = createBrowserRouter([

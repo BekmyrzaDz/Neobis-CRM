@@ -1,0 +1,24 @@
+.popularDepartment {
+  .title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    color: #252525;
+    margin-bottom: 24px;
+  }
+  .wrapper {
+    display: flex;
+    align-items: center;
+    gap: 70px;
+    .canvasWrapper {
+      width: 300px;
+      height: 300px;
+    }
+    .descr {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+}

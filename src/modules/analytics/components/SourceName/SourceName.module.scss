@@ -1,0 +1,19 @@
+.item {
+  display: flex;
+  align-items: center;
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50px;
+    background-color: rgb(182, 212, 136);
+    margin-right: 7px;
+  }
+  .text {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    color: #252525;
+    margin-right: 7px;
+  }
+}
