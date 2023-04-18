@@ -11,6 +11,8 @@ import {
 import Header from "../Header/Header"
 import Card from "../PaymentCard/Card"
 import styles from "./Payment.module.scss"
+import CompositeTable from "../Table/Table"
+import { columns, rows } from "../../mockApi"
 
 interface IPaymentMethod {
   id: number
@@ -65,20 +67,25 @@ export const Payment = (props: Props) => {
     <div className={styles.payment}>
       <Header />
       <div className={styles.content}>
-        {paymentMethodData.map((method, index) => (
-          <Card
-            key={index}
-            id={method.id}
-            logo={method.logo}
-            paymentType={method.paymentType}
-            paymentTypeImg={method.paymentTypeImg}
-            cardNumber={method.cardNumber}
-            first_name={method.first_name}
-            last_name={method.last_name}
-            limit={method.limit}
-            cardTypeImg={method.cardTypeImg}
-          />
-        ))}
+        <div className={styles.cards}>
+          {paymentMethodData.map((method, index) => (
+            <Card
+              key={index}
+              id={method.id}
+              logo={method.logo}
+              paymentType={method.paymentType}
+              paymentTypeImg={method.paymentTypeImg}
+              cardNumber={method.cardNumber}
+              first_name={method.first_name}
+              last_name={method.last_name}
+              limit={method.limit}
+              cardTypeImg={method.cardTypeImg}
+            />
+          ))}
+        </div>
+        <div className={styles.table}>
+          <CompositeTable rows={rows} columns={columns} />
+        </div>
       </div>
     </div>
   )
