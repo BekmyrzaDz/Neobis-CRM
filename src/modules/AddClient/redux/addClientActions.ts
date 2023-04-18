@@ -2,19 +2,21 @@ import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import createService from "../services/addClientService";
-import { ICreateStudent, ICreateStudentData } from "../types";
-import { fetchAllStudents } from '../../DndMainPage/redux/asyncActions';
+import { ICreateStudent, IStudent } from "../types";
 
-export const fetchCreateStudent = createAsyncThunk<
-  ICreateStudent,
-  ICreateStudent,
+// createStudent Action
+export const createStudent = createAsyncThunk<
+IStudent,
+ICreateStudent,
   { rejectValue: string }
->('createClient/fetchCreateStudent', async ({...studentData}, {rejectWithValue, dispatch}) => {
+>('createClient/createStudent', async ({...studentData}, {rejectWithValue}) => {
   try {   
     const response = await createService.createStudent({...studentData})
-    dispatch(fetchAllStudents())
+    if (response) {
+      toast.success('Заявка успешно создана')
+    }
     return response
-  } catch (error: unknown) {
+  } catch (error: unknown) {    
     if (typeof error === 'string') {
       toast.error(error)
       return rejectWithValue(error)

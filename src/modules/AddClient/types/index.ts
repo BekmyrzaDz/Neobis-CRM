@@ -1,9 +1,3 @@
-export interface IModal {
-  active: boolean
-  setActive: React.Dispatch<React.SetStateAction<boolean>>
-  children?: React.ReactNode
-}
-
 export interface IOptions {
   icon: any
   name: string
@@ -15,40 +9,26 @@ export interface IDepartmentOptions {
 }
 
 // Create types
-export interface ICreateDepartment {
-  name: string
-}
-export interface ICreatePaymentMethod {
-  name: string
-}
-
-export interface ICreateStatus {
-  name: string
-}
-
-export interface ICreateSource {
-  name: string
-}
-
-export interface IUpdateReason {
-  name: string
-}
 export interface ICreateStudent {
   first_name: string
   last_name: string
-  surname?: string
   notes: string
   phone: string
   laptop: string | boolean
-  department: ICreateDepartment
-  came_from: ICreateSource
-  payment_method?: ICreatePaymentMethod
+  department: {
+    name: string
+  }
+  came_from: {
+    name: string
+  }
+  payment_method: {
+    name: string
+  }
 }
 
 export interface ICreateBaseStudent {
   first_name: string
   last_name: string
-  surname?: string
   notes: string
   phone: string
 }
@@ -63,4 +43,33 @@ export interface ICreateStudentState {
   isLoading: boolean,
   isSuccess: boolean,
   isError: boolean,
+}
+
+// Student types
+export interface IStudent {
+  request_date?: string
+  id?: number
+  first_name: string
+  last_name: string
+  notes?: string
+  phone: string
+  laptop: boolean
+  department: {
+    name: string
+  }
+  came_from: {
+    id: number
+    name: string
+  }
+  payment_method: {
+    id: number
+    name: string
+  }
+  status?: {
+    id: number
+    name: string
+  }
+  reason?: number[] | null
+  on_request?: boolean
+  is_archive?: boolean
 }

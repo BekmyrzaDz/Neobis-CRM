@@ -1,7 +1,7 @@
 // import { IStudentState, IStudent } from '../types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { IData, IStudent, IUpdateStudent, IStudentState, IColumn } from '../types'
-import { fetchAllStudents, fetchDetailUpdateStudent, fetchStudentById } from './asyncActions'
+import { getAllStudents, getStudentById } from './asyncActions'
 
 const initialState: IStudentState = {
   student: [],
@@ -23,32 +23,32 @@ export const dndSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAllStudents.pending, (state) => {
+      .addCase(getAllStudents.pending, (state) => {
         state.isLoading = true
       })
       .addCase(
-        fetchAllStudents.fulfilled,
+        getAllStudents.fulfilled,
         (state, action: PayloadAction<IStudent[]>) => {
           state.isLoading = false
           state.isSuccess = true
           state.student = action.payload
       })
-      .addCase(fetchAllStudents.rejected, (state) => {
+      .addCase(getAllStudents.rejected, (state) => {
         state.isLoading = false
         state.isError = true
         state.student = null
       })
-      .addCase(fetchStudentById.pending, (state) => {
+      .addCase(getStudentById.pending, (state) => {
         state.isLoading = true
       })
       .addCase(
-        fetchStudentById.fulfilled,
+        getStudentById.fulfilled,
         (state, action: PayloadAction<IStudent>) => {
           state.isLoading = false
           state.isSuccess = true
           state.newStudent = action.payload
       })
-      .addCase(fetchStudentById.rejected, (state) => {
+      .addCase(getStudentById.rejected, (state) => {
         state.isLoading = false
         state.isError = true
         state.newStudent = null

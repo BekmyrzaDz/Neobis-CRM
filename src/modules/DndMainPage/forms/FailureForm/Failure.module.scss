@@ -1,0 +1,36 @@
+.title {
+  font-family: Segoe UI;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 31.92px;
+  color: #252525;
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+.checkboxses {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 51px;
+}
+
+.btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.verifyBtn {
+  border-radius: 12px;
+  padding: 16px;
+  font-family: Segoe UI;
+}
+
+.cancelBtn {
+  border-radius: 12px;
+  padding: 16px;
+  background: #ffffff;
+  border: 2px solid #252525;
+  color: #252525;
+  font-family: Segoe UI;
+}

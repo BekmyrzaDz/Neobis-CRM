@@ -1,16 +1,9 @@
 import React, { FC } from "react"
 import clsx from "clsx"
 import styles from "./Button.module.scss"
+import { IconButtonProps } from "./Button.props"
 
-interface Props {
-  icon: string
-  color?: string
-  hoverColor?: string
-  isDragging?: boolean
-  onClick?: () => void
-}
-
-const Button: FC<Props> = ({
+const Button: FC<IconButtonProps> = ({
   icon,
   color,
   hoverColor,
@@ -25,9 +18,9 @@ const Button: FC<Props> = ({
   })
 
   return (
-    <div className={buttonDefaultColors} {...props}>
+    <button className={buttonDefaultColors} {...props}>
       <img className={styles.icon} src={icon} alt="icon" />
-    </div>
+    </button>
   )
 }
 

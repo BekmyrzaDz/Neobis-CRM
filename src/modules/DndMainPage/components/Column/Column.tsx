@@ -9,10 +9,12 @@ interface Props {
   column: IColumn
   students: IStudent[]
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setOpenFailure: React.Dispatch<React.SetStateAction<boolean>>
+  setOpenSuccessful: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 function Column<T>(props: Props) {
-  const { column, students, setOpen } = props
+  const { column, students, setOpen, setOpenFailure, setOpenSuccessful } = props
 
   return (
     <div className={styles.column}>
@@ -41,7 +43,8 @@ function Column<T>(props: Props) {
                         student={student}
                         isDragging={draggableSnapshot.isDragging}
                         setOpen={setOpen}
-                        // setClientId={setClientId}
+                        setOpenFailure={setOpenFailure}
+                        setOpenSuccessful={setOpenSuccessful}
                       />
                     </div>
                   )}
