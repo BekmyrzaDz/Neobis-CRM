@@ -18,3 +18,15 @@ export interface ILeavingReason {
   percent_value: number
   color: string
 }
+
+// Статус обработки клиентов
+export interface ISingleDepartment {
+  name: string
+  num_students: number
+  color: string
+}
+
+export interface IRequestStatus {
+  name: string
+  departments: ISingleDepartment[]
+}

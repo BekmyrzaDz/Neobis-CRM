@@ -8,6 +8,7 @@ import PopularSource from '../../modules/analytics/Charts/PopularSource/PopularS
 import styles from './Analytics.module.scss'
 import PopularDepartment from '../../modules/analytics/Charts/PopularDepartment/PopularDepartment'
 import LeavingReason from '../../modules/analytics/Charts/LeavingReason/LeavingReason'
+import CallWaiting from '../../modules/analytics/Charts/RequestStatuses/CallWaiting/CallWaiting'
 
 interface Props {}
 
@@ -38,12 +39,20 @@ const AnalyticsPage = (props: Props) => {
         />
       </div>
       <div className={styles.content}>
-        {/* <div className={styles.firstRow}>
-          <h1>COLUMN 1</h1>
-          <h1>COLUMN 2</h1>
-          <h1>COLUMN 3</h1>
-          <h1>COLUMN 4</h1>
-        </div> */}
+        <div className={styles.firstRow}>
+          <div className={styles.callWaitingWrapper}>
+            <CallWaiting />
+          </div>
+          <div className={styles.callWaitingWrapper}>
+            <CallWaiting />
+          </div>
+          <div className={styles.callWaitingWrapper}>
+            <CallWaiting />
+          </div>
+          <div className={styles.callWaitingWrapper}>
+            <CallWaiting />
+          </div>
+        </div>
 
         <div className={styles.secondRow}>
           <div className={styles.popularSourceWrapper}>

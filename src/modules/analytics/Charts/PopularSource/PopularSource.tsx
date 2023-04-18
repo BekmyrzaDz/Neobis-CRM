@@ -101,6 +101,7 @@ const PopularSource = () => {
         <div className={styles.descr}>
           {myData.map((item) => (
             <SourceName
+              key={item.name}
               color={item.color}
               name={item.name}
               value={`${item.percent_value}%`}

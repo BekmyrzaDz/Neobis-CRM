@@ -120,6 +120,7 @@ const LeavingReason = () => {
             .sort((a, b) => b.percent_value - a.percent_value)
             .map((item) => (
               <DepartmentItem
+                key={item.reason}
                 departmentName={item.reason}
                 color={item.color}
                 count={`${item.percent_value}%`}

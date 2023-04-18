@@ -20,9 +20,18 @@
   flex-direction: column;
   gap: 16px;
   & > .firstRow {
+    max-height: 470px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 20px;
+    & > .callWaitingWrapper {
+      display: flex;
+      justify-content: center;
+      flex: 1;
+      padding: 20px;
+      background-color: white;
+      border-radius: 20px;
+    }
   }
   & > .secondRow {
     max-height: 400px;

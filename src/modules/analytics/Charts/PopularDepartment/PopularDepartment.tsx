@@ -63,6 +63,7 @@ const data = {
       label: 'Количество студентов',
       data: myData.map(({ quantity }) => quantity),
       backgroundColor: myData.map(({ color }) => color),
+      hoverOffset: 4
     },
   ],
 }
@@ -87,7 +88,7 @@ const PopularDepartment = () => {
       <h2 className={styles.title}>Популярные направления</h2>
       <div className={styles.wrapper}>
         <div className={styles.canvasWrapper}>
-          <Doughnut data={data} options={options} className={styles.doughnut} />
+          <Pie data={data} options={options} className={styles.doughnut} />
         </div>
 
         <div className={styles.descr}>
@@ -95,6 +96,7 @@ const PopularDepartment = () => {
             .sort((a, b) => b.quantity - a.quantity)
             .map((item) => (
               <DepartmentItem
+                key={item.name}
                 departmentName={item.name}
                 color={item.color}
                 count={item.quantity}

@@ -3,65 +3,76 @@
 .profile {
   display: flex;
   flex-direction: column;
+  align-items: center;
   background-color: $count-gray-color;
   padding: 24px;
   height: 100vh;
-}
+  .profileWrapper {
+    width: 70vw;
+  }
+  .header {
+    margin-bottom: 64px;
+    .backButton {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 21px;
+      padding: 17px 32px;
+    }
+  }
+  .content {
+    display: flex;
+    min-height: 578px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 55px;
+    background-color: $white-color;
+    border-radius: 16px;
+    .contentWrapper {
+      // width: 1200px; //100%
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .title {
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 32px;
+        color: $black-color;
+        margin-bottom: 64px;
+      }
+      .wrapper {
+        width: 100%;
+        display: flex;
+        align-items: start;
+        gap: 106px;
+        .left {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          .leftSubtitle {
+            font-style: normal;
+            font-weight: 350;
+            font-size: 18px;
+            line-height: 24px;
+            color: $gray-color;
+            margin-bottom: 24px;
+          }
+        }
 
-.header {
-  margin-bottom: 64px;
-}
-
-.backButton {
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 21px;
-  padding: 17px 32px;
-}
-
-.content {
-  padding: 40px 55px;
-  background-color: $white-color;
-  max-width: 1144px;
-  min-height: 578px;
-  border-radius: 16px;
-}
-
-.title {
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 32px;
-  color: $black-color;
-  margin-bottom: 64px;
-}
-
-.wrapper {
-  display: flex;
-  align-items: start;
-}
-
-.left {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-right: 95px;
-}
-
-.leftSubtitle {
-  font-style: normal;
-  font-weight: 350;
-  font-size: 18px;
-  line-height: 24px;
-  color: $gray-color;
-  margin-bottom: 24px;
-}
-
-.rightSubtitle {
-  font-style: normal;
-  font-weight: 350;
-  font-size: 18px;
-  line-height: 24px;
-  color: $gray-color;
+        .right {
+          width: 100%;
+          .rightSubtitle {
+            font-style: normal;
+            font-weight: 350;
+            font-size: 18px;
+            line-height: 24px;
+            color: $gray-color;
+          }
+        }
+      }
+    }
+  }
 }
