@@ -14,7 +14,8 @@ import ModalSimple from "../../../components/ModalPopup/Modal"
 import ModalDelete from "../components/ModalPopup/Modal"
 import IconButton from "../../../components/iconButton/IconButton"
 import DetailViewForm from "../forms/DetailViewForm/DetailViewForm"
-import DetailViewFailure from "../forms/DetailViewFailure/DetailViewFailure"
+import Failure from "../forms/FailureForm/Failure"
+import Success from "../forms/SuccessForm/Success"
 import {
   deleteStudentById,
   getAllStudents,
@@ -23,7 +24,6 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux"
 import { initialData } from "../client-db/client-data"
 import styles from "./index.module.scss"
-import DetailViewSuccess from "../forms/DetailViewSuccess/DetailViewSuccess"
 
 enum Columns {
   WaitingForAcall = "column-1",
@@ -277,12 +277,12 @@ export const DragAndDrop: FC = () => {
             )}
             {openSuccessful && (
               <Modal active={openSuccessful} setActive={setOpenSuccessful}>
-                <DetailViewSuccess />
+                <Success />
               </Modal>
             )}
             {openFailure && (
               <ModalSimple active={openFailure} setActive={setOpenFailure}>
-                <DetailViewFailure setOpenFailure={setOpenFailure} />
+                <Failure setOpenFailure={setOpenFailure} />
               </ModalSimple>
             )}
           </>

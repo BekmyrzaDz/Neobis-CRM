@@ -1,5 +1,4 @@
 import React, { FC } from "react"
-import styles from "./DetailViewSuccess.module.scss"
 import { Form, Formik } from "formik"
 import { successSchema } from "../../Schema/Validation"
 import { useAppDispatch, useAppSelector } from "../../../../hooks/redux"
@@ -14,10 +13,11 @@ import {
   IUpdateStudentData,
 } from "../../types"
 import { createPayment, editStudentById } from "../../redux/asyncActions"
+import styles from "./Success.module.scss"
 
 interface ISuccess {}
 
-const DetailViewSuccess: FC<ISuccess> = ({}) => {
+const Success: FC<ISuccess> = ({}) => {
   const dispatch = useAppDispatch()
   const client = useAppSelector((state) => state?.client?.newStudent)
   const id = useAppSelector((state) => state?.client?.newStudent?.id)
@@ -137,4 +137,4 @@ const DetailViewSuccess: FC<ISuccess> = ({}) => {
   )
 }
 
-export default DetailViewSuccess
+export default Success

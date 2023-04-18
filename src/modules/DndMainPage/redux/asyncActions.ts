@@ -195,7 +195,7 @@ export const deleteStudentByIdForAnalytics = createAsyncThunk<
   try {    
     const response = await dndService.deleteStudent(id)
     if (response === 204) {
-      toast.info('Заявка добавлена в раздел “Аналитика”')
+      toast.error('Заявка добавлена в раздел “Аналитика”')
     }
     return response
   } catch (error: unknown) {  

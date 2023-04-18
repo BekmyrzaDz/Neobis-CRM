@@ -1,5 +1,4 @@
 import React, { FC } from "react"
-import styles from "./DetailViewFailure.module.scss"
 import { Form, Formik } from "formik"
 import { reasonSchema } from "../../Schema/Validation"
 import IconButton from "../../../../components/iconButton/IconButton"
@@ -11,6 +10,7 @@ import {
   deleteStudentByIdForAnalytics,
   editStudentById,
 } from "../../redux/asyncActions"
+import styles from "./Failure.module.scss"
 
 interface Failure {
   setOpenFailure: React.Dispatch<React.SetStateAction<boolean>>
@@ -32,7 +32,7 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   }
 }
 
-const DetailViewFailure: FC<Failure> = ({ setOpenFailure }) => {
+const Failure: FC<Failure> = ({ setOpenFailure }) => {
   const dispatch = useAppDispatch()
   const student = useAppSelector((state) => state?.client?.newStudent)
   const id = useAppSelector((state) => state?.client?.newStudent?.id)
@@ -111,4 +111,4 @@ const DetailViewFailure: FC<Failure> = ({ setOpenFailure }) => {
   )
 }
 
-export default DetailViewFailure
+export default Failure
