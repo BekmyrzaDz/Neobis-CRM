@@ -8,17 +8,20 @@ import { switchDepartmentName } from "../../helpers/switchDepartmentName"
 import Button from "../IconButton/Button"
 import { check, close } from "../../assets"
 import { useAppDispatch } from "../../../../hooks/redux"
-import { fetchStudentById } from "../../redux/asyncActions"
+import { getStudentById } from "../../redux/asyncActions"
 
 interface Props {
   student: IStudent
   isDragging: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setOpenFailure: React.Dispatch<React.SetStateAction<boolean>>
+  setOpenSuccessful: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 function Card<T>(props: Props) {
   const dispatch = useAppDispatch()
-  const { student, isDragging, setOpen } = props
+  const { student, isDragging, setOpen, setOpenFailure, setOpenSuccessful } =
+    props
   const [color, setColor] = useState<string>("")
 
   const directionClasses = clsx(styles.directionUxUi, {
@@ -59,9 +62,45 @@ function Card<T>(props: Props) {
 
   const handleClick = async () => {
     try {
-      await dispatch(fetchStudentById(id as number))
+      await dispatch(getStudentById(id as number))
       setOpen(true)
-    } catch (error) {}
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const handleSuccessful = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
+    e.nativeEvent.stopImmediatePropagation()
+
+    const { dataset } = e.currentTarget
+    const value = dataset.check
+
+    try {
+      if (value === "successful") {
+        await dispatch(getStudentById(id as number))
+        setOpenSuccessful(true)
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const handleFailure = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
+    e.nativeEvent.stopImmediatePropagation()
+
+    const { dataset } = e.currentTarget
+    const value = dataset.check
+
+    try {
+      if (value === "failure") {
+        await dispatch(getStudentById(id as number))
+        setOpenFailure(true)
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -103,8 +142,15 @@ function Card<T>(props: Props) {
                 color={`violet`}
                 hoverColor={color}
                 isDragging={isDragging}
+                data-check="successful"
+                onClick={handleSuccessful}
               />
-              <Button icon={close} color={`red`} />
+              <Button
+                icon={close}
+                color={`red`}
+                data-check="failure"
+                onClick={handleFailure}
+              />
             </div>
           </div>
         </div>

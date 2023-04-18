@@ -2,10 +2,10 @@ import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import dndService from '../services/dndService';
-import { IStudent, IUpdateStudentData } from '../types';
+import { ICreatePayment, IPayment, IStudent, IUpdateStudentData } from '../types';
 
 // getAllStudents Action
-export const fetchAllStudents = createAsyncThunk<
+export const getAllStudents = createAsyncThunk<
   IStudent[],
   undefined,
   { rejectValue: string }
@@ -33,11 +33,11 @@ export const fetchAllStudents = createAsyncThunk<
 })
 
 // getStudentById Action
-export const fetchStudentById = createAsyncThunk<
+export const getStudentById = createAsyncThunk<
   IStudent,
   number,
   { rejectValue: string }
->('client/fetchStudentById', async (id, {rejectWithValue}) => {
+>('client/getStudentById', async (id, {rejectWithValue}) => {
   try {
     const response = await dndService.getStudentById(id)
     return response
@@ -60,12 +60,43 @@ export const fetchStudentById = createAsyncThunk<
   }
 })
 
+// createPayment Action
+export const createPayment = createAsyncThunk<
+IPayment,
+ICreatePayment,
+  { rejectValue: string }
+>('updateClient/createPayment', async ({...paymentData}, {rejectWithValue}) => {
+  try {   
+    const response = await dndService.createPayment({...paymentData})
+    if (response) {
+      toast.success('Заявка успешно добавлена в раздел “Студенты” ')
+    }
+    return response
+  } catch (error: unknown) {    
+    if (typeof error === 'string') {
+      toast.error(error)
+      return rejectWithValue(error)
+    }
+    if (error instanceof AxiosError) {
+      const message =
+        (error.response &&
+          error.response?.data &&
+          error.response?.data?.message) ||
+        error.message ||
+        error.toString()
+      toast.error(message)
+      return rejectWithValue(message)
+    }
+    throw error
+  }
+})
+
 // updateStudentStatus Action 
-export const fetchUpdateStudent = createAsyncThunk<
+export const editStudentById = createAsyncThunk<
   IStudent,
   IUpdateStudentData,
   { rejectValue: string }
->('updateClient/fetchUpdateStudent', async ({id, updateStudent}, {rejectWithValue}) => {
+>('updateClient/editStudentById', async ({id, updateStudent}, {rejectWithValue}) => {
   try {    
     const response = await dndService.updateStudent({id, updateStudent})
 
@@ -91,11 +122,11 @@ export const fetchUpdateStudent = createAsyncThunk<
 })
 
 // updateDetailStudent Action 
-export const fetchDetailUpdateStudent = createAsyncThunk<
+export const detailEditStudentById = createAsyncThunk<
   IStudent,
   IUpdateStudentData,
   { rejectValue: string }
->('updateClient/fetchDetailUpdateStudent', async ({id, updateStudent}, {rejectWithValue}) => {
+>('updateClient/detailEditStudentById', async ({id, updateStudent}, {rejectWithValue}) => {
   try {    
     const response = await dndService.updateStudent({id, updateStudent})
     if (response) {
@@ -123,18 +154,51 @@ export const fetchDetailUpdateStudent = createAsyncThunk<
 })
 
 // deleteStudent Action 
-export const fetchDeleteStudent = createAsyncThunk<
+export const deleteStudentById = createAsyncThunk<
   number,
   number,
   { rejectValue: string }
->('updateClient/fetchDeleteStudent', async (id, {rejectWithValue}) => {
+>('updateClient/deleteStudentById', async (id, {rejectWithValue}) => {
   try {    
     const response = await dndService.deleteStudent(id)
     if (response === 204) {
       toast.success('Заявка успешно удалена')
     }
     return response
-  } catch (error: unknown) {
+  } catch (error: unknown) {  
+    if (typeof error === 'string') {
+      toast.error(error)
+      return rejectWithValue(error)
+    }
+
+    if (error instanceof AxiosError) {
+      const message =
+        (error.response &&
+          error.response?.data &&
+          error.response?.data?.message) ||
+        error.message ||
+        error.toString()
+      toast.error(message)
+      
+      return rejectWithValue(message)
+    }
+    throw error
+  }
+})
+
+// deleteStudent Action 
+export const deleteStudentByIdForAnalytics = createAsyncThunk<
+  number,
+  number,
+  { rejectValue: string }
+>('updateClient/deleteStudentByIdForAnalytics', async (id, {rejectWithValue}) => {
+  try {    
+    const response = await dndService.deleteStudent(id)
+    if (response === 204) {
+      toast.info('Заявка добавлена в раздел “Аналитика”')
+    }
+    return response
+  } catch (error: unknown) {  
     if (typeof error === 'string') {
       toast.error(error)
       return rejectWithValue(error)

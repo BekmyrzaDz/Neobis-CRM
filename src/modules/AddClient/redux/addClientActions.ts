@@ -2,14 +2,14 @@ import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import createService from "../services/addClientService";
-import { ICreateStudent, ICreateStudentData } from "../types";
+import { ICreateStudent, IStudent } from "../types";
 
 // createStudent Action
-export const fetchCreateStudent = createAsyncThunk<
-  ICreateStudent,
-  ICreateStudent,
+export const createStudent = createAsyncThunk<
+IStudent,
+ICreateStudent,
   { rejectValue: string }
->('createClient/fetchCreateStudent', async ({...studentData}, {rejectWithValue}) => {
+>('createClient/createStudent', async ({...studentData}, {rejectWithValue}) => {
   try {   
     const response = await createService.createStudent({...studentData})
     if (response) {

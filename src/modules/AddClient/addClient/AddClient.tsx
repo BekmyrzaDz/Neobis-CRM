@@ -2,14 +2,18 @@ import { FC, useState } from "react"
 import Button from "../../../components/AddButton"
 import Modal from "../../../components/ModalPopupMainPage/Modal"
 import Input from "../../../components/Input/MyInput"
-import ModalButton from "../components/ModalButton"
-import { ICreateStudent, IDepartmentOptions, IOptions } from "../types"
-import { flagKyrgyzstan, left, plusBox } from "../assets"
+import {
+  ICreateStudent,
+  IDepartmentOptions,
+  IOptions,
+  IStudent,
+} from "../types"
+import { plusBox } from "../assets"
 import styles from "./AddClient.module.scss"
 import { Form, Formik } from "formik"
 import { addClientSchema } from "../Schema/Validation"
-import { useAppDispatch, useAppSelector } from "../../../hooks/redux"
-import { fetchCreateStudent } from "../redux/addClientActions"
+import { useAppDispatch } from "../../../hooks/redux"
+import { createStudent } from "../redux/addClientActions"
 import MySelect from "../../../components/Select/MySelect"
 import {
   departments,
@@ -29,18 +33,16 @@ export const AddClient: FC = () => {
     const changeValue = {
       ...value,
       laptop: value.laptop === "yes" ? true : false,
-      paid: false,
       on_request: true,
       is_archive: false,
     }
 
-    dispatch(fetchCreateStudent(changeValue))
+    dispatch(createStudent(changeValue))
   }
 
   const initialValues: ICreateStudent = {
     first_name: "",
     last_name: "",
-    surname: "",
     notes: "",
     phone: "",
     laptop: "",

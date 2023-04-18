@@ -1,9 +1,10 @@
 import axios from "axios";
-import {IStudent, IUpdateStudentData} from '../types'
+import {ICreatePayment, IPayment, IStudent, IUpdateStudentData} from '../types'
 import getToken from "../../../helpers/getToken";
 
 axios.defaults.baseURL = 'http://64.226.89.72'
 const API_URL: string = '/api/students/'
+const API_URL_PAYMENT: string = '/api/payments/'
 
 // All students
 const getAllStudents = async (): Promise<IStudent[]> => {
@@ -23,6 +24,17 @@ const getStudentById = async (id: number): Promise<IStudent> => {
   return response.data
 }
 
+// Create payment
+const createPayment = async (studentData: ICreatePayment): Promise<IPayment> => {
+  console.log(studentData);
+  
+  const response = await axios.post(API_URL_PAYMENT, studentData, {
+    headers: getToken()
+  })
+
+  return response.data
+}
+
 // Update student status
 const updateStudent = async ({
   id,
@@ -36,9 +48,7 @@ const updateStudent = async ({
 }
 
 // Delete student
-const deleteStudent = async (id: number): Promise<number> => {
-  console.log(JSON.stringify(updateStudent, null, 2))
-  
+const deleteStudent = async (id: number): Promise<number> => {  
   const response = await axios.delete(`${API_URL}${id}/`, {
     headers: getToken()
   })  
@@ -51,6 +61,7 @@ const dndService = {
   getStudentById,
   updateStudent,
   deleteStudent,
+  createPayment,
 }
 
 export default dndService

@@ -8,7 +8,7 @@ export const clientSchema = Yup.object().shape({
     .max(30, 'Максимум 30 символа')
     .required('Обязательное поле'),
   last_name: Yup.string()
-  .typeError('Должно быть строкой')
+    .typeError('Должно быть строкой')
     .min(2, 'Минимум 2 символа')
     .max(30, 'Максимум 30 символа')
     .required('Обязательное поле'),
@@ -34,4 +34,25 @@ export const clientSchema = Yup.object().shape({
   payment_method: Yup.object().shape({
     name: Yup.string().required('Обязательное поле'),
   }),
+})
+
+// Reason Schema
+export const reasonSchema = Yup.object().shape({
+  checked: Yup.array()
+    .required('Поля обязательны к заполнению'),
+})
+
+export const successSchema = Yup.object().shape({
+  full_name: Yup.string()
+    .typeError('Должно быть строкой')
+    .min(2, 'Минимум 2 символа')
+    .max(30, 'Максимум 30 символа')
+    .required('Обязательное поле'),
+  course: Yup.object().shape({
+    name: Yup.string().required('Обязательное поле'),
+  }),
+  payment_type: Yup.object().shape({
+    name: Yup.string().required('Обязательное поле'),
+  }),
+  amount: Yup.string().required('Обязательное поле'),
 })

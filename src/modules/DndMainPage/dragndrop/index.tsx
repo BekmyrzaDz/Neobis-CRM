@@ -10,17 +10,20 @@ import {
 } from "../types"
 import Column from "../components/Column/Column"
 import Modal from "../../../components/ModalPopupMainPage/Modal"
-import ModalDelete from "../../../components/ModalPopupDelete/Modal"
+import ModalSimple from "../../../components/ModalPopup/Modal"
+import ModalDelete from "../components/ModalPopup/Modal"
 import IconButton from "../../../components/iconButton/IconButton"
 import DetailViewForm from "../forms/DetailViewForm/DetailViewForm"
+import DetailViewFailure from "../forms/DetailViewFailure/DetailViewFailure"
 import {
-  fetchAllStudents,
-  fetchDeleteStudent,
-  fetchUpdateStudent,
+  deleteStudentById,
+  getAllStudents,
+  editStudentById,
 } from "../redux/asyncActions"
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux"
 import { initialData } from "../client-db/client-data"
 import styles from "./index.module.scss"
+import DetailViewSuccess from "../forms/DetailViewSuccess/DetailViewSuccess"
 
 enum Columns {
   WaitingForAcall = "column-1",
@@ -52,7 +55,7 @@ export const DragAndDrop: FC = () => {
   const [state, setState] = useState<IData>(initialData)
 
   useEffect(() => {
-    dispatch(fetchAllStudents())
+    dispatch(getAllStudents())
   }, [dispatch])
 
   const client: IStudentState = useAppSelector((state) => state?.client)
@@ -196,7 +199,7 @@ export const DragAndDrop: FC = () => {
           },
         }
 
-        dispatch(fetchUpdateStudent({ id, updateStudent }))
+        dispatch(editStudentById({ id, updateStudent }))
       }
     })
 
@@ -214,11 +217,13 @@ export const DragAndDrop: FC = () => {
 
   const [open, setOpen] = useState<boolean>(false)
   const [openDelete, setOpenDelete] = useState<boolean>(false)
+  const [openFailure, setOpenFailure] = useState<boolean>(false)
+  const [openSuccessful, setOpenSuccessful] = useState<boolean>(false)
 
   const id = useAppSelector((state) => state?.client?.newStudent?.id)
 
   const handleDelete = () => {
-    dispatch(fetchDeleteStudent(id as number))
+    dispatch(deleteStudentById(id as number))
   }
 
   return (
@@ -239,6 +244,8 @@ export const DragAndDrop: FC = () => {
                   column={column}
                   students={students || []}
                   setOpen={setOpen}
+                  setOpenFailure={setOpenFailure}
+                  setOpenSuccessful={setOpenSuccessful}
                 />
               )
             })}
@@ -267,6 +274,16 @@ export const DragAndDrop: FC = () => {
                   />
                 </div>
               </ModalDelete>
+            )}
+            {openSuccessful && (
+              <Modal active={openSuccessful} setActive={setOpenSuccessful}>
+                <DetailViewSuccess />
+              </Modal>
+            )}
+            {openFailure && (
+              <ModalSimple active={openFailure} setActive={setOpenFailure}>
+                <DetailViewFailure setOpenFailure={setOpenFailure} />
+              </ModalSimple>
             )}
           </>
         </div>

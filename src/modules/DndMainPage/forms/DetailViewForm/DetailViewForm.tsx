@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import { Form, Formik } from "formik"
 import { IUpdateStudent, IUpdateStudentData } from "../../types"
 import { useAppDispatch, useAppSelector } from "../../../../hooks/redux"
-import { fetchDetailUpdateStudent } from "../../redux/asyncActions"
+import { detailEditStudentById } from "../../redux/asyncActions"
 import { clientSchema } from "../../Schema/Validation"
 import IconButton from "../../../../components/iconButton/IconButton"
 import MySelect from "../../../../components/Select/MySelect"
@@ -30,7 +30,6 @@ const DetailViewForm: FC<Props> = ({ setOpen, setOpenDelete }) => {
   const initialValues: IUpdateStudent = {
     first_name: student?.first_name ? student?.first_name : "",
     last_name: student?.last_name ? student?.last_name : "",
-    surname: "",
     notes: student?.notes ? student?.notes : "",
     phone: student?.phone ? student?.phone : "",
     laptop: student?.laptop === true ? "yes" : "no",
@@ -74,19 +73,15 @@ const DetailViewForm: FC<Props> = ({ setOpen, setOpenDelete }) => {
       },
       phone,
       laptop: laptop === "yes" ? true : false,
-      paid: false,
       on_request: true,
       is_archive: false,
     }
 
-    dispatch(
-      fetchDetailUpdateStudent({ id, updateStudent } as IUpdateStudentData)
-    )
+    dispatch(detailEditStudentById({ id, updateStudent } as IUpdateStudentData))
   }
 
   const handleArchive = () => {
     const updateStudent: IUpdateStudent = {
-      ...student,
       came_from: {
         name: student?.came_from?.name as string,
       },
@@ -99,14 +94,13 @@ const DetailViewForm: FC<Props> = ({ setOpen, setOpenDelete }) => {
       status: {
         name: student?.status?.name as string,
       },
-      paid: false,
       on_request: true,
       is_archive: true,
     }
 
-    dispatch(
-      fetchDetailUpdateStudent({ id, updateStudent } as IUpdateStudentData)
-    )
+    console.log(JSON.stringify(updateStudent, null, 2))
+
+    dispatch(detailEditStudentById({ id, updateStudent } as IUpdateStudentData))
   }
 
   const handleClick = () => {

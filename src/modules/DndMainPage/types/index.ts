@@ -1,5 +1,6 @@
 export interface IStudentState {
   student?: IStudent[] | null
+  payment?: IPayment | null
   newStudent?: IStudent | null
   isLoading: boolean
   isSuccess: boolean
@@ -41,11 +42,6 @@ export interface ISource {
   name: string
 }
 
-export interface IReason {
-  id: number
-  name: string
-}
-
 export interface IStudent {
   request_date?: string
   id?: number
@@ -60,7 +56,7 @@ export interface IStudent {
   payment_method: IPaymentMethod
   status?: IStatus
   paid?: boolean
-  reason?: IReason | null
+  reason?: number[]
   on_request?: boolean
   is_archive?: boolean
 }
@@ -87,7 +83,6 @@ export interface IUpdateReason {
 export interface IUpdateStudent {
   first_name?: string
   last_name?: string
-  surname?: string
   notes?: string
   phone?: string
   laptop?: string | boolean
@@ -96,6 +91,7 @@ export interface IUpdateStudent {
   payment_method?: IUpdatePaymentMethod
   status?: IUpdateStatus
   paid?: boolean
+  reason?: number[]
   on_request?: boolean
   is_archive?: boolean
 }
@@ -134,4 +130,35 @@ export interface ICreateStudent {
   department: ICreateDepartment
   came_from: ICreateSource
   payment_method?: ICreatePaymentMethod
+}
+
+// Create payment type
+export interface ICreatePayment {
+  client_card: {
+    id: number
+  }
+  course: {
+    name: string
+  }
+  payment_type: {
+    name: string
+  }
+  amount: string
+}
+
+export interface IPayment {
+  id: number
+  client_card: {
+    id: number
+  }
+  course: {
+    name: string
+  }
+  payment_type: {
+    id: number
+    name: string
+  }
+  last_payment_date: string
+  payment_time: string
+  amount: string
 }
