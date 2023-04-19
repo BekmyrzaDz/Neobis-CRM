@@ -34,33 +34,36 @@ const MyTable: React.FC<TPopap> = ({ popap, setPopap }) => {
 
 
   return (
-    <div className={classes.root} >
-      <div className={classes.tableTop}>
-        <h2 className={classes.tabelTitle}>
-          <img src={black} alt='blacklist' />
-          Черный список</h2>
-        <img style={{ cursor: 'pointer' }} onClick={() => setPopap(false)} src={close} alt='close' />
+    <div className={classes.bg}>
+      <div className={classes.root} >
+        <div className={classes.tableTop}>
+          <h2 className={classes.tabelTitle}>
+            <img src={black} alt='blacklist' />
+            Черный список</h2>
+          <img style={{ cursor: 'pointer' }} onClick={() => setPopap(false)} src={close} alt='close' />
+        </div>
+
+        <DataGrid
+          rows={blacklist}
+          columns={[
+            {
+              field: 'fio', headerName: 'ФИО', width: 180, headerClassName: classes.headerName, align: 'center'
+            },
+            {
+              field: 'blacklist_created_at', headerName: 'Дата', width: 180, headerClassName: classes.headerName, align: 'center'
+            },
+            {
+              field: 'acceptBy', headerName: 'Кто принял', width: 190, headerClassName: classes.headerName, align: 'center'
+            },
+          ]}
+          pageSize={5}
+          className={classes.table}
+          rowHeight={60}
+
+        />
       </div>
-
-      <DataGrid
-        rows={blacklist}
-        columns={[
-          {
-            field: 'fio', headerName: 'ФИО', width: 180, headerClassName: classes.headerName, align: 'center'
-          },
-          {
-            field: 'blacklist_created_at', headerName: 'Дата', width: 180, headerClassName: classes.headerName, align: 'center'
-          },
-          {
-            field: 'acceptBy', headerName: 'Кто принял', width: 190, headerClassName: classes.headerName, align: 'center'
-          },
-        ]}
-        pageSize={5}
-        className={classes.table}
-        rowHeight={60}
-
-      />
     </div>
+
   );
 }
 
@@ -70,6 +73,16 @@ export default MyTable;
 
 
 const useStyles = makeStyles({
+  bg: {
+    position: 'fixed',
+    zIndex: 1,
+    background: '#373333',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+
+  },
   tableTop: {
     margin: '15px',
     display: 'flex',

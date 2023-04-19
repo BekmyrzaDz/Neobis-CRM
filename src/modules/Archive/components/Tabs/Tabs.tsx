@@ -46,29 +46,7 @@ export default function TabComponent() {
     count: number | string;
   }
 
-  const rows = [
-    {
-      id: 1,
-      first_name: 'Khaza',
-      last_name: 'khaan',
-      fio: 'dkdjkdkd',
-      email: 'ivanov@mail.com',
-      phone: '+7 (123) 456-78-90',
-      user_type: 'Менеджер',
-      image: 'url/to/avatar',
-    },
-    {
-      id: 3,
-      first_name: 'Khaza',
-      last_name: 'khaan',
-      fio: 'dkdjkdkd',
-      email: 'ivanov@mail.com',
-      phone: '+7 (123) 456-78-90',
-      user_type: 'Менеджер',
-      image: 'url/to/avatar',
 
-    },
-  ];
 
   const TabsItem: TabsItems[] = [
     { title: 'Менеджеры', count: managers.length },
