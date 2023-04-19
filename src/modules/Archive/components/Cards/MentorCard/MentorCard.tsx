@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardContent, CardMedia, Typography, Box } from '@material-ui/core';
+import { Menu, MenuItem, Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import { MoreVert } from '@material-ui/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch } from '../../../../../store/store';
+import { RootState } from '../../../../../store/store';
+import { archiveMentorById, deleteMentorById } from '../../../redux/mentorArchive/mentorArchiveSlice'
 import Linkedin from '../../../assets/largeLinkedin.svg'
-import gmail from '../../../assets/email.png'
+import gmail from '../../../assets/email.png';
+import archive from '../../../assets/archive.png';
+import trash from '../../../assets/redTrash.svg';
 
 interface UserCardProps {
+  id: number,
   onCardClick: () => void;
   name: string;
   photoUrl: string;
@@ -14,17 +21,83 @@ interface UserCardProps {
   email: string;
 }
 
-const UserCard: React.FC<UserCardProps> = ({
+
+
+
+
+
+const UserCard: React.FC<UserCardProps> = ({ id,
   name,
   photoUrl,
   position,
   linkedin, email, onCardClick
 }) => {
   const classes = useStyles();
+
+
+  const [selectedItemId, setSelectedItemId] = useState<string | boolean | number | null | object>(null);
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const dispatch = useDispatch<AppDispatch>()
+
+
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>, itemId: string | number | true | object) => {
+    setSelectedItemId(itemId);
+    setAnchorEl(event.currentTarget);
+
+  };
+
+
+
+  const handleClose = () => {
+    setSelectedItemId(null);
+    setAnchorEl(null);
+  };
+
+
+  const handleDelete = (itemId: string | number | true | object) => {
+    const id = Number(itemId);
+    dispatch(deleteMentorById(id)).then(() => {
+      window.location.reload();
+    });
+  };
+
+  const handleArchive = (itemId: string | number | true | object) => {
+    const id = Number(itemId);
+    dispatch(archiveMentorById(id)).then(() => {
+      window.location.reload();
+    });
+  };
+
+  const isItemSelected = selectedItemId === id;
+
+  const handleArchiveClick = () => handleArchive(id);
+  const handleDeleteClick = () => handleDelete(id);
+
+
   return (
     <>
       <Card className={classes.card} onClick={onCardClick}>
-        <MoreVert className={classes.box} />
+        <>
+          <MoreVert className={classes.box} onClick={(event) => handleClick(event, id)} />
+          <Menu classes={{ paper: classes.menu }}
+            id="three-dots-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl && isItemSelected)}
+            onClose={handleClose}>
+            <MenuItem className={classes.menuItem} onClick={handleArchiveClick}>
+              <img src={archive} alt='archive' />
+              Разархивировать
+            </MenuItem>
+            <MenuItem className={classes.menuItem} onClick={handleDeleteClick}>
+              <img src={trash} alt='trash' />
+              Удалить
+            </MenuItem>
+          </Menu>
+        </>
         <CardMedia className={classes.media} image={photoUrl} />
         <CardContent style={{ textAlign: 'center' }}>
           <Typography className={classes.name}>{name}</Typography>
@@ -102,5 +175,22 @@ const useStyles = makeStyles({
     alignItems: 'center',
     gap: '5px',
     justifyContent: 'center',
-  }
+  },
+  iconButton: {
+    padding: '5px 0 20px 0',
+  },
+  button: {
+    color: '#756FB3',
+    fontWeight: 'bold',
+    paddingBottom: 25
+  },
+  menu: {
+    marginTop: '60px',
+    borderRadius: '18px',
+  },
+  menuItem: {
+    display: 'flex',
+    gap: '10px',
+    fontSize: 14
+  },
 });

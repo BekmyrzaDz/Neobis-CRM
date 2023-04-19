@@ -40,7 +40,7 @@ const MentorsCards = (props: MyComponentProps) => {
         employees.map(mentor => (
           <MentorCard
             key={mentor.id}
-            onCardClick={() => handleCardClick(mentor)}
+            id={mentor.id}
             name={`${mentor.first_name} ${mentor.last_name}`}
             position='Front-end'
             photoUrl={mentor.image}

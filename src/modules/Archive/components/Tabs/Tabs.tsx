@@ -76,7 +76,7 @@ export default function TabComponent() {
     { title: 'Преподаватели', count: mentors.length },
     { title: 'Студенты', count: students.length },
     { title: 'Группы', count: groups.length },
-    { title: 'Курсы', count: 5 },
+    { title: 'Курсы', count: courses.length },
   ];
 
   return (

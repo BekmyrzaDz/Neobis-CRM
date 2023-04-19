@@ -7,7 +7,8 @@ import { toast } from 'react-toastify';
 import { AppDispatch } from '../../../../store/store';
 import { IconButton } from '@material-ui/core';
 import Spinner from '../../../../components/spinner/spinner';
-import { deleteArchiveManagerBuId, unzippingManagers } from '../../redux/managerArchive/managerArhiveSlice'
+import { deleteArchiveManagerBuId, unzippingManagers } from '../../redux/managerArchive/managerArhiveSlice';
+import { deleteArchiveAdminById, unzippingAdmins } from '../../redux/adminArchive/adminArchiveSlice'
 import { makeStyles } from '@material-ui/styles';
 import { Menu, MenuItem, Box } from '@material-ui/core';
 import archive from '../../assets/archive.png';
@@ -78,11 +79,18 @@ const DataBase: React.FC<MyComponentProps> = (props: MyComponentProps): JSX.Elem
     dispatch(deleteArchiveManagerBuId(id)).then(() => {
       window.location.reload();
     });
+
+    dispatch(deleteArchiveAdminById(id)).then(() => {
+      window.location.reload();
+    });
   };
 
   const handleArchive = (itemId: string | number | true | object) => {
     const id = Number(itemId);
     dispatch(unzippingManagers(id)).then(() => {
+      window.location.reload();
+    });
+    dispatch(unzippingAdmins(id)).then(() => {
       window.location.reload();
     });
   };

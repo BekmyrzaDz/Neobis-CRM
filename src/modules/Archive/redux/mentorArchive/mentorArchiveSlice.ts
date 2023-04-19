@@ -75,27 +75,11 @@ export const getArchiveMentors = createAsyncThunk<IMentorsState[], void, AsyncTh
   },
 );
 
-export const getMentorById = createAsyncThunk<IMentorState, number, AsyncThunkConfig>(
-  'mentors/getMentorById',
-  async (id: number, thunkApi) => {
-    try {
-      const response = await axios.get<IMentorState>(`http://64.226.89.72/api/mentors/${id}`, {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      });
-      return response.data;
-    } catch (error: any) {
-      return thunkApi.rejectWithValue(error.response.data);
-    }
-  },
-);
-
 export const deleteMentorById = createAsyncThunk<void, number, AsyncThunkConfig>(
   'mentors/deleteMentorById',
   async (id: number, thunkApi) => {
     try {
-      await axios.delete<void>(`http://64.226.89.72/api/mentors/${id}`, {
+      await axios.delete<void>(`http://64.226.89.72/api/archive/mentors/${id}`, {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
@@ -111,9 +95,9 @@ export const archiveMentorById = createAsyncThunk<IMentor, number, AsyncThunkCon
   async (id: number, thunkApi) => {
     try {
       const response = await axios.patch<IMentor>(
-        `http://64.226.89.72/api/mentors/${id}/`,
+        `http://64.226.89.72/api/archive/mentors/${id}/`,
         {
-          is_active: false, // изменяем состояние на неактивное
+          is_active: true, // изменяем состояние на неактивное
         },
         {
           headers: {
@@ -145,17 +129,6 @@ const mentorArchiveSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message ?? 'Something went wrong.';
       })
-      .addCase(getMentorById.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(getMentorById.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.mentor = [action.payload];
-      })
-      .addCase(getMentorById.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message ?? 'Something went wrong.';
-      })
       .addCase(deleteMentorById.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.error = null;
@@ -163,6 +136,18 @@ const mentorArchiveSlice = createSlice({
       .addCase(deleteMentorById.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message ?? 'Something went wrong.';
+      })
+      .addCase(archiveMentorById.pending, (state) => {
+        state.archiveStatus = 'loading';
+      })
+      .addCase(archiveMentorById.fulfilled, (state, action) => {
+        state.archiveStatus = 'succeeded';
+        const index = state.mentors.findIndex((e) => e.id === action.payload.id);
+        state.mentors[index] = action.payload;
+      })
+      .addCase(archiveMentorById.rejected, (state, action) => {
+        state.archiveStatus = 'failed';
+        state.archiveError = action.error.message ?? 'Something went wrong.';
       });
   },
 });

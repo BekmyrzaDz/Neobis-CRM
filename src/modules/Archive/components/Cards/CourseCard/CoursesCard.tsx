@@ -1,8 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, CardMedia, CardContent, Typography } from "@material-ui/core";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import GroupIcon from "@material-ui/icons/Group";
+import archive from '../../../assets/archive.png';
+import trash from '../../../assets/redTrash.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch } from '../../../../../store/store';
+import { Menu, MenuItem } from '@material-ui/core';
+import { MoreVert } from '@material-ui/icons';
+import { deleteCourseById, archiveCourseById } from '../../../redux/courseArchive/courseArchiveSlice'
+
+
 
 interface ICourses {
   id: number;
@@ -15,7 +24,45 @@ interface ICourses {
 }
 
 const CardExample: React.FC<ICourses> = (course) => {
-  
+
+  const [selectedItemId, setSelectedItemId] = useState<string | boolean | number | null | object>(null);
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const dispatch = useDispatch<AppDispatch>()
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>, itemId: string | number | true | object) => {
+    setSelectedItemId(itemId);
+    setAnchorEl(event.currentTarget);
+
+  };
+
+
+
+  const handleClose = () => {
+    setSelectedItemId(null);
+    setAnchorEl(null);
+  };
+
+
+  const handleDelete = (itemId: string | number | true | object) => {
+    const id = Number(itemId);
+    dispatch(deleteCourseById(id)).then(() => {
+      window.location.reload();
+    });
+  };
+
+  const handleArchive = (itemId: string | number | true | object) => {
+    const id = Number(itemId);
+    dispatch(archiveCourseById(id)).then(() => {
+      window.location.reload();
+    });
+  };
+
+  const isItemSelected = selectedItemId === course.course.id;
+
+  const handleArchiveClick = () => handleArchive(course.course.id);
+  const handleDeleteClick = () => handleDelete(course.course.id);
 
   const classes = useStyles();
   return (
@@ -38,6 +85,24 @@ const CardExample: React.FC<ICourses> = (course) => {
           </div>
         </div>
       </CardContent>
+      <>
+        <MoreVert className={classes.box} onClick={(event) => handleClick(event, id)} />
+        <Menu classes={{ paper: classes.menu }}
+          id="three-dots-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl && isItemSelected)}
+          onClose={handleClose}>
+          <MenuItem className={classes.menuItem} onClick={handleArchiveClick}>
+            <img src={archive} alt='archive' />
+            Разархивировать
+          </MenuItem>
+          <MenuItem className={classes.menuItem} onClick={handleDeleteClick}>
+            <img src={trash} alt='trash' />
+            Удалить
+          </MenuItem>
+        </Menu>
+      </>
     </Card>
   );
 };
@@ -54,7 +119,15 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fff",
     borderRadius: 16,
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    position: 'relative'
+  },
+  box: {
+    color: '#756FB3',
+    fontWeight: 'bold',
+    position: 'absolute',
+    bottom: '15px',
+    right: '15px'
   },
   media: {
     height: 160,
@@ -87,5 +160,22 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     marginLeft: theme.spacing(0.5)
-  }
+  },
+  iconButton: {
+    padding: '5px 0 20px 0',
+  },
+  button: {
+    color: '#756FB3',
+    fontWeight: 'bold',
+    paddingBottom: 25
+  },
+  menu: {
+    marginTop: '60px',
+    borderRadius: '18px',
+  },
+  menuItem: {
+    display: 'flex',
+    gap: '10px',
+    fontSize: 14
+  },
 }));
