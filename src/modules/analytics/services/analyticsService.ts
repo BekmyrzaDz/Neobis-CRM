@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { IPopularSource, IRequestStatus } from '../types'
+import { IPopularDepartment, IPopularSource, IRequestStatus } from '../types'
 // import $api from '../../../http'
 
 axios.defaults.baseURL = 'http://64.226.89.72'
@@ -27,9 +27,23 @@ const getPopularSource = async (token: string): Promise<IPopularSource[]> => {
   return response.data
 }
 
+// Get popular department
+const getPopularDepartment = async (
+  token: string
+): Promise<IPopularDepartment[]> => {
+  const response = await axios.get(API_URL + 'popular-departments/', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  return response.data
+}
+
 const analyticsService = {
   getRequestStatuses,
   getPopularSource,
+  getPopularDepartment,
 }
 
 export default analyticsService

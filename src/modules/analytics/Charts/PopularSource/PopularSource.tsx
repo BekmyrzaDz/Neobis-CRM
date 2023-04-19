@@ -70,6 +70,7 @@ const PopularSource = () => {
       easing: 'easeInOutBounce',
     },
   }
+  
   return (
     <div className={styles.popularSource}>
       <h2 className={styles.title}>Откуда приходят клиенты</h2>
