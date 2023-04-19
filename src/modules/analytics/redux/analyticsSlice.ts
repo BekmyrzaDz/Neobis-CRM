@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { IInititalState, IRequestStatus } from '../types'
-import { getRequestStatuses } from './asyncActions'
+import { IInititalState, IPopularSource, IRequestStatus } from '../types'
+import { getPopularSource, getRequestStatuses } from './asyncActions'
 
 const initialState: IInititalState = {
   requestStatus: [],
@@ -31,6 +31,21 @@ export const analyticsSlice = createSlice({
         state.isLoading = false
         state.isError = true
         state.requestStatus = []
+      })
+      .addCase(getPopularSource.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(
+        getPopularSource.fulfilled,
+        (state, action: PayloadAction<IPopularSource[]>) => {
+          state.isLoading = false
+          state.popularSource = action.payload
+        }
+      )
+      .addCase(getPopularSource.rejected, (state) => {
+        state.isLoading = false
+        state.isError = true
+        state.popularSource = []
       })
   },
 })

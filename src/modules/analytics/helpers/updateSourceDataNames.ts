@@ -1,22 +1,42 @@
 import { IPopularSource } from '../types'
 
-export const updateSourceDataNames = (data: IPopularSource[]) => {
+export const updateSourceDataNames = (
+  data: IPopularSource[]
+): IPopularSource[] => {
+  const updatedData: IPopularSource[] = []
   for (let i = 0; i < data.length; i++) {
-    switch (data[i].name) {
+    const sourceData = data[i]
+    let updatedSourceData: IPopularSource
+    switch (sourceData.name) {
       case 'from_instagram':
-        data[i].name = 'Instagram'
+        updatedSourceData = {
+          ...sourceData,
+          name: 'Instagram',
+        }
         break
       case 'from_announcement':
-        data[i].name = 'Объявление'
+        updatedSourceData = {
+          ...sourceData,
+          name: 'Объявление',
+        }
         break
       case 'from_website':
-        data[i].name = 'Сайт'
+        updatedSourceData = {
+          ...sourceData,
+          name: 'Сайт',
+        }
         break
       case 'other':
-        data[i].name = 'Другое'
+        updatedSourceData = {
+          ...sourceData,
+          name: 'Другое',
+        }
         break
       default:
+        updatedSourceData = sourceData
         break
     }
+    updatedData.push(updatedSourceData)
   }
+  return updatedData
 }
