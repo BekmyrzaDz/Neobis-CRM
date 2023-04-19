@@ -15,7 +15,7 @@ export function updateReqStatusDepartmentNames(data: IRequestStatus) {
     flutter: 'Flutter',
     olimped_programming: 'PO',
   }
-  const renamedDepartments = data.departments.map(
+  const renamedDepartments = data?.departments && data.departments.map(
     (department: ISingleDepartment) => {
       const newName = nameMap[department.name]
       return {

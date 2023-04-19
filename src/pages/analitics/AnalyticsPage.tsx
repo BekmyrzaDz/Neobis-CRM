@@ -1,17 +1,22 @@
 import { useEffect } from 'react'
-import ProfileIcon from '../../modules/students/components/profileIcon/ProfileIcon'
 import { useNavigate } from 'react-router-dom'
+import ProfileIcon from '../../modules/students/components/profileIcon/ProfileIcon'
+import Spinner from '../../components/spinner/spinner'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { getProfileById } from '../../modules/profilePage/redux/asyncActions'
-import PopularSource from '../../modules/analytics/Charts/PopularSource/PopularSource'
+import { getRequestStatuses } from '../../modules/analytics/redux/asyncActions'
+
+import {
+  CallMade,
+  CallWaiting,
+  LeavingReason,
+  PopularDepartment,
+  PopularSource,
+  TrialLessonMade,
+  TrialLessonSigned,
+} from '../../modules/analytics/Charts'
 
 import styles from './Analytics.module.scss'
-import PopularDepartment from '../../modules/analytics/Charts/PopularDepartment/PopularDepartment'
-import LeavingReason from '../../modules/analytics/Charts/LeavingReason/LeavingReason'
-import CallWaiting from '../../modules/analytics/Charts/RequestStatuses/CallWaiting/CallWaiting'
-import CallMade from '../../modules/analytics/Charts/RequestStatuses/CallMade/CallMade'
-import TrialLessonSigned from '../../modules/analytics/Charts/RequestStatuses/TrialLessonSigned/TrialLessonSigned'
-import TrialLessonMade from '../../modules/analytics/Charts/RequestStatuses/TrialLessonMade/TrialLessonMade'
 
 interface Props {}
 
@@ -21,15 +26,24 @@ const AnalyticsPage = (props: Props) => {
   const auth = useAppSelector((state) => state.auth)
   const profile = useAppSelector((state) => state.profile)
   const authUserId = auth.user?.id
+  const token = auth.user?.access
   const first_name = profile.profile?.first_name
   const last_name = profile.profile?.last_name
   const avatar = profile.profile?.image!
+  const isLoading = useAppSelector((state) => state.analytics.isLoading)
 
   useEffect(() => {
     if (authUserId !== undefined) {
       dispatch(getProfileById(authUserId))
     }
+    if (token !== undefined) {
+      dispatch(getRequestStatuses(token))
+    }
   }, [])
+
+  if (isLoading) {
+    return <Spinner />
+  }
 
   return (
     <div className={styles.analyticsPage}>

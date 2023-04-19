@@ -11,8 +11,7 @@ import detailWiewReducer from '../modules/DndMainPage/redux/detailViewSlice'
 import createStudentSlice from '../modules/AddClient/redux/addClientSlice'
 import studentsOnStudyReducer from '../modules/students/redux/students/studentsOnStudySlice'
 import groupsOnStudyReducer from '../modules/students/redux/groups/groupsOnStudySlice'
-
-
+import analyticsReducer from '../modules/analytics/redux/analyticsSlice'
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -26,6 +25,7 @@ const rootReducer = combineReducers({
   client: clientReducer,
   addClient: createStudentSlice,
   singelClient: detailWiewReducer,
+  analytics: analyticsReducer,
 })
 
 export const setupStore = () => {

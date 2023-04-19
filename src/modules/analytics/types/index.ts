@@ -30,3 +30,13 @@ export interface IRequestStatus {
   name: string
   departments: ISingleDepartment[]
 }
+
+// Redux init state
+export interface IInititalState {
+  requestStatus: IRequestStatus[]
+  popularSource: IPopularSource[]
+  popularDepartment: IPopularDepartment[]
+  leavingReason: ILeavingReason[]
+  isLoading: boolean
+  isError: boolean
+}
