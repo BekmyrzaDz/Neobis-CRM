@@ -5,53 +5,53 @@ import { IRequestStatus } from '../../../types'
 import { updateReqStatusDepartmentNames } from '../../../helpers/updateReqStatusDepartmentNames'
 import DepartmentItem from '../../../components/DepartmentItem/DepartmentItem'
 
-import styles from './CallWaiting.module.scss'
+import styles from './callMade.module.scss'
 
 ChartJS.defaults.font.family = 'Segoe UI, sans-serif'
 ChartJS.defaults.color = '#252525'
 ChartJS.register(Tooltip, Legend, ArcElement)
 
 const myData: IRequestStatus = {
-  name: 'Ждёт звонка',
+  name: 'Звонок совершен',
   departments: [
     {
       name: 'back-end',
-      num_students: 34,
+      num_students: 2,
       color: '#756FB3',
     },
     {
       name: 'android',
-      num_students: 11,
+      num_students: 13,
       color: '#A2238E',
     },
     {
       name: 'front-end',
-      num_students: 15,
+      num_students: 5,
       color: '#32B483',
     },
     {
       name: 'flutter',
-      num_students: 17,
+      num_students: 7,
       color: '#00A64E',
     },
     {
       name: 'pm',
-      num_students: 7,
+      num_students: 14,
       color: '#70BF44',
     },
     {
       name: 'ux-ui',
-      num_students: 22,
+      num_students: 32,
       color: '#C656A0',
     },
     {
       name: 'ios',
-      num_students: 21,
+      num_students: 1,
       color: '#A6CE39',
     },
     {
       name: 'olimped_programming',
-      num_students: 1,
+      num_students: 3,
       color: '#C656A0',
     },
   ],
@@ -87,9 +87,9 @@ const options: any = {
   },
 }
 
-const CallWaiting = () => {
+const CallMade = () => {
   return (
-    <div className={styles.callWaiting}>
+    <div className={styles.callMade}>
       <h2 className={styles.title}>{updatedData.name}</h2>
       <div className={styles.wrapper}>
         <div className={styles.canvasWrapper}>
@@ -113,4 +113,4 @@ const CallWaiting = () => {
   )
 }
 
-export default CallWaiting
+export default CallMade

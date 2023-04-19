@@ -1,0 +1,25 @@
+.callMade {
+  .title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    color: #252525;
+    margin-bottom: 24px;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    .canvasWrapper {
+      width: 140px;
+      height: 140px;
+    }
+    .descr {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+}

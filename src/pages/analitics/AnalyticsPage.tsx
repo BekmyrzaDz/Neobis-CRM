@@ -9,6 +9,9 @@ import styles from './Analytics.module.scss'
 import PopularDepartment from '../../modules/analytics/Charts/PopularDepartment/PopularDepartment'
 import LeavingReason from '../../modules/analytics/Charts/LeavingReason/LeavingReason'
 import CallWaiting from '../../modules/analytics/Charts/RequestStatuses/CallWaiting/CallWaiting'
+import CallMade from '../../modules/analytics/Charts/RequestStatuses/CallMade/CallMade'
+import TrialLessonSigned from '../../modules/analytics/Charts/RequestStatuses/TrialLessonSigned/TrialLessonSigned'
+import TrialLessonMade from '../../modules/analytics/Charts/RequestStatuses/TrialLessonMade/TrialLessonMade'
 
 interface Props {}
 
@@ -44,13 +47,13 @@ const AnalyticsPage = (props: Props) => {
             <CallWaiting />
           </div>
           <div className={styles.callWaitingWrapper}>
-            <CallWaiting />
+            <CallMade />
           </div>
           <div className={styles.callWaitingWrapper}>
-            <CallWaiting />
+            <TrialLessonSigned />
           </div>
           <div className={styles.callWaitingWrapper}>
-            <CallWaiting />
+            <TrialLessonMade />
           </div>
         </div>
 
