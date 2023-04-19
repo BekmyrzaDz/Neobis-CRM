@@ -1,5 +1,10 @@
 import axios from 'axios'
-import { IPopularDepartment, IPopularSource, IRequestStatus } from '../types'
+import {
+  ILeavingReason,
+  IPopularDepartment,
+  IPopularSource,
+  IRequestStatus,
+} from '../types'
 // import $api from '../../../http'
 
 axios.defaults.baseURL = 'http://64.226.89.72'
@@ -40,10 +45,22 @@ const getPopularDepartment = async (
   return response.data
 }
 
+// Get leaving reasons
+const getLeavingReason = async (token: string): Promise<ILeavingReason[]> => {
+  const response = await axios.get(API_URL + 'leaving-reasons/', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  return response.data
+}
+
 const analyticsService = {
   getRequestStatuses,
   getPopularSource,
   getPopularDepartment,
+  getLeavingReason,
 }
 
 export default analyticsService

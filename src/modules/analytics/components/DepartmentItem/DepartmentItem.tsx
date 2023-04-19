@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import styles from './DepartmentItem.module.scss'
 
 interface IDepartmentItem {
-  departmentName: string
+  departmentName: string | number
   count?: number | string
   color: string
 }

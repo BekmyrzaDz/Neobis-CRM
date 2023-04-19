@@ -14,7 +14,7 @@ export interface IPopularDepartment {
 
 // Причина ухода
 export interface ILeavingReason {
-  reason: string
+  reason: number
   percent_value: number
   color: string
 }

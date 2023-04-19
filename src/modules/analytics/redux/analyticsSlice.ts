@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {
   IInititalState,
+  ILeavingReason,
   IPopularDepartment,
   IPopularSource,
   IRequestStatus,
 } from '../types'
 import {
+  getLeavingReason,
   getPopularDepartment,
   getPopularSource,
   getRequestStatuses,
@@ -70,6 +72,21 @@ export const analyticsSlice = createSlice({
         state.isLoading = false
         state.isError = true
         state.popularDepartment = []
+      })
+      .addCase(getLeavingReason.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(
+        getLeavingReason.fulfilled,
+        (state, action: PayloadAction<ILeavingReason[]>) => {
+          state.isLoading = false
+          state.leavingReason = action.payload
+        }
+      )
+      .addCase(getLeavingReason.rejected, (state) => {
+        state.isLoading = false
+        state.isError = true
+        state.leavingReason = []
       })
   },
 })

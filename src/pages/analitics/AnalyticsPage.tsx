@@ -5,6 +5,7 @@ import Spinner from '../../components/spinner/spinner'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { getProfileById } from '../../modules/profilePage/redux/asyncActions'
 import {
+  getLeavingReason,
   getPopularDepartment,
   getPopularSource,
   getRequestStatuses,
@@ -44,6 +45,7 @@ const AnalyticsPage = (props: Props) => {
       dispatch(getRequestStatuses(token))
       dispatch(getPopularSource(token))
       dispatch(getPopularDepartment(token))
+      dispatch(getLeavingReason(token))
     }
   }, [])
 
