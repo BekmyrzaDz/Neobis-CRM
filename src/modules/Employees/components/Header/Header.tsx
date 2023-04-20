@@ -1,34 +1,52 @@
-import { useState } from 'react';
-import { AppBar, Toolbar, Typography, Avatar, Button, makeStyles, Box } from '@material-ui/core';
+import { useState, useEffect } from 'react';
+import { AppBar, Toolbar, Button, makeStyles, Box } from '@material-ui/core';
+import { useAppSelector, useAppDispatch } from '../../../../hooks/redux';
+import { useNavigate } from 'react-router-dom'
+import { getProfileById } from '../../../profilePage/redux/asyncActions'
+import { plus } from '../../assets';
 import SearchBar from '../../../CoursePage/components/SearchBar/SearchBar';
-import { user, plus } from '../../assets';
 import ModalPopap from '../ModalPopap/ModalPopap';
+import ProfileIcon from '../../../students/components/profileIcon/ProfileIcon';
+
+
 
 
 
 function Header() {
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
   const classes = useStyles();
-  const [userName, setUserName] = useState<string>('Бексултан Маратов');
+
   const [popap, setPopap] = useState<boolean>(false);
+
+  const id = useAppSelector((state) => state.auth.user?.id)
+
+  const { first_name, last_name, image } = useAppSelector(
+    (state) => state.profile.profile
+  ) ?? { first_name: '', last_name: '', image: '' }
+
+  useEffect(() => {
+    if (id !== undefined) dispatch(getProfileById(id))
+  }, [])
+
+
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
           <SearchBar />
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box className={classes.wrapper} >
             <Button onClick={() => setPopap(!popap)} className={classes.button} variant="contained">
               <img src={plus} alt="plus" style={{ marginRight: '13px' }} />
               Добавить сотрудника
             </Button>
             {popap && <ModalPopap popap={popap} setPopap={setPopap} />}
-
-            <Box className={classes.userBox}>
-              <Avatar alt={userName} src={user} />
-              <Typography className={classes.userName} component="h2" variant="subtitle1">
-                {userName}
-              </Typography>
-            </Box>
+            <ProfileIcon
+              avatar={image}
+              text={`${first_name} ${last_name} `}
+              onClick={() => navigate('/profile')}
+            />
           </Box>
         </Toolbar>
       </AppBar>
@@ -73,4 +91,16 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '18px',
     marginLeft: '10px',
   },
+  wrapper: {
+    display: 'flex',
+    alignItems: 'center'
+  }
 }));
+
+
+
+
+
+
+
+
