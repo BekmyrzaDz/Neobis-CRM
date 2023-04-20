@@ -1,10 +1,11 @@
 // import { IStudentState, IStudent } from '../types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { IData, IStudent, IUpdateStudent, IStudentState, IColumn } from '../types'
-import { fetchAllStudents, fetchDeleteStudent, fetchDetailUpdateStudent, fetchStudentById } from './asyncActions'
+import { createPayment, deleteStudentByIdForAnalytics, detailEditStudentById } from './asyncActions'
 
 const initialState: IStudentState = {
   newStudent: null,
+  payment: null,
   isLoading: false,
   isSuccess: false,
   isError: false,
@@ -22,32 +23,46 @@ export const detailViewSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchDetailUpdateStudent.pending, (state) => {
+      .addCase(createPayment.pending, (state) => {
         state.isLoading = true
       })
       .addCase(
-        fetchDetailUpdateStudent.fulfilled,
-        (state, action: PayloadAction<IStudent>) => {
+        createPayment.fulfilled,
+        (state, action) => {
           state.isLoading = false
           state.isSuccess = true
-          state.newStudent = action.payload
+          // state.payment = action.payload
       })
-      .addCase(fetchDetailUpdateStudent.rejected, (state) => {
+      .addCase(createPayment.rejected, (state) => {
         state.isLoading = false
         state.isError = true
         state.newStudent = null
       })
-      .addCase(fetchDeleteStudent.pending, (state) => {
+      .addCase(detailEditStudentById.pending, (state) => {
         state.isLoading = true
       })
       .addCase(
-        fetchDeleteStudent.fulfilled,
+        detailEditStudentById.fulfilled,
         (state, action: PayloadAction<IStudent>) => {
           state.isLoading = false
           state.isSuccess = true
           state.newStudent = action.payload
       })
-      .addCase(fetchDeleteStudent.rejected, (state) => {
+      .addCase(detailEditStudentById.rejected, (state) => {
+        state.isLoading = false
+        state.isError = true
+        state.newStudent = null
+      })
+      .addCase(deleteStudentByIdForAnalytics.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(
+        deleteStudentByIdForAnalytics.fulfilled,
+        (state) => {
+          state.isLoading = false
+          state.isSuccess = true
+      })
+      .addCase(deleteStudentByIdForAnalytics.rejected, (state) => {
         state.isLoading = false
         state.isError = true
         state.newStudent = null

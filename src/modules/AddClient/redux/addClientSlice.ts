@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ICreateStudent, ICreateStudentState,  } from '../types'
-import { fetchCreateStudent } from './addClientActions'
+import { createStudent } from './addClientActions'
 
 const initialState: ICreateStudentState = {
   newClient: null,
@@ -16,18 +16,18 @@ export const createStudentSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchCreateStudent.pending, (state) => {
+      .addCase(createStudent.pending, (state) => {
         state.isLoading = true
       })
       .addCase(
-        fetchCreateStudent.fulfilled,
-        (state, action: PayloadAction<ICreateStudent>) => {
+        createStudent.fulfilled,
+        (state, action) => {
           state.isLoading = false
           state.isSuccess = true
-          state.newClient = action.payload
+          state.newClient = action.payload as ICreateStudent
         }
       )
-      .addCase(fetchCreateStudent.rejected, (state) => {
+      .addCase(createStudent.rejected, (state) => {
         state.isLoading = false
         state.isError = true
         state.newClient = null

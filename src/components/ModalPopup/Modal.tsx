@@ -1,8 +1,12 @@
 import { FC } from "react"
 import clsx from "clsx"
-import { IModal } from "../../modules/AddClient/types"
-import crossIcon from "./cross.svg"
 import styles from "./Modal.module.scss"
+
+interface IModal {
+  active: boolean
+  setActive: React.Dispatch<React.SetStateAction<boolean>>
+  children?: React.ReactNode
+}
 
 const Modal: FC<IModal> = ({ active, setActive, children }) => {
   const modalClasses = clsx(styles.modal, {
