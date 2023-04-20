@@ -74,25 +74,32 @@ const DataBase: React.FC<MyComponentProps> = (props: MyComponentProps): JSX.Elem
   }
 
 
+
   const handleDelete = (itemId: string | number | true | object) => {
     const id = Number(itemId);
-    dispatch(deleteArchiveManagerBuId(id)).then(() => {
-      window.location.reload();
-    });
+    const shouldExecute = window.confirm('Вы уверены, что хотите данного сотрудика?');
+    if (shouldExecute) {
+      dispatch(deleteArchiveManagerBuId(id)).then(() => {
+        window.location.reload();
+      });
 
-    dispatch(deleteArchiveAdminById(id)).then(() => {
-      window.location.reload();
-    });
+      dispatch(deleteArchiveAdminById(id)).then(() => {
+        window.location.reload();
+      });
+    }
   };
 
   const handleArchive = (itemId: string | number | true | object) => {
     const id = Number(itemId);
-    dispatch(unzippingManagers(id)).then(() => {
-      window.location.reload();
-    });
-    dispatch(unzippingAdmins(id)).then(() => {
-      window.location.reload();
-    });
+    const shouldExecute = window.confirm('Вы уверены, что хотите данного разархивировать данного сотрудника?');
+    if (shouldExecute) {
+      dispatch(unzippingManagers(id)).then(() => {
+        window.location.reload();
+      });
+      dispatch(unzippingAdmins(id)).then(() => {
+        window.location.reload();
+      });
+    }
   };
 
   return (

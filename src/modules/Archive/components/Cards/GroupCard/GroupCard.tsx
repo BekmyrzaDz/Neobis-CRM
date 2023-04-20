@@ -58,16 +58,22 @@ const GroupCard = (props: MyComponentProps) => {
 
   const handleDelete = (itemId: string | number | true | object) => {
     const id = Number(itemId);
-    dispatch(deleteGroupById(id)).then(() => {
-      window.location.reload();
-    });
+    const shouldExecute = window.confirm('Вы уверены, что хотите данного сотрудика?');
+    if (shouldExecute) {
+      dispatch(deleteGroupById(id)).then(() => {
+        window.location.reload();
+      });
+    }
   };
 
   const handleArchive = (itemId: string | number | true | object) => {
     const id = Number(itemId);
-    dispatch(archiveGroupById(id)).then(() => {
-      window.location.reload();
-    });
+    const shouldExecute = window.confirm('Вы уверены, что хотите данного сотрудика?');
+    if (shouldExecute) {
+      dispatch(archiveGroupById(id)).then(() => {
+        window.location.reload();
+      });
+    }
   };
 
   const isItemSelected = selectedItemId === info.id;
@@ -80,7 +86,7 @@ const GroupCard = (props: MyComponentProps) => {
       <div className={styles.room}>
         <div className={styles.aboutRoom}>
           <img src={door} alt='door' />
-          <span>{info.classroom.name}</span>
+          <span>{info.classroom?.name}</span>
         </div>
         <div className={styles.countRoom}>
           <span>{info.students_max}</span>
@@ -89,7 +95,7 @@ const GroupCard = (props: MyComponentProps) => {
       </div>
 
       <div className={styles.group}>
-        <h1>{info.name}</h1>
+        <h1>{info?.name}</h1>
         <div>
           <img src={timer} alt='timer' />
           <span>{info.start_at_time} - {info.end_at_time}</span>
@@ -108,7 +114,7 @@ const GroupCard = (props: MyComponentProps) => {
 
       <div className={styles.user}>
         <img src={avatar} alt='avatar' />
-        <h3>{`${info.mentor.first_name} ${info.mentor.last_name}`}</h3>
+        <h3>{`${info.mentor?.first_name} ${info.mentor?.last_name}`}</h3>
       </div>
 
       <>

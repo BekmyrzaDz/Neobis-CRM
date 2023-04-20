@@ -47,16 +47,22 @@ const CardExample: React.FC<ICourses> = (course) => {
 
   const handleDelete = (itemId: string | number | true | object) => {
     const id = Number(itemId);
-    dispatch(deleteCourseById(id)).then(() => {
-      window.location.reload();
-    });
+    const shouldExecute = window.confirm('Вы уверены, что хотите выполнить эту операцию?');
+    if (shouldExecute) {
+      dispatch(deleteCourseById(id)).then(() => {
+        window.location.reload();
+      });
+    }
   };
 
   const handleArchive = (itemId: string | number | true | object) => {
     const id = Number(itemId);
-    dispatch(archiveCourseById(id)).then(() => {
-      window.location.reload();
-    });
+    const shouldExecute = window.confirm('Вы уверены, что хотите выполнить эту операцию?');
+    if (shouldExecute) {
+      dispatch(archiveCourseById(id)).then(() => {
+        window.location.reload();
+      });
+    }
   };
 
   const isItemSelected = selectedItemId === course.course.id;

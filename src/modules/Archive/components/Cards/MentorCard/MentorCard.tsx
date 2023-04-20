@@ -46,7 +46,6 @@ const UserCard: React.FC<UserCardProps> = ({ id,
   const handleClick = (event: React.MouseEvent<HTMLElement>, itemId: string | number | true | object) => {
     setSelectedItemId(itemId);
     setAnchorEl(event.currentTarget);
-
   };
 
 
@@ -59,16 +58,22 @@ const UserCard: React.FC<UserCardProps> = ({ id,
 
   const handleDelete = (itemId: string | number | true | object) => {
     const id = Number(itemId);
-    dispatch(deleteMentorById(id)).then(() => {
-      window.location.reload();
-    });
+    const shouldExecute = window.confirm('Вы уверены, что хотите данного сотрудика?');
+    if (shouldExecute) {
+      dispatch(deleteMentorById(id)).then(() => {
+        window.location.reload();
+      });
+    }
   };
 
   const handleArchive = (itemId: string | number | true | object) => {
     const id = Number(itemId);
-    dispatch(archiveMentorById(id)).then(() => {
-      window.location.reload();
-    });
+    const shouldExecute = window.confirm('Вы уверены, что хотите данного сотрудика?');
+    if (shouldExecute) {
+      dispatch(archiveMentorById(id)).then(() => {
+        window.location.reload();
+      });
+    }
   };
 
   const isItemSelected = selectedItemId === id;

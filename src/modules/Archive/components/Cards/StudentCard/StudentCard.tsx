@@ -65,16 +65,22 @@ const StudentCard = (props: MyComponentProps) => {
 
   const handleDelete = (itemId: string | number | true | object) => {
     const id = Number(itemId);
-    dispatch(deleteStudentById(id)).then(() => {
-      window.location.reload();
-    });
+    const shouldExecute = window.confirm('Вы уверены, что хотите данного сотрудика?');
+    if (shouldExecute) {
+      dispatch(deleteStudentById(id)).then(() => {
+        window.location.reload();
+      });
+    }
   };
 
   const handleArchive = (itemId: string | number | true | object) => {
     const id = Number(itemId);
-    dispatch(archiveStudentById(id)).then(() => {
-      window.location.reload();
-    });
+    const shouldExecute = window.confirm('Вы уверены, что хотите данного сотрудика?');
+    if (shouldExecute) {
+      dispatch(archiveStudentById(id)).then(() => {
+        window.location.reload();
+      });
+    }
   };
 
 
