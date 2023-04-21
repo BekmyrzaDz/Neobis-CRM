@@ -10,9 +10,6 @@ import close from '../../assets/close.png'
 
 
 
-
-
-
 type TPopap = {
   popap: boolean;
   setPopap: React.Dispatch<React.SetStateAction<boolean>>;
@@ -81,7 +78,6 @@ const useStyles = makeStyles({
     left: 0,
     bottom: 0,
     right: 0,
-
   },
   tableTop: {
     margin: '15px',
@@ -107,7 +103,10 @@ const useStyles = makeStyles({
     zIndex: 1,
     borderRadisu: '16px',
     background: '#000',
-    borderRadius: '16px'
+    borderRadius: '16px',
+    '&. .MuiDataGrid-root .MuiDataGrid-overlay': {
+      background: '#000',
+    },
   },
   table: {
     background: '#000',
@@ -118,6 +117,7 @@ const useStyles = makeStyles({
     width: '600px',
     borderRight: 'none',
     border: 'none',
+
     '&. MuiDataGrid-columnSeparator': {
       opacity: 0
     },
