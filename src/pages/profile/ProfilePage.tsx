@@ -24,23 +24,27 @@ const ProfilePage = () => {
 
   return (
     <div className={styles.profile}>
-      <div className={styles.header}>
-        <Button className={styles.backButton} onClick={() => navigate(-1)}>
-          Вернуться назад
-        </Button>
-      </div>
+      <div className={styles.profileWrapper}>
+        <div className={styles.header}>
+          <Button className={styles.backButton} onClick={() => navigate(-1)}>
+            Вернуться назад
+          </Button>
+        </div>
 
-      <div className={styles.content}>
-        <h2 className={styles.title}>Личный кабинет</h2>
-        <div className={styles.wrapper}>
-          <div className={styles.left}>
-            <span className={styles.leftSubtitle}>Фото профиля</span>
-            <AvaForm />
-          </div>
+        <div className={styles.content}>
+          <div className={styles.contentWrapper}>
+            <h2 className={styles.title}>Личный кабинет</h2>
+            <div className={styles.wrapper}>
+              <div className={styles.left}>
+                <span className={styles.leftSubtitle}>Фото профиля</span>
+                <AvaForm />
+              </div>
 
-          <div className={styles.right}>
-            <span className={styles.rightSubtitle}>Личные данные</span>
-            <ProfileForm />
+              <div className={styles.right}>
+                <span className={styles.rightSubtitle}>Личные данные</span>
+                <ProfileForm />
+              </div>
+            </div>
           </div>
         </div>
       </div>

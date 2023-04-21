@@ -6,6 +6,12 @@ import managersReducer from '../modules/Employees/redux/managers/managersSlice';
 import mentorsReducer from '../modules/Employees/redux/mentors/mentorsSlice';
 import adminsReducer from '../modules/Employees/redux/admins/adminsSlice';
 // import { createStudentSlice } from './../modules/AddClient/redux/addClientSlice';
+import clientReducer from '../modules/DndMainPage/redux/dndSlice'
+import detailWiewReducer from '../modules/DndMainPage/redux/detailViewSlice'
+import createStudentSlice from '../modules/AddClient/redux/addClientSlice'
+import studentsOnStudyReducer from '../modules/students/redux/students/studentsOnStudySlice'
+import groupsOnStudyReducer from '../modules/students/redux/groups/groupsOnStudySlice'
+import analyticsReducer from '../modules/analytics/redux/analyticsSlice'
 import clientReducer from '../modules/DndMainPage/redux/dndSlice';
 import createStudentSlice from '../modules/AddClient/redux/addClientSlice';
 import managerArhiveSlice from '../modules/Archive/redux/managerArchive/managerArhiveSlice';
@@ -38,7 +44,9 @@ const rootReducer = combineReducers({
   courseArchive: courseArchiveReducer,
   blackList: blackListSlice,
   singelClient: detailWiewReducer,
-});
+  analytics: analyticsReducer,
+})
+
 
 export const setupStore = () => {
   return configureStore({
