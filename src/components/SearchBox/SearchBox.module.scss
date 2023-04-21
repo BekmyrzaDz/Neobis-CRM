@@ -1,0 +1,26 @@
+.searchBox {
+  display: flex;
+  position: relative;
+  align-items: center;
+  padding: 16px 8px;
+  width: 324px;
+  height: 56px;
+  border: 1px solid #252525;
+  border-radius: 16px;
+  .icon {
+    position: absolute;
+    left: 24px;
+  }
+  .input {
+    position: absolute;
+    left: 72px;
+    border: none;
+    outline: none;
+    background-color: #f5f5f5;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    color: #252525;
+  }
+}
