@@ -6,6 +6,7 @@ import SearchInput from "../../../../components/SearchInput"
 import { useAppSelector } from "../../../../hooks/redux"
 import { imgAvatar, plusBox, search } from "../../assets"
 import styles from "./Header.module.scss"
+import Success from "../SuccessForm/Success"
 
 interface Props {}
 
@@ -29,13 +30,13 @@ const Header = (props: Props) => {
       >
         <Button
           icon={plusBox}
-          name="Добавить способ оплаты"
+          name="Оплатить"
           active={active}
           setActive={setActive}
           style={{ marginRight: "16px" }}
         />
         <Modal active={active} setActive={setActive}>
-          <h1>Hello World</h1>
+          <Success />
         </Modal>
         <ProfileButton
           icon={imgAvatar}

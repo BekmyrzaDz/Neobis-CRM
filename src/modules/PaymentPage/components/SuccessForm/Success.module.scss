@@ -1,0 +1,33 @@
+.wrapper {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.title {
+  font-family: Segoe UI;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 31.92px;
+  color: #252525;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.verifyBtn {
+  width: 100%;
+  border-radius: 12px;
+  padding: 16px;
+  font-family: Segoe UI;
+}

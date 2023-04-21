@@ -12,7 +12,7 @@ import Header from "../Header/Header"
 import Card from "../PaymentCard/Card"
 import styles from "./Payment.module.scss"
 import CompositeTable from "../Table/Table"
-import { columns, rows } from "../../mockApi"
+import { rows } from "../../mockApi"
 
 interface IPaymentMethod {
   id: number
@@ -84,7 +84,7 @@ export const Payment = (props: Props) => {
           ))}
         </div>
         <div className={styles.table}>
-          <CompositeTable rows={rows} columns={columns} />
+          <CompositeTable rows={rows} />
         </div>
       </div>
     </div>

@@ -1,7 +1,6 @@
 import { GridColDef, GridValueGetterParams } from "@mui/x-data-grid"
-import { number } from "yup"
 
-// // Define the table data interface
+// Define the table data interface
 // interface TableData {
 //   account: string
 //   time: string
@@ -22,48 +21,6 @@ import { number } from "yup"
 //   "Сумма",
 //   "Статус оплаты",
 // ]
-
-const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 60, type: "number" },
-  { field: "payment_type", headerName: "Счёт", width: 150 },
-  {
-    field: "payment_time",
-    headerName: "Время",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "last_payment_date",
-    headerName: "Дата",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "acceptBy",
-    headerName: "Кто принял",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "fio",
-    headerName: "Кто оплатил",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "amount",
-    headerName: "Сумма",
-    type: "number",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "payment_status",
-    headerName: "Статус оплаты",
-    width: 150,
-    editable: true,
-  },
-]
 
 // {
 //   "id": 1,
@@ -177,4 +134,4 @@ const rows = [
   },
 ]
 
-export { columns, rows }
+export { rows }
