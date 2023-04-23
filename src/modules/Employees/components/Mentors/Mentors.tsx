@@ -51,7 +51,7 @@ const MentorsCards = (props: MyComponentProps) => {
             key={mentor.id}
             onCardClick={() => handleCardClick(mentor)}
             name={`${mentor.first_name} ${mentor.last_name}`}
-            position='Front-end'
+            position={mentor.department.name}
             photoUrl={mentor.image}
             linkedin="https://www.linkedin.com/in/khamza-avazbekov-917395201/"
             email="khamzadevv@gmail.com"

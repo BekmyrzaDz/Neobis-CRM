@@ -72,9 +72,11 @@ const useStyles = makeStyles({
     fontSize: '15px',
   },
   position: {
-    color: '#32B483',
+    color: '#756FB3',
     fontSize: '14px',
     fontWeight: 'bold',
+    textTransform: 'uppercase',
+
   },
   info: {
     fontSize: '1rem',
