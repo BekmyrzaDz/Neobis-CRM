@@ -7,6 +7,7 @@ import SearchBar from '../../../CoursePage/components/SearchBar/SearchBar';
 import blackList from '../../assets/blackList.svg'
 import BlackList from '../../components/BlackList/BlackList'
 import ProfileIcon from '../../../students/components/profileIcon/ProfileIcon';
+import SearchBox from '../../../../components/SearchBox/SearchBox';
 
 
 
@@ -35,7 +36,7 @@ function Header() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
-          <SearchBar />
+          <SearchBox />
           <Box className={classes.wrapper} >
             <Button onClick={() => setPopap(!popap)} className={classes.button} variant="contained">
               <img src={blackList} alt="blacklist" style={{ marginRight: '13px' }} />

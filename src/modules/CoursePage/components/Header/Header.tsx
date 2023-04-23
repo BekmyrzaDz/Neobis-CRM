@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { AppBar, Toolbar, Typography, Avatar, Button, makeStyles, Box } from '@material-ui/core';
+import SearchBox from '../../../../components/SearchBox/SearchBox';
 import SearchBar from '../SearchBar/SearchBar';
 import user from '../../assets/user.svg';
 import plus from '../../assets/plus.svg';
@@ -14,7 +15,7 @@ function Header() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
-          <SearchBar />
+          <SearchBox />
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Button className={classes.button} variant="contained">
               <img src={plus} alt="plus" style={{ marginRight: '13px' }} />
