@@ -1,13 +1,13 @@
 import arrow from './arrow.png';
 import calendar from './calendar.svg';
-import closeIcon from './closeIcon.png';
+import closeIcon from './closeIcon1.png';
 import flag from './flag.svg';
 import image from './image.svg';
 import kushbak from './kushbak.png';
 import linkedin from './linkedin.svg';
 import plus from './plus.svg';
 import time from './time.svg';
-import user from './user.svg';
+import imgAvatar from './user.svg';
 import trash from './trash.png';
 import admin from './Roles/admin.svg';
 import adminDark from './Roles/adminDark.svg';
@@ -28,7 +28,7 @@ export {
   linkedin,
   plus,
   time,
-  user,
+  imgAvatar,
   trash,
   admin,
   adminDark,

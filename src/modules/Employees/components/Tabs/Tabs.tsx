@@ -7,13 +7,13 @@ import { getAllEmployees } from '../../redux/allEmployees/allEmployeesSlice';
 import { getManagers } from '../../redux/managers/managersSlice'
 import { getMentors } from '../../redux/mentors/mentorsSlice'
 import { getAdmins } from '../../redux/admins/adminsSlice'
-import { RootState } from '../../../../store/store';
+import { RootState, AppDispatch } from '../../../../store/store';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 
 export default function TabComponent() {
   const classes = useStyles();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const [value, setValue] = useState(0);
 
   const { allEmployees } = useSelector((state: RootState) => state.allEmployees);
@@ -89,7 +89,7 @@ const useStyles = makeStyles({
   },
   Tab: {
     marginBottom: '29px',
-    fontSize: '18px',
+    fontSize: '16px',
     textTransform: 'none',
     letterSpacing: '0.5px',
     borderRadius: '16px',
@@ -109,8 +109,8 @@ const useStyles = makeStyles({
     backgroundColor: 'white',
     color: 'black',
     borderRadius: '10px',
-    width: '30px',
-    height: '27px',
+    width: '25px',
+    height: '25px',
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',

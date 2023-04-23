@@ -1,6 +1,5 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import CardExample from "../../modules/CoursePage/components/Card/Card"
-import DetailCard from "../../modules/CoursePage/components/DetailCard/DetailCard"
 import Header from "../../modules/CoursePage/components/Header/Header";
 import uxui from '../../modules/CoursePage/assets/courses/ux.ui.jpg';
 import front from '../../modules/CoursePage/assets/courses/frontEnd.png';
@@ -10,6 +9,12 @@ import pm from '../../modules/CoursePage/assets/courses/pm.webp';
 import android from '../../modules/CoursePage/assets/courses/android.png';
 import flutter from '../../modules/CoursePage/assets/courses/flutter.webp';
 import olimpic from '../../modules/CoursePage/assets/courses/olimpic.png';
+import { RootState, AppDispatch } from '../../store/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { getAllCourses } from "../../modules/CoursePage/redux/courses/coursesSlice";
+import { archiveCourseById } from '../../modules/CoursePage/redux/courses/coursesSlice';
+import DetailCard from "../../modules/CoursePage/components/DetailCard/DetailCard";
+
 
 type Props = {}
 
@@ -38,10 +43,29 @@ export const courses: ICourses[] = [
 const CoursePage = (props: Props) => {
   const [selectedCard, setSelectedCard] = useState<ICourses | null>(null)
 
+  const dispatch = useDispatch<AppDispatch>()
 
-  const handleCardClick = (card: ICourses) => {
-    setSelectedCard(card);
-  };
+
+
+  useEffect(() => {
+    dispatch(getAllCourses())
+  }, [])
+
+  const { courses } = useSelector((state: RootState) => state.courses);
+  const { course } = useSelector((state: RootState) => state.courses);
+  const [showModal, setShowModal] = useState(true);
+
+
+  // const handleCardClick = (card: ICourses) => {
+  //   setSelectedCard(card);
+  // };
+
+  const handleCardClick = (mentor) => {
+    setShowModal(true);
+    dispatch(archiveCourseById(mentor.id));
+    console.log('state', showModal);
+    console.log('course', course)
+  }
 
   return <div style={{ backgroundColor: '#F1F1F1', minHeight: '100vh' }}>
     <Header />
@@ -51,14 +75,15 @@ const CoursePage = (props: Props) => {
           <CardExample
             key={idx}
             id={course.id}
+            onCardClick={() => handleCardClick(course)}
             color={course.color}
-            img={course.img}
-            title={course.title}
-            month={course.month}
-            groups={course.groups}
-            onClick={() => handleCardClick(course)}
+            img={course.image}
+            title={course.name}
+            month={course.duration_month}
+            groups={course.group_set.length}
           />)
       }
+      {showModal && <DetailCard course={course} onClose={() => setShowModal(false)} />}
     </div>
   </div>
 }

@@ -42,7 +42,7 @@ export const createAdmin = createAsyncThunk<IAdmins, ICreateAdminRequest, AsyncT
         },
       });
       return response.data;
-    } catch (error: unknown) {
+    } catch (error: any) {
       return thunkApi.rejectWithValue(error.response.data);
     }
   },
@@ -61,7 +61,7 @@ export const getAdmins = createAsyncThunk<IAdmins[], void, AsyncThunkConfig>(
         },
       });
       return response.data;
-    } catch (error: unknown) {
+    } catch (error: any) {
       return thunkApi.rejectWithValue(error.response.data);
     }
   },

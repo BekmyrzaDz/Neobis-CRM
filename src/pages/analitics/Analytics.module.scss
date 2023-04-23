@@ -1,0 +1,69 @@
+@import '../../sass/base';
+
+.analyticsPage {
+  padding: 24px;
+  background-color: $count-gray-color;
+  min-height: 100vh;
+}
+
+.header {
+  margin-bottom: 64px;
+  & > {
+    .porfileIcon {
+      margin-left: auto;
+    }
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  & > .firstRow {
+    max-height: 470px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    & > .callWaitingWrapper {
+      display: flex;
+      justify-content: center;
+      flex: 1;
+      padding: 20px;
+      background-color: white;
+      border-radius: 20px;
+    }
+  }
+  & > .secondRow {
+    max-height: 400px;
+    display: flex;
+    gap: 20px;
+    & > .popularSourceWrapper {
+      display: flex;
+      justify-content: center;
+      flex: 1;
+      padding: 20px;
+      background-color: white;
+      border-radius: 20px;
+    }
+    & > .popularDepartmentWrapper {
+      display: flex;
+      justify-content: center;
+      flex: 1;
+      padding: 20px;
+      background-color: white;
+      border-radius: 20px;
+    }
+  }
+  & > .thirdRow {
+    max-height: 400px;
+    width: 100%;
+    & > .leavingReasonWrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background-color: white;
+      border-radius: 20px;
+    }
+  }
+}

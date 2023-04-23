@@ -4,7 +4,11 @@ import editAva from '../../../../assets/icons/editAva.svg'
 import Modal from '../../../../components/Modal/Modal'
 import Avatar from '../../assets/ava.png'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
-import { updateAvatar } from '../../redux/asyncActions'
+import {
+  getProfileById,
+  updateAvatar,
+  updateProfile,
+} from '../../redux/asyncActions'
 
 import styles from './index.module.scss'
 
@@ -23,16 +27,29 @@ const AvaForm = () => {
     }
   }
 
-  const onUpdateAvatar = () => {
-    const formData = new FormData()
-    formData.append('file', selectedImage)
+  // const onUpdateAvatar = () => {
+  //   const formData = new FormData()
+  //   formData.append('image', selectedImage as Blob)
+  //   dispatch(updateAvatar({ id, formData }))
+  // }
 
-    dispatch(updateAvatar({ id, formData }))
+  const onUpdateAvatar = async () => {
+    try {
+      const formData = new FormData()
+      formData.append('image', selectedImage as Blob)
+      await dispatch(updateAvatar({ id, formData }))
+
+      await dispatch(getProfileById(id))
+    } catch (error) {}
   }
 
   return (
     <>
-      <Modal active={modalActive} setActive={setModalActive} className={styles.content}>
+      <Modal
+        active={modalActive}
+        setActive={setModalActive}
+        className={styles.content}
+      >
         <div className={styles.upload}>
           {selectedImage ? (
             <img
@@ -72,12 +89,14 @@ const AvaForm = () => {
           )}
         </div>
       </Modal>
-      <img src={image ? image : Avatar} alt='avatar' className={styles.ava} />
-      <div className={styles.action}>
-        <img src={editAva} alt='edit' />
-        <span className={styles.editAva} onClick={() => setModalActive(true)}>
-          Изменить фото
-        </span>
+      <div>
+        <img src={image ? image : Avatar} alt='avatar' className={styles.ava} />
+        <div className={styles.action}>
+          <img src={editAva} alt='edit' />
+          <span className={styles.editAva} onClick={() => setModalActive(true)}>
+            Изменить фото
+          </span>
+        </div>
       </div>
     </>
   )

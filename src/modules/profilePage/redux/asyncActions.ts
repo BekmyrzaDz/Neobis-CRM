@@ -68,9 +68,9 @@ export const updateAvatar = createAsyncThunk<
   IProfile,
   IUpdateAvatarData,
   { rejectValue: string }
->('profile/updateAvatar', async ({ id, file }, thunkAPI) => {
+>('profile/updateAvatar', async ({ id, formData }, thunkAPI) => {
   try {
-    const response = await profileService.updateAvatar({ id, file })
+    const response = await profileService.updateAvatar({ id, formData })
     return response
   } catch (error: unknown) {
     if (typeof error === 'string') {

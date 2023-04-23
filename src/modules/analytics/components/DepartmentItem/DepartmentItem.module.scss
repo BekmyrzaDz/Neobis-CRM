@@ -1,0 +1,31 @@
+.departmentItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 50px;
+    .dot {
+      min-width: 10px;
+      min-height: 10px;
+      border-radius: 50px;
+      background-color: rgb(182, 212, 136);
+    }
+    .name {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 19px;
+      color: #252525;
+    }
+  }
+  .count {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    color: #252525;
+  }
+}

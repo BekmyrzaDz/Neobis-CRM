@@ -10,7 +10,6 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import Spinner from '../../components/spinner/spinner'
 import Modal from '../../components/Modal/Modal'
 import IconButton from '../../components/iconButton/IconButton'
-import SearchBar from '../../modules/CoursePage/components/SearchBar/SearchBar'
 import SwitcherButton from '../../modules/students/components/SwitcherButton/SwitcherButton'
 import ProfileIcon from '../../modules/students/components/profileIcon/ProfileIcon'
 import FilterButton from '../../modules/students/components/filterButton/filterButton'
@@ -30,9 +29,9 @@ import {
   getAllGroups,
   getGroupDepartmentFilters,
 } from '../../modules/students/redux/groups/asyncActions'
+import SearchBox from '../../components/SearchBox/SearchBox'
 
 type ModalState = [boolean, Dispatch<SetStateAction<boolean>>]
-// type activeOptionState = [string, Dispatch<SetStateAction<string>>]
 
 const StudentsPage = () => {
   const navigate = useNavigate()
@@ -46,6 +45,8 @@ const StudentsPage = () => {
     return filter || ''
   })
   const [modalActive, setModalActive]: ModalState = useState(false)
+  const [keyword, setKeyword] = useState('')
+  console.log(keyword)
 
   const auth = useAppSelector((state) => state.auth)
   const profile = useAppSelector((state) => state.profile)
@@ -93,6 +94,10 @@ const StudentsPage = () => {
   const onToggleModal = useCallback(() => {
     setModalActive((prev) => !prev)
   }, [])
+
+  const handleSearchChange = (value: string) => {
+    setKeyword(value)
+  }
 
   const departmentFilters = [
     {
@@ -221,7 +226,7 @@ const StudentsPage = () => {
   return (
     <div className={styles.studentPage}>
       <div className={styles.header}>
-        <SearchBar />
+        <SearchBox onChange={handleSearchChange} />
 
         <div className={styles.actions}>
           <SwitcherButton
@@ -264,6 +269,18 @@ const StudentsPage = () => {
       <div className={styles.content}>
         {activeOption === 'Студенты'
           ? studentsOnStudy
+              .filter((value) => {
+                if (keyword == '') {
+                  return value
+                } else if (
+                  value.first_name
+                    .toLowerCase()
+                    .includes(keyword.toLowerCase()) ||
+                  value.last_name.toLowerCase().includes(keyword.toLowerCase())
+                ) {
+                  return value
+                }
+              })
               .slice()
               .reverse()
               .map((student) => {
@@ -281,6 +298,21 @@ const StudentsPage = () => {
                 )
               })
           : groupsOnStudy
+              .filter((value) => {
+                if (keyword == '') {
+                  return value
+                } else if (
+                  value?.name.toLowerCase().includes(keyword.toLowerCase()) ||
+                  value?.mentor?.first_name
+                    .toLowerCase()
+                    .includes(keyword.toLowerCase()) ||
+                  value?.mentor?.last_name
+                    .toLowerCase()
+                    .includes(keyword.toLowerCase())
+                ) {
+                  return value
+                }
+              })
               .slice()
               .reverse()
               .map((group) => {
