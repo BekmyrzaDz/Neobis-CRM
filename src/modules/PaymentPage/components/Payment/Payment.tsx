@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import {
   creditCard,
   elcard,
@@ -12,7 +12,39 @@ import Header from "../Header/Header"
 import Card from "../PaymentCard/Card"
 import styles from "./Payment.module.scss"
 import CompositeTable from "../Table/Table"
-import { columns, rows } from "../../mockApi"
+import { rows } from "../../mockApi"
+import { useGetAllStudentsQuery } from "../../redux/payment"
+import Spinner from "../../../../components/spinner/spinner"
+
+interface IPayment {
+  id: number
+  client_card: {
+    fio: string
+    payment_status: number
+  }
+  course: {
+    name: string
+  }
+  payment_type: {
+    id: number
+    name: string
+  }
+  last_payment_date: string
+  payment_time: string
+  amount: string
+  acceptBy: string
+}
+
+interface IInitialState {
+  id: number
+  payment_type: string
+  payment_time: string
+  last_payment_date: string
+  acceptBy: string
+  fio: string
+  amount: string
+  payment_status: string
+}
 
 interface IPaymentMethod {
   id: number
@@ -63,6 +95,17 @@ const paymentMethodData: IPaymentMethod[] = [
 interface Props {}
 
 export const Payment = (props: Props) => {
+  // Students get all hooks
+  const {
+    isLoading: areAllStudentsLoading,
+    isError: areAllStudentsError,
+    data: allStudents,
+  } = useGetAllStudentsQuery()
+
+  if (areAllStudentsLoading) {
+    return <Spinner />
+  }
+
   return (
     <div className={styles.payment}>
       <Header />
@@ -84,7 +127,7 @@ export const Payment = (props: Props) => {
           ))}
         </div>
         <div className={styles.table}>
-          <CompositeTable rows={rows} columns={columns} />
+          <CompositeTable rows={allStudents || []} />
         </div>
       </div>
     </div>
