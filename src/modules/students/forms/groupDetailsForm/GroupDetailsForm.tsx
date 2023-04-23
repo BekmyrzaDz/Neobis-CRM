@@ -230,14 +230,14 @@ const GroupDetailsForm: FC<GroupDetailsFormProps> = ({ setModalActive }) => {
         </div>
         <div className={styles.rowWrapper}>
           <Input
-            label='Старт курса*'
+            label='Старт группы*'
             id='start_at_date'
             name='start_at_date'
             type='date'
             className={styles.twoInOne}
           />
           <Input
-            label='Конец курса*'
+            label='Конец группы*'
             id='end_at_date'
             name='end_at_date'
             type='date'
