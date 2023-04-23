@@ -10,7 +10,7 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core"
-import { paymentHistory } from "../../assets"
+import { cash, paymentHistory } from "../../assets"
 import {
   DataGrid,
   GridColDef,
@@ -18,28 +18,6 @@ import {
   GridCellParams,
 } from "@mui/x-data-grid"
 import clsx from "clsx"
-
-// Define the table data interface
-// interface TableData {
-//   account: string
-//   time: string
-//   date: string
-//   whoAccepted: string
-//   whoPaid: string
-//   amount: string
-//   paymentStatus: string
-// }
-
-// Define the table column header names
-// const columns: string[] = [
-//   "Счёт",
-//   "Время",
-//   "Дата",
-//   "Кто принял",
-//   "Кто оплатил",
-//   "Сумма",
-//   "Статус оплаты",
-// ]
 
 interface TableData {
   rows: any
@@ -102,30 +80,11 @@ export const useStyles = makeStyles({
   "& .statusPaidInFull.violet": {
     color: "#756FB3",
   },
-  // statusGottaPay: {
-
-  // },
-  // statusSoonPayment: {
-
-  // },
-  // statusPaid: {
-
-  // },
-  // statusPaidInFull: {
-
-  // },
 })
 
 // Define the Table Component
 const CompositeTable: React.FC<TableData> = ({ rows }) => {
   const classes = useStyles()
-
-  // const generateColorsObject = (color) => {
-  //   const colorKey = color;
-  //   const colorObject = {}
-  //   colorObj[colorKey] = color
-  //   return colorObj; // it's value will have something like { 'red': 'red' }
-  // }
 
   const columns: GridColDef[] = [
     {
@@ -146,6 +105,15 @@ const CompositeTable: React.FC<TableData> = ({ rows }) => {
       cellClassName: (params: GridCellParams) => clsx(classes.ceil),
       headerAlign: "center",
       align: "center",
+      valueGetter: (value) => {
+        if (value?.row?.payment_type?.name === "cash") {
+          return "Наличными"
+        } else if (value?.row?.payment_type?.name === "card") {
+          return "Картой"
+        } else if (value?.row?.payment_type?.name === "online_wallet") {
+          return "Эл. кошелек"
+        }
+      },
     },
     {
       field: "payment_time",
@@ -186,6 +154,7 @@ const CompositeTable: React.FC<TableData> = ({ rows }) => {
       cellClassName: (params: GridCellParams) => clsx(classes.ceil),
       headerAlign: "center",
       align: "center",
+      valueGetter: (value) => value?.row?.client_card?.fio,
     },
     {
       field: "amount",
@@ -211,6 +180,17 @@ const CompositeTable: React.FC<TableData> = ({ rows }) => {
       },
       headerAlign: "center",
       align: "center",
+      valueGetter: (value) => {
+        if (value?.row?.client_card?.payment_status === 1) {
+          return "Должен оплатить"
+        } else if (value?.row?.client_card?.payment_status === 2) {
+          return "Скоро оплата"
+        } else if (value?.row?.client_card?.payment_status === 3) {
+          return "Оплачено"
+        } else if (value?.row?.client_card?.payment_status === 4) {
+          return "Оплатил полностью"
+        }
+      },
     },
   ]
 
@@ -237,21 +217,7 @@ const CompositeTable: React.FC<TableData> = ({ rows }) => {
           }}
           className={classes.table}
           disableRowSelectionOnClick
-          // columnHeaderTitle={}
           rowHeight={64}
-          // getCellClassName={(params: GridCellParams<any, any, any>) => {
-          //   // params.value.
-          //   if (params.value === "Оплачено") {
-          //     return classes["& .statusPaid.green"]
-          //   }
-          //   // return params.value >= 15 ? "hot" : "cold"
-          // }}
-          // getCellClassName={(params: GridCellParams<any, any, number>) => {
-          //   if (params.field === "city" || params.value == null) {
-          //     return ""
-          //   }
-          //   return params.value >= 15 ? "hot" : "cold"
-          // }}
         />
       </Box>
     </TableContainer>

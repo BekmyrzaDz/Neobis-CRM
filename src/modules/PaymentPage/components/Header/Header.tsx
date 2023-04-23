@@ -7,30 +7,40 @@ import { useAppSelector } from "../../../../hooks/redux"
 import { imgAvatar, plusBox, search } from "../../assets"
 import styles from "./Header.module.scss"
 import Success from "../SuccessForm/Success"
+import { useGetProfileByIdQuery } from "../../redux/payment"
 
 interface Props {}
 
 const Header = (props: Props) => {
   const [active, setActive] = useState(false)
-  const user = useAppSelector((state) => state.auth.user)
+  const user = useAppSelector((state) => state?.auth?.user)
+
+  const {
+    isLoading: areProfileLoading,
+    isError: areProfileError,
+    data: profile,
+  } = useGetProfileByIdQuery(user?.id as number)
 
   return (
     <div
       style={{
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "flex-end",
         alignItems: "center",
         padding: "24px",
       }}
     >
-      <SearchInput icon={search} name="Поиск" placeholder="Поиск" />
+      {/* <SearchInput icon={search} name="Поиск" placeholder="Поиск" /> */}
       <div
-        style={{ display: "flex", alignItems: "center" }}
+        style={{
+          display: "flex",
+          alignItems: "center",
+        }}
         className={styles.group}
       >
         <Button
           icon={plusBox}
-          name="Оплатить"
+          name="Внести оплату"
           active={active}
           setActive={setActive}
           style={{ marginRight: "16px" }}
@@ -39,8 +49,8 @@ const Header = (props: Props) => {
           <Success />
         </Modal>
         <ProfileButton
-          icon={imgAvatar}
-          name={`${user?.first_name} ${user?.last_name}`}
+          icon={profile?.image}
+          name={`${profile?.first_name} ${profile?.last_name}`}
         />
       </div>
     </div>

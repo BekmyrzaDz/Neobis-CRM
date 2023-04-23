@@ -53,6 +53,7 @@ export interface IStudent {
   laptop: boolean
   department: IDepartment
   came_from: ISource
+  group?: string
   payment_method: IPaymentMethod
   status?: IStatus
   paid?: boolean
@@ -88,6 +89,7 @@ export interface IUpdateStudent {
   laptop?: string | boolean
   department?: IUpdateDepartment
   came_from?: IUpdateSource
+  group?: string
   payment_method?: IUpdatePaymentMethod
   status?: IUpdateStatus
   paid?: boolean
@@ -136,6 +138,7 @@ export interface ICreateStudent {
 export interface ICreatePayment {
   client_card: {
     id: number
+    group?: string
   }
   course: {
     name: string
