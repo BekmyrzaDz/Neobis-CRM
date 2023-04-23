@@ -1,30 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, CardMedia, CardContent, Typography } from "@material-ui/core";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import GroupIcon from "@material-ui/icons/Group";
-
+import { RootState, AppDispatch } from '../../../../store/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { getAllCourses } from "../../redux/courses/coursesSlice";
 interface ICourses {
-  id:number;
+  id: number;
   color: string;
   img: string;
   title: string;
   month: number;
   groups: number;
-  onClick: () => void;
+  onCardClick: () => void;
 }
 
-const CardExample: React.FC<ICourses> = ({ color, img, title, month, groups }) => {
+
+const CardExample: React.FC<ICourses> = ({ color, img, title, month, groups, onCardClick }) => {
   const classes = useStyles();
+
+  const dispatch = useDispatch<AppDispatch>()
+
+
+
+
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} onClick={onCardClick} >
       <CardMedia
         className={classes.media}
         image={img}
         title="Card Image"
       />
       <CardContent className={classes.content}>
-        <Typography className={classes.title} style={{ color: color }}>{title}</Typography>
+        <Typography className={classes.title} style={{ color: color, textTransform: 'uppercase' }}>{title}</Typography>
         <div className={classes.iconContainer}>
           <div className={classes.iconPosition}>
             <AccessTimeIcon className={classes.icon} />

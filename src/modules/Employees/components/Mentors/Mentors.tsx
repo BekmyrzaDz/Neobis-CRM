@@ -27,7 +27,6 @@ const MentorsCards = (props: MyComponentProps) => {
   const dispatch = useDispatch<AppDispatch>()
 
 
-
   const [showModal, setShowModal] = useState(false);
 
   const handleCardClick = (mentor) => {

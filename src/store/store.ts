@@ -6,12 +6,12 @@ import managersReducer from '../modules/Employees/redux/managers/managersSlice';
 import mentorsReducer from '../modules/Employees/redux/mentors/mentorsSlice';
 import adminsReducer from '../modules/Employees/redux/admins/adminsSlice';
 // import { createStudentSlice } from './../modules/AddClient/redux/addClientSlice';
-import clientReducer from '../modules/DndMainPage/redux/dndSlice'
-import detailWiewReducer from '../modules/DndMainPage/redux/detailViewSlice'
-import createStudentSlice from '../modules/AddClient/redux/addClientSlice'
-import studentsOnStudyReducer from '../modules/students/redux/students/studentsOnStudySlice'
-import groupsOnStudyReducer from '../modules/students/redux/groups/groupsOnStudySlice'
-import analyticsReducer from '../modules/analytics/redux/analyticsSlice'
+import clientReducer from '../modules/DndMainPage/redux/dndSlice';
+import detailWiewReducer from '../modules/DndMainPage/redux/detailViewSlice';
+import createStudentSlice from '../modules/AddClient/redux/addClientSlice';
+import studentsOnStudyReducer from '../modules/students/redux/students/studentsOnStudySlice';
+import groupsOnStudyReducer from '../modules/students/redux/groups/groupsOnStudySlice';
+import analyticsReducer from '../modules/analytics/redux/analyticsSlice';
 import clientReducer from '../modules/DndMainPage/redux/dndSlice';
 import createStudentSlice from '../modules/AddClient/redux/addClientSlice';
 import managerArhiveSlice from '../modules/Archive/redux/managerArchive/managerArhiveSlice';
@@ -24,6 +24,7 @@ import studentsOnStudyReducer from '../modules/students/redux/students/studentsO
 import courseArchiveReducer from '../modules/Archive/redux/courseArchive/courseArchiveSlice';
 import blackListSlice from '../modules/Archive/redux/blackListSlice/blackListSlice';
 import groupsOnStudyReducer from '../modules/students/redux/groups/groupsOnStudySlice';
+import coursesSlice from '../modules/CoursePage/redux/courses/coursesSlice';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -45,8 +46,8 @@ const rootReducer = combineReducers({
   blackList: blackListSlice,
   singelClient: detailWiewReducer,
   analytics: analyticsReducer,
-})
-
+  courses: coursesSlice,
+});
 
 export const setupStore = () => {
   return configureStore({

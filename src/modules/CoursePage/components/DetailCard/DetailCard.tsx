@@ -6,9 +6,14 @@ import mentor from '../../assets/kushbak.png';
 import trash from '../../assets/trash.png'
 import styles from './DetailsCard.module.scss'
 
-const DetailCard = () => {
+const DetailCard: React.FC<UserCardProps> = ({ name,
+  photoUrl,
+  position,
+  linkedin, email, onCardClick }) => {
+
+
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={onCardClick}>
       <div className={styles.cardImg}>
         <img src={uxui} alt="uxui" />
         <button> <img src={pen} alt="change" /> Изменить</button>

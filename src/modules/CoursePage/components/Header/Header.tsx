@@ -18,7 +18,7 @@ function Header() {
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Button className={classes.button} variant="contained">
               <img src={plus} alt="plus" style={{ marginRight: '13px' }} />
-              Добавить сотрудника
+              Добавить курс
             </Button>
             <Box className={classes.userBox}>
               <Avatar alt={userName} src={user} />

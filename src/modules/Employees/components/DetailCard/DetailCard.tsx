@@ -56,7 +56,7 @@ const DetailCard: React.FC<YMentor> = ({ mentor, onClose }) => {
         <div className={`${open && styles.scroll}`}>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <h2 className={styles.title}>Карточка преподавателя</h2>
-            <img style={{ cursor: 'pointer' }} onClick={() => handleArchive(mentorID.id)} src={archive} alt='archive' />
+            <img style={{ cursor: 'pointer', marginRight: '10px' }} onClick={() => handleArchive(mentorID.id)} src={archive} alt='archive' />
           </div>
           <img
             onClick={onClose}
