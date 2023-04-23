@@ -1,15 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AppBar, Toolbar, Typography, Avatar, Button, makeStyles, Box } from '@material-ui/core';
 import SearchBox from '../../../../components/SearchBox/SearchBox';
 import SearchBar from '../SearchBar/SearchBar';
 import user from '../../assets/user.svg';
 import plus from '../../assets/plus.svg';
+import { useAppSelector, useAppDispatch } from '../../../../hooks/redux';
+import { useNavigate } from 'react-router-dom'
+import { getProfileById } from '../../../profilePage/redux/asyncActions'
+import ProfileIcon from '../../../students/components/profileIcon/ProfileIcon';
 
 
 
 function Header() {
   const classes = useStyles();
-  const [userName, setUserName] = useState<string>('Бексултан Маратов');
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
+  const id = useAppSelector((state) => state.auth.user?.id)
+
+
+  const { first_name, last_name, image } = useAppSelector(
+    (state) => state.profile.profile
+  ) ?? { first_name: '', last_name: '', image: '' }
+
+
+  useEffect(() => {
+    if (id !== undefined) dispatch(getProfileById(id))
+  }, [])
 
   return (
     <div className={classes.root}>
@@ -21,12 +38,11 @@ function Header() {
               <img src={plus} alt="plus" style={{ marginRight: '13px' }} />
               Добавить курс
             </Button>
-            <Box className={classes.userBox}>
-              <Avatar alt={userName} src={user} />
-              <Typography className={classes.userName} component="h2" variant="subtitle1">
-                {userName}
-              </Typography>
-            </Box>
+            <ProfileIcon
+              avatar={image}
+              text={`${first_name} ${last_name} `}
+              onClick={() => navigate('/profile')}
+            />
           </Box>
         </Toolbar>
       </AppBar>
