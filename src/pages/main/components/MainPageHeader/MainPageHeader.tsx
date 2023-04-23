@@ -1,13 +1,22 @@
 import styles from "./MainPageHeader.module.scss"
 import ProfileButton from "../../../../components/ProfileButton"
-import { FC } from "react"
+import { FC, useEffect } from "react"
 import { AddClient } from "../../../../modules/AddClient"
-import { useAppSelector } from "../../../../hooks/redux"
+import { useAppDispatch, useAppSelector } from "../../../../hooks/redux"
 import SearchInput from "../../../../components/SearchInput"
 import imgAvatar from "./assets/image/imgAvatar.png"
 import search from "./assets/image/searchIcon.svg"
+import { getProfileById } from "../../../../modules/profilePage/redux/asyncActions"
 
 const MainPageHeader: FC = () => {
+  const dispatch = useAppDispatch()
+  const id = useAppSelector((state) => state.auth.user?.id)
+  const profile = useAppSelector((state) => state.profile.profile)
+
+  useEffect(() => {
+    dispatch(getProfileById(id as number))
+  }, [])
+
   const state = useAppSelector((state) => state.auth.user)
   return (
     <header className={styles.header}>
@@ -29,8 +38,8 @@ const MainPageHeader: FC = () => {
             <div className={styles.profile}>
               <ProfileButton
                 className={styles.item}
-                icon={imgAvatar}
-                name={`${state?.first_name} ${state?.last_name}`}
+                icon={profile?.image as string}
+                name={`${profile?.first_name} ${profile?.last_name}`}
               />
             </div>
           </div>

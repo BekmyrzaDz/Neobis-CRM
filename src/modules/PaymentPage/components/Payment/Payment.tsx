@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import {
   creditCard,
   elcard,
@@ -11,6 +11,40 @@ import {
 import Header from "../Header/Header"
 import Card from "../PaymentCard/Card"
 import styles from "./Payment.module.scss"
+import CompositeTable from "../Table/Table"
+import { rows } from "../../mockApi"
+import { useGetAllStudentsQuery } from "../../redux/payment"
+import Spinner from "../../../../components/spinner/spinner"
+
+interface IPayment {
+  id: number
+  client_card: {
+    fio: string
+    payment_status: number
+  }
+  course: {
+    name: string
+  }
+  payment_type: {
+    id: number
+    name: string
+  }
+  last_payment_date: string
+  payment_time: string
+  amount: string
+  acceptBy: string
+}
+
+interface IInitialState {
+  id: number
+  payment_type: string
+  payment_time: string
+  last_payment_date: string
+  acceptBy: string
+  fio: string
+  amount: string
+  payment_status: string
+}
 
 interface IPaymentMethod {
   id: number
@@ -61,24 +95,40 @@ const paymentMethodData: IPaymentMethod[] = [
 interface Props {}
 
 export const Payment = (props: Props) => {
+  // Students get all hooks
+  const {
+    isLoading: areAllStudentsLoading,
+    isError: areAllStudentsError,
+    data: allStudents,
+  } = useGetAllStudentsQuery()
+
+  if (areAllStudentsLoading) {
+    return <Spinner />
+  }
+
   return (
     <div className={styles.payment}>
       <Header />
       <div className={styles.content}>
-        {paymentMethodData.map((method, index) => (
-          <Card
-            key={index}
-            id={method.id}
-            logo={method.logo}
-            paymentType={method.paymentType}
-            paymentTypeImg={method.paymentTypeImg}
-            cardNumber={method.cardNumber}
-            first_name={method.first_name}
-            last_name={method.last_name}
-            limit={method.limit}
-            cardTypeImg={method.cardTypeImg}
-          />
-        ))}
+        <div className={styles.cards}>
+          {paymentMethodData.map((method, index) => (
+            <Card
+              key={index}
+              id={method.id}
+              logo={method.logo}
+              paymentType={method.paymentType}
+              paymentTypeImg={method.paymentTypeImg}
+              cardNumber={method.cardNumber}
+              first_name={method.first_name}
+              last_name={method.last_name}
+              limit={method.limit}
+              cardTypeImg={method.cardTypeImg}
+            />
+          ))}
+        </div>
+        <div className={styles.table}>
+          <CompositeTable rows={allStudents || []} />
+        </div>
       </div>
     </div>
   )

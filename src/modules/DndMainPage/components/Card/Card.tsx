@@ -103,6 +103,10 @@ function Card<T>(props: Props) {
     }
   }
 
+  console.log(student)
+  const hourString = student && student?.request_date.substring(11, 13)
+  const hour = parseInt(hourString)
+
   return (
     <div
       className={styles.card}
@@ -114,10 +118,10 @@ function Card<T>(props: Props) {
         <div className={styles.cardTop}>
           <div className={styles.clock}>
             <ClockTimeSvgComponent />
-            <div className={styles.time}>{student?.request_date}</div>
+            <div className={styles.time}>{`${hour} ч.`}</div>
           </div>
           <div className={idClasses}>
-            <span>{student?.id}</span>
+            <span>{`ID${student?.id}`}</span>
           </div>
         </div>
         <div className={styles.cardContent}>

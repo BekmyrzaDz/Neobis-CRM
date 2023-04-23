@@ -1,0 +1,74 @@
+.wrapper {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.title {
+  font-family: Segoe UI;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 31.92px;
+  color: #252525;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.verifyBtn {
+  width: 100%;
+  border-radius: 12px;
+  padding: 16px;
+  font-family: Segoe UI;
+}
+
+.inputSearch {
+  position: relative;
+}
+
+.list {
+  list-style: none;
+  position: absolute;
+  top: 70px;
+  left: 0;
+  right: 0;
+  max-height: 200px;
+  box-shadow: -2px 1px 8px 0px rgba(34, 60, 80, 0.2);
+  background: #fff;
+  overflow-y: auto;
+  z-index: 1;
+}
+
+.textError {
+  text-align: center;
+  color: #d74245;
+}
+
+.textLoading {
+  text-align: center;
+}
+
+.item {
+  margin: 0;
+  height: 44px;
+  padding: 11.5px 16px;
+  font-size: 16px;
+  font-family: Segoe UI;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  &:hover {
+    background: #373333;
+    color: #fff;
+  }
+}

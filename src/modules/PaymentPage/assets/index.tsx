@@ -8,6 +8,7 @@ import kicb from "./icon/kicb.svg"
 import elcard from "./icon/elcard.svg"
 import odengi from "./icon/odengi.svg"
 import wallet from "./icon/wallet.svg"
+import paymentHistory from "./icon/paymentHistory.svg"
 import imgAvatar from "./image/imgAvatar.png"
 
 export {
@@ -22,4 +23,5 @@ export {
   odengi,
   wallet,
   imgAvatar,
+  paymentHistory,
 }
