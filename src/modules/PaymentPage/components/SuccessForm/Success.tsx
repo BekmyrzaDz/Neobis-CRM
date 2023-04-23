@@ -61,7 +61,7 @@ const Success: FC<ISuccess> = ({}) => {
 
   interface IValues {
     full_name: string
-    // group: string
+    group: string
     course: {
       name: string
     }
@@ -115,7 +115,7 @@ const Success: FC<ISuccess> = ({}) => {
 
   interface IState {
     full_name: string
-    // group: string
+    group: string
     course: {
       name: string
     }
@@ -130,7 +130,7 @@ const Success: FC<ISuccess> = ({}) => {
       student?.first_name && student?.last_name
         ? `${student?.first_name} ${student?.last_name}`
         : "",
-    // group: "",
+    group: "",
     // group: group?.name ? (group?.name as string) : "",
     course: {
       name: student?.department.name
@@ -146,7 +146,7 @@ const Success: FC<ISuccess> = ({}) => {
   }
 
   const onSubmit = (values: IState) => {
-    const { id, came_from, department, status, payment_method } =
+    const { id, came_from, department, status, payment_method, group } =
       student as IStudent
     const { course, payment_type, amount } = values
 
@@ -154,7 +154,7 @@ const Success: FC<ISuccess> = ({}) => {
       came_from: {
         name: came_from?.name as string,
       },
-      // group,
+      group,
       department: {
         name: department?.name as string,
       },
@@ -174,7 +174,7 @@ const Success: FC<ISuccess> = ({}) => {
     const value: ICreatePayment = {
       client_card: {
         id: student?.id as number,
-        // group,
+        group,
       },
       course: {
         name: course.name,
@@ -230,15 +230,15 @@ const Success: FC<ISuccess> = ({}) => {
                 </ul>
               )}
             </div>
-            {/* <div className={styles.inputSearch}> */}
-            {/* <Input
+            <div className={styles.inputSearch}>
+              <Input
                 label="Группа*"
                 name="group"
                 id="group"
                 type="text"
                 placeholder="Группа"
-              /> */}
-            {/* {dropdownGoups && (
+              />
+              {/* {dropdownGoups && (
                 <ul className={styles.list}>
                   {areGroupsLoading && (
                     <p className={styles.textLoading}>Loading...</p>
@@ -254,7 +254,7 @@ const Success: FC<ISuccess> = ({}) => {
                   ))}
                 </ul>
               )} */}
-            {/* </div> */}
+            </div>
             <MySelect
               label="Курс*"
               id="course"
