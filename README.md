@@ -29,7 +29,35 @@ npm install
   * Payment
 
 ## Screenshots
+### Authorization  
 ![Authorization](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Authorization.png)
+
+### Profile  
+![Profile](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Profile.png)
+
+### Home  
+![Home](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Home.png)
+
+### Students  
+![Students](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Students.png)
+
+### Groups  
+![Groups](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Groups.png)
+
+### Employees  
+![Employees](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Employees.png)
+
+### Courses  
+![Courses](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Courses.png)
+
+### Analytics  
+![Analytics](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Analytics.png)
+
+### Archive  
+![Archive](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Archive.png)
+
+### Payment  
+![Payment](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Payment.png)
 
 ## Authors 
 - [Ruslansabitov312](https://github.com/Ruslansabitov312)
