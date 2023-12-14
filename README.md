@@ -28,6 +28,9 @@ npm install
   * Archive 
   * Payment
 
+## Screenshots
+![Authorization](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Authorization.png)
+
 ## Authors 
 - [Ruslansabitov312](https://github.com/Ruslansabitov312)
 - [Khamzadev](https://github.com/Khamzadev)
