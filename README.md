@@ -1,5 +1,7 @@
 # Neolabs-CRM
-Neolabs - system for customer management, quality control, monitoring of conversion and automation of business processes 
+Neolabs - system for customer management, quality control, monitoring of conversion and automation of business processes.
+
+I want to warn you that the backend of the project has run out of subscriptions. That's why I added screenshots to the readmi file of this project.
 
 ### Installation ⚙️
 __Clone git repository__
@@ -10,6 +12,10 @@ https://github.com/BekmyrzaDz/neolabs-crm.git
 __Installation dependencies__
 ```
 npm install
+```
+__Run__
+```
+npm run dev
 ```
 
 ## Features
