@@ -1,19 +1,25 @@
 # Neolabs-CRM
-Neolabs - system for customer management, quality control, monitoring of conversion and automation of business processes.
 
-I want to warn you that the backend of the project has run out of subscriptions. That's why I added screenshots to the readmi file of this project.
+Neolabs-CRM - CRM (Customer Relationship Management) System for quality control, monitoring of conversion and automation of business processes.
+
+I want to warn you that the backend of the project has run out of subscriptions. That's why I added screenshots to the readme file of this project.
 
 ### Installation ⚙️
-__Clone git repository__
+
+**Clone git repository**
+
 ```
 https://github.com/BekmyrzaDz/neolabs-crm.git
 ```
 
-__Installation dependencies__
+**Installation dependencies**
+
 ```
 npm install
 ```
-__Run__
+
+**Run**
+
 ```
 npm run dev
 ```
@@ -23,49 +29,61 @@ npm run dev
 - Administrative panel.
 - Managing the information structure of the application through the administrative panel.
 - Updating application content through the administrative panel.
-- Development of sections: 
-  * Authorization with password reset
-  * Personal Area
-  * Main screen with an analogue of a Trello board and drag and drop to change cards and statuses (applications)
-  * List of students 
-  * List of employees
-  * List of courses (groups, directions) 
-  * Analytics 
-  * Archive 
-  * Payment
+- Development of sections:
+  - Authorization with password reset
+  - Personal Area
+  - Main screen with an analogue of a Trello board and drag and drop to change cards and statuses (applications)
+  - List of students
+  - List of employees
+  - List of courses (groups, directions)
+  - Analytics
+  - Archive
+  - Payment
 
 ## Screenshots
-### Authorization  
+
+### Authorization
+
 ![Authorization](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Authorization.png)
 
-### Profile  
+### Profile
+
 ![Profile](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Profile.png)
 
-### Home  
+### Home
+
 ![Home](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Home.png)
 
-### Students  
+### Students
+
 ![Students](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Students.png)
 
-### Groups  
+### Groups
+
 ![Groups](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Groups.png)
 
-### Employees  
+### Employees
+
 ![Employees](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Employees.png)
 
-### Courses  
+### Courses
+
 ![Courses](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Courses.png)
 
-### Analytics  
+### Analytics
+
 ![Analytics](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Analytics.png)
 
-### Archive  
+### Archive
+
 ![Archive](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Archive.png)
 
-### Payment  
+### Payment
+
 ![Payment](https://github.com/BekmyrzaDz/neolabs-crm/blob/main/src/assets/images/Payment.png)
 
-## Authors 
+## Authors
+
 - [Ruslansabitov312](https://github.com/Ruslansabitov312)
 - [Khamzadev](https://github.com/Khamzadev)
 - [BekmyrzaDz](https://github.com/Bekmyrzadz)
